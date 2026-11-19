@@ -1,0 +1,4 @@
+Sources and instructional references
+Internal source: Home4Good Digital Pathways Course Tracking Design, version 0.5, November 1, 2026 (provided in user library). Its decisions regarding module names, delivery modes, completion confirmation, baseline/final separation and reporting are preserved.
+Instructional reference: Northstar Digital Literacy (Literacy Minnesota), standards for essential computer, internet, email, digital information and workplace digital skills. This is an independent original Home4Good guide and is not an official Northstar product or credential.
+Recommended external resources for instructor verification: www.digitalliteracyassessment.org; consumer.ftc.gov (job scams); www.cisa.gov (phishing and account security); www.careeronestop.org (job search and resume guidance). Verify current procedures and accessibility options before deployment.
