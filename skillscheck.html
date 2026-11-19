@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="vitals">
+  <title>Digital Pathways to Employment — Skills Check Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --on-primary: #ffffff;
+      --primary-hover: #0b616c;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #2e7d4f;
+      --positive-tint: #eaf4ee;
+      --warning: #b86e00;
+      --warning-tint: #fcf4e6;
+      --error-tint: #fbeeed;
+      --focus: #0f7c8a;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Type scale (Focused Tool) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.35rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.95rem, 0.92rem + 0.15vw, 1.0625rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Accessibility modes (controlled via data attributes on .page) */
+    .page[data-text-size="large"] {
+      --body-size: 1.1875rem;
+      --subhead-size: 1.3125rem;
+      --headline-size: 1.65rem;
+      --label-size: 0.875rem;
+    }
+
+    .page[data-contrast="high"] {
+      --background: #ffffff;
+      --surface-container-low: #f4f7f8;
+      --on-surface: #0d161b;
+      --on-surface-variant: #25343b;
+      --outline: #2e424a;
+      --outline-variant: #7b9198;
+      --primary: #095d68;
+      --primary-hover: #06444d;
+      --on-primary-container: #063d45;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    .page {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+      background-color: var(--surface-container-low);
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1240px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      line-height: 1.08;
+    }
+    .section-title {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .subhead {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .lede {
+      font-size: 1.05em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: var(--space-sm) 0 0 0;
+    }
+    .kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-primary-container);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .muted {
+      color: var(--on-surface-variant);
+      font-size: 0.92em;
+    }
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Cards & Status Accent Bars */
+    .card {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+
+    .status-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-status="watch"] { border-left-color: var(--warning); }
+
+    .callout {
+      background: var(--primary-container);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-primary-container);
+    }
+    .callout[data-status="ok"] {
+      background: var(--positive-tint);
+      border-left-color: var(--tertiary);
+      color: var(--secondary);
+    }
+    .callout[data-status="alert"] {
+      background: var(--error-tint);
+      border-left-color: var(--error);
+      color: var(--error);
+    }
+
+    /* Reassurance Chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background: var(--positive-tint);
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+    .chip[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="watch"] {
+      background: var(--warning-tint);
+      color: var(--on-surface);
+    }
+    .chip[data-status="alert"] {
+      background: var(--error-tint);
+      color: var(--error);
+    }
+
+    /* Buttons */
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-in-out),
+                  color var(--dur-micro) var(--ease-in-out),
+                  box-shadow var(--dur-micro) var(--ease-in-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: var(--background);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--surface-container-low);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--on-surface-variant);
+      border-color: var(--outline-variant);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .btn-sm {
+      min-height: 38px;
+      padding: var(--space-xs) var(--space-md);
+      font-size: 0.875rem;
+    }
+
+    /* Top Header & Accessibility Bar */
+    .hub-header {
+      display: grid;
+      gap: var(--space-md);
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .header-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .a11y-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .a11y-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      margin-right: var(--space-xs);
+    }
+    .toggle-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+    .toggle-pill {
+      min-height: 38px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out), color var(--dur-micro) var(--ease-in-out);
+    }
+    .toggle-pill[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Phase Switcher & Learner Info */
+    .phase-bar {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .phase-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .phase-btn {
+      flex: 1 1 180px;
+      min-height: 56px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background: var(--background);
+      color: var(--on-surface);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: background-color var(--dur-micro) var(--ease-in-out), box-shadow var(--dur-micro) var(--ease-in-out);
+    }
+    .phase-btn:hover {
+      background: var(--surface-container-low);
+    }
+    .phase-btn[aria-selected="true"] {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: inset 0 -3px 0 var(--primary);
+    }
+    .phase-btn-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+    .phase-btn-sub {
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Form Controls */
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+    .field input[type="text"],
+    .field input[type="date"],
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+    }
+    .field select {
+      padding-right: var(--space-xl);
+    }
+    .field textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    /* Key Figures Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .kpi-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .kpi-value {
+      font-family: var(--font-headline);
+      font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+      font-weight: 800;
+      color: var(--on-surface);
+      margin: var(--space-xs) 0;
+      line-height: 1.1;
+    }
+    .kpi-caption {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .kpi-caption[data-status="ok"] { color: var(--secondary); font-weight: 700; }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--surface-container);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      margin-top: var(--space-sm);
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .progress-fill[data-status="ok"] {
+      background: var(--tertiary);
+    }
+
+    /* Main Workspace Layout */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .module-rail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .module-nav-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-in-out),
+                  box-shadow var(--dur-micro) var(--ease-in-out);
+    }
+    .module-nav-btn:hover {
+      background: var(--surface-container);
+    }
+    .module-nav-btn[aria-current="step"] {
+      background: var(--background);
+      border-color: var(--primary);
+      border-left-color: var(--primary);
+      box-shadow: var(--card-lift);
+    }
+    .module-nav-btn[data-complete="true"] {
+      border-left-color: var(--tertiary);
+    }
+    .module-nav-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .module-code {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--on-primary-container);
+    }
+    .module-nav-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--on-surface);
+      line-height: 1.25;
+    }
+    .module-nav-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Active Module Panel */
+    .module-detail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .vocab-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+    .vocab-tag {
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface-variant);
+    }
+
+    /* Interactive Checklist Items */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin: var(--space-md) 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--background);
+      cursor: pointer;
+      min-height: 48px;
+      transition: background-color var(--dur-micro) var(--ease-in-out);
+    }
+    .check-item:hover {
+      background: var(--surface-container-low);
+    }
+    .check-item[data-checked="true"] {
+      background: var(--positive-tint);
+      border-color: var(--tertiary);
+    }
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      accent-color: var(--tertiary);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .check-item-text {
+      flex: 1;
+      color: var(--on-surface);
+    }
+
+    /* Hands-on Practice Scenario Boxes */
+    .scenario-box {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .scenario-artifact {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+    .choice-btn {
+      min-height: 48px;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      text-align: left;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: background-color var(--dur-micro) var(--ease-in-out), box-shadow var(--dur-micro) var(--ease-in-out);
+    }
+    .choice-btn:hover {
+      background: var(--surface-container);
+    }
+    .choice-btn[aria-pressed="true"] {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      color: var(--on-primary-container);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    .choice-btn[data-verdict="correct"] {
+      background: var(--positive-tint);
+      border-color: var(--tertiary);
+      color: var(--secondary);
+    }
+    .choice-btn[data-verdict="incorrect"] {
+      background: var(--error-tint);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    /* Rating 1-5 Cards */
+    .rating-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    .rating-btn {
+      min-height: 76px;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: background-color var(--dur-micro) var(--ease-in-out), box-shadow var(--dur-micro) var(--ease-in-out);
+    }
+    .rating-btn:hover {
+      background: var(--surface-container-low);
+    }
+    .rating-btn[aria-pressed="true"] {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    .rating-num {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--on-primary-container);
+    }
+    .rating-desc {
+      font-size: 0.8rem;
+      line-height: 1.35;
+      color: var(--on-surface-variant);
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      background: var(--background);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Comparison Chart Container */
+    .chart-box {
+      width: 100%;
+      min-height: 280px;
+      padding: var(--space-md) 0;
+    }
+
+    /* Inline Utility Classes */
+    .flex-between {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+    .support-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+    .support-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
+      padding: 4px var(--space-md);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline-variant);
+      background: var(--background);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .support-pill[aria-pressed="true"] {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      color: var(--on-primary-container);
+      font-weight: 700;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Footer */
+    .hub-footer {
+      border-top: 1px solid var(--outline-variant);
+      padding-top: var(--space-lg);
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    @media (max-width: 900px) {
+      .phase-bar { grid-template-columns: 1fr; }
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid { padding: var(--space-sm); gap: var(--space-md); }
+      .card, .hub-header, .scenario-box { padding: var(--space-md); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="app-page" data-text-size="standard" data-contrast="calm">
+    <main class="page-grid">
+
+      <!-- HEADER & ACCESSIBILITY CONTROLS -->
+      <header class="hub-header">
+        <div class="header-top-row">
+          <div>
+            <p class="kicker">Home4Good Inc. &bull; Digital Pathways to Employment</p>
+            <h1 class="title">Skills Check Hub</h1>
+            <p class="lede">
+              Practice core workplace computer and AI skills in a safe, training-only space. Check what you can already do today, try hands-on scenarios, and save your progress for your Skool course portal or coach.
+            </p>
+          </div>
+          <div id="hub-milestone-badge" class="chip" data-status="info">
+            <span id="hub-milestone-text">Baseline In Progress</span>
+          </div>
+        </div>
+
+        <div class="callout" role="note">
+          <strong>Privacy &amp; Dignity Promise:</strong> All exercises use fictional candidate <strong>Jordan Lee</strong> (<span class="tabular">jordan.lee@riverside-example.test</span>) and fictional employer <strong>Riverside Community Services</strong>. You never need to enter real passwords, Social Security numbers, IDs, addresses, or justice-system history.
+        </div>
+
+        <div class="a11y-toolbar" aria-label="Accessibility and learning mode controls">
+          <span class="a11y-label">Display Comfort:</span>
+          <div class="toggle-group">
+            <button type="button" class="toggle-pill" id="btn-text-standard" aria-pressed="true" onclick="setTextSize('standard')">Standard Text</button>
+            <button type="button" class="toggle-pill" id="btn-text-large" aria-pressed="false" onclick="setTextSize('large')">Large Text</button>
+            <button type="button" class="toggle-pill" id="btn-contrast-calm" aria-pressed="true" onclick="setContrast('calm')">Calm Contrast</button>
+            <button type="button" class="toggle-pill" id="btn-contrast-high" aria-pressed="false" onclick="setContrast('high')">High Contrast</button>
+          </div>
+          <span class="a11y-label">Pace:</span>
+          <div class="toggle-group">
+            <button type="button" class="toggle-pill" id="btn-mode-self" aria-pressed="true" onclick="setDeliveryMode('self-paced')">Self-Paced (No Deadline)</button>
+            <button type="button" class="toggle-pill" id="btn-mode-group" aria-pressed="false" onclick="setDeliveryMode('scheduled-group')">Scheduled Group</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- PHASE SWITCHER & LEARNER RECORD STRIP -->
+      <section class="card" aria-label="Check phase and session details">
+        <div class="phase-bar">
+          <div>
+            <p class="kicker">Step 1 &bull; Choose Your View</p>
+            <div class="phase-tabs" role="tablist" aria-label="Skills check phase">
+              <button type="button" role="tab" class="phase-btn" id="tab-baseline" aria-selected="true" onclick="setPhase('baseline')">
+                <span class="phase-btn-title">Baseline Check (Start)</span>
+                <span class="phase-btn-sub">Benchmark starting skills before modules</span>
+              </button>
+              <button type="button" role="tab" class="phase-btn" id="tab-final" aria-selected="false" onclick="setPhase('final')">
+                <span class="phase-btn-title">Final Check (Finish)</span>
+                <span class="phase-btn-sub">Demonstrate growth after practice</span>
+              </button>
+              <button type="button" role="tab" class="phase-btn" id="tab-summary" aria-selected="false" onclick="setPhase('summary')">
+                <span class="phase-btn-title">Progress &amp; Skool Export</span>
+                <span class="phase-btn-sub">Compare start to finish &amp; save record</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p class="kicker">Optional Learner Header (No Sensitive Info)</p>
+            <div class="field-row">
+              <div class="field">
+                <label for="input-learner-name">First Name or Skool Handle</label>
+                <input type="text" id="input-learner-name" placeholder="e.g., Alex M. or Learner-04" oninput="updateMetaField('learnerName', this.value)">
+              </div>
+              <div class="field">
+                <label for="input-baseline-date">Baseline Date</label>
+                <input type="date" id="input-baseline-date" onchange="updateMetaField('baselineDate', this.value)">
+              </div>
+              <div class="field">
+                <label for="input-final-date">Final Check Date</label>
+                <input type="date" id="input-final-date" onchange="updateMetaField('finalDate', this.value)">
+              </div>
+            </div>
+            <div style="margin-top: var(--space-sm);">
+              <span class="a11y-label">Supports I use (optional):</span>
+              <div class="support-chips" id="support-chips-container"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CURRENT STATE SUMMARY KPI ROW -->
+      <section class="kpi-grid" aria-label="Overall progress overview">
+        <div class="status-card" id="kpi-card-ican" data-status="neutral">
+          <div class="kpi-label">"I Can" Statements Checked</div>
+          <div class="kpi-value tabular" id="kpi-ican-value">0 / 35</div>
+          <div class="kpi-caption" id="kpi-ican-caption">Check what feels comfortable right now</div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="kpi-ican-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="status-card" id="kpi-card-scenarios" data-status="neutral">
+          <div class="kpi-label">Hands-On Practice Scenarios</div>
+          <div class="kpi-value tabular" id="kpi-scenarios-value">0 / 7</div>
+          <div class="kpi-caption" id="kpi-scenarios-caption">Interactive tasks using safe mock data</div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="kpi-scenarios-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="status-card" id="kpi-card-ratings" data-status="neutral">
+          <div class="kpi-label" id="kpi-ratings-label">Baseline Skills Rated</div>
+          <div class="kpi-value tabular" id="kpi-ratings-value">0 / 7</div>
+          <div class="kpi-caption" id="kpi-ratings-caption">Leave blank if not yet tried</div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="kpi-ratings-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="status-card" id="kpi-card-growth" data-status="neutral">
+          <div class="kpi-label">Modules at Independent (3+)</div>
+          <div class="kpi-value tabular" id="kpi-growth-value">0 / 7</div>
+          <div class="kpi-caption" id="kpi-growth-caption">Target range is 3 (Independent) to 5</div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="kpi-growth-bar" data-status="ok" style="width: 0%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORKSPACE VIEW (BASELINE OR FINAL) -->
+      <section id="workspace-view" class="workspace-grid" aria-label="Module skills workspace">
+        <!-- Left Rail: 7 Modules -->
+        <nav class="module-rail" aria-label="Seven core skill areas" id="module-rail"></nav>
+
+        <!-- Right Detail Panel -->
+        <div class="module-detail" id="module-detail"></div>
+      </section>
+
+      <!-- SUMMARY & SKOOL PORTAL EXPORT VIEW -->
+      <section id="summary-view" class="hidden" aria-label="Progress comparison and Skool export">
+        <div class="card">
+          <div class="flex-between">
+            <div>
+              <p class="kicker">Start-to-Finish Growth Record</p>
+              <h2 class="section-title">Baseline vs. Final Demonstration Summary</h2>
+              <p class="lede">
+                Compare where you started with what you can demonstrate today. A score of <strong>0 change or a fresh try</strong> is valid learning information—never a failure.
+              </p>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-primary" onclick="copySkoolSummary(this)">
+                <i data-lucide="copy" width="18" height="18" aria-hidden="true"></i>
+                <span>Copy Summary for Skool</span>
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="downloadSkillsSummary()">
+                <i data-lucide="download" width="18" height="18" aria-hidden="true"></i>
+                <span>Download .txt Record</span>
+              </button>
+            </div>
+          </div>
+          <div id="copy-feedback" class="muted" style="margin-top: var(--space-sm);" aria-live="polite"></div>
+
+          <!-- SVG Progress Chart with Target Reference Band -->
+          <div class="chart-box" id="summary-chart-container"></div>
+
+          <!-- Paired Comparison Table -->
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Skill Area</th>
+                  <th>Baseline (1–5)</th>
+                  <th>Final (1–5)</th>
+                  <th>Change</th>
+                  <th>"I Can" Checks</th>
+                  <th>Hands-On Scenario</th>
+                </tr>
+              </thead>
+              <tbody id="summary-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="callout" data-status="ok" style="margin-top: var(--space-lg);">
+            <strong>Connecting Back to Skool &amp; Your Coach:</strong> Copy your summary above and paste it into your Skool course check-in thread or module reflection prompt. Remember: in facilitated programs, your instructor or coach confirms each completed module separately based on observed skills—no automated lockouts or time penalties apply.
+          </div>
+
+          <div class="flex-between" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--outline-variant);">
+            <span class="muted">Need a clean slate to run a fresh check?</span>
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-all" onclick="resetAllProgress(this)">Reset All Progress</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="hub-footer">
+        <div>
+          <strong>Digital Pathways to Employment</strong> &bull; Curriculum &amp; Skills Check Design by Home4Good Inc. (DP-SKILLS-v1.0 &amp; Seven-Module Core Update v1.1).
+        </div>
+        <div>
+          Instructional references: Northstar Digital Literacy (Literacy Minnesota), FTC Consumer Job Scam Guidance (consumer.ftc.gov), CISA Phishing &amp; Account Security (cisa.gov), and CareerOneStop (careeronestop.org). All practice names, employers, and <span class="tabular">.test</span> addresses are fictional placeholders for safe learning.
+        </div>
+        <div>
+          Copyright &copy; 2026 Ronda Bell, licensed to Home4Good Inc. for authorized educational and charitable reentry use. Contact: home4good@bellahvisions.com &bull; programs.bellahvisions.com
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    /* =========================================================================
+       DATA MODEL: 7 CORE MODULES (DP-01 to DP-06 + AI-07)
+       All strings use backticks to avoid quote/apostrophe parse issues.
+    ========================================================================= */
+    const RATING_ANCHORS = [
+      { level: 1, title: `1 — Beginning`, desc: `Just getting started; helpful to watch a demo first.` },
+      { level: 2, title: `2 — Developing`, desc: `Can do parts of this with a guide or step-by-step prompts.` },
+      { level: 3, title: `3 — Independent`, desc: `Can complete the core task safely using written instructions.` },
+      { level: 4, title: `4 — Proficient`, desc: `Works accurately, checks own work, and explains choices.` },
+      { level: 5, title: `5 — Advanced`, desc: `Can adapt the skill to a new situation and explain why.` }
+    ];
+
+    const SUPPORT_OPTIONS = [
+      `Keyboard navigation`,
+      `Larger text / zoom`,
+      `Audio or screen reader`,
+      `Extra time`,
+      `Plain-language guide`,
+      `Coach / partner check-in`
+    ];
+
+    const MODULES = [
+      {
+        id: `dp01`,
+        code: `DP-01`,
+        title: `Computer Basics and Digital Confidence`,
+        outcome: `Use a computer, input devices, and accessibility controls with confidence.`,
+        vocab: [`Operating system`, `Desktop`, `Application`, `File`, `Folder`, `Keyboard shortcut`, `Accessibility setting`],
+        ican: [
+          `I can open an application and interact with the desktop safely.`,
+          `I can type, edit text, and fix mistakes using keyboard navigation.`,
+          `I can adjust an accessibility setting (such as text size or contrast) to fit my comfort.`,
+          `I can save a file, close it, locate it again, and reopen it.`,
+          `I can lock or sign out of a shared workstation before stepping away.`
+        ],
+        scenarioTitle: `First Day at Riverside Community Services`,
+        scenarioPrompt: `You are starting as a support assistant at Riverside Community Services. Fix the misspelled word in the plan below, verify your accessibility comfort, save First_Day_Plan, and choose the safest step when stepping away from a shared workstation.`,
+        exitCheckQ: `Why should you lock or sign out before leaving a shared training computer?`,
+        exitCheckA: `To protect your workspace and prevent someone else from viewing or changing your files.`
+      },
+      {
+        id: `dp02`,
+        code: `DP-02`,
+        title: `Navigating the Internet Safely`,
+        outcome: `Locate trustworthy information online and recognize common internet and account risks.`,
+        vocab: [`Browser`, `Address bar`, `Tab`, `Search result`, `Domain`, `Phishing`, `Multi-factor authentication`],
+        ican: [
+          `I can open browser tabs and compare two websites side by side.`,
+          `I can use specific search terms and spot sponsored ads vs. real results.`,
+          `I can check who published a page (domain & organization) and when it was updated.`,
+          `I can recognize suspicious or urgent phishing messages asking for passwords or IDs.`,
+          `I can navigate to an official website independently instead of clicking a message link.`
+        ],
+        scenarioTitle: `Spot the Urgent Phishing Trap`,
+        scenarioPrompt: `While looking for workplace safety guidance, an urgent message arrives pretending to be Riverside support. Inspect the message below, flag the warning signs, and choose the safest verification step.`,
+        exitCheckQ: `Does a padlock icon alone prove that a website is trustworthy?`,
+        exitCheckA: `No. HTTPS encrypts the connection, but scam sites can also have a padlock—always verify the domain and publisher.`
+      },
+      {
+        id: `dp03`,
+        code: `DP-03`,
+        title: `Email and Professional Communication`,
+        outcome: `Compose and manage workplace email with clarity, professionalism, and privacy care.`,
+        vocab: [`Subject line`, `Recipient`, `CC`, `BCC`, `Reply All`, `Attachment`, `Signature`],
+        ican: [
+          `I can write a clear, specific subject line that matches the purpose of my email.`,
+          `I can verify the right recipient before sending and choose Reply vs. Reply All wisely.`,
+          `I can write a concise, polite workplace request with clear next steps.`,
+          `I can attach the right file and preview its filename and version before sending.`,
+          `I know never to include real Social Security numbers, IDs, or passwords in routine email.`
+        ],
+        scenarioTitle: `Confirm Orientation & Request the Missing Location`,
+        scenarioPrompt: `Ms. Johnson (Training Supervisor) sent Jordan Lee an orientation message: "Hello Jordan, please confirm that you can attend orientation on Thursday, November 12, 2026, at 10:00 AM Eastern. Send your sample résumé." Notice the meeting location is missing! Complete the safe email check below.`,
+        exitCheckQ: `Why should you preview an attachment before clicking Send?`,
+        exitCheckA: `To confirm you attached the intended document and the correct, final version.`
+      },
+      {
+        id: `dp04`,
+        code: `DP-04`,
+        title: `Creating Documents and Managing Files`,
+        outcome: `Create a clean résumé and organize both editable (.docx) and shareable (.pdf) versions.`,
+        vocab: [`Word processor`, `Formatting`, `PDF`, `Filename`, `Extension`, `Folder structure`, `Version`],
+        ican: [
+          `I can organize a document with clear headings (Skills, Experience, Education) and bullet points.`,
+          `I can describe transferable and volunteer experiences accurately without inventing history.`,
+          `I can save an editable copy (Jordan_Lee_Resume.docx) inside a named folder (Applications).`,
+          `I can export a PDF copy (Jordan_Lee_Resume.pdf) and locate both files later.`,
+          `I can inspect the exported PDF to confirm layout, completeness, and readable text.`
+        ],
+        scenarioTitle: `Organize Jordan Lee's Résumé Files`,
+        scenarioPrompt: `Help fictional candidate Jordan Lee prepare and organize a résumé for the Customer Support Associate role using only verified facts from the candidate card.`,
+        exitCheckQ: `Why keep both an editable (.docx) file and a PDF (.pdf) version of your résumé?`,
+        exitCheckA: `Keep the editable file to update for future jobs, and send the PDF so formatting stays clean on any employer's screen.`
+      },
+      {
+        id: `dp05`,
+        code: `DP-05`,
+        title: `Online Job Search and Applications`,
+        outcome: `Evaluate job postings critically, avoid job scams, and complete safe application tracking.`,
+        vocab: [`Job posting`, `Qualifications`, `ATS`, `Application portal`, `Job scam`, `Application tracker`, `Résumé upload`],
+        ican: [
+          `I can tell the difference between "required" and "preferred" job qualifications.`,
+          `I can match a candidate's real skills and experience to what an employer is asking for.`,
+          `I can recognize job scam red flags, such as fees to apply or requests for gift cards/bank details.`,
+          `I can review every field of an online form and attach the right résumé before submitting.`,
+          `I can maintain a simple application tracker with organization, role, status, and next action.`
+        ],
+        scenarioTitle: `Evaluate Riverside Posting & Spot the Scam`,
+        scenarioPrompt: `Review the fictional Riverside Community Services Customer Support Associate listing alongside a suspicious job ad, match Jordan Lee's real qualifications, and verify a clean tracker entry.`,
+        exitCheckQ: `Is paying a fee to secure an interview or job offer a normal requirement?`,
+        exitCheckA: `No. Legitimate employers never charge fees or ask for gift cards to interview or hire you.`
+      },
+      {
+        id: `dp06`,
+        code: `DP-06`,
+        title: `Virtual Interviews and Workplace Digital Skills`,
+        outcome: `Read calendar invitations accurately, manage virtual meeting controls, and follow up professionally.`,
+        vocab: [`Video conference`, `Mute`, `Camera`, `Calendar invite`, `Time zone`, `Chat`, `Screen sharing`],
+        ican: [
+          `I can read a calendar invite and confirm the exact date, time zone, and meeting link.`,
+          `I can test my microphone and camera in advance and mute/unmute smoothly on request.`,
+          `I know how to troubleshoot audio or connectivity calmly and message the host if audio fails.`,
+          `I can answer practice interview questions clearly using positive workplace examples.`,
+          `I can send a concise, polite thank-you follow-up email after the interview.`
+        ],
+        scenarioTitle: `Join & Troubleshoot the Practice Interview`,
+        scenarioPrompt: `Review Jordan Lee's fictional calendar invitation, practice toggling meeting controls, solve an audio drop calmly, and choose the strongest follow-up message.`,
+        exitCheckQ: `Why is it essential to double-check the time zone on a virtual interview invite?`,
+        exitCheckA: `Because remote interviewers may be in a different time zone—confirming prevents joining an hour early or late.`
+      },
+      {
+        id: `ai07`,
+        code: `AI-07`,
+        title: `Responsible AI Literacy & CLEAR Prompting`,
+        outcome: `Understand AI capabilities and limits, write CLEAR prompts safely, and verify AI output before using it.`,
+        vocab: [`AI assistant`, `CLEAR prompt`, `Context`, `Hallucination / error`, `Data privacy`, `Human judgment`, `Verification`],
+        ican: [
+          `I can explain what AI assistants do well and two important limits (they can make up facts or show bias).`,
+          `I keep real private details (SSNs, IDs, addresses, passwords, sensitive history) out of AI prompts.`,
+          `I can write a structured CLEAR prompt — Context, Let AI know task, Explain details, Ask format, Review & refine.`,
+          `I can spot and remove exaggerated or invented claims that an AI tool adds to a résumé or answer.`,
+          `I use my own human judgment to review, fact-check, and refine AI drafts before sharing them.`
+        ],
+        scenarioTitle: `CLEAR Prompt Privacy Guard & Output Fact-Check`,
+        scenarioPrompt: `Test your CLEAR prompting skills for Jordan Lee's Customer Support interview prep, keep private data strictly out of the prompt, and catch two fabricated claims in an AI-generated résumé draft.`,
+        exitCheckQ: `Who is responsible for checking facts and tone in an AI-assisted résumé or email?`,
+        exitCheckA: `You are. AI is a helper, not a truth machine—human review ensures accuracy, honesty, and privacy.`
+      }
+    ];
+
+    /* =========================================================================
+       APPLICATION STATE (PERSISTED VIA notebookAppApi)
+    ========================================================================= */
+    const DEFAULT_STATE = {
+      textSize: `standard`,
+      contrast: `calm`,
+      deliveryMode: `self-paced`,
+      phase: `baseline`,
+      activeModuleId: `dp01`,
+      learnerName: ``,
+      baselineDate: `2026-11-18`,
+      finalDate: ``,
+      supports: [],
+      icanChecks: {},
+      baselineRatings: {},
+      finalRatings: {},
+      reflections: {},
+      scenarios: {
+        dp01: { text: `My First Day at Riverside\n1. Meet supervisor and review daily suport schedule.\n2. Check shared workstation tools and calendar.\n3. Confirm safety and sign-out policy.`, saved: false, departureChoice: ``, feedback: `` },
+        dp02: { flags: [], padlockAnswer: ``, nextAction: ``, verified: false },
+        dp03: { subjectChoice: ``, attachmentChoice: ``, locationAsked: false, noSsnChecked: false, verified: false },
+        dp04: { headingsChecked: [], fileChoice: ``, pdfInspectChecked: false, verified: false },
+        dp05: { req1: ``, scamSpot: ``, trackerStatus: ``, verified: false },
+        dp06: { timeZoneChoice: ``, micMuted: true, camOn: false, audioFixChoice: ``, followupChoice: ``, verified: false },
+        ai07: { clearContext: `I am preparing for an entry-level Customer Support Associate interview using fictional candidate Jordan Lee.`, clearTask: `Create 3 practice interview questions and short tips.`, clearDetails: `Use plain language focused on active listening, scheduling, and reliability.`, clearFormat: `Numbered list with brief sample answers.`, privacyChoice: ``, caughtClaims: [], verified: false }
+      },
+      scenariosDone: {}
+    };
+
+    let appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+    /* =========================================================================
+       PERSISTENCE HELPERS (notebookAppApi)
+    ========================================================================= */
+    async function saveState() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(appState);
+        }
+      } catch (e) {
+        /* Fail gracefully if previewed standalone */
+      }
+    }
+
+    async function loadState() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            appState = mergeDeep(JSON.parse(JSON.stringify(DEFAULT_STATE)), saved);
+          }
+        }
+      } catch (e) {
+        /* Keep default state */
+      }
+    }
+
+    function mergeDeep(target, source) {
+      if (!source || typeof source !== `object`) return target;
+      const keys = Object.keys(source);
+      for (let i = 0; i < keys.length; i++) {
+        const k = keys[i];
+        if (source[k] && typeof source[k] === `object` && !Array.isArray(source[k]) && target[k] && typeof target[k] === `object' && !Array.isArray(target[k])`) {
+          target[k] = mergeDeep(target[k], source[k]);
+        } else if (source[k] && typeof source[k] === `object` && !Array.isArray(source[k]) && target[k] && typeof target[k] === `object`) {
+          target[k] = mergeDeep(target[k], source[k]);
+        } else {
+          target[k] = source[k];
+        }
+      }
+      return target;
+    }
+
+    /* =========================================================================
+       UI CONTROLLERS (HOISTED FUNCTIONS FOR INLINE HANDLERS)
+    ========================================================================= */
+    function setTextSize(size) {
+      appState.textSize = size;
+      applyDisplaySettings();
+      saveState();
+    }
+
+    function setContrast(mode) {
+      appState.contrast = mode;
+      applyDisplaySettings();
+      saveState();
+    }
+
+    function setDeliveryMode(mode) {
+      appState.deliveryMode = mode;
+      applyDisplaySettings();
+      saveState();
+    }
+
+    function applyDisplaySettings() {
+      const page = document.getElementById(`app-page`);
+      if (page) {
+        page.setAttribute(`data-text-size`, appState.textSize);
+        page.setAttribute(`data-contrast`, appState.contrast);
+      }
+      setPressed(`btn-text-standard`, appState.textSize === `standard`);
+      setPressed(`btn-text-large`, appState.textSize === `large`);
+      setPressed(`btn-contrast-calm`, appState.contrast === `calm`);
+      setPressed(`btn-contrast-high`, appState.contrast === `high`);
+      setPressed(`btn-mode-self`, appState.deliveryMode === `self-paced`);
+      setPressed(`btn-mode-group`, appState.deliveryMode === `scheduled-group`);
+    }
+
+    function setPressed(id, pressed) {
+      const el = document.getElementById(id);
+      if (el) el.setAttribute(`aria-pressed`, pressed ? `true` : `false`);
+    }
+
+    function setPhase(phase) {
+      appState.phase = phase;
+      renderAll();
+      saveState();
+    }
+
+    function selectModule(modId) {
+      appState.activeModuleId = modId;
+      if (appState.phase === `summary`) {
+        appState.phase = `baseline`;
+      }
+      renderAll();
+      saveState();
+    }
+
+    function updateMetaField(key, val) {
+      appState[key] = val;
+      saveState();
+    }
+
+    function toggleSupport(label) {
+      const idx = appState.supports.indexOf(label);
+      if (idx === -1) {
+        appState.supports.push(label);
+      } else {
+        appState.supports.splice(idx, 1);
+      }
+      renderSupportChips();
+      saveState();
+    }
+
+    function toggleIcan(modId, index) {
+      if (!appState.icanChecks[modId]) appState.icanChecks[modId] = [];
+      const arr = appState.icanChecks[modId];
+      const pos = arr.indexOf(index);
+      if (pos === -1) arr.push(index);
+      else arr.splice(pos, 1);
+      renderAll();
+      saveState();
+    }
+
+    function setRating(modId, level) {
+      const targetMap = appState.phase === `final` ? appState.finalRatings : appState.baselineRatings;
+      if (targetMap[modId] === level) {
+        delete targetMap[modId];
+      } else {
+        targetMap[modId] = level;
+      }
+      renderAll();
+      saveState();
+    }
+
+    function updateReflection(modId, field, value) {
+      if (!appState.reflections[modId]) appState.reflections[modId] = { learned: ``, practice: `` };
+      appState.reflections[modId][field] = value;
+      saveState();
+    }
+
+    /* =========================================================================
+       HANDS-ON SCENARIO INTERACTION HANDLERS (DP-01 to AI-07)
+    ========================================================================= */
+    function dp01UpdateText(val) {
+      appState.scenarios.dp01.text = val;
+      saveState();
+    }
+
+    function dp01SelectDeparture(choice) {
+      appState.scenarios.dp01.departureChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp01Verify() {
+      const s = appState.scenarios.dp01;
+      const hasHeading = s.text.indexOf(`My First Day at Riverside`) !== -1;
+      const fixedSpelling = s.text.toLowerCase().indexOf(`suport`) === -1 && s.text.toLowerCase().indexOf(`support`) !== -1;
+      const safeExit = s.departureChoice === `lock`;
+
+      if (hasHeading && fixedSpelling && safeExit) {
+        s.saved = true;
+        s.feedback = `Great work! You fixed "suport" to "support", kept your heading clear, saved First_Day_Plan, and chose locking/signing out on a shared workstation.`;
+        appState.scenariosDone.dp01 = true;
+      } else {
+        s.saved = false;
+        const hints = [];
+        if (!hasHeading) hints.push(`Keep the heading "My First Day at Riverside".`);
+        if (!fixedSpelling) hints.push(`Correct the misspelled word "suport" to "support".`);
+        if (!safeExit) hints.push(`Choose the safe workstation exit step (Lock or sign out).`);
+        s.feedback = `Almost there — check these items: ` + hints.join(` `);
+      }
+      renderAll();
+      saveState();
+    }
+
+    function dp02ToggleFlag(flagKey) {
+      const arr = appState.scenarios.dp02.flags;
+      const idx = arr.indexOf(flagKey);
+      if (idx === -1) arr.push(flagKey);
+      else arr.splice(idx, 1);
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp02SetPadlock(ans) {
+      appState.scenarios.dp02.padlockAnswer = ans;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp02SetNextAction(ans) {
+      appState.scenarios.dp02.nextAction = ans;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp02Verify() {
+      const s = appState.scenarios.dp02;
+      const hasFlags = s.flags.indexOf(`urgency`) !== -1 && s.flags.indexOf(`sensitive`) !== -1 && s.flags.indexOf(`domain`) !== -1;
+      const padlockOk = s.padlockAnswer === `no`;
+      const actionOk = s.nextAction === `independent`;
+      if (hasFlags && padlockOk && actionOk) {
+        s.verified = true;
+        appState.scenariosDone.dp02 = true;
+      } else {
+        s.verified = false;
+      }
+      renderAll();
+      saveState();
+    }
+
+    function dp03SetSubject(choice) {
+      appState.scenarios.dp03.subjectChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp03SetAttachment(choice) {
+      appState.scenarios.dp03.attachmentChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp03ToggleCheck(key) {
+      appState.scenarios.dp03[key] = !appState.scenarios.dp03[key];
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp03Verify() {
+      const s = appState.scenarios.dp03;
+      const ok = s.subjectChoice === `clear` && s.attachmentChoice === `pdf` && s.locationAsked && s.noSsnChecked;
+      s.verified = ok;
+      if (ok) appState.scenariosDone.dp03 = true;
+      renderAll();
+      saveState();
+    }
+
+    function dp04ToggleHeading(h) {
+      const arr = appState.scenarios.dp04.headingsChecked;
+      const idx = arr.indexOf(h);
+      if (idx === -1) arr.push(h);
+      else arr.splice(idx, 1);
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp04SetFileChoice(choice) {
+      appState.scenarios.dp04.fileChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp04ToggleInspect() {
+      appState.scenarios.dp04.pdfInspectChecked = !appState.scenarios.dp04.pdfInspectChecked;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp04Verify() {
+      const s = appState.scenarios.dp04;
+      const h = s.headingsChecked;
+      const hasReq = h.indexOf(`Skills`) !== -1 && h.indexOf(`Experience`) !== -1 && h.indexOf(`Education`) !== -1 && h.indexOf(`Legal History`) === -1;
+      const ok = hasReq && s.fileChoice === `both` && s.pdfInspectChecked;
+      s.verified = ok;
+      if (ok) appState.scenariosDone.dp04 = true;
+      renderAll();
+      saveState();
+    }
+
+    function dp05SetReq(choice) {
+      appState.scenarios.dp05.req1 = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp05SetScam(choice) {
+      appState.scenarios.dp05.scamSpot = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp05SetTracker(choice) {
+      appState.scenarios.dp05.trackerStatus = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp05Verify() {
+      const s = appState.scenarios.dp05;
+      const ok = s.req1 === `required` && s.scamSpot === `scam` && s.trackerStatus === `next-action`;
+      s.verified = ok;
+      if (ok) appState.scenariosDone.dp05 = true;
+      renderAll();
+      saveState();
+    }
+
+    function dp06SetTimeZone(choice) {
+      appState.scenarios.dp06.timeZoneChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp06ToggleMic() {
+      appState.scenarios.dp06.micMuted = !appState.scenarios.dp06.micMuted;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp06ToggleCam() {
+      appState.scenarios.dp06.camOn = !appState.scenarios.dp06.camOn;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp06SetAudioFix(choice) {
+      appState.scenarios.dp06.audioFixChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp06SetFollowup(choice) {
+      appState.scenarios.dp06.followupChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function dp06Verify() {
+      const s = appState.scenarios.dp06;
+      const ok = s.timeZoneChoice === `eastern` && !s.micMuted && s.audioFixChoice === `troubleshoot` && s.followupChoice === `thankyou`;
+      s.verified = ok;
+      if (ok) appState.scenariosDone.dp06 = true;
+      renderAll();
+      saveState();
+    }
+
+    function ai07UpdateClear(field, val) {
+      appState.scenarios.ai07[field] = val;
+      const box = document.getElementById(`ai07-privacy-live`);
+      if (box) {
+        const sensitivePattern = /\b\d{3}-\d{2}-\d{4}\b|\bssn\b|\bpassword\b|\bstate id\b|\binmate\b|\bfelony\b/i;
+        const combined = appState.scenarios.ai07.clearContext + ` ` + appState.scenarios.ai07.clearDetails;
+        if (sensitivePattern.test(combined)) {
+          box.className = `callout`;
+          box.setAttribute(`data-status`, `alert`);
+          box.textContent = `Privacy Alert: It looks like sensitive personal or ID terms appeared in your prompt. Replace them with fictional placeholders like Jordan Lee and Riverside Community Services.`;
+        } else {
+          box.className = `callout`;
+          box.setAttribute(`data-status`, `ok`);
+          box.textContent = `Privacy Check Clear: Your CLEAR prompt uses safe training-only details.`;
+        }
+      }
+      saveState();
+    }
+
+    function ai07SetPrivacyChoice(choice) {
+      appState.scenarios.ai07.privacyChoice = choice;
+      renderModuleDetail();
+      saveState();
+    }
+
+    function ai07ToggleClaim(claimKey) {
+      const arr = appState.scenarios.ai07.caughtClaims;
+      const idx = arr.indexOf(claimKey);
+      if (idx === -1) arr.push(claimKey);
+      else arr.splice(idx, 1);
+      renderModuleDetail();
+      saveState();
+    }
+
+    function ai07Verify() {
+      const s = appState.scenarios.ai07;
+      const c = s.caughtClaims;
+      const caughtFabrications = c.indexOf(`callcenter5`) !== -1 && c.indexOf(`crmbilling`) !== -1 && c.indexOf(`frontdesk`) === -1 && c.indexOf(`listening`) === -1;
+      const safePrivacy = s.privacyChoice === `fictional`;
+      const hasClear = s.clearContext.trim().length > 10 && s.clearTask.trim().length > 5;
+      const ok = caughtFabrications && safePrivacy && hasClear;
+      s.verified = ok;
+      if (ok) appState.scenariosDone.ai07 = true;
+      renderAll();
+      saveState();
+    }
+
+    /* =========================================================================
+       EXPORT & RESET HANDLERS
+    ========================================================================= */
+    function buildPlainSummaryText() {
+      const name = appState.learnerName.trim() || `Training Participant (ID kept private)`;
+      const lines = [
+        `DIGITAL PATHWAYS TO EMPLOYMENT — SKILLS CHECK SUMMARY`,
+        `Organization: Home4Good Inc.`,
+        `Participant / Skool Handle: ` + name,
+        `Learning Pace: ` + (appState.deliveryMode === `self-paced` ? `Self-Paced` : `Scheduled Group`),
+        `Baseline Date: ` + (appState.baselineDate || `Not recorded`),
+        `Final Check Date: ` + (appState.finalDate || `Pending`),
+        `Accessibility Supports: ` + (appState.supports.length ? appState.supports.join(`, `) : `None selected`),
+        ``,
+        `SKILL AREA BREAKDOWN (Scale 1–5; Blank = Not Assessed):`
+      ];
+
+      for (let i = 0; i < MODULES.length; i++) {
+        const m = MODULES[i];
+        const b = appState.baselineRatings[m.id] || `-`;
+        const f = appState.finalRatings[m.id] || `-`;
+        const diff = (typeof b === `number` && typeof f === `number`) ? ((f - b >= 0 ? `+` : ``) + (f - b)) : `n/a`;
+        const icanCount = (appState.icanChecks[m.id] || []).length;
+        const scen = appState.scenariosDone[m.id] ? `Completed` : `Not yet completed`;
+        lines.push(m.code + ` | ` + m.title + ` | Baseline: ` + b + ` | Final: ` + f + ` | Change: ` + diff + ` | "I Can": ` + icanCount + `/5 | Scenario: ` + scen);
+      }
+
+      lines.push(``);
+      lines.push(`Note: Self-checks and practice demonstrations support your Skool check-ins. In facilitated programs, staff confirm module completion separately.`);
+      return lines.join(`\n`);
+    }
+
+    function copySkoolSummary(btn) {
+      const txt = buildPlainSummaryText();
+      const feedback = document.getElementById(`copy-feedback`);
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === `function`) {
+        navigator.clipboard.writeText(txt).then(function() {
+          if (feedback) feedback.textContent = `Summary copied to your clipboard — ready to paste into your Skool check-in.`;
+          if (btn) {
+            const span = btn.querySelector(`span`);
+            if (span) span.textContent = `Copied!`;
+          }
+        }).catch(function() {
+          if (feedback) feedback.textContent = `Use the Download .txt Record button to save your summary file.`;
+        });
+      } else if (feedback) {
+        feedback.textContent = `Use the Download .txt Record button to save your summary file.`;
+      }
+    }
+
+    function downloadSkillsSummary() {
+      const txt = buildPlainSummaryText();
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: txt,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `Digital_Pathways_Skills_Summary.txt`
+        });
+      }
+    }
+
+    function resetAllProgress(btn) {
+      if (btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to confirm reset`;
+        return;
+      }
+      appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      if (btn) {
+        btn.dataset.armed = `false`;
+        btn.textContent = `Reset All Progress`;
+      }
+      renderAll();
+      saveState();
+    }
+
+    /* =========================================================================
+       RENDERING ENGINE
+    ========================================================================= */
+    function renderAll() {
+      applyDisplaySettings();
+      renderPhaseTabs();
+      renderLearnerMeta();
+      renderSupportChips();
+      renderKPIs();
+
+      const wsView = document.getElementById(`workspace-view`);
+      const sumView = document.getElementById(`summary-view`);
+      if (appState.phase === `summary`) {
+        if (wsView) wsView.classList.add(`hidden`);
+        if (sumView) sumView.classList.remove(`hidden`);
+        renderSummaryView();
+      } else {
+        if (wsView) wsView.classList.remove(`hidden`);
+        if (sumView) sumView.classList.add(`hidden`);
+        renderModuleRail();
+        renderModuleDetail();
+      }
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function renderPhaseTabs() {
+      const tabs = [
+        { id: `tab-baseline`, val: `baseline` },
+        { id: `tab-final`, val: `final` },
+        { id: `tab-summary`, val: `summary` }
+      ];
+      for (let i = 0; i < tabs.length; i++) {
+        const el = document.getElementById(tabs[i].id);
+        if (el) el.setAttribute(`aria-selected`, appState.phase === tabs[i].val ? `true` : `false`);
+      }
+    }
+
+    function renderLearnerMeta() {
+      const nameEl = document.getElementById(`input-learner-name`);
+      const baseEl = document.getElementById(`input-baseline-date`);
+      const finEl = document.getElementById(`input-final-date`);
+      if (nameEl && nameEl.value !== appState.learnerName) nameEl.value = appState.learnerName;
+      if (baseEl && baseEl.value !== appState.baselineDate) baseEl.value = appState.baselineDate;
+      if (finEl && finEl.value !== appState.finalDate) finEl.value = appState.finalDate;
+    }
+
+    function renderSupportChips() {
+      const container = document.getElementById(`support-chips-container`);
+      if (!container) return;
+      let html = ``;
+      for (let i = 0; i < SUPPORT_OPTIONS.length; i++) {
+        const label = SUPPORT_OPTIONS[i];
+        const active = appState.supports.indexOf(label) !== -1;
+        html += `<button type="button" class="support-pill" aria-pressed="${active ? `true` : `false`}" onclick="toggleSupport('${label}')">${label}</button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function renderKPIs() {
+      let totalIcan = 0;
+      let checkedIcan = 0;
+      let scenariosDoneCount = 0;
+      let ratedCount = 0;
+      let independentCount = 0;
+
+      const activeRatings = appState.phase === `final` ? appState.finalRatings : appState.baselineRatings;
+
+      for (let i = 0; i < MODULES.length; i++) {
+        const m = MODULES[i];
+        totalIcan += m.ican.length;
+        checkedIcan += (appState.icanChecks[m.id] || []).length;
+        if (appState.scenariosDone[m.id]) scenariosDoneCount++;
+        if (typeof activeRatings[m.id] === `number`) {
+          ratedCount++;
+          if (activeRatings[m.id] >= 3) independentCount++;
+        }
+      }
+
+      setText(`kpi-ican-value`, checkedIcan + ` / ` + totalIcan);
+      setBar(`kpi-ican-bar`, (checkedIcan / totalIcan) * 100);
+      setCardStatus(`kpi-card-ican`, checkedIcan === totalIcan ? `ok` : `neutral`);
+
+      setText(`kpi-scenarios-value`, scenariosDoneCount + ` / ` + MODULES.length);
+      setBar(`kpi-scenarios-bar`, (scenariosDoneCount / MODULES.length) * 100);
+      setCardStatus(`kpi-card-scenarios`, scenariosDoneCount === MODULES.length ? `ok` : `neutral`);
+
+      setText(`kpi-ratings-label`, appState.phase === `final` ? `Final Skills Rated` : `Baseline Skills Rated`);
+      setText(`kpi-ratings-value`, ratedCount + ` / ` + MODULES.length);
+      setBar(`kpi-ratings-bar`, (ratedCount / MODULES.length) * 100);
+      setCardStatus(`kpi-card-ratings`, ratedCount === MODULES.length ? `ok` : `neutral`);
+
+      setText(`kpi-growth-value`, independentCount + ` / ` + MODULES.length);
+      setBar(`kpi-growth-bar`, (independentCount / MODULES.length) * 100);
+      setCardStatus(`kpi-card-growth`, independentCount >= 5 ? `ok` : `neutral`);
+
+      const badge = document.getElementById(`hub-milestone-badge`);
+      const badgeTxt = document.getElementById(`hub-milestone-text`);
+      const baseCount = Object.keys(appState.baselineRatings).length;
+      const finCount = Object.keys(appState.finalRatings).length;
+      if (badge && badgeTxt) {
+        if (finCount === 7 && scenariosDoneCount === 7) {
+          badge.setAttribute(`data-status`, `ok`);
+          badgeTxt.textContent = `Ready for Skool Celebration`;
+        } else if (baseCount === 7) {
+          badge.setAttribute(`data-status`, `ok`);
+          badgeTxt.textContent = `Baseline Complete`;
+        } else {
+          badge.setAttribute(`data-status`, `info`);
+          badgeTxt.textContent = appState.phase === `final` ? `Final Check Active` : `Baseline In Progress`;
+        }
+      }
+    }
+
+    function setText(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    function setBar(id, pct) {
+      const el = document.getElementById(id);
+      if (el) el.style.width = Math.round(pct) + `%`;
+    }
+
+    function setCardStatus(id, status) {
+      const el = document.getElementById(id);
+      if (el) el.setAttribute(`data-status`, status);
+    }
+
+    function renderModuleRail() {
+      const rail = document.getElementById(`module-rail`);
+      if (!rail) return;
+      const activeRatings = appState.phase === `final` ? appState.finalRatings : appState.baselineRatings;
+      let html = ``;
+      for (let i = 0; i < MODULES.length; i++) {
+        const m = MODULES[i];
+        const isCurrent = m.id === appState.activeModuleId;
+        const icanLen = (appState.icanChecks[m.id] || []).length;
+        const scenDone = !!appState.scenariosDone[m.id];
+        const rating = activeRatings[m.id];
+        const complete = scenDone && icanLen === m.ican.length && typeof rating === `number`;
+
+        html += `<button type="button" class="module-nav-btn" aria-current="${isCurrent ? `step` : `false`}" data-complete="${complete ? `true` : `false`}" onclick="selectModule('${m.id}')">`;
+        html += `<div class="module-nav-top">`;
+        html += `<span class="module-code">${m.code}</span>`;
+        if (typeof rating === `number`) {
+          html += `<span class="chip" data-status="${rating >= 3 ? `ok` : `info`}">Level ${rating}</span>`;
+        } else {
+          html += `<span class="muted">Not rated</span>`;
+        }
+        html += `</div>`;
+        html += `<div class="module-nav-title">${m.title}</div>`;
+        html += `<div class="module-nav-meta">`;
+        html += `<span class="tabular">I can: ${icanLen}/${m.ican.length}</span>`;
+        html += `<span>&bull;</span>`;
+        html += `<span>${scenDone ? `Scenario verified` : `Scenario open`}</span>`;
+        html += `</div>`;
+        html += `</button>`;
+      }
+      rail.innerHTML = html;
+    }
+
+    function renderModuleDetail() {
+      const container = document.getElementById(`module-detail`);
+      if (!container) return;
+      const modIndex = MODULES.findIndex(function(item) { return item.id === appState.activeModuleId; });
+      const m = MODULES[modIndex >= 0 ? modIndex : 0];
+      const activeRatings = appState.phase === `final` ? appState.finalRatings : appState.baselineRatings;
+      const currentRating = activeRatings[m.id];
+      const checkedList = appState.icanChecks[m.id] || [];
+      const refl = appState.reflections[m.id] || { learned: ``, practice: `` };
+
+      let html = ``;
+
+      /* 1. Module Header Card */
+      html += `<div class="status-card" data-status="${appState.scenariosDone[m.id] ? `ok` : `neutral`}">`;
+      html += `<div class="flex-between">`;
+      html += `<div>`;
+      html += `<p class="kicker">${m.code} &bull; ${appState.phase === `final` ? `Final Demonstration Check` : `Baseline Self-Check`}</p>`;
+      html += `<h2 class="section-title">${m.title}</h2>`;
+      html += `<p class="lede">${m.outcome}</p>`;
+      html += `</div>`;
+      html += `<span class="chip" data-status="${appState.scenariosDone[m.id] ? `ok` : `info`}">${appState.scenariosDone[m.id] ? `Scenario Verified` : `Practice Ready`}</span>`;
+      html += `</div>`;
+      html += `<div class="vocab-list" aria-label="Key terms">`;
+      for (let v = 0; v < m.vocab.length; v++) {
+        html += `<span class="vocab-tag">${m.vocab[v]}</span>`;
+      }
+      html += `</div>`;
+      html += `</div>`;
+
+      /* 2. Hands-On Practice Scenario Card */
+      html += `<div class="card">`;
+      html += `<p class="kicker">Hands-On Scenario Practice</p>`;
+      html += `<h3 class="subhead">${m.scenarioTitle}</h3>`;
+      html += `<p class="muted" style="margin-top: var(--space-xs);">${m.scenarioPrompt}</p>`;
+      html += renderScenarioBody(m.id);
+      html += `<div class="callout" style="margin-top: var(--space-md);">`;
+      html += `<strong>Quick Check Question:</strong> ${m.exitCheckQ}<br>`;
+      html += `<span><strong>Answer guide:</strong> ${m.exitCheckA}</span>`;
+      html += `</div>`;
+      html += `</div>`;
+
+      /* 3. "I Can" Self-Reflection Checklist */
+      html += `<div class="card">`;
+      html += `<div class="flex-between">`;
+      html += `<div><p class="kicker">Student Workbook Checklist</p><h3 class="subhead">I Can Self-Reflection (${checkedList.length} of ${m.ican.length})</h3></div>`;
+      html += `<span class="muted">Check every statement you feel ready to demonstrate</span>`;
+      html += `</div>`;
+      html += `<ul class="checklist">`;
+      for (let i = 0; i < m.ican.length; i++) {
+        const isChecked = checkedList.indexOf(i) !== -1;
+        html += `<li><label class="check-item" data-checked="${isChecked ? `true` : `false`}">`;
+        html += `<input type="checkbox" ${isChecked ? `checked` : ``} onchange="toggleIcan('${m.id}', ${i})">`;
+        html += `<span class="check-item-text">${m.ican[i]}</span>`;
+        html += `</label></li>`;
+      }
+      html += `</ul>`;
+      html += `</div>`;
+
+      /* 4. 1-5 Readiness Benchmark & Reflection Notes */
+      html += `<div class="card">`;
+      html += `<p class="kicker">${appState.phase === `final` ? `Final Demonstration` : `Baseline Starting Point`} &bull; 1–5 Readiness Anchor</p>`;
+      html += `<h3 class="subhead">How comfortable do you feel with ${m.code} right now?</h3>`;
+      html += `<p class="muted" style="margin-top: var(--space-xs);">Select a level below (click again to leave blank). Blank means "not yet checked"—never zero.</p>`;
+      html += `<div class="rating-grid">`;
+      for (let r = 0; r < RATING_ANCHORS.length; r++) {
+        const anchor = RATING_ANCHORS[r];
+        const selected = currentRating === anchor.level;
+        html += `<button type="button" class="rating-btn" aria-pressed="${selected ? `true` : `false`}" onclick="setRating('${m.id}', ${anchor.level})">`;
+        html += `<span class="rating-num">${anchor.title}</span>`;
+        html += `<span class="rating-desc">${anchor.desc}</span>`;
+        html += `</button>`;
+      }
+      html += `</div>`;
+
+      html += `<div class="field-row" style="margin-top: var(--space-lg);">`;
+      html += `<div class="field">`;
+      html += `<label for="refl-learned-${m.id}">Something I learned or felt proud of</label>`;
+      html += `<input type="text" id="refl-learned-${m.id}" value="${escapeAttr(refl.learned)}" placeholder="Optional short note..." oninput="updateReflection('${m.id}', 'learned', this.value)">`;
+      html += `</div>`;
+      html += `<div class="field">`;
+      html += `<label for="refl-practice-${m.id}">One skill to practice again or ask my coach</label>`;
+      html += `<input type="text" id="refl-practice-${m.id}" value="${escapeAttr(refl.practice)}" placeholder="Optional question for Skool or coach..." oninput="updateReflection('${m.id}', 'practice', this.value)">`;
+      html += `</div>`;
+      html += `</div>`;
+
+      /* Prev / Next Module Navigation */
+      html += `<div class="flex-between" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--outline-variant);">`;
+      if (modIndex > 0) {
+        const prevM = MODULES[modIndex - 1];
+        html += `<button type="button" class="btn btn-secondary" onclick="selectModule('${prevM.id}')">&larr; Previous: ${prevM.code}</button>`;
+      } else {
+        html += `<span></span>`;
+      }
+      if (modIndex < MODULES.length - 1) {
+        const nextM = MODULES[modIndex + 1];
+        html += `<button type="button" class="btn btn-primary" onclick="selectModule('${nextM.id}')">Next: ${nextM.code} &rarr;</button>`;
+      } else {
+        html += `<button type="button" class="btn btn-primary" onclick="setPhase('summary')">View Progress &amp; Skool Export &rarr;</button>`;
+      }
+      html += `</div>`;
+      html += `</div>`;
+
+      container.innerHTML = html;
+    }
+
+    function renderScenarioBody(modId) {
+      if (modId === `dp01`) {
+        const s = appState.scenarios.dp01;
+        let h = `<div class="scenario-box">`;
+        h += `<div class="field"><label for="dp01-editor">Practice File: First_Day_Plan (Fix the misspelled word "suport" &rarr; "support")</label>`;
+        h += `<textarea id="dp01-editor" oninput="dp01UpdateText(this.value)">${escapeHtml(s.text)}</textarea></div>`;
+        h += `<div><p class="a11y-label" style="display:block; margin-bottom: var(--space-xs);">Before stepping away from this shared training computer, what should you do?</p>`;
+        h += `<div class="choice-grid">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.departureChoice === `leave` ? `true` : `false`}" onclick="dp01SelectDeparture('leave')">Leave the screen open so it loads faster later</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.departureChoice === `lock` ? `true` : `false`}" onclick="dp01SelectDeparture('lock')">Save my work and lock or sign out of the workstation</button>`;
+        h += `</div></div>`;
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp01Verify()">Save &amp; Verify First_Day_Plan</button></div>`;
+        if (s.feedback) {
+          h += `<div class="callout" data-status="${s.saved ? `ok` : `alert`}">${escapeHtml(s.feedback)}</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      if (modId === `dp02`) {
+        const s = appState.scenarios.dp02;
+        const flagSelected = function(k) { return s.flags.indexOf(k) !== -1; };
+        let h = `<div class="scenario-box">`;
+        h += `<div class="scenario-artifact">`;
+        h += `<div class="kicker">Fictional Suspicious Message</div>`;
+        h += `<div><strong>FROM:</strong> <span class="tabular">account-verify@riverside-urgent.example.test</span></div>`;
+        h += `<div><strong>SUBJECT:</strong> Password verification required immediately</div>`;
+        h += `<p style="margin: var(--space-sm) 0 0 0;">"Your account will be deleted in 30 minutes unless you reply with your password and identification number."</p>`;
+        h += `</div>`;
+
+        h += `<div><p class="a11y-label">1. Select ALL three warning signs in this message:</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${flagSelected(`urgency`)}" onclick="dp02ToggleFlag('urgency')">Artificial 30-minute panic / deadline</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${flagSelected(`sensitive`)}" onclick="dp02ToggleFlag('sensitive')">Asks for password &amp; ID number by reply</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${flagSelected(`domain`)}" onclick="dp02ToggleFlag('domain')">Suspicious look-alike sender domain</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">2. Does a browser padlock alone prove a website is trustworthy?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.padlockAnswer === `yes`}" onclick="dp02SetPadlock('yes')">Yes, a padlock guarantees it is safe</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.padlockAnswer === `no`}" onclick="dp02SetPadlock('no')">No, it only secures the connection—check the domain</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">3. What is the safest next step?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.nextAction === `click`}" onclick="dp02SetNextAction('click')">Reply quickly so the account is not deleted</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.nextAction === `independent`}" onclick="dp02SetNextAction('independent')">Navigate to the official site independently or ask a trusted coach</button>`;
+        h += `</div></div>`;
+
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp02Verify()">Check Safety Decisions</button></div>`;
+        if (s.verified) {
+          h += `<div class="callout" data-status="ok">Verified! You spotted every phishing red flag and chose independent verification.</div>`;
+        } else if (s.padlockAnswer || s.nextAction || s.flags.length) {
+          h += `<div class="muted">Select all 3 warning signs, answer the padlock check, and pick independent verification, then click Check Safety Decisions.</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      if (modId === `dp03`) {
+        const s = appState.scenarios.dp03;
+        let h = `<div class="scenario-box">`;
+        h += `<div class="scenario-artifact">`;
+        h += `<div class="kicker">Fictional Message From Ms. Johnson</div>`;
+        h += `<p style="margin: 0;">"Hello Jordan, please confirm that you can attend orientation on Thursday, November 12, 2026, at 10:00 AM Eastern. Send your sample résumé. Thank you."</p>`;
+        h += `</div>`;
+
+        h += `<div><p class="a11y-label">1. Choose the clearest Subject Line:</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.subjectChoice === `vague`}" onclick="dp03SetSubject('vague')">hello</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.subjectChoice === `clear`}" onclick="dp03SetSubject('clear')">Orientation Confirmation — Jordan Lee</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">2. Which file should you attach to your reply?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.attachmentChoice === `draft`}" onclick="dp03SetAttachment('draft')">notes_old_v1.txt</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.attachmentChoice === `pdf`}" onclick="dp03SetAttachment('pdf')">Jordan_Lee_Resume.pdf</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">3. Pre-send review checks:</p><div class="checklist">`;
+        h += `<label class="check-item" data-checked="${s.locationAsked}"><input type="checkbox" ${s.locationAsked ? `checked` : ``} onchange="dp03ToggleCheck('locationAsked')"><span>I confirmed Thursday, Nov. 12 at 10:00 AM Eastern and politely asked for the missing meeting location.</span></label>`;
+        h += `<label class="check-item" data-checked="${s.noSsnChecked}"><input type="checkbox" ${s.noSsnChecked ? `checked` : ``} onchange="dp03ToggleCheck('noSsnChecked')"><span>I verified that no real SSN, ID number, or private personal info is included.</span></label>`;
+        h += `</div></div>`;
+
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp03Verify()">Verify Professional Email</button></div>`;
+        if (s.verified) {
+          h += `<div class="callout" data-status="ok">Verified! Your subject line, attachment preview, polite location question, and privacy check are complete.</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      if (modId === `dp04`) {
+        const s = appState.scenarios.dp04;
+        const hasH = function(k) { return s.headingsChecked.indexOf(k) !== -1; };
+        let h = `<div class="scenario-box">`;
+        h += `<div class="scenario-artifact">`;
+        h += `<div class="kicker">Fictional Candidate Card: Jordan Lee</div>`;
+        h += `<div><strong>Goal:</strong> Customer Support Associate (Atlanta, GA)</div>`;
+        h += `<div><strong>Experience:</strong> Volunteer front desk, community event registration (2025–2026); Retail stock assistant (2024–2025)</div>`;
+        h += `<div><strong>Skills:</strong> Active listening; organized records; scheduling; written communication</div>`;
+        h += `<div><strong>Education:</strong> High school diploma (training placeholder)</div>`;
+        h += `</div>`;
+
+        h += `<div><p class="a11y-label">1. Select the three clear headings needed on Jordan Lee's résumé (leave off inappropriate items):</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${hasH(`Skills`)}" onclick="dp04ToggleHeading('Skills')">Skills</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${hasH(`Experience`)}" onclick="dp04ToggleHeading('Experience')">Experience</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${hasH(`Education`)}" onclick="dp04ToggleHeading('Education')">Education</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${hasH(`Legal History`)}" onclick="dp04ToggleHeading('Legal History')">Legal History</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">2. Which file pair belongs in the Applications folder?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.fileChoice === `one`}" onclick="dp04SetFileChoice('one')">Only a screenshot saved on the Desktop</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.fileChoice === `both`}" onclick="dp04SetFileChoice('both')">Jordan_Lee_Resume.docx (editable) + Jordan_Lee_Resume.pdf (shareable)</button>`;
+        h += `</div></div>`;
+
+        h += `<label class="check-item" data-checked="${s.pdfInspectChecked}"><input type="checkbox" ${s.pdfInspectChecked ? `checked` : ``} onchange="dp04ToggleInspect()"><span>I inspected the PDF to confirm readable text, matching content, and clean layout.</span></label>`;
+
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp04Verify()">Verify Résumé &amp; Files</button></div>`;
+        if (s.verified) {
+          h += `<div class="callout" data-status="ok">Verified! Clean headings, transferable skills, and both .docx and .pdf files organized in Applications.</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      if (modId === `dp05`) {
+        const s = appState.scenarios.dp05;
+        let h = `<div class="scenario-box">`;
+        h += `<div class="scenario-artifact">`;
+        h += `<div class="kicker">Practice Listing: Riverside Community Services</div>`;
+        h += `<div><strong>Role:</strong> Customer Support Associate &bull; Full-time &bull; $19–$22/hour (fictional)</div>`;
+        h += `<div><strong>Required:</strong> Clear written communication, ability to use email and standard computer applications, accurate records.</div>`;
+        h += `<div><strong>Preferred:</strong> Experience with customer support software.</div>`;
+        h += `</div>`;
+
+        h += `<div><p class="a11y-label">1. "Experience with customer support software" is listed as Preferred. What does that mean?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.req1 === `disqualified`}" onclick="dp05SetReq('disqualified')">You are automatically disqualified without it</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.req1 === `required`}" onclick="dp05SetReq('required')">It is desirable, but not strictly required—Jordan can still apply</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">2. Another posting says: "Pay a $35 training fee to guarantee an interview tomorrow." How do you treat it?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.scamSpot === `scam`}" onclick="dp05SetScam('scam')">Major job scam warning sign—do not pay and verify independently</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.scamSpot === `normal`}" onclick="dp05SetScam('normal')">Normal hiring step for entry-level roles</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">3. What makes an application tracker entry complete?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.trackerStatus === `next-action`}" onclick="dp05SetTracker('next-action')">Employer, role, date, status, and a clear next-action follow-up date</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.trackerStatus === `none`}" onclick="dp05SetTracker('none')">Just the city name with no follow-up plan</button>`;
+        h += `</div></div>`;
+
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp05Verify()">Verify Job Search Check</button></div>`;
+        if (s.verified) {
+          h += `<div class="callout" data-status="ok">Verified! You distinguished required vs. preferred skills, spotted the fee scam, and logged a complete tracker plan.</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      if (modId === `dp06`) {
+        const s = appState.scenarios.dp06;
+        let h = `<div class="scenario-box">`;
+        h += `<div class="scenario-artifact">`;
+        h += `<div class="kicker">Fictional Calendar Invitation</div>`;
+        h += `<div><strong>Title:</strong> Riverside Practice Interview</div>`;
+        h += `<div><strong>Date &amp; Time:</strong> Friday, November 13, 2026 &bull; 2:00–2:30 PM Eastern</div>`;
+        h += `<div><strong>Location:</strong> Instructor-hosted training video room</div>`;
+        h += `</div>`;
+
+        h += `<div><p class="a11y-label">1. Which time zone should you plan for?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.timeZoneChoice === `eastern`}" onclick="dp06SetTimeZone('eastern')">2:00–2:30 PM Eastern Time</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.timeZoneChoice === `guess`}" onclick="dp06SetTimeZone('guess')">Whichever local clock is easiest without checking</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">2. Practice Room Controls — Unmute your microphone to introduce yourself:</p>`;
+        h += `<div class="btn-row" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="btn ${s.micMuted ? `btn-secondary` : `btn-primary`}" onclick="dp06ToggleMic()">${s.micMuted ? `Microphone: Muted (Click to Unmute)` : `Microphone: Live / Unmuted`}</button>`;
+        h += `<button type="button" class="btn ${s.camOn ? `btn-primary` : `btn-secondary`}" onclick="dp06ToggleCam()">${s.camOn ? `Camera: On` : `Camera: Off (Audio-only permitted)`}</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">3. If your audio suddenly stops working during the call, what should you do?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.audioFixChoice === `troubleshoot`}" onclick="dp06SetAudioFix('troubleshoot')">Check device/mute settings and message the host on the approved channel</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.audioFixChoice === `hangup`}" onclick="dp06SetAudioFix('hangup')">Close the meeting without telling anyone</button>`;
+        h += `</div></div>`;
+
+        h += `<div><p class="a11y-label">4. Pick the strongest post-interview follow-up:</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.followupChoice === `thankyou`}" onclick="dp06SetFollowup('thankyou')">A concise thank-you email referencing the Customer Support role and interest</button>`;
+        h += `<button type="button" class="choice-btn" aria-pressed="${s.followupChoice === `none`}" onclick="dp06SetFollowup('none')">Send five follow-up messages the same afternoon</button>`;
+        h += `</div></div>`;
+
+        h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="dp06Verify()">Verify Virtual Interview Check</button></div>`;
+        if (s.verified) {
+          h += `<div class="callout" data-status="ok">Verified! Time zone confirmed, microphone tested, calm troubleshooting chosen, and concise thank-you selected.</div>`;
+        }
+        h += `</div>`;
+        return h;
+      }
+
+      /* AI-07 */
+      const s = appState.scenarios.ai07;
+      const caught = function(k) { return s.caughtClaims.indexOf(k) !== -1; };
+      let h = `<div class="scenario-box">`;
+      h += `<div class="field-row">`;
+      h += `<div class="field"><label for="ai07-c">C — Context (Who/What is the situation?)</label><input type="text" id="ai07-c" value="${escapeAttr(s.clearContext)}" oninput="ai07UpdateClear('clearContext', this.value)"></div>`;
+      h += `<div class="field"><label for="ai07-l">L — Let AI know the task</label><input type="text" id="ai07-l" value="${escapeAttr(s.clearTask)}" oninput="ai07UpdateClear('clearTask', this.value)"></div>`;
+      h += `</div>`;
+      h += `<div class="field-row">`;
+      h += `<div class="field"><label for="ai07-e">E — Explain details</label><input type="text" id="ai07-e" value="${escapeAttr(s.clearDetails)}" oninput="ai07UpdateClear('clearDetails', this.value)"></div>`;
+      h += `<div class="field"><label for="ai07-a">A — Ask for a format</label><input type="text" id="ai07-a" value="${escapeAttr(s.clearFormat)}" oninput="ai07UpdateClear('clearFormat', this.value)"></div>`;
+      h += `</div>`;
+
+      h += `<div id="ai07-privacy-live" class="callout" data-status="ok">Privacy Check Clear: Your CLEAR prompt uses safe training-only details.</div>`;
+
+      h += `<div><p class="a11y-label">1. Which data rule protects your privacy when prompting AI tools?</p><div class="choice-grid" style="margin-top: var(--space-xs);">`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${s.privacyChoice === `fictional`}" onclick="ai07SetPrivacyChoice('fictional')">Use fictional placeholders or de-identified skills—never real SSNs, IDs, or private records</button>`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${s.privacyChoice === `pasteall`}" onclick="ai07SetPrivacyChoice('pasteall')">Paste full personal IDs and passwords so the AI knows you better</button>`;
+      h += `</div></div>`;
+
+      h += `<div><p class="a11y-label">2. R — Review &amp; Refine: AI drafted these 4 lines for Jordan Lee. Click the TWO invented claims that must be removed:</p>`;
+      h += `<div class="choice-grid" style="margin-top: var(--space-xs);">`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${caught(`frontdesk`)}" onclick="ai07ToggleClaim('frontdesk')">Volunteer front desk experience (2025–2026)</button>`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${caught(`callcenter5`)}" onclick="ai07ToggleClaim('callcenter5')">5 years managing a 40-person call center</button>`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${caught(`listening`)}" onclick="ai07ToggleClaim('listening')">Active listening and organized record-keeping</button>`;
+      h += `<button type="button" class="choice-btn" aria-pressed="${caught(`crmbilling`)}" onclick="ai07ToggleClaim('crmbilling')">Certified enterprise CRM billing director</button>`;
+      h += `</div></div>`;
+
+      h += `<div class="btn-row"><button type="button" class="btn btn-primary" onclick="ai07Verify()">Verify CLEAR Prompt &amp; Fact-Check</button></div>`;
+      if (s.verified) {
+        h += `<div class="callout" data-status="ok">Verified! Your CLEAR prompt protects personal privacy and you caught both fabricated AI claims before using the output.</div>`;
+      } else if (s.privacyChoice || s.caughtClaims.length) {
+        h += `<div class="muted">Select the safe privacy rule and flag ONLY the two invented claims ("5 years managing..." and "Certified enterprise CRM...").</div>`;
+      }
+      h += `</div>`;
+      return h;
+    }
+
+    /* =========================================================================
+       SUMMARY COMPARISON TABLE & VECTOR BAR CHART (WITH TARGET RANGE BAND)
+    ========================================================================= */
+    function renderSummaryView() {
+      const tbody = document.getElementById(`summary-table-body`);
+      if (tbody) {
+        let rows = ``;
+        for (let i = 0; i < MODULES.length; i++) {
+          const m = MODULES[i];
+          const b = appState.baselineRatings[m.id];
+          const f = appState.finalRatings[m.id];
+          let diffTxt = `—`;
+          let diffChip = ``;
+          if (typeof b === `number` && typeof f === `number`) {
+            const delta = f - b;
+            diffTxt = (delta > 0 ? `+` : ``) + delta;
+            diffChip = `<span class="chip" data-status="${delta > 0 ? `ok` : `info`}">${diffTxt}</span>`;
+          }
+          const icanCount = (appState.icanChecks[m.id] || []).length;
+          const scenDone = !!appState.scenariosDone[m.id];
+
+          rows += `<tr>`;
+          rows += `<td><strong>${m.code}</strong> &mdash; ${m.title}</td>`;
+          rows += `<td class="tabular">${typeof b === `number` ? b + ` / 5` : `Blank`}</td>`;
+          rows += `<td class="tabular">${typeof f === `number` ? f + ` / 5` : `Blank`}</td>`;
+          rows += `<td class="tabular">${diffChip || diffTxt}</td>`;
+          rows += `<td class="tabular">${icanCount} / ${m.ican.length}</td>`;
+          rows += `<td><span class="chip" data-status="${scenDone ? `ok` : `watch`}">${scenDone ? `Verified` : `Pending`}</span></td>`;
+          rows += `</tr>`;
+        }
+        tbody.innerHTML = rows;
+      }
+
+      renderSummaryChart();
+    }
+
+    function renderSummaryChart() {
+      const container = document.getElementById(`summary-chart-container`);
+      if (!container) return;
+
+      const width = 760;
+      const rowH = 38;
+      const topPad = 36;
+      const leftPad = 95;
+      const rightPad = 40;
+      const chartW = width - leftPad - rightPad;
+      const height = topPad + MODULES.length * rowH + 34;
+
+      const scaleX = function(val) {
+        return leftPad + (val / 5) * chartW;
+      };
+
+      let svg = `<svg viewBox="0 0 ${width} ${height}" width="100%" role="img" aria-label="Baseline and Final readiness comparison chart across 7 skill modules">`;
+      svg += `<text x="${leftPad}" y="18" fill="var(--on-surface)" font-family="Figtree, sans-serif" font-size="13" font-weight="700">Baseline vs. Final Readiness (Target Independent Range: 3 to 5 shaded)</text>`;
+
+      /* Vitals Treatment 5: Target Reference-Range Band (3 to 5) */
+      svg += `<rect x="${scaleX(3)}" y="${topPad - 4}" width="${scaleX(5) - scaleX(3)}" height="${MODULES.length * rowH + 4}" fill="var(--tertiary)" fill-opacity="0.12"></rect>`;
+
+      /* Vertical Gridlines & Axis Ticks (0 to 5) */
+      for (let t = 0; t <= 5; t++) {
+        const x = scaleX(t);
+        svg += `<line x1="${x}" y1="${topPad - 4}" x2="${x}" y2="${topPad + MODULES.length * rowH}" stroke="var(--outline-variant)" stroke-width="1"></line>`;
+        svg += `<text x="${x}" y="${height - 10}" text-anchor="middle" fill="var(--on-surface-variant)" font-family="Figtree, sans-serif" font-size="11" font-weight="600">${t}</text>`;
+      }
+
+      /* Module Bars */
+      for (let i = 0; i < MODULES.length; i++) {
+        const m = MODULES[i];
+        const y = topPad + i * rowH;
+        const b = appState.baselineRatings[m.id] || 0;
+        const f = appState.finalRatings[m.id] || 0;
+
+        svg += `<text x="${leftPad - 10}" y="${y + 20}" text-anchor="end" fill="var(--on-surface)" font-family="Figtree, sans-serif" font-size="12" font-weight="700">${m.code}</text>`;
+
+        /* Baseline bar */
+        if (b > 0) {
+          svg += `<rect x="${leftPad}" y="${y + 5}" width="${scaleX(b) - leftPad}" height="10" rx="2" fill="var(--data-context)"></rect>`;
+        }
+        /* Final bar */
+        if (f > 0) {
+          svg += `<rect x="${leftPad}" y="${y + 18}" width="${scaleX(f) - leftPad}" height="12" rx="2" fill="var(--data-1)"></rect>`;
+        }
+        if (b === 0 && f === 0) {
+          svg += `<text x="${leftPad + 8}" y="${y + 20}" fill="var(--on-surface-variant)" font-family="Atkinson Hyperlegible, sans-serif" font-size="11">Not yet rated</text>`;
+        }
+      }
+
+      /* Inline legend */
+      svg += `<rect x="${leftPad}" y="${height - 26}" width="12" height="8" rx="2" fill="var(--data-context)"></rect>`;
+      svg += `<text x="${leftPad + 18}" y="${height - 18}" fill="var(--on-surface-variant)" font-family="Figtree, sans-serif" font-size="11" font-weight="600">Baseline</text>`;
+      svg += `<rect x="${leftPad + 90}" y="${height - 26}" width="12" height="8" rx="2" fill="var(--data-1)"></rect>`;
+      svg += `<text x="${leftPad + 108}" y="${height - 18}" fill="var(--on-surface)" font-family="Figtree, sans-serif" font-size="11" font-weight="600">Final</text>`;
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    function escapeHtml(str) {
+      return String(str || ``)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`);
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replace(/"/g, `&quot;`);
+    }
+
+    /* =========================================================================
+       INIT
+    ========================================================================= */
+    async function initApp() {
+      await loadState();
+      renderAll();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
