@@ -8,4 +8,4 @@ Copyright © 2026 Ronda Bell. All rights reserved in original materials owned by
 
 A practical education-to-employment bridge for adults and young people who need confidence using computers, internet services, professional email, documents, online applications, and virtual interviews.
 
-### License to Home4Good Inc.
+### Licensed to Home4Good Inc.
