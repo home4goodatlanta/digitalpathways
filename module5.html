@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Module 5: Online Job Search and Applications — Digital Pathways to Employment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --primary-hover: #0b616c;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Named translucent / semantic surfaces */
+      --chip-ok-bg: #e5f3ea;
+      --chip-warn-bg: #fdf2dc;
+      --chip-warn-text: #7a4700;
+      --chip-alert-bg: #fbe9e8;
+      --range-band-bg: #eaf5ee;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Shared semantic & focus tokens */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.125rem, 1.35rem + 2.8vw, 3.35rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.25vw, 2.125rem);
+      --subhead-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.375rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.2vw, 1.15rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 5.5rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Large text accessibility mode */
+    html.text-large {
+      --body-size: clamp(1.2rem, 1.12rem + 0.3vw, 1.32rem);
+      --subhead-size: clamp(1.32rem, 1.18rem + 0.5vw, 1.55rem);
+      --label-size: 0.875rem;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    /* Top bar (Vitals treatment 2) */
+    .page-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-lg) var(--space-3xl);
+    }
+    .container * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-sm);
+    }
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+    .section-heading {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+    }
+    .sub-heading {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .lede {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: var(--space-md) 0 0;
+    }
+    p {
+      margin: 0 0 var(--space-md);
+      max-width: 68ch;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* Header & Accessibility Strip */
+    .hero-header {
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .top-utility-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .utility-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Buttons */
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      font-family: var(--font-label);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+      text-align: center;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+    .btn-secondary {
+      background-color: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--surface-container-low);
+    }
+    .btn-ghost {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+      padding: var(--space-xs) var(--space-md);
+      font-size: 0.875rem;
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background-color: var(--surface-container);
+    }
+    .btn-ghost[aria-pressed="true"] {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Reassurance Chips (Vitals treatment 4) */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background-color: var(--chip-ok-bg);
+      color: var(--secondary);
+      line-height: 1.3;
+    }
+    .chip[data-status="info"] {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="warn"] {
+      background-color: var(--chip-warn-bg);
+      color: var(--chip-warn-text);
+    }
+    .chip[data-status="alert"] {
+      background-color: var(--chip-alert-bg);
+      color: var(--error);
+    }
+
+    /* Status Accent Cards (Vitals treatment 1) */
+    .status-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="warn"] { border-left-color: var(--warning); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+
+    .wash-band {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+    }
+
+    /* Practice Loop Orientation Strip */
+    .loop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+    .loop-step {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-top: 3px solid var(--primary);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .loop-step:hover {
+      background-color: var(--surface-container);
+    }
+    .loop-num {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-primary-container);
+      margin-bottom: var(--space-xs);
+    }
+    .loop-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+    }
+    .loop-desc {
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+      line-height: 1.45;
+    }
+
+    /* Progress & Privacy Bar */
+    .overview-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      align-items: stretch;
+    }
+    .meter-track {
+      height: 12px;
+      background-color: var(--surface-container);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      margin: var(--space-sm) 0;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--tertiary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-long) var(--ease-out);
+    }
+    .figure-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.65rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      line-height: 1.2;
+    }
+
+    /* Sections */
+    .module-section {
+      padding-top: var(--space-2xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .module-section:last-of-type {
+      border-bottom: none;
+    }
+    .section-header {
+      margin-bottom: var(--space-lg);
+    }
+    .stage-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Vocabulary Strip */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .vocab-item {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+    .vocab-term {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+    }
+    .vocab-def {
+      font-size: 0.9375rem;
+      color: var(--on-surface-variant);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Interactive Job Board */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: end;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-md);
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex: 1 1 200px;
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .input-control, .select-control, .textarea-control {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--background);
+      color: var(--on-surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .select-control {
+      padding-right: var(--space-xl);
+    }
+    .textarea-control {
+      min-height: 108px;
+      resize: vertical;
+    }
+    .input-control:focus, .select-control:focus, .textarea-control:focus {
+      border-color: var(--primary);
+    }
+    .field-error-text {
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--error);
+      margin-top: var(--space-xs);
+    }
+
+    .job-board-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .job-card-btn {
+      width: 100%;
+      text-align: left;
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--outline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .job-card-btn:hover {
+      background-color: var(--surface-container-low);
+    }
+    .job-card-btn[aria-selected="true"] {
+      background-color: var(--surface-container-low);
+      border-color: var(--primary);
+      border-left-color: var(--primary);
+      box-shadow: var(--card-lift);
+    }
+    .job-card-btn[data-legit="caution"][aria-selected="true"] {
+      border-left-color: var(--error);
+    }
+    .job-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+      margin-top: var(--space-sm);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+
+    .detail-panel {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .detail-panel[data-status="alert"] { border-left-color: var(--error); }
+    .detail-panel[data-status="ok"] { border-left-color: var(--tertiary); }
+
+    .kv-list {
+      margin: var(--space-md) 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--outline-variant);
+    }
+    .kv-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--outline-variant);
+      font-size: 0.95rem;
+    }
+    .kv-key {
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+    .kv-val {
+      color: var(--on-surface-variant);
+      word-break: break-word;
+    }
+
+    /* Comparison 2-col */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-lg);
+    }
+    .clean-list {
+      margin: var(--space-sm) 0 0;
+      padding-left: 1.25rem;
+    }
+    .clean-list li {
+      margin-bottom: var(--space-sm);
+    }
+    .clean-list li:last-child { margin-bottom: 0; }
+
+    /* Scam Inspector */
+    .scam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+    .scam-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .scam-card[data-answered="correct"] { border-left-color: var(--tertiary); }
+    .scam-card[data-answered="review"] { border-left-color: var(--warning); }
+    .message-quote {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      font-size: 0.95rem;
+      border: 1px solid var(--outline-variant);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .feedback-box {
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .feedback-box.ok {
+      background-color: var(--chip-ok-bg);
+      color: var(--secondary);
+    }
+    .feedback-box.warn {
+      background-color: var(--chip-warn-bg);
+      color: var(--chip-warn-text);
+    }
+    .feedback-box.alert {
+      background-color: var(--chip-alert-bg);
+      color: var(--error);
+    }
+    .feedback-box.info {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    /* Candidate Card & Matcher */
+    .matcher-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .matcher-row {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .matcher-row[data-matched="true"] { border-left-color: var(--tertiary); }
+    .matcher-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: end;
+      margin-top: var(--space-sm);
+    }
+
+    /* Sandbox Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+    .form-span-2 {
+      grid-column: 1 / -1;
+    }
+    .radio-card-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+    .radio-card {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .radio-card input {
+      margin-top: 0.25rem;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+    }
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background-color: var(--surface-container-low);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .check-row input {
+      margin-top: 0.25rem;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+    }
+
+    /* AI CLEAR Strip */
+    .clear-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-sm);
+      margin: var(--space-lg) 0;
+    }
+    .clear-tile {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-top: 3px solid var(--primary);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+    .clear-letter {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--on-primary-container);
+    }
+    .clear-word {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: var(--space-xs);
+    }
+    .clear-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      margin: 0;
+    }
+
+    /* Application Tracker Table */
+    .table-wrap {
+      overflow-x: auto;
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    thead th {
+      background-color: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    tbody td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+      font-variant-numeric: tabular-nums;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Exit Check & Self-Check */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .quiz-option {
+      width: 100%;
+      text-align: left;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .quiz-option:hover {
+      background-color: var(--surface-container);
+    }
+    .quiz-option[aria-pressed="true"] {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 2px solid var(--outline-variant);
+      color: var(--on-surface-variant);
+      font-size: 0.9rem;
+    }
+
+    /* Container queries for responsive nested panels */
+    .card-wrapper { container-type: inline-size; }
+    @container (max-width: 440px) {
+      .kv-item { flex-direction: column; gap: var(--space-xs); }
+    }
+
+    /* Responsive breakpoints */
+    @media (max-width: 860px) {
+      .loop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .overview-row { grid-template-columns: 1fr; }
+      .job-board-split { grid-template-columns: 1fr; }
+      .clear-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .container { padding: var(--space-md) var(--space-md) var(--space-2xl); }
+      .loop-grid { grid-template-columns: 1fr; }
+      .two-col-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .clear-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="container">
+      <!-- HEADER & ORIENTATION -->
+      <header class="hero-header">
+        <div class="top-utility-row">
+          <div class="kicker" style="margin-bottom: 0;">Digital Pathways to Employment &bull; Module 5 of 7 &bull; Home4Good Inc.</div>
+          <div class="utility-controls" role="group" aria-label="Reading and progress controls">
+            <button type="button" class="btn btn-ghost" id="btn-text-size" aria-pressed="false" onclick="toggleTextSize()">
+              <i data-lucide="type" style="width:16px;height:16px;" aria-hidden="true"></i>
+              <span>Larger Text</span>
+            </button>
+            <button type="button" class="btn btn-ghost" id="btn-export-top" onclick="exportPracticeSummary()">
+              <i data-lucide="download" style="width:16px;height:16px;" aria-hidden="true"></i>
+              <span>Download Practice Summary</span>
+            </button>
+          </div>
+        </div>
+
+        <h1 class="title">Online Job Search and Applications</h1>
+        <p class="lede">
+          Build steady confidence navigating online job boards, spotting scam warning signs, matching your real skills to job postings, and completing safe practice applications — all inside a private fictional sandbox.
+        </p>
+
+        <!-- Practice Loop Navigation -->
+        <nav aria-label="Module 5 practice loop">
+          <div class="loop-grid">
+            <a class="loop-step" href="#stage-watch">
+              <div class="loop-num">Step 1 &bull; Watch / Guide</div>
+              <div class="loop-title">Explore Safe Job Boards</div>
+              <div class="loop-desc">Filter legitimate listings and learn key hiring terms.</div>
+            </a>
+            <a class="loop-step" href="#stage-lets-do">
+              <div class="loop-num">Step 2 &bull; Let's Do It</div>
+              <div class="loop-title">Spot Scams &amp; Match Skills</div>
+              <div class="loop-desc">Separate required vs. preferred skills and verify employers.</div>
+            </a>
+            <a class="loop-step" href="#stage-you-try">
+              <div class="loop-num">Step 3 &bull; You Try</div>
+              <div class="loop-title">Practice Sandbox &amp; AI</div>
+              <div class="loop-desc">Apply as Jordan Lee and compare keywords honestly with AI.</div>
+            </a>
+            <a class="loop-step" href="#stage-check">
+              <div class="loop-num">Step 4 &bull; Check Skills</div>
+              <div class="loop-title">Track &amp; Self-Check</div>
+              <div class="loop-desc">Log your application, test exit checks, and confirm skills.</div>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Progress & Privacy Promise -->
+        <div class="overview-row">
+          <div class="status-card" data-status="ok" id="progress-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-sm); flex-wrap:wrap;">
+              <span class="kicker" style="margin-bottom:0;">Your Module 5 Practice Progress</span>
+              <span class="chip" id="progress-chip">0 of 6 tasks practiced</span>
+            </div>
+            <div class="meter-track" aria-hidden="true">
+              <div class="meter-fill" id="progress-fill"></div>
+            </div>
+            <p class="field-hint" style="margin:0;" id="progress-summary-text">
+              Work at your own pace. Your practice saves automatically in this workspace.
+            </p>
+          </div>
+
+          <div class="status-card" data-status="info">
+            <div class="kicker" style="margin-bottom:var(--space-xs);">Privacy &amp; Dignity Promise</div>
+            <p style="font-size:0.95rem; margin:0;">
+              <strong>Fictional sandbox only.</strong> Never enter your real SSN, state ID, bank info, home address, passwords, or justice-system history. Participation never requires disclosing personal background.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <!-- STAGE 1: WATCH / GUIDE -->
+        <section class="module-section" id="stage-watch" aria-labelledby="heading-watch">
+          <div class="section-header">
+            <div class="stage-pill-row">
+              <span class="chip" data-status="info">Step 1 &bull; Watch / Guide</span>
+              <span class="chip" data-status="info">Lesson 5.1</span>
+            </div>
+            <h2 class="section-heading" id="heading-watch">How to Navigate Job Boards and Filter Real Opportunities</h2>
+            <p class="lede">
+              Job boards list hundreds of openings, including sponsored ads and occasional scams. Using filters helps you focus on roles that fit your schedule, pay needs, and real strengths.
+            </p>
+          </div>
+
+          <!-- Key Vocabulary -->
+          <div class="vocab-grid" aria-label="Module 5 key vocabulary">
+            <div class="vocab-item">
+              <div class="vocab-term">Job Posting</div>
+              <p class="vocab-def">An employer's notice listing the role title, duties, schedule, pay, and qualifications.</p>
+            </div>
+            <div class="vocab-item">
+              <div class="vocab-term">Applicant Tracking System (ATS)</div>
+              <p class="vocab-def">Software employers use to collect online applications and scan résumés for matching keywords.</p>
+            </div>
+            <div class="vocab-item">
+              <div class="vocab-term">Application Portal</div>
+              <p class="vocab-def">The secure employer webpage where you create a login or upload your résumé to apply.</p>
+            </div>
+            <div class="vocab-item">
+              <div class="vocab-term">Required vs. Preferred</div>
+              <p class="vocab-def"><strong>Required</strong> skills are essential; <strong>preferred</strong> skills are helpful extras, not strict deal-breakers.</p>
+            </div>
+          </div>
+
+          <!-- Guided Job Board Explorer -->
+          <div class="wash-band" style="margin-top: var(--space-lg);">
+            <h3 class="sub-heading" style="margin-bottom: var(--space-xs);">Guided Practice: Filter the Fictional Job Board</h3>
+            <p class="field-hint" style="margin-bottom: var(--space-md);">
+              Use the filters below to compare four fictional Atlanta listings. Select any job card to inspect its domain, pay, and legitimacy clues.
+            </p>
+
+            <div class="filter-bar">
+              <div class="field-group">
+                <label class="field-label" for="filter-schedule">Work Schedule</label>
+                <select class="select-control" id="filter-schedule" onchange="renderJobBoard()">
+                  <option value="all">All schedules</option>
+                  <option value="Full-time">Full-time only</option>
+                  <option value="Part-time">Part-time / Flexible</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="filter-safety">Safety &amp; Verification View</label>
+                <select class="select-control" id="filter-safety" onchange="renderJobBoard()">
+                  <option value="all">Show all listings (including 1 warning example)</option>
+                  <option value="verified">Verified fictional employers only (.test)</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="filter-keyword">Keyword Search</label>
+                <input type="text" class="input-control" id="filter-keyword" placeholder="e.g. records, customer, stock" oninput="renderJobBoard()">
+              </div>
+            </div>
+
+            <div class="job-board-split">
+              <div class="job-list" id="job-list-container" role="listbox" aria-label="Fictional job listings"></div>
+              <div class="card-wrapper">
+                <div class="detail-panel" id="job-detail-panel" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STAGE 2: LET'S DO IT -->
+        <section class="module-section" id="stage-lets-do" aria-labelledby="heading-lets-do">
+          <div class="section-header">
+            <div class="stage-pill-row">
+              <span class="chip" data-status="info">Step 2 &bull; Let's Do It</span>
+              <span class="chip" data-status="info">Lessons 5.1 &amp; 5.2</span>
+            </div>
+            <h2 class="section-heading" id="heading-lets-do">Spot Scam Red Flags and Match Your Transferable Skills</h2>
+            <p class="lede">
+              Before you share your name or upload a résumé, pause and check two things: Is this employer legitimate, and which of your real skills match what they actually need?
+            </p>
+          </div>
+
+          <!-- Side-by-side Legitimate vs Scam -->
+          <div class="two-col-grid">
+            <div class="status-card" data-status="ok">
+              <span class="chip" style="margin-bottom:var(--space-sm);">Verified Employer Signs</span>
+              <h3 class="sub-heading">What Safe Hiring Looks Like</h3>
+              <ul class="clean-list">
+                <li><strong>Official domain:</strong> Emails and portals match the organization's real website (in training, reserved <code>.test</code> domains like <code>hr@riverside-example.test</code>).</li>
+                <li><strong>Zero upfront cost:</strong> Employers never charge a fee for an interview, background check, or training software.</li>
+                <li><strong>Clear job details:</strong> Realistic pay range, specific everyday duties, and an identifiable workplace location.</li>
+                <li><strong>Respects privacy:</strong> Never asks for your SSN, bank account, or ID photo over text before a formal offer.</li>
+              </ul>
+            </div>
+
+            <div class="status-card" data-status="alert">
+              <span class="chip" data-status="alert" style="margin-bottom:var(--space-sm);">Warning Signs</span>
+              <h3 class="sub-heading">Common Job Scam Red Flags</h3>
+              <ul class="clean-list">
+                <li><strong>Pay-to-play fees:</strong> Requests for application fees, gift cards, crypto, or "starter kit" payments.</li>
+                <li><strong>Urgent credential links:</strong> Unexpected texts or emails demanding you click a link within 30 minutes to verify your password or ID.</li>
+                <li><strong>Too-good-to-be-true pay:</strong> High hourly pay ($40+/hr) for vague "easy remote entry" with zero interview.</li>
+                <li><strong>Look-alike addresses:</strong> Slightly altered domains like <code>riverside-urgent.example.test</code> instead of the official domain.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Interactive Scam Inspector -->
+          <div style="margin-top: var(--space-xl);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm);">
+              <div>
+                <h3 class="sub-heading">Let's Do It Together: Scam &amp; Safety Inspector</h3>
+                <p class="field-hint" style="margin:0;">Read each fictional training message and decide whether it is safe to proceed or a red flag requiring independent verification.</p>
+              </div>
+              <span class="chip" data-status="info" id="scam-score-chip">0 of 4 checked</span>
+            </div>
+            <div class="scam-grid" id="scam-inspector-grid"></div>
+          </div>
+
+          <!-- Required vs Preferred & Transferable Skills Matcher -->
+          <div class="wash-band" style="margin-top: var(--space-2xl);">
+            <h3 class="sub-heading">Analyze Qualifications &amp; Match Transferable Skills</h3>
+            <p class="lede" style="margin-top: var(--space-xs); font-size: 1rem;">
+              You do not need to have held the exact same job title before. Employers value <strong>transferable skills</strong> from volunteering, warehouse work, caregiving, school, or community programs. Let's match <strong>Jordan Lee's</strong> real training profile to the Riverside <strong>Customer Support Associate</strong> posting.
+            </p>
+
+            <div class="two-col-grid" style="margin-top: var(--space-lg); align-items: start;">
+              <!-- Jordan Lee Candidate Card -->
+              <div class="status-card" data-status="info">
+                <span class="chip" data-status="info" style="margin-bottom:var(--space-sm);">Fictional Candidate Card</span>
+                <h4 class="sub-heading">Jordan Lee &mdash; Training Profile</h4>
+                <ul class="kv-list">
+                  <li class="kv-item"><span class="kv-key">Target Role</span><span class="kv-val">Customer Support Associate</span></li>
+                  <li class="kv-item"><span class="kv-key">Email (placeholder)</span><span class="kv-val">jordan.lee@riverside-example.test</span></li>
+                  <li class="kv-item"><span class="kv-key">Location</span><span class="kv-val">Atlanta, Georgia</span></li>
+                  <li class="kv-item"><span class="kv-key">Experience (2025–2026)</span><span class="kv-val">Volunteer front desk, community event registration</span></li>
+                  <li class="kv-item"><span class="kv-key">Experience (2024–2025)</span><span class="kv-val">Retail stock assistant, fictional workplace</span></li>
+                  <li class="kv-item"><span class="kv-key">Core Skills</span><span class="kv-val">Active listening; organized records; scheduling; written communication</span></li>
+                  <li class="kv-item"><span class="kv-key">Education</span><span class="kv-val">High school diploma (fictional for training)</span></li>
+                </ul>
+                <p class="field-hint" style="margin:0;">
+                  Note: Notice how Jordan's profile includes real, honest strengths without disclosing any sensitive personal or legal history.
+                </p>
+              </div>
+
+              <!-- Interactive Qualification Matcher -->
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-sm); flex-wrap:wrap; gap:var(--space-sm);">
+                  <span class="field-label">Match Each Riverside Requirement</span>
+                  <span class="chip" data-status="info" id="matcher-score-chip">0 of 4 matched</span>
+                </div>
+                <div class="matcher-list" id="qualification-matcher"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STAGE 3: YOU TRY -->
+        <section class="module-section" id="stage-you-try" aria-labelledby="heading-you-try">
+          <div class="section-header">
+            <div class="stage-pill-row">
+              <span class="chip" data-status="info">Step 3 &bull; You Try</span>
+              <span class="chip" data-status="info">Lessons 5.3 &amp; Module 7 AI Literacy</span>
+            </div>
+            <h2 class="section-heading" id="heading-you-try">Complete Jordan Lee's Practice Application &amp; AI Keyword Check</h2>
+            <p class="lede">
+              Now practice the two core hands-on steps: completing a safe online application in the Riverside sandbox, and using an AI assistant responsibly without sharing private data or inventing work history.
+            </p>
+          </div>
+
+          <!-- 3A: Practice Application Sandbox -->
+          <div class="status-card" data-status="info" style="margin-bottom: var(--space-xl);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-sm); margin-bottom:var(--space-md);">
+              <div>
+                <span class="chip" data-status="info" style="margin-bottom:var(--space-xs);">Practice Sandbox &bull; Do Not Submit Real Info</span>
+                <h3 class="sub-heading">Riverside Community Services &mdash; Customer Support Associate Application</h3>
+              </div>
+              <button type="button" class="btn btn-secondary" onclick="fillJordanSandbox()">
+                <i data-lucide="user-check" style="width:16px;height:16px;" aria-hidden="true"></i>
+                <span>Fill Jordan Lee's Fictional Details</span>
+              </button>
+            </div>
+
+            <div class="feedback-box warn" id="privacy-guard-banner" style="display:none; margin-bottom: var(--space-md);" role="alert"></div>
+
+            <form id="sandbox-app-form" onsubmit="submitSandboxApp(event)" novalidate>
+              <div class="form-grid">
+                <div class="field-group">
+                  <label class="field-label" for="app-name">Applicant Full Name (Fictional Only)</label>
+                  <span class="field-hint">Use "Jordan Lee" &mdash; never your real name.</span>
+                  <input type="text" class="input-control" id="app-name" value="Jordan Lee" oninput="checkPrivacyGuard()">
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="app-email">Training Email Address (.test domain)</label>
+                  <span class="field-hint">Example: jordan.lee@riverside-example.test</span>
+                  <input type="email" class="input-control" id="app-email" value="jordan.lee@riverside-example.test" oninput="checkPrivacyGuard()">
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="app-city">City and State (No Street Address)</label>
+                  <span class="field-hint">City/state only: Atlanta, Georgia</span>
+                  <input type="text" class="input-control" id="app-city" value="Atlanta, Georgia" oninput="checkPrivacyGuard()">
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="app-role">Position Applied For</label>
+                  <span class="field-hint">Fictional training opening</span>
+                  <select class="select-control" id="app-role">
+                    <option value="Customer Support Associate">Customer Support Associate — Riverside</option>
+                    <option value="Warehouse Intake Clerk">Warehouse Intake Clerk — Peachtree Logistics</option>
+                    <option value="Front Desk Receptionist">Front Desk Receptionist — Oakwood Clinic</option>
+                  </select>
+                </div>
+
+                <div class="field-group form-span-2">
+                  <label class="field-label" for="app-summary">Briefly explain how Jordan's experience fits this role</label>
+                  <span class="field-hint">Tip: Connect Jordan's volunteer front desk, retail stock work, and organized records to customer support duties.</span>
+                  <textarea class="textarea-control" id="app-summary" oninput="checkPrivacyGuard()" placeholder="Example: In my volunteer front desk and retail stock roles, I practiced active listening, scheduling, and keeping organized records."></textarea>
+                  <div class="btn-row" style="margin-top:var(--space-xs);">
+                    <button type="button" class="btn btn-ghost" onclick="insertSampleSummary()">Insert Honest Sample Draft</button>
+                  </div>
+                </div>
+
+                <div class="field-group form-span-2">
+                  <fieldset style="border:none; padding:0; margin:0;">
+                    <legend class="field-label" style="margin-bottom:var(--space-xs);">Simulated Résumé Upload: Choose the Best File to Attach</legend>
+                    <span class="field-hint">From Module 4: Why do employers prefer PDF over an editable .docx file when submitting?</span>
+                    <div class="radio-card-group">
+                      <label class="radio-card">
+                        <input type="radio" name="app-resume" value="Jordan_Lee_Resume.pdf" onchange="previewResumeChoice(this.value)">
+                        <div>
+                          <strong>Jordan_Lee_Resume.pdf</strong>
+                          <div class="field-hint">Preserves layout on any device</div>
+                        </div>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="app-resume" value="Jordan_Lee_Resume.docx" onchange="previewResumeChoice(this.value)">
+                        <div>
+                          <strong>Jordan_Lee_Resume.docx</strong>
+                          <div class="field-hint">Editable working copy</div>
+                        </div>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="app-resume" value="First_Day_Plan.txt" onchange="previewResumeChoice(this.value)">
+                        <div>
+                          <strong>First_Day_Plan.txt</strong>
+                          <div class="field-hint">Module 1 class exercise file</div>
+                        </div>
+                      </label>
+                    </div>
+                  </fieldset>
+                  <div id="resume-choice-feedback" style="margin-top:var(--space-sm);"></div>
+                </div>
+
+                <div class="field-group form-span-2">
+                  <span class="field-label">Pre-Submission Safety &amp; Accuracy Review</span>
+                  <label class="check-row">
+                    <input type="checkbox" id="app-check-privacy">
+                    <span>I confirmed this form contains <strong>only fictional information</strong> (no SSN, ID number, password, real address, or personal history).</span>
+                  </label>
+                  <label class="check-row" style="margin-top:var(--space-xs);">
+                    <input type="checkbox" id="app-check-accuracy">
+                    <span>I checked that the role title, summary, and résumé filename are accurate before marking ready.</span>
+                  </label>
+                </div>
+              </div>
+
+              <div id="sandbox-form-feedback" style="margin-top:var(--space-md);"></div>
+
+              <div class="btn-row" style="margin-top:var(--space-lg);">
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="send" style="width:16px;height:16px;" aria-hidden="true"></i>
+                  <span>Save Practice Application &amp; Log to Tracker</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- 3B: Responsible AI Keyword Comparator -->
+          <div class="wash-band">
+            <span class="chip" data-status="info" style="margin-bottom:var(--space-xs);">Responsible AI Practice &bull; Module 7 Bridge</span>
+            <h3 class="sub-heading">Compare Job Keywords with AI &mdash; Without Fabricating Experience</h3>
+            <p class="lede" style="margin-top:var(--space-xs); font-size:1rem;">
+              An AI tool can help spot matching keywords between a job description and your skills list. However, AI can also guess or invent work history you do not have. Use the <strong>CLEAR</strong> method and keep you — the human — in charge.
+            </p>
+
+            <div class="clear-grid" aria-label="CLEAR prompting framework">
+              <div class="clear-tile">
+                <div class="clear-letter">C</div>
+                <div class="clear-word">Context</div>
+                <p class="clear-hint">Share only the fictional role and general skills.</p>
+              </div>
+              <div class="clear-tile">
+                <div class="clear-letter">L</div>
+                <div class="clear-word">Let AI Know Task</div>
+                <p class="clear-hint">Ask it to compare keywords, not write fake history.</p>
+              </div>
+              <div class="clear-tile">
+                <div class="clear-letter">E</div>
+                <div class="clear-word">Explain Details</div>
+                <p class="clear-hint">State: "Use only the facts listed. Do not invent jobs."</p>
+              </div>
+              <div class="clear-tile">
+                <div class="clear-letter">A</div>
+                <div class="clear-word">Ask for Format</div>
+                <p class="clear-hint">Request a short bulleted list of matches and gaps.</p>
+              </div>
+              <div class="clear-tile">
+                <div class="clear-letter">R</div>
+                <div class="clear-word">Review &amp; Refine</div>
+                <p class="clear-hint">Check every word against facts and cut untrue claims.</p>
+              </div>
+            </div>
+
+            <div class="status-card" data-status="info" style="margin-top:var(--space-md);">
+              <div class="field-group" style="margin-bottom:var(--space-md);">
+                <label class="field-label" for="ai-prompt-choice">Test a Prompt Approach for Jordan Lee @ Riverside</label>
+                <span class="field-hint">Choose one of the three prompts below to see how privacy rules and fact-checking respond.</span>
+                <select class="select-control" id="ai-prompt-choice" onchange="updateAiPromptPreview()">
+                  <option value="clear">1. Honest CLEAR Prompt (Recommended — Facts Only, No Private Data)</option>
+                  <option value="unsafe-privacy">2. Unsafe Privacy Prompt (Includes Fictional ID Number &amp; Home Address)</option>
+                  <option value="dishonest">3. Dishonest Prompt ("Add 3 years of support software experience so I pass ATS")</option>
+                </select>
+              </div>
+
+              <div class="message-quote" id="ai-prompt-preview" style="margin-bottom:var(--space-md);"></div>
+
+              <div class="btn-row">
+                <button type="button" class="btn btn-primary" onclick="runAiSimulator()">
+                  <i data-lucide="sparkles" style="width:16px;height:16px;" aria-hidden="true"></i>
+                  <span>Run Training AI Check</span>
+                </button>
+              </div>
+
+              <div id="ai-sim-output" style="margin-top:var(--space-lg);" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STAGE 4: CHECK SKILLS -->
+        <section class="module-section" id="stage-check" aria-labelledby="heading-check">
+          <div class="section-header">
+            <div class="stage-pill-row">
+              <span class="chip" data-status="info">Step 4 &bull; Check Skills</span>
+              <span class="chip" data-status="info">Lesson 5.4, Worksheet 5 &amp; DP-05</span>
+            </div>
+            <h2 class="section-heading" id="heading-check">Track Your Applications and Complete Your Module 5 Self-Check</h2>
+            <p class="lede">
+              Tracking every application prevents duplicate submissions and helps you plan polite follow-ups. Complete the tracker, answer the three quick exit questions, and check off your confidence skills below.
+            </p>
+          </div>
+
+          <!-- 4A: Application Tracker -->
+          <div style="margin-bottom: var(--space-2xl);">
+            <h3 class="sub-heading" style="margin-bottom: var(--space-xs);">Practice Application Tracker</h3>
+            <p class="field-hint" style="margin-bottom: var(--space-md);">
+              Your Riverside sandbox application updates this table automatically. You can also add another fictional training entry to practice planning follow-up dates.
+            </p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Organization (Fictional)</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Practice Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Next Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tracker-tbody"></tbody>
+              </table>
+            </div>
+
+            <form class="wash-band" style="margin-top:var(--space-md);" onsubmit="addTrackerRow(event)">
+              <h4 class="sub-heading" style="font-size:1.05rem; margin-bottom:var(--space-sm);">Add a Fictional Practice Row</h4>
+              <div class="form-grid">
+                <div class="field-group">
+                  <label class="field-label" for="trk-org">Fictional Organization</label>
+                  <input type="text" class="input-control" id="trk-org" placeholder="e.g. Peachtree Logistics (Fictional)">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="trk-role">Role</label>
+                  <input type="text" class="input-control" id="trk-role" placeholder="e.g. Warehouse Intake Clerk">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="trk-date">Practice Date</label>
+                  <input type="date" class="input-control" id="trk-date" value="2026-11-18">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="trk-status">Status</label>
+                  <select class="select-control" id="trk-status">
+                    <option value="Practice / draft">Practice / draft</option>
+                    <option value="Practice submitted">Practice submitted</option>
+                    <option value="Follow-up planned">Follow-up planned</option>
+                  </select>
+                </div>
+                <div class="field-group form-span-2">
+                  <label class="field-label" for="trk-next">Next Action &amp; Follow-up Date</label>
+                  <input type="text" class="input-control" id="trk-next" placeholder="e.g. Send polite status check email on Nov 25">
+                </div>
+              </div>
+              <div id="tracker-form-msg" style="margin-top:var(--space-sm);"></div>
+              <div class="btn-row" style="margin-top:var(--space-md);">
+                <button type="submit" class="btn btn-secondary">Add Practice Entry</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- 4B: Quick Exit Check -->
+          <div style="margin-bottom: var(--space-2xl);">
+            <h3 class="sub-heading" style="margin-bottom: var(--space-xs);">Module 5 Quick Exit Check</h3>
+            <p class="field-hint" style="margin-bottom: var(--space-md);">Test your understanding on the three core Module 5 review questions.</p>
+            <div class="quiz-grid" id="exit-check-grid"></div>
+          </div>
+
+          <!-- 4C: Student Worksheet 5 Self-Check -->
+          <div class="status-card" data-status="ok">
+            <span class="chip" style="margin-bottom:var(--space-sm);">Student Worksheet 5 &bull; Skills Demonstration Self-Check</span>
+            <h3 class="sub-heading">My Module 5 Work Checklist</h3>
+            <p class="field-hint" style="margin-top:var(--space-xs); margin-bottom:var(--space-md);">
+              Check off each skill you practiced today. Remember: your self-check tracks your learning, and <strong>formal module completion is confirmed separately by a Home4Good instructor or staff member</strong> after observing your work.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:var(--space-sm);" id="self-check-list">
+              <label class="check-row">
+                <input type="checkbox" data-skill="extract" onchange="toggleSkillCheck(this)">
+                <span><strong>I can:</strong> extract required job information and tell Required from Preferred qualifications.</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" data-skill="scam" onchange="toggleSkillCheck(this)">
+                <span><strong>I can:</strong> check employer legitimacy and recognize common job scam indicators.</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" data-skill="mock" onchange="toggleSkillCheck(this)">
+                <span><strong>I can:</strong> enter accurate mock application data while protecting my private personal details.</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" data-skill="resume" onchange="toggleSkillCheck(this)">
+                <span><strong>I can:</strong> choose the correct PDF résumé file and verify AI keyword suggestions honestly.</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" data-skill="tracker" onchange="toggleSkillCheck(this)">
+                <span><strong>I can:</strong> track application status and plan an appropriate next action.</span>
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top:var(--space-lg);">
+              <div class="field-group">
+                <label class="field-label" for="ref-learned">Something I learned in Module 5</label>
+                <textarea class="textarea-control" id="ref-learned" oninput="saveReflection()" placeholder="Write one takeaway in your own words..."></textarea>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="ref-practice">One skill I want to practice again</label>
+                <textarea class="textarea-control" id="ref-practice" oninput="saveReflection()" placeholder="e.g. Checking email domains before clicking..."></textarea>
+              </div>
+              <div class="field-group form-span-2">
+                <label class="field-label" for="ref-question">Questions I want to ask my instructor or Skool community</label>
+                <input type="text" class="input-control" id="ref-question" oninput="saveReflection()" placeholder="Optional question to bring to class or post in the group">
+              </div>
+            </div>
+
+            <div class="btn-row" style="margin-top:var(--space-lg); justify-content:space-between; align-items:center;">
+              <div class="btn-row">
+                <button type="button" class="btn btn-primary" onclick="exportPracticeSummary()">
+                  <i data-lucide="download" style="width:16px;height:16px;" aria-hidden="true"></i>
+                  <span>Download My Module 5 Summary (.txt)</span>
+                </button>
+                <button type="button" class="btn btn-ghost" id="btn-reset-all" onclick="resetAllProgress(this)">
+                  Reset Practice Sandbox
+                </button>
+              </div>
+              <span class="field-hint" id="save-status-indicator" style="margin:0;">Ready</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER & ATTRIBUTION -->
+      <footer class="site-footer">
+        <p style="margin-bottom:var(--space-xs);">
+          <strong>Digital Pathways to Employment &mdash; Module 5: Online Job Search and Applications</strong> &bull; Practice-first digital literacy for Home4Good Inc. reentry participants.
+        </p>
+        <p style="margin-bottom:var(--space-xs);">
+          Recommended public verification resources (open independently in your browser): <code>consumer.ftc.gov</code> (job scams), <code>www.cisa.gov</code> (phishing &amp; account security), <code>www.careeronestop.org</code> (job search &amp; résumé guidance).
+        </p>
+        <p style="margin:0;">
+          Copyright &copy; 2026 Ronda Bell. Licensed to Home4Good Inc. for authorized educational and charitable use. Eligible participants in authorized Home4Good programs may access this resource free of charge for personal learning. Contact: <code>home4good@bellahvisions.com</code> &bull; <code>programs.bellahvisions.com</code>.
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    /* =========================
+       CURRICULUM DATA (BACKTICKS)
+       ========================= */
+    const JOB_LISTINGS = [
+      {
+        id: `riverside`,
+        title: `Customer Support Associate`,
+        org: `Riverside Community Services`,
+        location: `Atlanta, GA`,
+        schedule: `Full-time`,
+        pay: `$19–$22/hour (fictional)`,
+        domain: `careers.riverside-example.test`,
+        legit: true,
+        statusLabel: `Verified Training Listing`,
+        duties: [
+          `Answer customer questions clearly by email and phone`,
+          `Update basic records and organize service requests`,
+          `Schedule follow-up calls accurately`
+        ],
+        required: [
+          `Clear written communication`,
+          `Ability to use email and standard computer applications`,
+          `Ability to maintain accurate records`
+        ],
+        preferred: [
+          `Experience with customer support software`
+        ],
+        note: `Matches Jordan Lee's training goal. Notice the clear pay range, specific duties, and reserved .test training domain.`
+      },
+      {
+        id: `peachtree`,
+        title: `Warehouse Intake Clerk`,
+        org: `Peachtree Logistics Hub (Fictional)`,
+        location: `Atlanta, GA`,
+        schedule: `Part-time`,
+        pay: `$18–$20/hour (fictional)`,
+        domain: `jobs.peachtree-example.test`,
+        legit: true,
+        statusLabel: `Verified Training Listing`,
+        duties: [
+          `Check incoming shipment paperwork and log counts`,
+          `Keep stock shelves organized and update daily inventory sheets`,
+          `Coordinate delivery times with shift leads`
+        ],
+        required: [
+          `Organized record-keeping and attention to accuracy`,
+          `Ability to follow safety and check-in procedures`,
+          `Team communication during shift handoffs`
+        ],
+        preferred: [
+          `Familiarity with handheld barcode scanners`
+        ],
+        note: `Strong fit for anyone with retail stock, inventory, or organized record-keeping experience.`
+      },
+      {
+        id: `metro-scam`,
+        title: `Remote Data Entry Specialist — URGENT`,
+        org: `Metro Fast-Track Hiring (Suspicious)`,
+        location: `Remote / Anywhere`,
+        schedule: `Part-time`,
+        pay: `$42/hour guaranteed + $500 sign-on bonus`,
+        domain: `metro-cash-bonus.example.test`,
+        legit: false,
+        statusLabel: `Scam Red Flags Detected`,
+        duties: [
+          `Process simple forms from your phone in 2 hours a day`,
+          `Immediate hire with no interview required`
+        ],
+        required: [
+          `Must pay $45 refundable software setup fee today`,
+          `Text photo of State ID and bank routing number before orientation`
+        ],
+        preferred: [
+          `None`
+        ],
+        note: `RED FLAGS: Legitimate employers NEVER charge an upfront fee for software or interviews, never guarantee unusually high pay with no interview, and never ask for ID photos or bank numbers over text.`
+      },
+      {
+        id: `oakwood`,
+        title: `Front Desk Receptionist`,
+        org: `Oakwood Neighborhood Clinic (Fictional)`,
+        location: `Atlanta, GA`,
+        schedule: `Full-time`,
+        pay: `$17–$19/hour (fictional)`,
+        domain: `oakwood-clinic.example.test`,
+        legit: true,
+        statusLabel: `Verified Training Listing`,
+        duties: [
+          `Greet visitors politely and verify appointment times`,
+          `Schedule follow-up visits on the clinic calendar`,
+          `Keep front-desk logbooks accurate and private`
+        ],
+        required: [
+          `Active listening and respectful communication`,
+          `Calendar scheduling and basic computer navigation`,
+          `Protecting visitor privacy`
+        ],
+        preferred: [
+          `Prior volunteer or community front-desk experience`
+        ],
+        note: `Notice how volunteer front desk experience directly satisfies the preferred qualification here!`
+      }
+    ];
+
+    const SCAM_CASES = [
+      {
+        id: `scam-1`,
+        source: `urgent-verify@riverside-urgent.example.test`,
+        subject: `Password verification required immediately`,
+        body: `"Your account will be deleted in 30 minutes unless you reply with your password and identification number."`,
+        isSafe: false,
+        explanation: `This is a phishing scam. Notice the look-alike domain (riverside-urgent.example.test), artificial 30-minute panic deadline, and request for your password and ID number. Never click or reply — open a clean browser tab and visit the official site or call a trusted support number.`
+      },
+      {
+        id: `scam-2`,
+        source: `hr@riverside-example.test`,
+        subject: `Orientation details — Jordan Lee`,
+        body: `"Hello Jordan, please confirm that you can attend orientation on Thursday, November 12, 2026, at 10:00 AM Eastern. Send your sample résumé. Thank you."`,
+        isSafe: true,
+        explanation: `This matches the verified training domain (riverside-example.test), asks only for confirmation and a résumé (no passwords, fees, or ID numbers), and uses calm, professional wording.`
+      },
+      {
+        id: `scam-3`,
+        source: `SMS text from unknown number`,
+        subject: `Paid training check & equipment fee`,
+        body: `"Congratulations! You are hired without an interview. Deposit this mobile check and send $120 via gift card to activate your work laptop today."`,
+        isSafe: false,
+        explanation: `Classic fake-check and gift-card scam. Real employers do not hire without verifying qualifications, and they never ask workers to buy gift cards or send money back for equipment.`
+      },
+      {
+        id: `scam-4`,
+        source: `scheduling@oakwood-clinic.example.test`,
+        subject: `Interview Invitation — Front Desk Receptionist`,
+        body: `"We reviewed your application for Front Desk Receptionist. Are you available Tuesday at 2:00 PM Eastern for a 20-minute video interview via our training portal?"`,
+        isSafe: true,
+        explanation: `Legitimate next step: references a role you actually applied for, states the time zone and format clearly, and does not demand private numbers or upfront payment.`
+      }
+    ];
+
+    const MATCHER_ITEMS = [
+      {
+        id: `m-1`,
+        reqText: `Clear written communication`,
+        reqType: `Required`,
+        correctValue: `skill-written`,
+        options: [
+          { value: ``, label: `Select matching evidence from Jordan's card...` },
+          { value: `skill-written`, label: `Core Skill: Written communication & volunteer event registration` },
+          { value: `gap-software`, label: `Preferred gap — not yet on Jordan's card` },
+          { value: `stock-physical`, label: `Retail stock assistant lifting boxes only` }
+        ],
+        okMsg: `Exact match! Jordan's written communication skill and event registration work directly support this requirement.`,
+        hintMsg: `Look at Jordan's Core Skills list and Volunteer front desk role.`
+      },
+      {
+        id: `m-2`,
+        reqText: `Ability to maintain accurate records`,
+        reqType: `Required`,
+        correctValue: `skill-records`,
+        options: [
+          { value: ``, label: `Select matching evidence from Jordan's card...` },
+          { value: `skill-records`, label: `Core Skill: Organized records + scheduling & registration logs` },
+          { value: `gap-software`, label: `Preferred gap — not yet on Jordan's card` },
+          { value: `diploma-only`, label: `High school diploma alone` }
+        ],
+        okMsg: `Well spotted! Keeping organized records during event registration and retail stocking is strong transferable experience.`,
+        hintMsg: `Which skill on Jordan's card directly mentions records?`
+      },
+      {
+        id: `m-3`,
+        reqText: `Ability to use email and standard computer applications`,
+        reqType: `Required`,
+        correctValue: `digital-pathways`,
+        options: [
+          { value: ``, label: `Select matching evidence from Jordan's card...` },
+          { value: `digital-pathways`, label: `Uses training email, word processor & scheduling tools accurately` },
+          { value: `gap-software`, label: `Preferred gap — not yet on Jordan's card` },
+          { value: `none`, label: `No match at all — skip applying` }
+        ],
+        okMsg: `Yes! Practical skills practiced across Digital Pathways (email, documents, scheduling) directly meet this requirement.`,
+        hintMsg: `Think about the digital tools Jordan uses on the candidate card and in this training.`
+      },
+      {
+        id: `m-4`,
+        reqText: `Experience with customer support software`,
+        reqType: `Preferred`,
+        correctValue: `gap-software`,
+        options: [
+          { value: ``, label: `Select matching evidence from Jordan's card...` },
+          { value: `skill-written`, label: `Core Skill: Written communication` },
+          { value: `gap-software`, label: `Preferred growth area — not listed, apply honestly & express eagerness to learn` },
+          { value: `invent`, label: `Claim 3 years of support software anyway` }
+        ],
+        okMsg: `Right! "Preferred" is desirable, not mandatory. Jordan should still apply honestly, highlight computer readiness, and never invent software experience.`,
+        hintMsg: `Check the badge: this is a Preferred qualification, and it is not on Jordan's card.`
+      }
+    ];
+
+    const EXIT_QUESTIONS = [
+      {
+        id: `eq-1`,
+        question: `1. Is paying a fee to obtain an interview or training software a normal requirement?`,
+        choices: [
+          { id: `a`, text: `Yes, most remote employers charge a small onboarding fee.` },
+          { id: `b`, text: `No — treat it as a major warning sign and independently verify the employer.` },
+          { id: `c`, text: `Only if they accept gift cards instead of bank transfers.` }
+        ],
+        correctId: `b`,
+        answerNote: `Instructor guide: Treat any fee for an interview or job placement as a major warning sign and independently verify the employer.`
+      },
+      {
+        id: `eq-2`,
+        question: `2. What does "Preferred" mean in a job posting?`,
+        choices: [
+          { id: `a`, text: `Desirable or helpful, but not always strictly required to apply.` },
+          { id: `b`, text: `Your application will be automatically rejected without it.` },
+          { id: `c`, text: `You must list it even if you have never used it.` }
+        ],
+        correctId: `a`,
+        answerNote: `Instructor guide: "Preferred" means desirable but not always required. Apply if you meet the core requirements honestly.`
+      },
+      {
+        id: `eq-3`,
+        question: `3. Why should you maintain an application tracker?`,
+        choices: [
+          { id: `a`, text: `So you can send the exact same application five times.` },
+          { id: `b`, text: `To share your passwords with recruiters.` },
+          { id: `c`, text: `To avoid duplicate submissions and plan appropriate follow-ups.` }
+        ],
+        correctId: `c`,
+        answerNote: `Instructor guide: Tracking keeps dates, statuses, and contacts organized so you avoid duplicate submissions and plan polite follow-ups.`
+      }
+    ];
+
+    /* =========================
+       APPLICATION STATE
+       ========================= */
+    const DEFAULT_STATE = {
+      largeText: false,
+      selectedJobId: `riverside`,
+      scamAnswers: {},
+      matcherAnswers: {},
+      sandboxSubmitted: false,
+      sandboxResume: ``,
+      sandboxSummary: ``,
+      aiTestedClear: false,
+      aiHallucinationFixed: false,
+      trackerRows: [
+        {
+          org: `Riverside Community Services`,
+          role: `Customer Support Associate`,
+          date: `2026-11-18`,
+          status: `Practice / draft`,
+          nextAction: `Complete sandbox review & log submission`
+        }
+      ],
+      exitAnswers: {},
+      selfChecks: {
+        extract: false,
+        scam: false,
+        mock: false,
+        resume: false,
+        tracker: false
+      },
+      refLearned: ``,
+      refPractice: ``,
+      refQuestion: ``
+    };
+
+    function cloneDefaultState() {
+      return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    }
+
+    var appState = cloneDefaultState();
+
+    /* =========================
+       PERSISTENCE HELPERS
+       ========================= */
+    async function persistState() {
+      const indicator = document.getElementById(`save-status-indicator`);
+      if (indicator) indicator.textContent = `Saving progress…`;
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(appState);
+        }
+        if (indicator) indicator.textContent = `Progress saved`;
+      } catch (err) {
+        if (indicator) indicator.textContent = `Saved locally for this session`;
+      }
+      updateOverallProgress();
+    }
+
+    function updateOverallProgress() {
+      let done = 0;
+      const total = 6;
+
+      if (Object.keys(appState.scamAnswers).length >= 4) done++;
+      const matchedCount = MATCHER_ITEMS.filter(function(item) {
+        return appState.matcherAnswers[item.id] === item.correctValue;
+      }).length;
+      if (matchedCount >= 4) done++;
+      if (appState.sandboxSubmitted) done++;
+      if (appState.aiTestedClear && appState.aiHallucinationFixed) done++;
+      if (Object.keys(appState.exitAnswers).length >= 3) done++;
+      const checksDone = Object.values(appState.selfChecks).filter(Boolean).length;
+      if (checksDone >= 5) done++;
+
+      const pct = Math.round((done / total) * 100);
+      const fill = document.getElementById(`progress-fill`);
+      const chip = document.getElementById(`progress-chip`);
+      const text = document.getElementById(`progress-summary-text`);
+
+      if (fill) fill.style.width = `${pct}%`;
+      if (chip) chip.textContent = `${done} of ${total} tasks practiced`;
+      if (text) {
+        if (done === total) {
+          text.textContent = `All 6 Module 5 practice tasks completed! Download your summary or review with your Home4Good instructor for staff confirmation.`;
+        } else {
+          text.textContent = `Work at your own pace. Complete the interactive activities below to build your Module 5 readiness.`;
+        }
+      }
+    }
+
+    /* =========================
+       ACCESSIBILITY TEXT SIZE
+       ========================= */
+    function toggleTextSize() {
+      appState.largeText = !appState.largeText;
+      applyTextSize();
+      persistState();
+    }
+
+    function applyTextSize() {
+      const root = document.documentElement;
+      const btn = document.getElementById(`btn-text-size`);
+      if (appState.largeText) {
+        root.classList.add(`text-large`);
+        if (btn) btn.setAttribute(`aria-pressed`, `true`);
+      } else {
+        root.classList.remove(`text-large`);
+        if (btn) btn.setAttribute(`aria-pressed`, `false`);
+      }
+    }
+
+    /* =========================
+       STAGE 1: JOB BOARD
+       ========================= */
+    function renderJobBoard() {
+      const scheduleEl = document.getElementById(`filter-schedule`);
+      const safetyEl = document.getElementById(`filter-safety`);
+      const kwEl = document.getElementById(`filter-keyword`);
+      const listEl = document.getElementById(`job-list-container`);
+      if (!scheduleEl || !safetyEl || !kwEl || !listEl) return;
+
+      const sched = scheduleEl.value;
+      const safety = safetyEl.value;
+      const kw = kwEl.value.trim().toLowerCase();
+
+      const filtered = JOB_LISTINGS.filter(function(job) {
+        if (sched !== `all` && job.schedule !== sched) return false;
+        if (safety === `verified` && !job.legit) return false;
+        if (kw) {
+          const hay = `${job.title} ${job.org} ${job.duties.join(` `)} ${job.required.join(` `)}`.toLowerCase();
+          if (!hay.includes(kw)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `<div class="status-card" data-status="warn"><p style="margin:0;">No fictional listings match those filters. Clear the keyword box or choose "All schedules" to view openings.</p></div>`;
+        renderJobDetail(null);
+        return;
+      }
+
+      if (!filtered.some(function(j) { return j.id === appState.selectedJobId; })) {
+        appState.selectedJobId = filtered[0].id;
+      }
+
+      listEl.innerHTML = filtered.map(function(job) {
+        const isSelected = job.id === appState.selectedJobId;
+        const badgeStatus = job.legit ? `ok` : `alert`;
+        return `
+          <button type="button"
+            class="job-card-btn"
+            role="option"
+            aria-selected="${isSelected ? `true` : `false`}"
+            data-legit="${job.legit ? `safe` : `caution`}"
+            onclick="selectJob('${job.id}')">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-sm); flex-wrap:wrap;">
+              <strong style="font-family:var(--font-headline); font-size:1.05rem; color:var(--on-surface);">${job.title}</strong>
+              <span class="chip" data-status="${badgeStatus}">${job.legit ? `Verified (.test)` : `Warning Example`}</span>
+            </div>
+            <div style="color:var(--on-surface-variant); font-size:0.95rem; margin-top:2px;">${job.org} &bull; ${job.location}</div>
+            <div class="job-meta-row">
+              <span>${job.schedule}</span>
+              <span>&bull;</span>
+              <span>${job.pay}</span>
+            </div>
+          </button>
+        `;
+      }).join(``);
+
+      const activeJob = filtered.find(function(j) { return j.id === appState.selectedJobId; }) || filtered[0];
+      renderJobDetail(activeJob);
+    }
+
+    function selectJob(id) {
+      appState.selectedJobId = id;
+      renderJobBoard();
+      persistState();
+    }
+
+    function renderJobDetail(job) {
+      const panel = document.getElementById(`job-detail-panel`);
+      if (!panel) return;
+      if (!job) {
+        panel.setAttribute(`data-status`, `warn`);
+        panel.innerHTML = `<p style="margin:0;">Select a fictional listing on the left to inspect its qualifications and domain.</p>`;
+        return;
+      }
+      panel.setAttribute(`data-status`, job.legit ? `ok` : `alert`);
+      panel.innerHTML = `
+        <span class="chip" data-status="${job.legit ? `ok` : `alert`}" style="margin-bottom:var(--space-sm);">${job.statusLabel}</span>
+        <h4 class="sub-heading">${job.title}</h4>
+        <p style="color:var(--on-surface-variant); margin-top:var(--space-xs);">${job.org} &bull; ${job.location}</p>
+        <ul class="kv-list">
+          <li class="kv-item"><span class="kv-key">Domain</span><span class="kv-val"><code>${job.domain}</code></span></li>
+          <li class="kv-item"><span class="kv-key">Schedule</span><span class="kv-val">${job.schedule}</span></li>
+          <li class="kv-item"><span class="kv-key">Pay</span><span class="kv-val">${job.pay}</span></li>
+        </ul>
+        <p style="font-weight:700; margin-bottom:var(--space-xs);">Key Duties</p>
+        <ul class="clean-list" style="margin-bottom:var(--space-md);">
+          ${job.duties.map(function(d) { return `<li>${d}</li>`; }).join(``)}
+        </ul>
+        <p style="font-weight:700; margin-bottom:var(--space-xs);">Required Qualifications</p>
+        <ul class="clean-list" style="margin-bottom:var(--space-md);">
+          ${job.required.map(function(r) { return `<li>${r}</li>`; }).join(``)}
+        </ul>
+        <p style="font-weight:700; margin-bottom:var(--space-xs);">Preferred (Optional)</p>
+        <ul class="clean-list" style="margin-bottom:var(--space-md);">
+          ${job.preferred.map(function(p) { return `<li>${p}</li>`; }).join(``)}
+        </ul>
+        <div class="feedback-box ${job.legit ? `info` : `alert`}">
+          ${job.note}
+        </div>
+      `;
+    }
+
+    /* =========================
+       STAGE 2A: SCAM INSPECTOR
+       ========================= */
+    function renderScamInspector() {
+      const grid = document.getElementById(`scam-inspector-grid`);
+      const chip = document.getElementById(`scam-score-chip`);
+      if (!grid) return;
+
+      let checkedCount = 0;
+      let correctCount = 0;
+
+      grid.innerHTML = SCAM_CASES.map(function(item) {
+        const userAns = appState.scamAnswers[item.id];
+        const hasAnswered = userAns === `safe` || userAns === `scam`;
+        if (hasAnswered) checkedCount++;
+        const isCorrect = hasAnswered && ((userAns === `safe` && item.isSafe) || (userAns === `scam` && !item.isSafe));
+        if (isCorrect) correctCount++;
+
+        const cardStatus = !hasAnswered ? `` : (isCorrect ? `correct` : `review`);
+        let feedbackHtml = ``;
+        if (hasAnswered) {
+          feedbackHtml = `
+            <div class="feedback-box ${isCorrect ? `ok` : `warn`}">
+              <strong>${isCorrect ? `Good catch:` : `Take another look:`}</strong> ${item.explanation}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="scam-card" data-answered="${cardStatus}">
+            <div>
+              <div class="kicker" style="margin-bottom:var(--space-xs);">From: ${item.source}</div>
+              <h4 class="sub-heading" style="font-size:1.05rem; margin-bottom:var(--space-sm);">${item.subject}</h4>
+              <div class="message-quote">${item.body}</div>
+            </div>
+            <div>
+              <div class="btn-row" role="group" aria-label="Evaluate ${item.subject}">
+                <button type="button"
+                  class="btn ${userAns === `safe` ? `btn-primary` : `btn-secondary`}"
+                  onclick="answerScamCase('${item.id}', 'safe')">
+                  Safe to Proceed
+                </button>
+                <button type="button"
+                  class="btn ${userAns === `scam` ? `btn-primary` : `btn-secondary`}"
+                  onclick="answerScamCase('${item.id}', 'scam')">
+                  Scam / Verify Independently
+                </button>
+              </div>
+              ${feedbackHtml ? `<div style="margin-top:var(--space-md);">${feedbackHtml}</div>` : ``}
+            </div>
+          </div>
+        `;
+      }).join(``);
+
+      if (chip) {
+        chip.textContent = `${checkedCount} of ${SCAM_CASES.length} checked (${correctCount} accurate)`;
+        chip.setAttribute(`data-status`, correctCount === SCAM_CASES.length ? `ok` : `info`);
+      }
+    }
+
+    function answerScamCase(id, choice) {
+      appState.scamAnswers[id] = choice;
+      renderScamInspector();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 2B: QUALIFICATION MATCHER
+       ========================= */
+    function renderMatcher() {
+      const container = document.getElementById(`qualification-matcher`);
+      const chip = document.getElementById(`matcher-score-chip`);
+      if (!container) return;
+
+      let correctCount = 0;
+
+      container.innerHTML = MATCHER_ITEMS.map(function(item) {
+        const val = appState.matcherAnswers[item.id] || ``;
+        const isCorrect = val === item.correctValue;
+        if (isCorrect) correctCount++;
+
+        let feedbackHtml = ``;
+        if (val) {
+          feedbackHtml = `
+            <div class="feedback-box ${isCorrect ? `ok` : `warn`}" style="margin-top:var(--space-sm);">
+              ${isCorrect ? item.okMsg : item.hintMsg}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="matcher-row" data-matched="${isCorrect ? `true` : `false`}">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-sm); flex-wrap:wrap;">
+              <strong>${item.reqText}</strong>
+              <span class="chip" data-status="${item.reqType === `Required` ? `info` : `warn`}">${item.reqType}</span>
+            </div>
+            <div class="matcher-controls">
+              <div class="field-group" style="margin:0;">
+                <label class="field-label" for="match-${item.id}" style="font-size:0.875rem;">Matching evidence from Jordan's profile</label>
+                <select class="select-control" id="match-${item.id}" onchange="selectMatcherOption('${item.id}', this.value)">
+                  ${item.options.map(function(opt) {
+                    return `<option value="${opt.value}" ${val === opt.value ? `selected` : ``}>${opt.label}</option>`;
+                  }).join(``)}
+                </select>
+              </div>
+            </div>
+            ${feedbackHtml}
+          </div>
+        `;
+      }).join(``);
+
+      if (chip) {
+        chip.textContent = `${correctCount} of ${MATCHER_ITEMS.length} matched`;
+        chip.setAttribute(`data-status`, correctCount === MATCHER_ITEMS.length ? `ok` : `info`);
+      }
+    }
+
+    function selectMatcherOption(id, val) {
+      appState.matcherAnswers[id] = val;
+      renderMatcher();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 3A: PRACTICE SANDBOX & PRIVACY GUARD
+       ========================= */
+    function checkPrivacyGuard() {
+      const nameVal = (document.getElementById(`app-name`) || {}).value || ``;
+      const emailVal = (document.getElementById(`app-email`) || {}).value || ``;
+      const cityVal = (document.getElementById(`app-city`) || {}).value || ``;
+      const sumVal = (document.getElementById(`app-summary`) || {}).value || ``;
+      const banner = document.getElementById(`privacy-guard-banner`);
+      if (!banner) return false;
+
+      const combined = `${nameVal} ${emailVal} ${cityVal} ${sumVal}`;
+      const ssnRegex = /\b\d{3}[- ]?\d{2}[- ]?\d{4}\b/;
+      const phoneRegex = /\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/;
+      const sensitiveKeywords = /\b(ssn|social security|password|routing number|bank account|parole|probation|felony|conviction|driver.?s license)\b/i;
+
+      let warning = ``;
+      if (ssnRegex.test(combined)) {
+        warning = `Privacy Guard paused submission: It looks like a 9-digit ID or SSN pattern was entered. Remove it and use fictional details only.`;
+      } else if (phoneRegex.test(combined)) {
+        warning = `Privacy Guard reminder: Avoid entering real phone numbers in the training sandbox.`;
+      } else if (sensitiveKeywords.test(combined)) {
+        warning = `Privacy Guard reminder: Never enter passwords, bank details, ID numbers, or justice-system history in this exercise. Focus only on skills and fictional info.`;
+      } else if (emailVal.trim() && !emailVal.trim().toLowerCase().endsWith(`.test`)) {
+        warning = `Safety tip: For training exercises, use the reserved .test domain (such as jordan.lee@riverside-example.test) so no real email address is used.`;
+      }
+
+      if (warning) {
+        banner.style.display = `block`;
+        banner.textContent = warning;
+        return true;
+      } else {
+        banner.style.display = `none`;
+        banner.textContent = ``;
+        return false;
+      }
+    }
+
+    function fillJordanSandbox() {
+      const nameEl = document.getElementById(`app-name`);
+      const emailEl = document.getElementById(`app-email`);
+      const cityEl = document.getElementById(`app-city`);
+      const roleEl = document.getElementById(`app-role`);
+      const sumEl = document.getElementById(`app-summary`);
+      if (nameEl) nameEl.value = `Jordan Lee`;
+      if (emailEl) emailEl.value = `jordan.lee@riverside-example.test`;
+      if (cityEl) cityEl.value = `Atlanta, Georgia`;
+      if (roleEl) roleEl.value = `Customer Support Associate`;
+      if (sumEl && !sumEl.value.trim()) {
+        sumEl.value = `In my volunteer front desk role (2025–2026) and retail stock assistant role (2024–2025), I practiced active listening, scheduling, written communication, and keeping accurate, organized records.`;
+      }
+      checkPrivacyGuard();
+    }
+
+    function insertSampleSummary() {
+      const sumEl = document.getElementById(`app-summary`);
+      if (!sumEl) return;
+      sumEl.value = `In my volunteer front desk role (2025–2026) and retail stock assistant role (2024–2025), I practiced active listening, scheduling, written communication, and keeping accurate, organized records.`;
+      appState.sandboxSummary = sumEl.value;
+      checkPrivacyGuard();
+      persistState();
+    }
+
+    function previewResumeChoice(filename) {
+      appState.sandboxResume = filename;
+      const box = document.getElementById(`resume-choice-feedback`);
+      if (!box) return;
+      if (filename === `Jordan_Lee_Resume.pdf`) {
+        box.innerHTML = `<div class="feedback-box ok"><strong>Great choice:</strong> <code>Jordan_Lee_Resume.pdf</code> keeps your layout clean and consistent across every employer's screen.</div>`;
+      } else if (filename === `Jordan_Lee_Resume.docx`) {
+        box.innerHTML = `<div class="feedback-box warn"><strong>Check the file format:</strong> <code>.docx</code> is best kept as your editable master copy. Most online portals prefer the exported <code>.pdf</code> so formatting never shifts.</div>`;
+      } else {
+        box.innerHTML = `<div class="feedback-box alert"><strong>Wrong file selected:</strong> <code>First_Day_Plan.txt</code> is from Module 1! Always preview filenames carefully before uploading so you attach Jordan's résumé.</div>`;
+      }
+      persistState();
+    }
+
+    function submitSandboxApp(event) {
+      event.preventDefault();
+      const fb = document.getElementById(`sandbox-form-feedback`);
+      if (!fb) return;
+
+      if (checkPrivacyGuard()) {
+        fb.innerHTML = `<div class="feedback-box alert">Please resolve the Privacy Guard notice above before saving your practice application.</div>`;
+        return;
+      }
+
+      const nameVal = ((document.getElementById(`app-name`) || {}).value || ``).trim();
+      const sumVal = ((document.getElementById(`app-summary`) || {}).value || ``).trim();
+      const chkPriv = (document.getElementById(`app-check-privacy`) || {}).checked;
+      const chkAcc = (document.getElementById(`app-check-accuracy`) || {}).checked;
+      const roleVal = (document.getElementById(`app-role`) || {}).value || `Customer Support Associate`;
+
+      if (!nameVal || sumVal.length < 15) {
+        fb.innerHTML = `<div class="feedback-box warn">Please include Jordan Lee's fictional name and at least a short sentence describing transferable skills.</div>`;
+        return;
+      }
+      if (appState.sandboxResume !== `Jordan_Lee_Resume.pdf`) {
+        fb.innerHTML = `<div class="feedback-box warn">Please select <code>Jordan_Lee_Resume.pdf</code> in the simulated upload step before marking ready.</div>`;
+        return;
+      }
+      if (!chkPriv || !chkAcc) {
+        fb.innerHTML = `<div class="feedback-box warn">Please check both Pre-Submission Review boxes to confirm privacy and accuracy.</div>`;
+        return;
+      }
+
+      appState.sandboxSubmitted = true;
+      appState.sandboxSummary = sumVal;
+
+      // Update Riverside row in tracker
+      const existing = appState.trackerRows.find(function(r) {
+        return r.org.toLowerCase().includes(`riverside`);
+      });
+      if (existing) {
+        existing.role = roleVal;
+        existing.status = `Practice submitted`;
+        existing.nextAction = `Follow up politely in 5 business days (training simulation)`;
+      } else {
+        appState.trackerRows.unshift({
+          org: `Riverside Community Services`,
+          role: roleVal,
+          date: `2026-11-18`,
+          status: `Practice submitted`,
+          nextAction: `Follow up politely in 5 business days (training simulation)`
+        });
+      }
+
+      fb.innerHTML = `<div class="feedback-box ok"><strong>Practice application saved!</strong> Your fictional Riverside submission is now logged in the Application Tracker below. Nothing was sent to any real employer.</div>`;
+      renderTracker();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 3B: RESPONSIBLE AI SIMULATOR
+       ========================= */
+    function updateAiPromptPreview() {
+      const sel = document.getElementById(`ai-prompt-choice`);
+      const preview = document.getElementById(`ai-prompt-preview`);
+      if (!sel || !preview) return;
+
+      const mode = sel.value;
+      if (mode === `clear`) {
+        preview.innerHTML = `<strong>CLEAR Prompt:</strong> "I am helping a fictional applicant prepare for an entry-level Customer Support Associate role. Compare these skills (active listening, organized records, scheduling, written communication; volunteer front desk, retail stock) against the job duties (answer customer questions, update basic records, schedule calls; preferred: customer support software). Use only the facts listed. Do not invent experience. Return a short bulleted list of keyword matches and honest gaps."`;
+      } else if (mode === `unsafe-privacy`) {
+        preview.innerHTML = `<strong>Unsafe Privacy Prompt:</strong> "Here is my State ID #449-00-1122, home street address, and personal phone number. Write a resume for Riverside Community Services..."`;
+      } else {
+        preview.innerHTML = `<strong>Dishonest Prompt:</strong> "Make up 3 years of customer support software experience on my resume so the employer's ATS software picks me."`;
+      }
+    }
+
+    function runAiSimulator() {
+      const sel = document.getElementById(`ai-prompt-choice`);
+      const out = document.getElementById(`ai-sim-output`);
+      if (!sel || !out) return;
+
+      const mode = sel.value;
+      if (mode === `unsafe-privacy`) {
+        out.innerHTML = `
+          <div class="feedback-box alert">
+            <strong>Stop — Privacy Rule Check:</strong> Never paste state IDs, SSNs, home addresses, passwords, or personal case numbers into an AI tool. Remove private data and use fictional details or skills-only summaries instead. Switch to Option 1 (Honest CLEAR Prompt) to practice safely.
+          </div>
+        `;
+        return;
+      }
+      if (mode === `dishonest`) {
+        out.innerHTML = `
+          <div class="feedback-box alert">
+            <strong>Stop — Honesty &amp; Trust Check:</strong> Fabricating job experience can cost an offer during verification or on day one. Remember: customer support software is only <em>Preferred</em>, not required. Switch to Option 1 (Honest CLEAR Prompt) to match real skills honestly.
+          </div>
+        `;
+        return;
+      }
+
+      appState.aiTestedClear = true;
+      renderAiSimulatorResult();
+      persistState();
+    }
+
+    function renderAiSimulatorResult() {
+      const out = document.getElementById(`ai-sim-output`);
+      if (!out || !appState.aiTestedClear) return;
+
+      const fixed = appState.aiHallucinationFixed;
+      out.innerHTML = `
+        <div class="status-card" data-status="${fixed ? `ok` : `warn`}">
+          <span class="chip" data-status="${fixed ? `ok` : `warn`}" style="margin-bottom:var(--space-sm);">
+            ${fixed ? `Human Verified &amp; Accurate` : `Draft Ready for Your Review`}
+          </span>
+          <h4 class="sub-heading" style="font-size:1.05rem;">Simulated AI Keyword Output</h4>
+          <ul class="clean-list" style="margin-top:var(--space-sm);">
+            <li><strong>Strong Keyword Matches:</strong> <em>written communication</em>, <em>accurate/organized records</em>, <em>scheduling</em>, and <em>front-desk customer questions</em>.</li>
+            <li><strong>Honest Gap (Preferred):</strong> <em>customer support software</em> is not in Jordan's experience.</li>
+            ${fixed
+              ? `<li><strong>Your Verified Revision:</strong> <em>"Ready and eager to learn Riverside's customer support software, building on strong computer navigation and organized record-keeping."</em></li>`
+              : `<li style="color:var(--error);"><strong>AI Mistake Spotted!</strong> The draft added: <em>"Jordan has 3 years using Zendesk Support Suite."</em> (This is NOT in Jordan's facts!)</li>`
+            }
+          </ul>
+          ${fixed
+            ? `<div class="feedback-box ok" style="margin-top:var(--space-md);">Excellent human oversight! You caught the fabricated claim, kept every detail truthful, and highlighted willingness to learn.</div>`
+            : `<div class="btn-row" style="margin-top:var(--space-md);">
+                 <button type="button" class="btn btn-primary" onclick="fixAiHallucination()">Remove Untrue Claim &amp; Keep Honest Version</button>
+               </div>`
+          }
+        </div>
+      `;
+    }
+
+    function fixAiHallucination() {
+      appState.aiHallucinationFixed = true;
+      renderAiSimulatorResult();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 4A: TRACKER
+       ========================= */
+    function renderTracker() {
+      const tbody = document.getElementById(`tracker-tbody`);
+      if (!tbody) return;
+      tbody.innerHTML = appState.trackerRows.map(function(row) {
+        const chipStatus = row.status.toLowerCase().includes(`submitted`) ? `ok` : `info`;
+        return `
+          <tr>
+            <td><strong>${row.org}</strong></td>
+            <td>${row.role}</td>
+            <td>${row.date}</td>
+            <td><span class="chip" data-status="${chipStatus}">${row.status}</span></td>
+            <td>${row.nextAction}</td>
+          </tr>
+        `;
+      }).join(``);
+    }
+
+    function addTrackerRow(event) {
+      event.preventDefault();
+      const orgEl = document.getElementById(`trk-org`);
+      const roleEl = document.getElementById(`trk-role`);
+      const dateEl = document.getElementById(`trk-date`);
+      const statusEl = document.getElementById(`trk-status`);
+      const nextEl = document.getElementById(`trk-next`);
+      const msgEl = document.getElementById(`tracker-form-msg`);
+      if (!orgEl || !roleEl || !dateEl || !statusEl || !nextEl || !msgEl) return;
+
+      const org = orgEl.value.trim();
+      const role = roleEl.value.trim();
+      const date = dateEl.value || `2026-11-18`;
+      const status = statusEl.value;
+      const nextAction = nextEl.value.trim() || `Review posting details`;
+
+      if (!org || !role) {
+        msgEl.innerHTML = `<div class="feedback-box warn">Please enter both a fictional organization and a role name.</div>`;
+        return;
+      }
+
+      appState.trackerRows.push({ org, role, date, status, nextAction });
+      orgEl.value = ``;
+      roleEl.value = ``;
+      nextEl.value = ``;
+      msgEl.innerHTML = `<div class="feedback-box ok">Added fictional entry to your practice tracker.</div>`;
+      renderTracker();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 4B: EXIT CHECK
+       ========================= */
+    function renderExitCheck() {
+      const grid = document.getElementById(`exit-check-grid`);
+      if (!grid) return;
+
+      grid.innerHTML = EXIT_QUESTIONS.map(function(q) {
+        const chosen = appState.exitAnswers[q.id] || ``;
+        const isCorrect = chosen === q.correctId;
+
+        return `
+          <div class="status-card" data-status="${!chosen ? `info` : (isCorrect ? `ok` : `warn`)}">
+            <h4 class="sub-heading" style="font-size:1.05rem; margin-bottom:var(--space-md);">${q.question}</h4>
+            <div>
+              ${q.choices.map(function(c) {
+                return `
+                  <button type="button"
+                    class="quiz-option"
+                    aria-pressed="${chosen === c.id ? `true` : `false`}"
+                    onclick="answerExitQuestion('${q.id}', '${c.id}')">
+                    ${c.text}
+                  </button>
+                `;
+              }).join(``)}
+            </div>
+            ${chosen ? `
+              <div class="feedback-box ${isCorrect ? `ok` : `warn`}" style="margin-top:var(--space-sm);">
+                <strong>${isCorrect ? `Correct:` : `Review:`}</strong> ${q.answerNote}
+              </div>
+            ` : ``}
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function answerExitQuestion(qId, choiceId) {
+      appState.exitAnswers[qId] = choiceId;
+      renderExitCheck();
+      persistState();
+    }
+
+    /* =========================
+       STAGE 4C: WORKSHEET 5 SELF-CHECK
+       ========================= */
+    function toggleSkillCheck(checkbox) {
+      const key = checkbox.getAttribute(`data-skill`);
+      if (!key) return;
+      appState.selfChecks[key] = checkbox.checked;
+      persistState();
+    }
+
+    function saveReflection() {
+      const l = document.getElementById(`ref-learned`);
+      const p = document.getElementById(`ref-practice`);
+      const q = document.getElementById(`ref-question`);
+      if (l) appState.refLearned = l.value;
+      if (p) appState.refPractice = p.value;
+      if (q) appState.refQuestion = q.value;
+      persistState();
+    }
+
+    function restoreWorksheetInputs() {
+      document.querySelectorAll(`#self-check-list input[type="checkbox"]`).forEach(function(cb) {
+        const key = cb.getAttribute(`data-skill`);
+        if (key && Object.prototype.hasOwnProperty.call(appState.selfChecks, key)) {
+          cb.checked = Boolean(appState.selfChecks[key]);
+        }
+      });
+      const l = document.getElementById(`ref-learned`);
+      const p = document.getElementById(`ref-practice`);
+      const q = document.getElementById(`ref-question`);
+      if (l) l.value = appState.refLearned || ``;
+      if (p) p.value = appState.refPractice || ``;
+      if (q) q.value = appState.refQuestion || ``;
+
+      if (appState.sandboxSummary) {
+        const sumEl = document.getElementById(`app-summary`);
+        if (sumEl) sumEl.value = appState.sandboxSummary;
+      }
+      if (appState.sandboxResume) {
+        const rad = document.querySelector(`input[name="app-resume"][value="${appState.sandboxResume}"]`);
+        if (rad) rad.checked = true;
+        previewResumeChoice(appState.sandboxResume);
+      }
+    }
+
+    function exportPracticeSummary() {
+      const checkedSkills = Object.entries(appState.selfChecks)
+        .filter(function(pair) { return pair[1]; })
+        .map(function(pair) { return `- [x] ${pair[0]}`; })
+        .join(`\n`) || `- None checked yet`;
+
+      const trackerLines = appState.trackerRows.map(function(r) {
+        return `- ${r.org} | ${r.role} | ${r.date} | ${r.status} | Next: ${r.nextAction}`;
+      }).join(`\n`);
+
+      const summaryText = [
+        `DIGITAL PATHWAYS TO EMPLOYMENT — MODULE 5 PRACTICE SUMMARY`,
+        `Home4Good Inc. (Fictional Sandbox Record — No Private Personal Info)`,
+        `==================================================================`,
+        `Scam Inspector checked: ${Object.keys(appState.scamAnswers).length} / ${SCAM_CASES.length}`,
+        `Qualification Matcher: ${MATCHER_ITEMS.filter(function(i) { return appState.matcherAnswers[i.id] === i.correctValue; }).length} / ${MATCHER_ITEMS.length}`,
+        `Riverside Practice Application Submitted: ${appState.sandboxSubmitted ? `Yes (Jordan Lee — Fictional)` : `Not yet`}`,
+        `Responsible AI Keyword Check Verified: ${appState.aiHallucinationFixed ? `Yes` : `Not yet`}`,
+        `Exit Check Questions Answered: ${Object.keys(appState.exitAnswers).length} / ${EXIT_QUESTIONS.length}`,
+        ``,
+        `APPLICATION TRACKER LOG:`,
+        trackerLines,
+        ``,
+        `STUDENT WORKSHEET 5 SELF-CHECK:`,
+        checkedSkills,
+        ``,
+        `Something I learned: ${appState.refLearned || `(blank)`}`,
+        `One skill to practice again: ${appState.refPractice || `(blank)`}`,
+        `Question for instructor / community: ${appState.refQuestion || `(blank)`}`,
+        ``,
+        `NOTE: Formal module completion is confirmed separately by Home4Good instructional staff.`
+      ].join(`\n`);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: summaryText,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `Digital_Pathways_Module5_Practice_Summary.txt`
+        });
+      }
+    }
+
+    function resetAllProgress(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to confirm reset`;
+        setTimeout(function() {
+          if (btn && btn.dataset.armed === `true`) {
+            btn.dataset.armed = `false`;
+            btn.textContent = `Reset Practice Sandbox`;
+          }
+        }, 5000);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Reset Practice Sandbox`;
+      appState = cloneDefaultState();
+      applyTextSize();
+      renderJobBoard();
+      renderScamInspector();
+      renderMatcher();
+      renderTracker();
+      renderExitCheck();
+      restoreWorksheetInputs();
+      const box = document.getElementById(`resume-choice-feedback`);
+      if (box) box.innerHTML = ``;
+      const fb = document.getElementById(`sandbox-form-feedback`);
+      if (fb) fb.innerHTML = ``;
+      const aiOut = document.getElementById(`ai-sim-output`);
+      if (aiOut) aiOut.innerHTML = ``;
+      persistState();
+    }
+
+    /* =========================
+       INIT
+       ========================= */
+    async function initApp() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            appState = Object.assign(cloneDefaultState(), saved);
+            if (!Array.isArray(appState.trackerRows) || appState.trackerRows.length === 0) {
+              appState.trackerRows = cloneDefaultState().trackerRows;
+            }
+          }
+        }
+      } catch (e) {
+        // Fallback to default state safely
+      }
+
+      applyTextSize();
+      renderJobBoard();
+      renderScamInspector();
+      renderMatcher();
+      updateAiPromptPreview();
+      if (appState.aiTestedClear) {
+        renderAiSimulatorResult();
+      }
+      renderTracker();
+      renderExitCheck();
+      restoreWorksheetInputs();
+      updateOverallProgress();
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>

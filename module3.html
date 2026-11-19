@@ -1,0 +1,2691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Module 3: Email and Professional Communication — Digital Pathways to Employment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #2e7d4f;
+      --positive-bg: #e6f3ec;
+      --warning: #b86e00;
+      --warning-bg: #fdf4e4;
+      --error-bg: #fbeceb;
+      --focus: #0f7c8a;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+      --headline-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+      --subhead-size: clamp(1.1875rem, 1.08rem + 0.45vw, 1.4375rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.25vw, 1.15rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    body.large-text {
+      --body-size: clamp(1.2rem, 1.12rem + 0.35vw, 1.32rem);
+      --subhead-size: clamp(1.32rem, 1.18rem + 0.55vw, 1.625rem);
+      --label-size: 0.875rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header { position: static !important; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Top Teal Bar (Treatment 2 — once per page) */
+    .page-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+    }
+
+    .page-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+    }
+
+    .page-container * { min-width: 0; }
+
+    /* Skip link for keyboard navigation */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: var(--space-sm);
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus {
+      left: var(--space-md);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.08;
+    }
+
+    .section-title {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+    }
+
+    .subhead {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .lede {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 64ch;
+      margin: var(--space-sm) 0 0;
+    }
+
+    .kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    p {
+      margin: 0 0 var(--space-md);
+      max-width: 68ch;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* Header & Portal Bar */
+    .portal-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .portal-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .portal-program {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .accessibility-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Quick Section Jump Strip (anchors inside single scroll flow) */
+    .jump-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin: var(--space-lg) 0 var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      border: var(--card-border);
+    }
+
+    .jump-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      border-radius: var(--rounded);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .jump-link:hover {
+      background-color: var(--surface-container);
+      text-decoration-thickness: 2px;
+    }
+
+    /* Progress Bar Strip */
+    .progress-panel {
+      margin-top: var(--space-lg);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .progress-track-wrap {
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .progress-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .progress-track {
+      height: 10px;
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--tertiary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: 0.625rem 1.125rem;
+      font-family: var(--font-label);
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.2;
+      border-radius: var(--rounded);
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover { background: var(--on-primary-container); }
+
+    .btn-secondary {
+      background: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover { background: var(--surface-container-low); }
+
+    .btn-ghost {
+      background: var(--background);
+      color: var(--on-surface);
+      border-color: var(--outline);
+    }
+    .btn-ghost:hover { background: var(--surface-container-low); }
+
+    .btn-sm {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--label-size);
+    }
+
+    .btn[disabled] {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* Status Cards & Chips (Treatments 1 & 4) */
+    .status-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-status="info"] { background: var(--primary-container); border-left-color: var(--primary); color: var(--on-primary-container); }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background: var(--positive-bg);
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+
+    .chip[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .chip[data-status="alert"] {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    .chip[data-status="warn"] {
+      background: var(--warning-bg);
+      color: var(--on-surface);
+    }
+
+    /* Section Spacing */
+    .module-section {
+      padding-top: var(--space-2xl);
+      margin-top: var(--space-2xl);
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    .module-section.first-section {
+      padding-top: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .section-header {
+      margin-bottom: var(--space-lg);
+    }
+
+    .stage-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Banded Workspace Container */
+    .wash-band {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      margin-top: var(--space-lg);
+      container-type: inline-size;
+    }
+
+    .white-panel {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+    }
+
+    /* 4-stage trainer stance grid */
+    .stance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+
+    .stance-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-top: 3px solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .stance-num {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+
+    /* Interactive I-Can Checklist */
+    .checklist-grid {
+      display: grid;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .check-item:hover {
+      background: var(--surface-container-low);
+    }
+
+    .check-item.is-checked {
+      background: var(--positive-bg);
+      border-color: var(--tertiary);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      margin-top: 2px;
+      accent-color: var(--tertiary);
+      cursor: pointer;
+    }
+
+    /* Lesson 1: Interactive Anatomy Explorer */
+    .anatomy-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    @container (max-width: 720px) {
+      .anatomy-layout { grid-template-columns: 1fr; }
+    }
+
+    .mock-email-frame {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--card-lift);
+      overflow: hidden;
+    }
+
+    .mock-email-topbar {
+      background: var(--surface-container);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-primary-container);
+    }
+
+    .anatomy-part-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--background);
+      border: none;
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-md);
+      font-family: inherit;
+      font-size: inherit;
+      color: var(--on-surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .anatomy-part-btn:last-child { border-bottom: none; }
+
+    .anatomy-part-btn:hover {
+      background: var(--surface-container-low);
+    }
+
+    .anatomy-part-btn.is-active {
+      background: var(--primary-container);
+      box-shadow: inset 4px 0 0 var(--primary);
+    }
+
+    .anatomy-field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .anatomy-inspector {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .anatomy-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .pill-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .pill-btn.is-active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Form Controls */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .field-hint {
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--on-surface);
+      background: var(--background);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      padding: 0.625rem 0.875rem;
+      transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .select {
+      padding-right: 2.25rem;
+      min-height: 44px;
+    }
+
+    .input { min-height: 44px; }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+      outline: none;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: end;
+    }
+
+    .form-row > .field-group {
+      flex: 1 1 220px;
+      margin-bottom: 0;
+    }
+
+    /* Feedback Boxes */
+    .feedback-box {
+      margin-top: var(--space-md);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      border: var(--card-border);
+      border-left: 4px solid var(--primary);
+      background: var(--background);
+    }
+
+    .feedback-box.is-ok {
+      border-left-color: var(--tertiary);
+      background: var(--positive-bg);
+    }
+
+    .feedback-box.is-warn {
+      border-left-color: var(--warning);
+      background: var(--warning-bg);
+    }
+
+    .feedback-box.is-alert {
+      border-left-color: var(--error);
+      background: var(--error-bg);
+    }
+
+    .feedback-list {
+      margin: var(--space-sm) 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .feedback-list li {
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Quiz / Scenario Cards */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .option-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+
+    .choice-btn {
+      width: 100%;
+      min-height: 44px;
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .choice-btn:hover { background: var(--surface-container-low); }
+
+    .choice-btn.is-selected-correct {
+      background: var(--positive-bg);
+      border-color: var(--tertiary);
+      font-weight: 700;
+    }
+
+    .choice-btn.is-selected-wrong {
+      background: var(--error-bg);
+      border-color: var(--error);
+    }
+
+    /* Before / After Comparison */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    @container (max-width: 680px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    .email-quote {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      font-size: 0.98rem;
+    }
+
+    /* Lesson 3: Simulated Inbox */
+    .inbox-split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.3fr;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    @container (max-width: 720px) {
+      .inbox-split { grid-template-columns: 1fr; }
+    }
+
+    .inbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .inbox-item {
+      width: 100%;
+      text-align: left;
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--on-surface);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .inbox-item:hover { background: var(--surface-container); }
+
+    .inbox-item.is-active {
+      border-color: var(--primary);
+      box-shadow: inset 4px 0 0 var(--primary);
+      background: var(--background);
+    }
+
+    .inbox-sender {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    .inbox-subject {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .attachment-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      margin-top: var(--space-xs);
+    }
+
+    .link-fake {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--surface-container-low);
+      border: 1px dashed var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--primary);
+      text-decoration: underline;
+      margin-top: var(--space-xs);
+    }
+
+    /* Tables (Vitals style) */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      overflow: hidden;
+      margin-top: var(--space-md);
+    }
+
+    .data-table th {
+      text-align: left;
+      background: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .data-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* Lesson 4: CLEAR Grid & AI Lab */
+    .clear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(175px, 100%), 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .clear-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .clear-letter {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--primary);
+    }
+
+    /* Attachment Chooser in DP-03 */
+    .file-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .file-card {
+      background: var(--background);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      font-family: inherit;
+      color: var(--on-surface);
+    }
+
+    .file-card.is-selected {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: inset 3px 0 0 var(--primary);
+    }
+
+    /* Candidate Card Reference */
+    .reference-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .ref-tile {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .ref-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ref-value {
+      font-weight: 700;
+      margin-top: var(--space-xs);
+      word-break: break-word;
+    }
+
+    .inline-code {
+      font-family: monospace;
+      font-size: 0.92em;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Footer */
+    .module-footer {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--outline-variant);
+      color: var(--on-surface-variant);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 640px) {
+      .page-container { padding: var(--space-md) var(--space-md) var(--space-xl); }
+      .wash-band, .white-panel { padding: var(--space-md); }
+      .portal-bar { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to learning activities</a>
+
+  <div class="page-shell">
+    <main id="main-content" class="page-container">
+
+      <!-- Portal & Accessibility Header -->
+      <header class="portal-bar">
+        <div class="portal-meta">
+          <div class="portal-program">Home4Good Inc. · Digital Pathways to Employment</div>
+          <div class="stage-row">
+            <span class="chip" data-status="info">Module 3 of 7</span>
+            <span class="chip">Practice-first · Self-paced or group</span>
+          </div>
+        </div>
+        <div class="accessibility-bar">
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-large-text" onclick="toggleLargeText()">
+            <i data-lucide="type" aria-hidden="true"></i>
+            <span id="large-text-label">Larger text: Off</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-all" onclick="handleResetProgress(this)">
+            <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+            <span>Reset my practice</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Hero Title Block -->
+      <section aria-labelledby="module-heading">
+        <h1 id="module-heading" class="title">Email and Professional Communication</h1>
+        <p class="lede">
+          Compose and manage workplace email with clarity, professionalism, and care. Practice reading employer messages, choosing the right recipients, checking attachments safely, and using AI responsibly—all inside a safe training sandbox.
+        </p>
+
+        <!-- Safe Practice Notice -->
+        <div class="status-card" data-status="info" style="margin-top: var(--space-lg);">
+          <div class="kicker" style="color: var(--on-primary-container);">Safe Practice Environment</div>
+          <p style="margin: 0;">
+            Every name, company, and <span class="inline-code">.test</span> email address in this module is fictional for classroom practice. <strong>Never</strong> enter real Social Security numbers, state IDs, bank details, passwords, or personal justice-system history into any exercise or AI prompt.
+          </p>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-panel" aria-live="polite">
+          <div class="progress-track-wrap">
+            <div class="progress-header-row">
+              <span>Your Module 3 Practice Progress</span>
+              <span id="progress-summary-text">0 of 5 hands-on checkpoints completed</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-role">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+          <div id="progress-status-chip" class="chip" data-status="info">Getting started</div>
+        </div>
+
+        <!-- Quick Anchor Navigation inside Scroll Flow -->
+        <nav class="jump-nav" aria-label="Module sections">
+          <a class="jump-link" href="#overview">Overview &amp; Goals</a>
+          <a class="jump-link" href="#lesson-1">1. Email Anatomy &amp; Recipients</a>
+          <a class="jump-link" href="#lesson-2">2. Workplace &amp; Interview Replies</a>
+          <a class="jump-link" href="#lesson-3">3. Attachments &amp; Email Safety</a>
+          <a class="jump-link" href="#lesson-4">4. Responsible AI Assistant</a>
+          <a class="jump-link" href="#capstone">Skills Demo (DP-03)</a>
+        </nav>
+      </section>
+
+      <!-- SECTION 1: OVERVIEW & LEARNING OUTCOMES -->
+      <section id="overview" class="module-section first-section" aria-labelledby="overview-heading">
+        <div class="section-header">
+          <div class="kicker">Part 1 · Module Overview</div>
+          <h2 id="overview-heading" class="section-title">How we learn together: four steady steps</h2>
+          <p class="lede">
+            Suggested pace: four 90-minute sessions (6 hours) in a group, or move at your own speed. Every lesson follows the same supportive rhythm—focused on specific skills, never labels about your ability.
+          </p>
+        </div>
+
+        <div class="stance-grid">
+          <div class="stance-card">
+            <div class="stance-num">Stage 1 · Watch me</div>
+            <h3 class="subhead">See it done clearly</h3>
+            <p>Walk through an annotated example first so every field and choice makes sense.</p>
+          </div>
+          <div class="stance-card">
+            <div class="stance-num">Stage 2 · Let’s do it</div>
+            <h3 class="subhead">Decide together</h3>
+            <p>Test common workplace choices with guided hints and immediate explanations.</p>
+          </div>
+          <div class="stance-card">
+            <div class="stance-num">Stage 3 · You try</div>
+            <h3 class="subhead">Practice in the sandbox</h3>
+            <p>Draft replies, inspect inbox messages, and fact-check AI drafts at your own pace.</p>
+          </div>
+          <div class="stance-card">
+            <div class="stance-num">Stage 4 · Show what you can do</div>
+            <h3 class="subhead">Complete task DP-03</h3>
+            <p>Put all the pieces together in one complete employer confirmation email and self-check.</p>
+          </div>
+        </div>
+
+        <!-- Fictional Candidate Reference Card -->
+        <div class="white-panel" style="margin-top: var(--space-lg);">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Training Identity Card</span>
+            <span class="field-hint">Use these fictional details for every exercise below</span>
+          </div>
+          <div class="reference-strip">
+            <div class="ref-tile">
+              <div class="ref-label">Fictional Applicant</div>
+              <div class="ref-value">Jordan Lee · Atlanta, GA</div>
+            </div>
+            <div class="ref-tile">
+              <div class="ref-label">Training Email (.test)</div>
+              <div class="ref-value">jordan.lee@riverside-example.test</div>
+            </div>
+            <div class="ref-tile">
+              <div class="ref-label">Target Role &amp; Employer</div>
+              <div class="ref-value">Customer Support Associate · Riverside Community Services</div>
+            </div>
+            <div class="ref-tile">
+              <div class="ref-label">Practice Résumé File</div>
+              <div class="ref-value">Jordan_Lee_Resume.pdf</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive "I Can" Self-Check -->
+        <div class="wash-band" aria-labelledby="ican-heading">
+          <div class="stage-row">
+            <span class="chip" id="ican-counter-chip">0 of 5 checked</span>
+          </div>
+          <h3 id="ican-heading" class="subhead">Student “I can” learning goals</h3>
+          <p style="margin-top: var(--space-xs); color: var(--on-surface-variant);">
+            Check off each goal as you feel ready during or after the lessons. Your selections are saved automatically.
+          </p>
+          <div class="checklist-grid" id="ican-checklist">
+            <label class="check-item" id="wrap-ican-1">
+              <input type="checkbox" id="ican-1" onchange="toggleICan('ican-1')">
+              <span><strong>I can</strong> write a meaningful subject line that tells the reader what the email is about.</span>
+            </label>
+            <label class="check-item" id="wrap-ican-2">
+              <input type="checkbox" id="ican-2" onchange="toggleICan('ican-2')">
+              <span><strong>I can</strong> identify the right recipients and choose wisely between To, CC, BCC, Reply, and Reply All.</span>
+            </label>
+            <label class="check-item" id="wrap-ican-3">
+              <input type="checkbox" id="ican-3" onchange="toggleICan('ican-3')">
+              <span><strong>I can</strong> write a clear, respectful workplace message with specific dates, times, and polite questions.</span>
+            </label>
+            <label class="check-item" id="wrap-ican-4">
+              <input type="checkbox" id="ican-4" onchange="toggleICan('ican-4')">
+              <span><strong>I can</strong> attach the right file with a clean filename and spot suspicious links or phishing requests.</span>
+            </label>
+            <label class="check-item" id="wrap-ican-5">
+              <input type="checkbox" id="ican-5" onchange="toggleICan('ican-5')">
+              <span><strong>I can</strong> protect private details, prompt an AI assistant safely, and fact-check any AI draft before sending.</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: LESSON 1 — EMAIL ANATOMY & RECIPIENTS -->
+      <section id="lesson-1" class="module-section" aria-labelledby="l1-heading">
+        <div class="section-header">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Lesson 1 · 90 min</span>
+            <span class="chip" id="cp1-chip" data-status="info">Checkpoint pending</span>
+          </div>
+          <h2 id="l1-heading" class="section-title">Inbox basics, email anatomy, and choosing recipients</h2>
+          <p class="lede">
+            A clear workplace email helps a busy supervisor or hiring manager understand your message in five seconds. Explore each part of a professional email below, then practice choosing who receives a message.
+          </p>
+        </div>
+
+        <!-- Stage 1: Watch Me — Interactive Email Anatomy -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Watch me · Interactive Blueprint</span>
+          </div>
+          <h3 class="subhead">Click any part of Jordan’s email to inspect why it works</h3>
+          <div class="anatomy-pills" role="group" aria-label="Quick select email part">
+            <button type="button" class="pill-btn is-active" data-part="to" onclick="selectAnatomyPart('to')">To</button>
+            <button type="button" class="pill-btn" data-part="cc" onclick="selectAnatomyPart('cc')">CC</button>
+            <button type="button" class="pill-btn" data-part="bcc" onclick="selectAnatomyPart('bcc')">BCC</button>
+            <button type="button" class="pill-btn" data-part="subject" onclick="selectAnatomyPart('subject')">Subject Line</button>
+            <button type="button" class="pill-btn" data-part="greeting" onclick="selectAnatomyPart('greeting')">Greeting</button>
+            <button type="button" class="pill-btn" data-part="body" onclick="selectAnatomyPart('body')">Message Body</button>
+            <button type="button" class="pill-btn" data-part="signoff" onclick="selectAnatomyPart('signoff')">Sign-off &amp; Attachment</button>
+          </div>
+
+          <div class="anatomy-layout">
+            <div class="mock-email-frame" aria-label="Sample professional email">
+              <div class="mock-email-topbar">
+                <span>Draft Message — Training Inbox</span>
+                <span>Safe .test domain</span>
+              </div>
+              <button type="button" class="anatomy-part-btn is-active" id="anat-btn-to" onclick="selectAnatomyPart('to')">
+                <span class="anatomy-field-label">To</span>
+                <span>ms.johnson@riverside-example.test</span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-cc" onclick="selectAnatomyPart('cc')">
+                <span class="anatomy-field-label">CC</span>
+                <span>scheduling@riverside-example.test (optional)</span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-bcc" onclick="selectAnatomyPart('bcc')">
+                <span class="anatomy-field-label">BCC</span>
+                <span>(Hidden copy — used when protecting group privacy)</span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-subject" onclick="selectAnatomyPart('subject')">
+                <span class="anatomy-field-label">Subject</span>
+                <span><strong>Orientation Confirmation — Jordan Lee</strong></span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-greeting" onclick="selectAnatomyPart('greeting')">
+                <span class="anatomy-field-label">Greeting</span>
+                <span>Dear Ms. Johnson,</span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-body" onclick="selectAnatomyPart('body')">
+                <span class="anatomy-field-label">Message Body</span>
+                <span>Thank you for the orientation details. I am writing to confirm that I can attend on Thursday, November 12, 2026, at 10:00 AM Eastern. Could you please share the building address or video link for the session?</span>
+              </button>
+              <button type="button" class="anatomy-part-btn" id="anat-btn-signoff" onclick="selectAnatomyPart('signoff')">
+                <span class="anatomy-field-label">Sign-off &amp; Attachment</span>
+                <span>Sincerely, Jordan Lee · Attached: Jordan_Lee_Resume.pdf</span>
+              </button>
+            </div>
+
+            <div class="anatomy-inspector" aria-live="polite">
+              <div>
+                <div class="kicker" id="anat-kicker">Part 1 of 7 · To Field</div>
+                <h4 class="subhead" id="anat-title">Primary Recipient (To)</h4>
+              </div>
+              <p id="anat-desc">
+                Put the person who needs to read your message and take action in the <strong>To</strong> field. Double-check the spelling of the domain before you hit send.
+              </p>
+              <div class="status-card" data-status="ok" style="padding: var(--space-sm) var(--space-md);">
+                <strong>Workplace tip:</strong> <span id="anat-tip">Verify the exact address from the employer’s message so your reply does not bounce or reach the wrong person.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 2: Let's Do It — To / CC / BCC / Reply All Lab -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Let’s do it · Recipient &amp; Reply Judgment</span>
+          </div>
+          <h3 class="subhead">Who should receive this message?</h3>
+          <p style="color: var(--on-surface-variant);">
+            Practice deciding between <strong>Reply</strong>, <strong>Reply All</strong>, <strong>CC</strong>, and <strong>BCC</strong> in three workplace situations. Answer all three to earn Checkpoint 1.
+          </p>
+
+          <div class="scenario-grid">
+            <!-- Q1 -->
+            <div class="white-panel">
+              <div class="kicker">Situation 1</div>
+              <p><strong>Ms. Johnson</strong> emails 12 job applicants in the <strong>To</strong> field asking each person to send their personal résumé separately. What should Jordan click?</p>
+              <div class="option-stack" id="l1-q1-opts">
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(1, 'reply', this)">
+                  <span>Reply (to Ms. Johnson only)</span>
+                </button>
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(1, 'replyall', this)">
+                  <span>Reply All (to Ms. Johnson and all 11 other applicants)</span>
+                </button>
+              </div>
+              <div id="l1-q1-fb" class="field-hint" style="margin-top: var(--space-sm);"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="white-panel">
+              <div class="kicker">Situation 2</div>
+              <p>Jordan wants to email Ms. Johnson to confirm an appointment and keep the <strong>front desk coordinator</strong> informed openly on the same thread.</p>
+              <div class="option-stack" id="l1-q2-opts">
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(2, 'cc', this)">
+                  <span>Put coordinator in CC (Carbon Copy)</span>
+                </button>
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(2, 'bcc', this)">
+                  <span>Put coordinator in BCC (Blind Carbon Copy)</span>
+                </button>
+              </div>
+              <div id="l1-q2-fb" class="field-hint" style="margin-top: var(--space-sm);"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="white-panel">
+              <div class="kicker">Situation 3</div>
+              <p>An instructor is emailing a training reminder to 15 learners who do not know each other and should not see each other’s email addresses.</p>
+              <div class="option-stack" id="l1-q3-opts">
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(3, 'cc', this)">
+                  <span>Put all 15 learners in CC</span>
+                </button>
+                <button type="button" class="choice-btn" onclick="answerL1Quiz(3, 'bcc', this)">
+                  <span>Put all 15 learners in BCC</span>
+                </button>
+              </div>
+              <div id="l1-q3-fb" class="field-hint" style="margin-top: var(--space-sm);"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: LESSON 2 — WORKPLACE CORRESPONDENCE & INTERVIEW REPLIES -->
+      <section id="lesson-2" class="module-section" aria-labelledby="l2-heading">
+        <div class="section-header">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Lesson 2 · 90 min</span>
+            <span class="chip" id="cp2-chip" data-status="info">Checkpoint pending</span>
+          </div>
+          <h2 id="l2-heading" class="section-title">Workplace correspondence and interview replies</h2>
+          <p class="lede">
+            Strong workplace messages put the main purpose first, confirm exact dates and time zones, and ask missing questions politely. Compare an unclear message with a professional one, then draft your own reply.
+          </p>
+        </div>
+
+        <!-- Watch Me: Before and After -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Watch me · Before and After</span>
+          </div>
+          <h3 class="subhead">Notice what changes when we write purpose-first</h3>
+          <div class="compare-grid">
+            <div class="email-quote" style="border-left: 4px solid var(--error);">
+              <div class="kicker" style="color: var(--error);">Before · Unclear Draft</div>
+              <p style="margin-bottom: var(--space-xs);"><strong>Subject:</strong> hey</p>
+              <p style="margin-bottom: var(--space-xs);">hey i got ur message about next week. yeah i can probably do friday. wait is it on zoom or in person?? thx - jordan</p>
+              <p class="field-hint">Missing: exact date/time, time zone, polite greeting, and clear subject.</p>
+            </div>
+            <div class="email-quote" style="border-left: 4px solid var(--tertiary);">
+              <div class="kicker" style="color: var(--secondary);">After · Clear &amp; Professional</div>
+              <p style="margin-bottom: var(--space-xs);"><strong>Subject:</strong> Interview Confirmation — Jordan Lee</p>
+              <p style="margin-bottom: var(--space-xs);">Hello Ms. Johnson,<br>Thank you for the interview invitation. I am confirming that I am available on Friday, November 13, 2026, from 2:00 to 2:30 PM Eastern. Could you please share the video meeting link when it is ready?<br>Best regards,<br>Jordan Lee</p>
+              <p class="field-hint">Clear purpose, exact date and time zone, polite single question, respectful closing.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- You Try: Interactive Correspondence Sandbox -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">You try · Correspondence Sandbox</span>
+          </div>
+          <h3 class="subhead">Practice replying to Riverside Community Services</h3>
+          <p style="color: var(--on-surface-variant);">
+            Choose a scenario below, read the incoming employer note, and compose your reply. Need a starting frame? Click <strong>Load plain-language helper</strong> to see a structured template you can customize.
+          </p>
+
+          <div class="anatomy-pills" role="group" aria-label="Select correspondence scenario">
+            <button type="button" class="pill-btn is-active" id="l2-scen-btn-interview" onclick="switchL2Scenario('interview')">Scenario A: Interview Invitation</button>
+            <button type="button" class="pill-btn" id="l2-scen-btn-reschedule" onclick="switchL2Scenario('reschedule')">Scenario B: Schedule Change</button>
+          </div>
+
+          <div class="status-card" id="l2-prompt-card" style="margin-bottom: var(--space-lg);">
+            <div class="kicker" id="l2-prompt-kicker">Incoming Message · Practice Interview</div>
+            <p id="l2-prompt-text" style="margin: 0;">
+              <strong>From:</strong> Ms. Johnson (ms.johnson@riverside-example.test)<br>
+              “Hello Jordan, please join us for a practice video interview on <strong>Friday, November 13, 2026, from 2:00 to 2:30 PM Eastern</strong>. Please reply to confirm your attendance.”
+            </p>
+          </div>
+
+          <div class="white-panel">
+            <div class="field-group">
+              <label class="field-label" for="l2-subject">Subject line</label>
+              <span class="field-hint" id="l2-subject-hint">Include the topic and your fictional name (Jordan Lee).</span>
+              <input type="text" class="input" id="l2-subject" placeholder="Example: Interview Confirmation — Jordan Lee">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="l2-body">Email message (greeting, confirmation, clarifying question, and sign-off)</label>
+              <span class="field-hint" id="l2-body-hint">Confirm Friday, November 13, 2026, at 2:00–2:30 PM Eastern and ask how to join the video room if not yet sent.</span>
+              <textarea class="textarea" id="l2-body" rows="6"></textarea>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+              <button type="button" class="btn btn-primary" onclick="evaluateL2Draft()">
+                <i data-lucide="check-circle" aria-hidden="true"></i>
+                <span>Check my reply</span>
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="loadL2Template()">
+                <i data-lucide="file-text" aria-hidden="true"></i>
+                <span>Load plain-language helper</span>
+              </button>
+            </div>
+
+            <div id="l2-feedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: LESSON 3 — ATTACHMENTS, LINKS & EMAIL SAFETY -->
+      <section id="lesson-3" class="module-section" aria-labelledby="l3-heading">
+        <div class="section-header">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Lesson 3 · 90 min</span>
+            <span class="chip" id="cp3-chip" data-status="info">Checkpoint pending</span>
+          </div>
+          <h2 id="l3-heading" class="section-title">Attachments, links, and email safety</h2>
+          <p class="lede">
+            Knowing what to attach—and what never to click—protects both your job search and your personal information. Practice telling safe messages apart from phishing tricks, and compare clean filenames with risky ones.
+          </p>
+        </div>
+
+        <!-- Watch Me: File Naming & Attachment vs Link Table -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Watch me · File &amp; Link Habits</span>
+          </div>
+          <h3 class="subhead">File attachments vs. inline links</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>What it does</th>
+                <th>Safe workplace habit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PDF Attachment</strong><br><span class="inline-code">Jordan_Lee_Resume.pdf</span></td>
+                <td>Travels inside the email and keeps your résumé layout identical on any device.</td>
+                <td>Preview the file before sending so you never attach an old draft or personal document.</td>
+              </tr>
+              <tr>
+                <td><strong>Editable Copy</strong><br><span class="inline-code">Jordan_Lee_Resume.docx</span></td>
+                <td>Used when you need to update skills or tailor wording for a new role.</td>
+                <td>Keep in your own folder; send the PDF to employers unless an application asks for `.docx`.</td>
+              </tr>
+              <tr>
+                <td><strong>Inline Web Link</strong><br><span class="inline-code">https://...</span></td>
+                <td>Opens a web page or portal outside your email app.</td>
+                <td>Never enter a password or ID through an unexpected link. Open the official site yourself instead.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- You Try: Simulated Safe Inbox Inspector -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">You try · Simulated Inbox Safety Check</span>
+          </div>
+          <h3 class="subhead">Inspect all three training emails and choose the safest action</h3>
+          <p style="color: var(--on-surface-variant);">
+            Click each message on the left to examine the sender address, message tone, and link or attachment. Complete all three reviews to earn Checkpoint 3.
+          </p>
+
+          <div class="inbox-split" style="margin-top: var(--space-md);">
+            <div class="inbox-list" role="tablist" aria-label="Simulated training inbox">
+              <button type="button" class="inbox-item is-active" id="inbox-tab-0" onclick="selectInboxMsg(0)">
+                <div class="inbox-sender">ms.johnson@riverside-example.test</div>
+                <div class="inbox-subject">Orientation details &amp; checklist</div>
+                <span class="chip" id="inbox-badge-0" data-status="info">Not reviewed</span>
+              </button>
+              <button type="button" class="inbox-item" id="inbox-tab-1" onclick="selectInboxMsg(1)">
+                <div class="inbox-sender">account-verify@riverside-urgent.example.test</div>
+                <div class="inbox-subject">Password verification required immediately</div>
+                <span class="chip" id="inbox-badge-1" data-status="info">Not reviewed</span>
+              </button>
+              <button type="button" class="inbox-item" id="inbox-tab-2" onclick="selectInboxMsg(2)">
+                <div class="inbox-sender">hiring-fee@fastjob-offer.example.test</div>
+                <div class="inbox-subject">Guaranteed interview — $45 badge deposit</div>
+                <span class="chip" id="inbox-badge-2" data-status="info">Not reviewed</span>
+              </button>
+            </div>
+
+            <div class="white-panel" id="inbox-reading-pane" aria-live="polite">
+              <!-- Populated dynamically by renderInboxPane() -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: LESSON 4 — RESPONSIBLE AI AS AN EMAIL ASSISTANT -->
+      <section id="lesson-4" class="module-section" aria-labelledby="l4-heading">
+        <div class="section-header">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Lesson 4 · Beginner AI Literacy</span>
+            <span class="chip" id="cp4-chip" data-status="info">Checkpoint pending</span>
+          </div>
+          <h2 id="l4-heading" class="section-title">Using AI responsibly as an email assistant</h2>
+          <p class="lede">
+            An AI assistant can suggest polite wording for a workplace message, but it can also invent wrong dates, times, or promises with total confidence. You stay in charge: protect your privacy, check every fact against the source, and edit the draft in your own words.
+          </p>
+        </div>
+
+        <!-- Privacy Guardrail Callout -->
+        <div class="status-card" data-status="alert">
+          <div class="kicker" style="color: var(--error);">AI Privacy Guardrail — Never Include</div>
+          <p style="margin: 0;">
+            Treat any AI prompt box like a public whiteboard. Leave out <strong>passwords, Social Security numbers, state IDs, real home addresses, phone numbers, case numbers, or justice-system history</strong>. Use fictional placeholders or general descriptions only.
+          </p>
+        </div>
+
+        <!-- Watch Me: CLEAR Prompting -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Watch me · The CLEAR Prompt Method</span>
+          </div>
+          <h3 class="subhead">Five steps to a useful, safe prompt</h3>
+          <div class="clear-grid">
+            <div class="clear-card">
+              <div class="clear-letter">C</div>
+              <strong>Context</strong>
+              <p class="field-hint">What is the situation? (e.g., replying to a fictional orientation note)</p>
+            </div>
+            <div class="clear-card">
+              <div class="clear-letter">L</div>
+              <strong>Let AI know task</strong>
+              <p class="field-hint">What do you want help writing or polishing?</p>
+            </div>
+            <div class="clear-card">
+              <div class="clear-letter">E</div>
+              <strong>Explain details</strong>
+              <p class="field-hint">Which exact facts may it use? Tell it not to invent extras.</p>
+            </div>
+            <div class="clear-card">
+              <div class="clear-letter">A</div>
+              <strong>Ask for format</strong>
+              <p class="field-hint">Short two-sentence email, polite tone, clear sign-off.</p>
+            </div>
+            <div class="clear-card">
+              <div class="clear-letter">R</div>
+              <strong>Review &amp; refine</strong>
+              <p class="field-hint">Compare word-for-word against the source and fix mistakes.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- You Try: Interactive AI Drafting & Fact-Check Simulator -->
+        <div class="wash-band">
+          <div class="stage-row">
+            <span class="chip" data-status="info">You try · AI Drafting &amp; Fact-Check Lab</span>
+          </div>
+          <h3 class="subhead">Step 1: Write a safe prompt and generate a sample AI draft</h3>
+
+          <div class="status-card" style="margin: var(--space-md) 0;">
+            <div class="kicker">Source Supervisor Note (Your Ground Truth)</div>
+            <p id="ai-source-note" style="margin: 0;">
+              “Jordan, please join the <strong>stockroom team</strong> on <strong>Tuesday at 9:00 AM</strong> for a <strong>30-minute orientation</strong>. Please bring a <strong>notebook</strong>.”
+            </p>
+          </div>
+
+          <div class="white-panel">
+            <div class="form-row" style="margin-bottom: var(--space-md);">
+              <div class="field-group">
+                <label class="field-label" for="ai-scenario-select">Practice scenario</label>
+                <select class="select" id="ai-scenario-select" onchange="updateAIScenario()">
+                  <option value="stockroom">Stockroom Orientation Reply (Workbook 7B)</option>
+                  <option value="polish">Polish a Casual Interview Reply (Workbook 7A)</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="ai-tone-select">Requested tone</label>
+                <select class="select" id="ai-tone-select">
+                  <option value="polite">Polite &amp; concise (2–3 sentences)</option>
+                  <option value="warm">Warm &amp; appreciative</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="ai-prompt-input">Your CLEAR prompt (fictional details only)</label>
+              <span class="field-hint">Tell the AI the task, the exact facts from the note above, and the format you want.</span>
+              <textarea class="textarea" id="ai-prompt-input" rows="3">Using only the supervisor note (stockroom team, Tuesday at 9:00 AM, 30-minute orientation, bring a notebook), write a polite two-sentence reply from Jordan confirming attendance.</textarea>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+              <button type="button" class="btn btn-primary" onclick="runAISimulator()">
+                <i data-lucide="sparkles" aria-hidden="true"></i>
+                <span>Check privacy &amp; generate AI draft</span>
+              </button>
+            </div>
+
+            <div id="ai-privacy-feedback" aria-live="polite"></div>
+
+            <!-- AI Draft Output + Fact-Check Editor -->
+            <div id="ai-output-stage" style="display: none; margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid var(--outline-variant);">
+              <h4 class="subhead">Step 2: Spot the AI’s mistakes and revise in your own words</h4>
+              <p class="field-hint" style="margin-top: var(--space-xs);">
+                Read the AI’s draft carefully against the source note above. Edit the box below to fix every wrong fact and remove any unsafe request before sending.
+              </p>
+
+              <div class="status-card" data-status="alert" style="margin: var(--space-md) 0;">
+                <div class="kicker" style="color: var(--error);">Unchecked AI Draft (Contains Errors!)</div>
+                <p id="ai-raw-draft" style="margin: 0;"></p>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="ai-revised-draft">Your fact-checked final reply</label>
+                <span class="field-hint" id="ai-check-hint">Fix the team, day, duration/format, and remove any unverified ID or certification claims.</span>
+                <textarea class="textarea" id="ai-revised-draft" rows="4"></textarea>
+              </div>
+
+              <button type="button" class="btn btn-primary" onclick="verifyAIRevision()">
+                <i data-lucide="shield-check" aria-hidden="true"></i>
+                <span>Verify my fact-checked reply</span>
+              </button>
+
+              <div id="ai-verify-feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: END-OF-MODULE SKILLS DEMONSTRATION (DP-03) -->
+      <section id="capstone" class="module-section" aria-labelledby="cap-heading">
+        <div class="section-header">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Stage 4 · Show What You Can Do</span>
+            <span class="chip" id="cp5-chip" data-status="info">Task DP-03 pending</span>
+          </div>
+          <h2 id="cap-heading" class="section-title">End-of-module skills demonstration (Task DP-03)</h2>
+          <p class="lede">
+            Complete this culminating hands-on task using fictional candidate Jordan Lee’s details. Review every field—recipient, subject, tone, filename, and confidentiality—before pressing send.
+          </p>
+        </div>
+
+        <!-- DP-03 Task Prompt -->
+        <div class="status-card" style="margin-bottom: var(--space-lg);">
+          <div class="kicker">Employer Message to Respond To</div>
+          <p style="margin-bottom: var(--space-sm);">
+            <strong>From:</strong> Ms. Johnson, Training Supervisor (<span class="inline-code">ms.johnson@riverside-example.test</span>)<br>
+            <strong>Subject:</strong> Orientation details<br>
+            “Hello Jordan, please confirm that you can attend orientation on <strong>Thursday, November 12, 2026, at 10:00 AM Eastern</strong>. Send your sample résumé. Thank you.”
+          </p>
+          <p class="field-hint" style="margin: 0;">
+            Notice what is missing: <strong>the meeting location is not listed.</strong> Compose your reply with subject <span class="inline-code">Orientation Confirmation — Jordan Lee</span>, confirm the exact time, politely ask for the missing location, and attach the proper résumé file.
+          </p>
+        </div>
+
+        <!-- Full Interactive Mock Email Client -->
+        <div class="wash-band">
+          <div class="mock-email-frame">
+            <div class="mock-email-topbar">
+              <span>Riverside Training Mail — Compose Practice Message</span>
+              <span>From: jordan.lee@riverside-example.test</span>
+            </div>
+
+            <div style="padding: var(--space-lg);">
+              <div class="form-row" style="margin-bottom: var(--space-md);">
+                <div class="field-group">
+                  <label class="field-label" for="dp03-to">To (choose the safe, correct recipient)</label>
+                  <select class="select" id="dp03-to">
+                    <option value="">-- Select recipient --</option>
+                    <option value="ms.johnson@riverside-example.test">ms.johnson@riverside-example.test (Ms. Johnson, Training Supervisor)</option>
+                    <option value="all-applicants@riverside-example.test">all-applicants@riverside-example.test (All 25 training applicants)</option>
+                    <option value="verify@riverside-urgent.example.test">verify@riverside-urgent.example.test (Urgent account verify)</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="dp03-cc">CC (optional)</label>
+                  <input type="text" class="input" id="dp03-cc" placeholder="Leave blank or add job-coach@riverside-example.test">
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="dp03-subject">Subject</label>
+                <span class="field-hint">Required format: Orientation Confirmation — Jordan Lee</span>
+                <input type="text" class="input" id="dp03-subject" placeholder="Orientation Confirmation — Jordan Lee">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="dp03-body">Message body</label>
+                <span class="field-hint">Include a greeting, confirm Thursday, Nov 12, 2026 at 10:00 AM Eastern, ask for the missing location, mention your attached résumé, and sign off professionally.</span>
+                <textarea class="textarea" id="dp03-body" rows="6" placeholder="Dear Ms. Johnson,"></textarea>
+              </div>
+
+              <!-- Simulated Attachment Picker & Preview -->
+              <div class="field-group">
+                <div class="field-label">Attach file from Jordan’s training folder</div>
+                <span class="field-hint">Select a file and preview it before sending to verify it is the right, safe version.</span>
+                <div class="file-card-grid" role="group" aria-label="Choose attachment file">
+                  <button type="button" class="file-card" id="file-opt-pdf" onclick="selectDP03File('Jordan_Lee_Resume.pdf')">
+                    <strong>Jordan_Lee_Resume.pdf</strong>
+                    <span class="field-hint">PDF · Clean final layout</span>
+                  </button>
+                  <button type="button" class="file-card" id="file-opt-draft" onclick="selectDP03File('Resume_ROUGH_NOTES_v1.docx')">
+                    <strong>Resume_ROUGH_NOTES_v1.docx</strong>
+                    <span class="field-hint">Word draft · Unfinished notes</span>
+                  </button>
+                  <button type="button" class="file-card" id="file-opt-private" onclick="selectDP03File('State_ID_and_SSN_Scan.pdf')">
+                    <strong>State_ID_and_SSN_Scan.pdf</strong>
+                    <span class="field-hint">Sensitive personal ID document</span>
+                  </button>
+                </div>
+                <div id="dp03-file-preview" style="margin-top: var(--space-sm);" aria-live="polite"></div>
+              </div>
+
+              <!-- Confidentiality Check Question (DP-03 Requirement) -->
+              <div class="field-group" style="margin-top: var(--space-md);">
+                <label class="field-label" for="dp03-privacy-q">Final check: Why should you never include a real SSN or state ID in a routine orientation email?</label>
+                <select class="select" id="dp03-privacy-q">
+                  <option value="">-- Choose the best reason --</option>
+                  <option value="risk">Routine email is not secure for sensitive IDs, and employers do not need SSNs before formal onboarding.</option>
+                  <option value="size">Because numbers make the email file size too large to deliver.</option>
+                  <option value="font">Because email apps cannot display digits correctly.</option>
+                </select>
+              </div>
+
+              <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md);">
+                <button type="button" class="btn btn-primary" onclick="submitDP03()">
+                  <i data-lucide="send" aria-hidden="true"></i>
+                  <span>Review &amp; send practice email</span>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="fillDP03Sample()">
+                  <i data-lucide="lightbulb" aria-hidden="true"></i>
+                  <span>Show an example structure</span>
+                </button>
+              </div>
+
+              <div id="dp03-feedback" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Workbook Reflection & Export -->
+        <div class="wash-band" aria-labelledby="reflect-heading">
+          <div class="stage-row">
+            <span class="chip" data-status="info">Student Workbook · Reflection</span>
+          </div>
+          <h3 id="reflect-heading" class="subhead">Record your Module 3 learning reflection</h3>
+          <p style="color: var(--on-surface-variant);">
+            Complete these prompts from Student Worksheet 3. You can download a plain-text copy of your self-check and reflection to upload to Skool or share with your instructor.
+          </p>
+
+          <div class="field-group" style="margin-top: var(--space-md);">
+            <label class="field-label" for="reflect-learned">Something I learned in Module 3</label>
+            <input type="text" class="input" id="reflect-learned" oninput="saveReflection()" placeholder="Example: How to check a sender domain before clicking a link">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="reflect-practice">One skill I want to practice again</label>
+            <input type="text" class="input" id="reflect-practice" oninput="saveReflection()" placeholder="Example: Fact-checking AI email drafts against the source note">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="reflect-questions">Questions I want to ask my instructor</label>
+            <input type="text" class="input" id="reflect-questions" oninput="saveReflection()" placeholder="Optional question for class or office hours">
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md);">
+            <button type="button" class="btn btn-primary" onclick="downloadPracticeSummary()">
+              <i data-lucide="download" aria-hidden="true"></i>
+              <span>Download my Module 3 practice summary (.txt)</span>
+            </button>
+          </div>
+          <div id="export-feedback" aria-live="polite" class="field-hint" style="margin-top: var(--space-sm);"></div>
+        </div>
+      </section>
+
+      <!-- Footer & Attribution -->
+      <footer class="module-footer">
+        <p>
+          <strong>Curriculum Attribution:</strong> Adapted from <em>Digital Pathways to Employment — Module 3: Email and Professional Communication</em> (Home4Good Inc., Version 1.0/1.1, November 2026). Original course materials copyright © 2026 Ronda Bell, licensed to Home4Good Inc. for authorized educational and charitable use. Instructional reference informed by Northstar Digital Literacy standards (Literacy Minnesota).
+        </p>
+        <p style="margin-bottom: 0;">
+          Note: Completing activities in this interactive workbook supports your practice and self-reflection; official module completion is confirmed separately by your Home4Good instructor or facilitator.
+        </p>
+      </footer>
+
+    </main>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    // =========================================================================
+    // STATE & PERSISTENCE (notebookAppApi)
+    // =========================================================================
+    const DEFAULT_STATE = {
+      largeText: false,
+      ican: {
+        'ican-1': false,
+        'ican-2': false,
+        'ican-3': false,
+        'ican-4': false,
+        'ican-5': false
+      },
+      l1Quiz: { q1: null, q2: null, q3: null },
+      l2Completed: false,
+      l2Scenario: 'interview',
+      l3Reviews: { 0: null, 1: null, 2: null },
+      l4Completed: false,
+      dp03Completed: false,
+      dp03SelectedFile: '',
+      reflection: {
+        learned: '',
+        practice: '',
+        questions: ''
+      }
+    };
+
+    let appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    let currentL2Scenario = 'interview';
+    let currentInboxIdx = 0;
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (err) {
+          // Graceful no-op if host rejects
+        }
+      }
+    }
+
+    function updateProgressUI() {
+      const cp1 = (appState.l1Quiz.q1 === true && appState.l1Quiz.q2 === true && appState.l1Quiz.q3 === true);
+      const cp2 = Boolean(appState.l2Completed);
+      const cp3 = (appState.l3Reviews[0] === true && appState.l3Reviews[1] === true && appState.l3Reviews[2] === true);
+      const cp4 = Boolean(appState.l4Completed);
+      const cp5 = Boolean(appState.dp03Completed);
+
+      const checkpoints = [cp1, cp2, cp3, cp4, cp5];
+      const doneCount = checkpoints.filter(Boolean).length;
+      const pct = Math.round((doneCount / 5) * 100);
+
+      const fillEl = document.getElementById('progress-fill');
+      const textEl = document.getElementById('progress-summary-text');
+      const roleEl = document.getElementById('progress-bar-role');
+      const chipEl = document.getElementById('progress-status-chip');
+
+      if (fillEl) fillEl.style.width = `${pct}%`;
+      if (roleEl) roleEl.setAttribute('aria-valuenow', String(pct));
+      if (textEl) textEl.textContent = `${doneCount} of 5 hands-on checkpoints completed`;
+
+      if (chipEl) {
+        if (doneCount === 0) {
+          chipEl.textContent = `Getting started`;
+          chipEl.setAttribute('data-status', 'info');
+        } else if (doneCount < 5) {
+          chipEl.textContent = `In progress · ${pct}%`;
+          chipEl.setAttribute('data-status', 'info');
+        } else {
+          chipEl.textContent = `All 5 checkpoints practiced`;
+          chipEl.removeAttribute('data-status');
+        }
+      }
+
+      setCheckpointChip('cp1-chip', cp1, 'Checkpoint 1 complete');
+      setCheckpointChip('cp2-chip', cp2, 'Checkpoint 2 complete');
+      setCheckpointChip('cp3-chip', cp3, 'Checkpoint 3 complete');
+      setCheckpointChip('cp4-chip', cp4, 'Checkpoint 4 complete');
+      setCheckpointChip('cp5-chip', cp5, 'Task DP-03 complete');
+    }
+
+    function setCheckpointChip(id, isDone, doneText) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (isDone) {
+        el.textContent = doneText;
+        el.removeAttribute('data-status');
+      } else {
+        el.textContent = id === 'cp5-chip' ? `Task DP-03 pending` : `Checkpoint pending`;
+        el.setAttribute('data-status', 'info');
+      }
+    }
+
+    // =========================================================================
+    // ACCESSIBILITY & RESET
+    // =========================================================================
+    function toggleLargeText() {
+      appState.largeText = !appState.largeText;
+      applyLargeTextUI();
+      persistState();
+    }
+
+    function applyLargeTextUI() {
+      const labelEl = document.getElementById('large-text-label');
+      if (appState.largeText) {
+        document.body.classList.add('large-text');
+        if (labelEl) labelEl.textContent = `Larger text: On`;
+      } else {
+        document.body.classList.remove('large-text');
+        if (labelEl) labelEl.textContent = `Larger text: Off`;
+      }
+    }
+
+    function handleResetProgress(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        const span = btn.querySelector('span');
+        if (span) span.textContent = `Click again to confirm reset`;
+        setTimeout(() => {
+          if (btn.dataset.armed === 'true') {
+            btn.dataset.armed = 'false';
+            if (span) span.textContent = `Reset my practice`;
+          }
+        }, 4000);
+        return;
+      }
+
+      btn.dataset.armed = 'false';
+      const span = btn.querySelector('span');
+      if (span) span.textContent = `Reset my practice`;
+
+      appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      restoreUIFromState();
+      persistState();
+    }
+
+    // =========================================================================
+    // I-CAN CHECKLIST
+    // =========================================================================
+    function toggleICan(id) {
+      const cb = document.getElementById(id);
+      if (!cb) return;
+      appState.ican[id] = cb.checked;
+      updateICanUI();
+      persistState();
+    }
+
+    function updateICanUI() {
+      let count = 0;
+      const keys = Object.keys(appState.ican);
+      keys.forEach((k) => {
+        const cb = document.getElementById(k);
+        const wrap = document.getElementById(`wrap-${k}`);
+        const checked = Boolean(appState.ican[k]);
+        if (checked) count++;
+        if (cb) cb.checked = checked;
+        if (wrap) wrap.classList.toggle('is-checked', checked);
+      });
+      const chip = document.getElementById('ican-counter-chip');
+      if (chip) {
+        chip.textContent = `${count} of 5 checked`;
+        if (count === 5) {
+          chip.removeAttribute('data-status');
+        } else {
+          chip.setAttribute('data-status', 'info');
+        }
+      }
+    }
+
+    // =========================================================================
+    // LESSON 1: ANATOMY EXPLORER & RECIPIENT QUIZ
+    // =========================================================================
+    const ANATOMY_DATA = {
+      to: {
+        kicker: `Part 1 of 7 · To Field`,
+        title: `Primary Recipient (To)`,
+        desc: `Put the person who needs to read your message and take action in the <strong>To</strong> field. Double-check the spelling of the domain before you hit send.`,
+        tip: `Verify the exact address from the employer’s message so your reply does not bounce or reach the wrong person.`
+      },
+      cc: {
+        kicker: `Part 2 of 7 · CC Field`,
+        title: `Carbon Copy (CC)`,
+        desc: `Use <strong>CC</strong> for people who should stay informed openly—such as a second supervisor or coordinator—even though they are not the main person answering.`,
+        tip: `Everyone on the email can see who is listed in CC. Only include people who are authorized to see the thread.`
+      },
+      bcc: {
+        kicker: `Part 3 of 7 · BCC Field`,
+        title: `Blind Carbon Copy (BCC)`,
+        desc: `Recipients in <strong>BCC</strong> receive a copy without exposing their email address to others. This protects privacy when sending announcements to a group.`,
+        tip: `If you email multiple contacts who do not know each other, use BCC so you never leak private email addresses.`
+      },
+      subject: {
+        kicker: `Part 4 of 7 · Subject Line`,
+        title: `Clear, Specific Subject Line`,
+        desc: `Your subject tells a busy employer what your message is about before they open it. Include the topic and your name, such as <em>Orientation Confirmation — Jordan Lee</em>.`,
+        tip: `Never leave the subject blank or write only "hello." A clear subject helps your message get opened faster.`
+      },
+      greeting: {
+        kicker: `Part 5 of 7 · Greeting`,
+        title: `Respectful Greeting`,
+        desc: `Open with a polite greeting using the person’s name and title when given, such as <em>Dear Ms. Johnson,</em> or <em>Hello Ms. Johnson,</em>.`,
+        tip: `Match the name shown in their message. Avoid overly casual openers like "yo" or "hey" in job emails.`
+      },
+      body: {
+        kicker: `Part 6 of 7 · Message Body`,
+        title: `Purpose-First Message Body`,
+        desc: `State why you are writing in the first sentence. Confirm key dates, times, and time zones, and ask any missing question clearly and politely.`,
+        tip: `Keep paragraphs short (2–4 sentences) so a supervisor can read everything cleanly on a phone or desktop.`
+      },
+      signoff: {
+        kicker: `Part 7 of 7 · Closing & Attachment`,
+        title: `Professional Sign-off & Checked File`,
+        desc: `End with <em>Sincerely,</em> or <em>Thank you,</em> followed by your name. Always preview attached files to confirm the filename and PDF format before sending.`,
+        tip: `Never attach sensitive IDs or personal documents unless an authorized HR portal specifically requires them after hiring.`
+      }
+    };
+
+    function selectAnatomyPart(part) {
+      const data = ANATOMY_DATA[part];
+      if (!data) return;
+
+      document.querySelectorAll('.anatomy-part-btn').forEach((b) => b.classList.remove('is-active'));
+      const activeRow = document.getElementById(`anat-btn-${part}`);
+      if (activeRow) activeRow.classList.add('is-active');
+
+      document.querySelectorAll('.anatomy-pills .pill-btn').forEach((p) => {
+        p.classList.toggle('is-active', p.dataset.part === part);
+      });
+
+      const k = document.getElementById('anat-kicker');
+      const t = document.getElementById('anat-title');
+      const d = document.getElementById('anat-desc');
+      const tip = document.getElementById('anat-tip');
+      if (k) k.textContent = data.kicker;
+      if (t) t.textContent = data.title;
+      if (d) d.innerHTML = data.desc;
+      if (tip) tip.textContent = data.tip;
+    }
+
+    function answerL1Quiz(qNum, choice, btn) {
+      const correctMap = { 1: 'reply', 2: 'cc', 3: 'bcc' };
+      const explainMap = {
+        1: {
+          ok: `Correct. Use Reply when only Ms. Johnson needs your résumé and the other applicants should not see your private files.`,
+          bad: `Watch out: Reply All would send Jordan’s résumé to all 11 other applicants. Choose Reply so only Ms. Johnson receives it.`
+        },
+        2: {
+          ok: `Correct. CC keeps the coordinator visibly in the loop while addressing the message to Ms. Johnson.`,
+          bad: `Not quite: BCC hides the coordinator from Ms. Johnson, which can cause confusion if the coordinator replies. Use CC for transparent teamwork.`
+        },
+        3: {
+          ok: `Correct. BCC protects every learner’s email privacy when messaging a group.`,
+          bad: `Careful: CC exposes all 15 email addresses to everyone. Use BCC to protect group privacy.`
+        }
+      };
+
+      const isCorrect = (choice === correctMap[qNum]);
+      appState.l1Quiz[`q${qNum}`] = isCorrect;
+
+      const wrap = document.getElementById(`l1-q${qNum}-opts`);
+      if (wrap) {
+        wrap.querySelectorAll('.choice-btn').forEach((b) => {
+          b.classList.remove('is-selected-correct', 'is-selected-wrong');
+        });
+      }
+      if (btn) {
+        btn.classList.add(isCorrect ? 'is-selected-correct' : 'is-selected-wrong');
+      }
+
+      const fb = document.getElementById(`l1-q${qNum}-fb`);
+      if (fb) {
+        fb.textContent = isCorrect ? explainMap[qNum].ok : explainMap[qNum].bad;
+        fb.style.color = isCorrect ? `var(--secondary)` : `var(--error)`;
+      }
+
+      updateProgressUI();
+      persistState();
+    }
+
+    // =========================================================================
+    // LESSON 2: WORKPLACE CORRESPONDENCE SANDBOX
+    // =========================================================================
+    const L2_SCENARIOS = {
+      interview: {
+        kicker: `Incoming Message · Practice Interview`,
+        promptHtml: `<strong>From:</strong> Ms. Johnson (ms.johnson@riverside-example.test)<br>“Hello Jordan, please join us for a practice video interview on <strong>Friday, November 13, 2026, from 2:00 to 2:30 PM Eastern</strong>. Please reply to confirm your attendance.”`,
+        subjectHint: `Include the topic and your fictional name (Jordan Lee).`,
+        subjectPlaceholder: `Example: Interview Confirmation — Jordan Lee`,
+        bodyHint: `Confirm Friday, November 13, 2026, at 2:00–2:30 PM Eastern and ask politely for the video meeting link or join instructions if needed.`,
+        templateSubject: `Interview Confirmation — Jordan Lee`,
+        templateBody: `Hello Ms. Johnson,\n\nThank you for inviting me to interview for the Customer Support Associate position. I am happy to confirm that I will attend the video interview on Friday, November 13, 2026, from 2:00 to 2:30 PM Eastern.\n\nCould you please confirm when the video meeting link will be sent?\n\nSincerely,\nJordan Lee`
+      },
+      reschedule: {
+        kicker: `Incoming Message · Schedule Change`,
+        promptHtml: `<strong>From:</strong> Ms. Johnson (ms.johnson@riverside-example.test)<br>“Hello Jordan, our Riverside orientation has moved from 10:00 AM to <strong>1:30 PM Eastern on Thursday, November 12, 2026</strong>. Please confirm if the new time works and let me know if you have any questions.”`,
+        subjectHint: `Reference the updated orientation schedule and your fictional name.`,
+        subjectPlaceholder: `Example: Re: Updated Orientation Time — Jordan Lee`,
+        bodyHint: `Confirm the new time (1:30 PM Eastern on Thursday, Nov 12) and ask one clear clarifying question (such as the room number, building entrance, or what to bring).`,
+        templateSubject: `Updated Orientation Confirmation — Jordan Lee`,
+        templateBody: `Dear Ms. Johnson,\n\nThank you for the schedule update. I can confirm that the new time of 1:30 PM Eastern on Thursday, November 12, 2026, works well for me.\n\nCould you please let me know which entrance or room number I should check in at when I arrive?\n\nBest regards,\nJordan Lee`
+      }
+    };
+
+    function switchL2Scenario(key) {
+      if (!L2_SCENARIOS[key]) return;
+      currentL2Scenario = key;
+      appState.l2Scenario = key;
+
+      const btnInt = document.getElementById('l2-scen-btn-interview');
+      const btnRes = document.getElementById('l2-scen-btn-reschedule');
+      if (btnInt) btnInt.classList.toggle('is-active', key === 'interview');
+      if (btnRes) btnRes.classList.toggle('is-active', key === 'reschedule');
+
+      const sc = L2_SCENARIOS[key];
+      const kicker = document.getElementById('l2-prompt-kicker');
+      const text = document.getElementById('l2-prompt-text');
+      const subHint = document.getElementById('l2-subject-hint');
+      const subInput = document.getElementById('l2-subject');
+      const bodyHint = document.getElementById('l2-body-hint');
+      const bodyInput = document.getElementById('l2-body');
+      const fb = document.getElementById('l2-feedback');
+
+      if (kicker) kicker.textContent = sc.kicker;
+      if (text) text.innerHTML = sc.promptHtml;
+      if (subHint) subHint.textContent = sc.subjectHint;
+      if (subInput) {
+        subInput.placeholder = sc.subjectPlaceholder;
+        subInput.value = '';
+      }
+      if (bodyHint) bodyHint.textContent = sc.bodyHint;
+      if (bodyInput) bodyInput.value = '';
+      if (fb) fb.innerHTML = '';
+    }
+
+    function loadL2Template() {
+      const sc = L2_SCENARIOS[currentL2Scenario];
+      const subInput = document.getElementById('l2-subject');
+      const bodyInput = document.getElementById('l2-body');
+      if (subInput) subInput.value = sc.templateSubject;
+      if (bodyInput) bodyInput.value = sc.templateBody;
+    }
+
+    function evaluateL2Draft() {
+      const subEl = document.getElementById('l2-subject');
+      const bodyEl = document.getElementById('l2-body');
+      const fbEl = document.getElementById('l2-feedback');
+      if (!subEl || !bodyEl || !fbEl) return;
+
+      const subj = subEl.value.trim();
+      const body = bodyEl.value.trim();
+      const lower = body.toLowerCase();
+
+      const checks = [];
+      checks.push({
+        pass: subj.length >= 8 && !/^hey$/i.test(subj),
+        good: `Meaningful subject line included.`,
+        fix: `Add a clear subject line that names the topic (for example, "Interview Confirmation — Jordan Lee").`
+      });
+      checks.push({
+        pass: /(hello|dear|good morning|good afternoon|hi ms|ms\. johnson)/i.test(body),
+        good: `Respectful greeting included.`,
+        fix: `Start with a polite greeting such as "Dear Ms. Johnson," or "Hello Ms. Johnson,".`
+      });
+
+      if (currentL2Scenario === 'interview') {
+        checks.push({
+          pass: /(nov|november|friday|13)/i.test(lower) && /(2:00|2:30|2 pm|eastern)/i.test(lower),
+          good: `Confirmed the specific interview day and time.`,
+          fix: `Mention the exact day and time (Friday, November 13, 2026, at 2:00–2:30 PM Eastern) so there is zero confusion.`
+        });
+      } else {
+        checks.push({
+          pass: /(1:30|thursday|nov|november|12)/i.test(lower),
+          good: `Confirmed the updated schedule time.`,
+          fix: `Confirm the new time explicitly (1:30 PM Eastern on Thursday, November 12).`
+        });
+      }
+
+      checks.push({
+        pass: /\?/.test(body) || /(could you|please let me know|where|link|room|entrance|location)/i.test(lower),
+        good: `Included a polite clarifying question or next step.`,
+        fix: `Ask one polite clarifying question (such as requesting the meeting link, entrance, or room number).`
+      });
+
+      checks.push({
+        pass: /(sincerely|best|thank you|regards|respectfully)/i.test(lower) && /(jordan)/i.test(lower),
+        good: `Professional closing and signature included.`,
+        fix: `Close politely with "Sincerely," or "Best regards," and Jordan Lee’s name.`
+      });
+
+      const allPassed = checks.every((c) => c.pass);
+      const passedCount = checks.filter((c) => c.pass).length;
+
+      if (allPassed) {
+        appState.l2Completed = true;
+        updateProgressUI();
+        persistState();
+      }
+
+      const cls = allPassed ? 'is-ok' : (passedCount >= 3 ? 'is-warn' : 'is-alert');
+      const heading = allPassed
+        ? `Strong workplace reply — Checkpoint 2 earned.`
+        : `Good start (${passedCount} of ${checks.length} parts ready). Review these adjustments:`;
+
+      const listHtml = checks.map((c) => `<li><strong>${c.pass ? 'Ready:' : 'Adjust:'}</strong> ${c.pass ? c.good : c.fix}</li>`).join('');
+      fbEl.innerHTML = `<div class="feedback-box ${cls}"><strong>${heading}</strong><ul class="feedback-list">${listHtml}</ul></div>`;
+    }
+
+    // =========================================================================
+    // LESSON 3: SIMULATED INBOX SAFETY INSPECTOR
+    // =========================================================================
+    const INBOX_MESSAGES = [
+      {
+        id: 0,
+        from: `ms.johnson@riverside-example.test`,
+        subject: `Orientation details & checklist`,
+        body: `Hello Jordan,\n\nThank you for confirming your interest. Attached is the Orientation Welcome Checklist for Thursday, November 12. Please reply with your sample résumé attached as a PDF.\n\nThank you,\nMs. Johnson, Training Supervisor`,
+        artifactHtml: `<div class="attachment-pill"><i data-lucide="paperclip" aria-hidden="true"></i> <span>Attachment: Riverside_Orientation_Checklist.pdf</span></div>`,
+        question: `Is this message safe, and what should Jordan do next?`,
+        options: [
+          { id: 'safe', label: `Safe training email — matches our expected supervisor, .test domain, and clean PDF filename.` },
+          { id: 'phish', label: `Phishing scam — delete immediately and never reply.` }
+        ],
+        correct: 'safe',
+        explainOk: `Correct. The sender matches Ms. Johnson’s training address, there is no false urgency or request for passwords/IDs, and the PDF filename is clear.`,
+        explainBad: `Look closer: this matches Ms. Johnson’s expected address, asks no sensitive details, and uses a clear PDF attachment—this one is safe.`
+      },
+      {
+        id: 1,
+        from: `account-verify@riverside-urgent.example.test`,
+        subject: `Password verification required immediately`,
+        body: `URGENT NOTICE:\n\nYour account will be deleted in 30 minutes unless you reply with your password and identification number, or sign in using the verification link below.`,
+        artifactHtml: `<div class="link-fake">Simulated Link: http://login-check.riverside-urgent.example.test/verify-now</div>`,
+        question: `What are the red flags, and what is the safest next action?`,
+        options: [
+          { id: 'click', label: `Click the link right away so the account is not deleted in 30 minutes.` },
+          { id: 'verify', label: `Do not click or reply. Open the official service independently or contact trusted support.` }
+        ],
+        correct: 'verify',
+        explainOk: `Correct! A 30-minute threat, a look-alike urgent domain, and asking for your password and ID number are classic phishing signs. Never click unexpected links.`,
+        explainBad: `Stop and check: legitimate employers never ask for your password or ID number by email or give a 30-minute deletion threat. Navigate to the official service independently.`
+      },
+      {
+        id: 2,
+        from: `hiring-fee@fastjob-offer.example.test`,
+        subject: `Guaranteed interview — $45 badge deposit`,
+        body: `Congratulations! You are pre-approved for a $38/hour remote job with zero interview. To lock in your spot, send a $45 refundable badge fee using a gift card code today.`,
+        artifactHtml: `<div class="attachment-pill"><i data-lucide="alert-triangle" aria-hidden="true"></i> <span>Unverified payment link inside message</span></div>`,
+        question: `How should a job seeker handle an email requesting a fee or gift card?`,
+        options: [
+          { id: 'scam', label: `Treat it as a job scam. Legitimate employers do not charge fees or ask for gift cards to get hired.` },
+          { id: 'pay', label: `Pay the deposit quickly since it says it is refundable.` }
+        ],
+        correct: 'scam',
+        explainOk: `Correct. Paying a fee or sending gift cards to secure an interview or job is a major scam warning sign.`,
+        explainBad: `Warning: paying a fee or buying gift cards to secure an interview is a classic job scam. Never pay money to apply or interview.`
+      }
+    ];
+
+    function selectInboxMsg(idx) {
+      currentInboxIdx = idx;
+      for (let i = 0; i < 3; i++) {
+        const tab = document.getElementById(`inbox-tab-${i}`);
+        if (tab) tab.classList.toggle('is-active', i === idx);
+      }
+      renderInboxPane();
+    }
+
+    function renderInboxPane() {
+      const pane = document.getElementById('inbox-reading-pane');
+      const msg = INBOX_MESSAGES[currentInboxIdx];
+      if (!pane || !msg) return;
+
+      const reviewed = appState.l3Reviews[msg.id];
+      const optsHtml = msg.options.map((o) => {
+        let cls = 'choice-btn';
+        if (reviewed !== null) {
+          if (o.id === msg.correct && reviewed === true) cls += ' is-selected-correct';
+          if (o.id !== msg.correct && reviewed === false) cls += ' is-selected-wrong';
+        }
+        return `<button type="button" class="${cls}" onclick="answerInboxMsg(${msg.id}, '${o.id}')"><span>${o.label}</span></button>`;
+      }).join('');
+
+      let fbHtml = '';
+      if (reviewed === true) {
+        fbHtml = `<div class="feedback-box is-ok"><strong>Safe choice:</strong> ${msg.explainOk}</div>`;
+      } else if (reviewed === false) {
+        fbHtml = `<div class="feedback-box is-alert"><strong>Let’s check again:</strong> ${msg.explainBad}</div>`;
+      }
+
+      pane.innerHTML = `
+        <div class="kicker">Message Inspection</div>
+        <p style="margin-bottom: var(--space-xs);"><strong>From:</strong> <span class="inline-code">${msg.from}</span></p>
+        <p style="margin-bottom: var(--space-md);"><strong>Subject:</strong> ${msg.subject}</p>
+        <div class="status-card" style="background: var(--surface-container-low); margin-bottom: var(--space-md);">
+          <p style="white-space: pre-line; margin-bottom: var(--space-sm);">${msg.body}</p>
+          ${msg.artifactHtml}
+        </div>
+        <p style="font-weight: 700; margin-bottom: var(--space-xs);">${msg.question}</p>
+        <div class="option-stack">${optsHtml}</div>
+        ${fbHtml}
+      `;
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+
+    function answerInboxMsg(msgId, choiceId) {
+      const msg = INBOX_MESSAGES[msgId];
+      if (!msg) return;
+      const isOk = (choiceId === msg.correct);
+      appState.l3Reviews[msgId] = isOk;
+
+      updateInboxBadges();
+      renderInboxPane();
+      updateProgressUI();
+      persistState();
+    }
+
+    function updateInboxBadges() {
+      for (let i = 0; i < 3; i++) {
+        const badge = document.getElementById(`inbox-badge-${i}`);
+        if (!badge) continue;
+        const val = appState.l3Reviews[i];
+        if (val === true) {
+          badge.textContent = `Reviewed safely`;
+          badge.removeAttribute('data-status');
+        } else if (val === false) {
+          badge.textContent = `Needs another look`;
+          badge.setAttribute('data-status', 'alert');
+        } else {
+          badge.textContent = `Not reviewed`;
+          badge.setAttribute('data-status', 'info');
+        }
+      }
+    }
+
+    // =========================================================================
+    // LESSON 4: RESPONSIBLE AI SIMULATOR & FACT-CHECKER
+    // =========================================================================
+    const AI_SCENARIOS = {
+      stockroom: {
+        sourceHtml: `“Jordan, please join the <strong>stockroom team</strong> on <strong>Tuesday at 9:00 AM</strong> for a <strong>30-minute orientation</strong>. Please bring a <strong>notebook</strong>.”`,
+        defaultPrompt: `Using only the supervisor note (stockroom team, Tuesday at 9:00 AM, 30-minute orientation, bring a notebook), write a polite two-sentence reply from Jordan confirming attendance.`,
+        rawDrafts: {
+          polite: `Hello,\n\nThank you for the update. I will meet the sales team on Thursday at 9:00 AM for the full morning orientation, and I will bring my notebook and a copy of my state ID.\n\nBest regards,\nJordan Lee`,
+          warm: `Hi there,\n\nI really appreciate the invitation! I am excited to join the sales team on Thursday at 9:00 AM for the full morning session, and I’ll be sure to bring my notebook and a copy of my state ID.\n\nWarmly,\nJordan Lee`
+        },
+        checkHint: `Spot the 4 mistakes the AI made: wrong team (sales → stockroom), wrong day (Thursday → Tuesday), wrong length (full morning → 30-minute orientation), and unsafe ID claim (remove "state ID").`
+      },
+      polish: {
+        sourceHtml: `“Hello Jordan, please join us for a <strong>practice video interview</strong> on <strong>Friday, November 13, from 2:00 to 2:30 PM Eastern</strong>. Please reply to confirm.”`,
+        defaultPrompt: `Rewrite my casual note ("thx for the invite see u at 230 in person") into a polite two-sentence professional email using only the facts in the invitation.`,
+        rawDrafts: {
+          polite: `Dear Hiring Team,\n\nThank you for inviting me. I will be at your office in person on Friday, November 13, at 2:30 PM Eastern, and I will bring my certification.\n\nSincerely,\nJordan Lee`,
+          warm: `Hello,\n\nThank you so much for the opportunity! I look forward to meeting at your office in person on Friday, November 13, at 2:30 PM Eastern, and I’ll bring my certification along.\n\nBest,\nJordan Lee`
+        },
+        checkHint: `Spot the 3 mistakes the AI made: wrong format ("at your office in person" → video interview), wrong start time ("at 2:30 PM" → 2:00 to 2:30 PM Eastern), and invented claim ("my certification").`
+      }
+    };
+
+    function updateAIScenario() {
+      const sel = document.getElementById('ai-scenario-select');
+      if (!sel) return;
+      const sc = AI_SCENARIOS[sel.value] || AI_SCENARIOS.stockroom;
+      const src = document.getElementById('ai-source-note');
+      const promptEl = document.getElementById('ai-prompt-input');
+      const outStage = document.getElementById('ai-output-stage');
+      const privFb = document.getElementById('ai-privacy-feedback');
+      const verFb = document.getElementById('ai-verify-feedback');
+
+      if (src) src.innerHTML = sc.sourceHtml;
+      if (promptEl) promptEl.value = sc.defaultPrompt;
+      if (outStage) outStage.style.display = 'none';
+      if (privFb) privFb.innerHTML = '';
+      if (verFb) verFb.innerHTML = '';
+    }
+
+    function detectSensitiveInfo(text) {
+      const patterns = [
+        { re: /\b\d{3}[-\s]?\d{2}[-\s]?\d{4}\b/, msg: `SSN-style number detected` },
+        { re: /\b(password|passcode|pin number|state id|driver.?s license|case number|probation|parole|felony|conviction)\b/i, msg: `Sensitive personal or justice-system term detected` },
+        { re: /\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b/, msg: `Real-looking phone number detected` }
+      ];
+      return patterns.filter((p) => p.re.test(text)).map((p) => p.msg);
+    }
+
+    function runAISimulator() {
+      const sel = document.getElementById('ai-scenario-select');
+      const toneSel = document.getElementById('ai-tone-select');
+      const promptEl = document.getElementById('ai-prompt-input');
+      const privFb = document.getElementById('ai-privacy-feedback');
+      const outStage = document.getElementById('ai-output-stage');
+      const rawDraftEl = document.getElementById('ai-raw-draft');
+      const revEl = document.getElementById('ai-revised-draft');
+      const hintEl = document.getElementById('ai-check-hint');
+      const verFb = document.getElementById('ai-verify-feedback');
+
+      if (!sel || !toneSel || !promptEl || !privFb || !outStage || !rawDraftEl || !revEl) return;
+
+      const promptText = promptEl.value.trim();
+      if (promptText.length < 15) {
+        privFb.innerHTML = `<div class="feedback-box is-warn"><strong>Add a little more detail:</strong> Write a clear CLEAR prompt telling the AI the situation, the facts to use, and the format you want.</div>`;
+        return;
+      }
+
+      const risks = detectSensitiveInfo(promptText);
+      if (risks.length > 0) {
+        privFb.innerHTML = `<div class="feedback-box is-alert"><strong>Privacy guardrail triggered (${risks.join('; ')}):</strong> Remove personal identifiers, passwords, phone numbers, or justice-system history before sending a prompt to any AI tool.</div>`;
+        outStage.style.display = 'none';
+        return;
+      }
+
+      privFb.innerHTML = `<div class="feedback-box is-ok"><strong>Privacy check passed:</strong> No sensitive personal data found in your prompt. Now inspect the AI draft below—do not trust it until you check every fact!</div>`;
+
+      const sc = AI_SCENARIOS[sel.value] || AI_SCENARIOS.stockroom;
+      const draft = sc.rawDrafts[toneSel.value] || sc.rawDrafts.polite;
+
+      rawDraftEl.textContent = draft;
+      revEl.value = draft;
+      if (hintEl) hintEl.textContent = sc.checkHint;
+      if (verFb) verFb.innerHTML = '';
+      outStage.style.display = 'block';
+    }
+
+    function verifyAIRevision() {
+      const sel = document.getElementById('ai-scenario-select');
+      const revEl = document.getElementById('ai-revised-draft');
+      const verFb = document.getElementById('ai-verify-feedback');
+      if (!sel || !revEl || !verFb) return;
+
+      const text = revEl.value.trim();
+      const lower = text.toLowerCase();
+      const issues = [];
+
+      if (sel.value === 'stockroom') {
+        if (/sales/i.test(lower)) issues.push(`Change "sales team" back to "stockroom team".`);
+        if (!/stockroom/i.test(lower)) issues.push(`Include the correct team: "stockroom team".`);
+        if (/thursday/i.test(lower)) issues.push(`Change "Thursday" back to "Tuesday".`);
+        if (!/tuesday/i.test(lower)) issues.push(`Confirm the correct day: "Tuesday".`);
+        if (/full morning/i.test(lower)) issues.push(`Remove "full morning"—the note says "30-minute orientation".`);
+        if (/(state id|copy of my id|\bid\b)/i.test(lower)) issues.push(`Remove the unsafe promise to bring a copy of your ID.`);
+        if (!/notebook/i.test(lower)) issues.push(`Mention bringing a notebook as requested.`);
+      } else {
+        if (/in person|at your office/i.test(lower)) issues.push(`Remove "at your office in person"—this is a video interview.`);
+        if (!/video/i.test(lower)) issues.push(`Specify that it is a "video interview".`);
+        if (!/2:00/i.test(lower)) issues.push(`Include the start time "2:00" (2:00 to 2:30 PM Eastern), not just 2:30.`);
+        if (/certification/i.test(lower)) issues.push(`Remove "certification"—the invitation never mentioned it.`);
+      }
+
+      if (issues.length === 0) {
+        appState.l4Completed = true;
+        updateProgressUI();
+        persistState();
+        verFb.innerHTML = `<div class="feedback-box is-ok"><strong>Verified and ready — Checkpoint 4 earned!</strong> Every fact in your final message matches the original source, and no unverified or private details were included.</div>`;
+      } else {
+        const listHtml = issues.map((i) => `<li>${i}</li>`).join('');
+        verFb.innerHTML = `<div class="feedback-box is-warn"><strong>A few facts still need fixing before sending:</strong><ul class="feedback-list">${listHtml}</ul></div>`;
+      }
+    }
+
+    // =========================================================================
+    // CAPSTONE: TASK CARD DP-03 MOCK CLIENT
+    // =========================================================================
+    const FILE_PREVIEWS = {
+      'Jordan_Lee_Resume.pdf': {
+        status: 'ok',
+        msg: `Previewing Jordan_Lee_Resume.pdf: Clean 1-page PDF showing Customer Support Associate summary, Volunteer Front Desk & Retail Stock experience, and skills. Safe and ready to attach.`
+      },
+      'Resume_ROUGH_NOTES_v1.docx': {
+        status: 'warn',
+        msg: `Previewing Resume_ROUGH_NOTES_v1.docx: Contains unfinished scratchpad notes and informal formatting. Employers expect a clean PDF version instead.`
+      },
+      'State_ID_and_SSN_Scan.pdf': {
+        status: 'alert',
+        msg: `Privacy alert! Previewing State_ID_and_SSN_Scan.pdf: Never attach a state ID or Social Security document to a routine orientation email.`
+      }
+    };
+
+    function selectDP03File(filename) {
+      appState.dp03SelectedFile = filename;
+      updateDP03FileUI();
+      persistState();
+    }
+
+    function updateDP03FileUI() {
+      const fn = appState.dp03SelectedFile;
+      const map = {
+        'Jordan_Lee_Resume.pdf': 'file-opt-pdf',
+        'Resume_ROUGH_NOTES_v1.docx': 'file-opt-draft',
+        'State_ID_and_SSN_Scan.pdf': 'file-opt-private'
+      };
+      Object.keys(map).forEach((k) => {
+        const el = document.getElementById(map[k]);
+        if (el) el.classList.toggle('is-selected', fn === k);
+      });
+
+      const prevEl = document.getElementById('dp03-file-preview');
+      if (!prevEl) return;
+      if (!fn || !FILE_PREVIEWS[fn]) {
+        prevEl.innerHTML = '';
+        return;
+      }
+      const p = FILE_PREVIEWS[fn];
+      const cls = p.status === 'ok' ? 'is-ok' : (p.status === 'warn' ? 'is-warn' : 'is-alert');
+      prevEl.innerHTML = `<div class="feedback-box ${cls}" style="margin-top: var(--space-xs);">${p.msg}</div>`;
+    }
+
+    function fillDP03Sample() {
+      const toEl = document.getElementById('dp03-to');
+      const subEl = document.getElementById('dp03-subject');
+      const bodyEl = document.getElementById('dp03-body');
+      const privEl = document.getElementById('dp03-privacy-q');
+
+      if (toEl) toEl.value = `ms.johnson@riverside-example.test`;
+      if (subEl) subEl.value = `Orientation Confirmation — Jordan Lee`;
+      if (bodyEl) {
+        bodyEl.value = `Dear Ms. Johnson,\n\nThank you for the orientation details. I am writing to confirm that I will attend orientation on Thursday, November 12, 2026, at 10:00 AM Eastern.\n\nCould you please share the meeting location or video link when convenient? I have attached my sample résumé (Jordan_Lee_Resume.pdf) as requested.\n\nSincerely,\nJordan Lee`;
+      }
+      if (privEl) privEl.value = `risk`;
+      selectDP03File('Jordan_Lee_Resume.pdf');
+    }
+
+    function submitDP03() {
+      const toEl = document.getElementById('dp03-to');
+      const subEl = document.getElementById('dp03-subject');
+      const bodyEl = document.getElementById('dp03-body');
+      const privEl = document.getElementById('dp03-privacy-q');
+      const fbEl = document.getElementById('dp03-feedback');
+      if (!toEl || !subEl || !bodyEl || !privEl || !fbEl) return;
+
+      const toVal = toEl.value;
+      const subj = subEl.value.trim();
+      const body = bodyEl.value.trim();
+      const lower = body.toLowerCase();
+      const file = appState.dp03SelectedFile;
+      const privAns = privEl.value;
+
+      const risks = detectSensitiveInfo(body);
+      const criteria = [
+        {
+          pass: toVal === 'ms.johnson@riverside-example.test',
+          ok: `Correct recipient selected (Ms. Johnson).`,
+          fix: `Select ms.johnson@riverside-example.test in the To field—never reply to all applicants or an urgent verification scam.`
+        },
+        {
+          pass: /orientation confirmation/i.test(subj) && /jordan lee/i.test(subj),
+          ok: `Meaningful subject matches DP-03 format (Orientation Confirmation — Jordan Lee).`,
+          fix: `Use the requested subject: Orientation Confirmation — Jordan Lee.`
+        },
+        {
+          pass: /(dear|hello|hi)/i.test(lower) && /(november 12|nov 12|thursday)/i.test(lower) && /(10:00|10 am|eastern)/i.test(lower),
+          ok: `Polite greeting and exact date/time confirmed (Thursday, Nov 12, 2026 at 10:00 AM Eastern).`,
+          fix: `Include a greeting and confirm the exact date and time: Thursday, November 12, 2026, at 10:00 AM Eastern.`
+        },
+        {
+          pass: /(location|address|where|room|link)/i.test(lower) && /\?/.test(body),
+          ok: `Politely requested the missing meeting location.`,
+          fix: `Ask politely for the missing meeting location (address, room, or video link).`
+        },
+        {
+          pass: file === 'Jordan_Lee_Resume.pdf',
+          ok: `Attached the clean final PDF résumé (Jordan_Lee_Resume.pdf).`,
+          fix: `Select Jordan_Lee_Resume.pdf from the attachment picker.`
+        },
+        {
+          pass: privAns === 'risk' && risks.length === 0,
+          ok: `Confidentiality verified—no sensitive personal IDs included.`,
+          fix: `Confirm why sensitive IDs stay out of routine email, and make sure no SSN/ID numbers appear in your draft.`
+        }
+      ];
+
+      const allPass = criteria.every((c) => c.pass);
+      const passCount = criteria.filter((c) => c.pass).length;
+
+      if (allPass) {
+        appState.dp03Completed = true;
+        updateProgressUI();
+        persistState();
+      }
+
+      const cls = allPass ? 'is-ok' : (passCount >= 4 ? 'is-warn' : 'is-alert');
+      const title = allPass
+        ? `Practice email sent safely! Task DP-03 demonstration complete.`
+        : `Almost ready (${passCount} of ${criteria.length} DP-03 criteria met). Review before sending:`;
+
+      const listHtml = criteria.map((c) => `<li><strong>${c.pass ? 'Met:' : 'Needed:'}</strong> ${c.pass ? c.ok : c.fix}</li>`).join('');
+      fbEl.innerHTML = `<div class="feedback-box ${cls}"><strong>${title}</strong><ul class="feedback-list">${listHtml}</ul></div>`;
+    }
+
+    // =========================================================================
+    // REFLECTION & DOWNLOADABLE PRACTICE SUMMARY
+    // =========================================================================
+    function saveReflection() {
+      const l = document.getElementById('reflect-learned');
+      const p = document.getElementById('reflect-practice');
+      const q = document.getElementById('reflect-questions');
+      appState.reflection = {
+        learned: l ? l.value : '',
+        practice: p ? p.value : '',
+        questions: q ? q.value : ''
+      };
+      persistState();
+    }
+
+    function downloadPracticeSummary() {
+      const fb = document.getElementById('export-feedback');
+      const icanLabels = [
+        'Use a meaningful subject line',
+        'Identify correct recipients (To/CC/BCC/Reply)',
+        'Write a clear, professional workplace message',
+        'Attach the right file and spot phishing risks',
+        'Protect privacy and fact-check AI drafts'
+      ];
+      const icanLines = icanLabels.map((lbl, idx) => {
+        const checked = appState.ican[`ican-${idx + 1}`] ? '[x]' : '[ ]';
+        return `${checked} I can: ${lbl}`;
+      }).join('\n');
+
+      const cp1 = (appState.l1Quiz.q1 && appState.l1Quiz.q2 && appState.l1Quiz.q3) ? 'Completed' : 'In progress';
+      const cp2 = appState.l2Completed ? 'Completed' : 'In progress';
+      const cp3 = (appState.l3Reviews[0] && appState.l3Reviews[1] && appState.l3Reviews[2]) ? 'Completed' : 'In progress';
+      const cp4 = appState.l4Completed ? 'Completed' : 'In progress';
+      const cp5 = appState.dp03Completed ? 'Completed' : 'In progress';
+
+      const content = [
+        `DIGITAL PATHWAYS TO EMPLOYMENT — MODULE 3 PRACTICE SUMMARY`,
+        `Module: Email and Professional Communication (Home4Good Inc.)`,
+        `Note: Fictional practice record for learner portfolio / instructor review.`,
+        ``,
+        `HANDS-ON CHECKPOINTS:`,
+        `- Lesson 1 (Email Anatomy & Recipients): ${cp1}`,
+        `- Lesson 2 (Workplace & Interview Replies): ${cp2}`,
+        `- Lesson 3 (Attachments & Inbox Safety): ${cp3}`,
+        `- Lesson 4 (Responsible AI Assistant): ${cp4}`,
+        `- Task DP-03 (End-of-Module Skills Demo): ${cp5}`,
+        ``,
+        `STUDENT "I CAN" SELF-CHECK:`,
+        icanLines,
+        ``,
+        `REFLECTION:`,
+        `Something I learned: ${appState.reflection.learned || '(not entered yet)'}`,
+        `One skill to practice again: ${appState.reflection.practice || '(not entered yet)'}`,
+        `Questions for instructor: ${appState.reflection.questions || '(none entered)'}`
+      ].join('\n');
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: content,
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: 'Module3_Email_Practice_Summary.txt'
+        });
+        if (fb) fb.textContent = `Downloaded Module3_Email_Practice_Summary.txt.`;
+      } else {
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Module3_Email_Practice_Summary.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        if (fb) fb.textContent = `Downloaded Module3_Email_Practice_Summary.txt.`;
+      }
+    }
+
+    // =========================================================================
+    // INITIALIZATION
+    // =========================================================================
+    function restoreUIFromState() {
+      applyLargeTextUI();
+      updateICanUI();
+      updateInboxBadges();
+      renderInboxPane();
+      updateDP03FileUI();
+      updateProgressUI();
+
+      const rl = document.getElementById('reflect-learned');
+      const rp = document.getElementById('reflect-practice');
+      const rq = document.getElementById('reflect-questions');
+      if (rl) rl.value = appState.reflection.learned || '';
+      if (rp) rp.value = appState.reflection.practice || '';
+      if (rq) rq.value = appState.reflection.questions || '';
+    }
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === 'object') {
+            appState = Object.assign({}, JSON.parse(JSON.stringify(DEFAULT_STATE)), saved);
+            if (!appState.ican) appState.ican = Object.assign({}, DEFAULT_STATE.ican);
+            if (!appState.l1Quiz) appState.l1Quiz = Object.assign({}, DEFAULT_STATE.l1Quiz);
+            if (!appState.l3Reviews) appState.l3Reviews = Object.assign({}, DEFAULT_STATE.l3Reviews);
+            if (!appState.reflection) appState.reflection = Object.assign({}, DEFAULT_STATE.reflection);
+          }
+        } catch (err) {
+          // Use defaults
+        }
+      }
+
+      restoreUIFromState();
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>

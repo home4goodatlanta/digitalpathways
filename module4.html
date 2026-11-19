@@ -1,0 +1,3062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Module 4: Creating Documents and Managing Files — Digital Pathways to Employment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+      --surface-paper: #fcfdfd;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --primary-hover: #0b636e;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --tertiary-soft: #e6f3ec;
+      --error: #b3261e;
+      --error-soft: #fbeae9;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --warning-soft: #fdf4e3;
+      --warning-ink: #7a4800;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Focus */
+      --focus: #0f7c8a;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-border-strong: 2px solid var(--outline);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+      --focus-ring: 0 0 0 3px rgb(15 124 138 / 0.28);
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.125rem, 1.4rem + 2.4vw, 3.25rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.25vw, 2.05rem);
+      --subhead-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.35rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.22vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+      --body-line-height: 1.62;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Comfort text-size modes */
+    html[data-text-scale="large"] {
+      --body-size: 1.25rem;
+      --subhead-size: 1.45rem;
+      --headline-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.25rem);
+    }
+    html[data-text-scale="xlarge"] {
+      --body-size: 1.4rem;
+      --subhead-size: 1.6rem;
+      --headline-size: clamp(1.85rem, 1.4rem + 1.5vw, 2.45rem);
+    }
+    html[data-contrast="high"] {
+      --card-border: 2px solid var(--on-surface);
+      --outline-variant: #7b9198;
+      --on-surface-variant: #1b2b33;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: var(--body-line-height);
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    .page-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-xl);
+      padding: var(--space-lg);
+      max-width: 1120px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: var(--space-sm);
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .skip-link:focus { left: var(--space-md); }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      line-height: 1.08;
+      max-width: 24ch;
+    }
+    .section-heading {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .subhead {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .lede {
+      font-size: 1.12em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 64ch;
+      margin: var(--space-sm) 0 0 0;
+    }
+    p {
+      margin: 0;
+      max-width: 65ch;
+    }
+    .kicker {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      display: inline-block;
+      margin-bottom: var(--space-xs);
+    }
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background-color: var(--surface-container-low);
+      padding: 0.1em 0.4em;
+      border-radius: var(--space-xs);
+      border: 1px solid var(--outline-variant);
+      word-break: break-word;
+    }
+
+    /* Header & Comfort Bar */
+    .hero-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .hero-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .comfort-bar {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .comfort-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .comfort-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      margin-right: var(--space-xs);
+    }
+
+    /* Progress strip */
+    .progress-strip {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .progress-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline-variant);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--tertiary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-long) var(--ease-out);
+    }
+    .jump-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .jump-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background-color: var(--background);
+      color: var(--primary);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .jump-link:hover {
+      background-color: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+    .jump-link.is-done {
+      background-color: var(--tertiary-soft);
+      border-color: var(--tertiary);
+      color: var(--secondary);
+    }
+
+    /* Chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background-color: var(--tertiary-soft);
+      color: var(--secondary);
+      line-height: 1.4;
+    }
+    .chip[data-status="info"] {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="alert"] {
+      background-color: var(--error-soft);
+      color: var(--error);
+    }
+    .chip[data-status="warn"] {
+      background-color: var(--warning-soft);
+      color: var(--warning-ink);
+    }
+
+    /* Status cards */
+    .status-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-status="warn"] { border-left-color: var(--warning); }
+
+    .callout {
+      background-color: var(--primary-container);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-primary-container);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .callout--warn {
+      background-color: var(--warning-soft);
+      border-left-color: var(--warning);
+      color: var(--warning-ink);
+    }
+    .callout--ok {
+      background-color: var(--tertiary-soft);
+      border-left-color: var(--tertiary);
+      color: var(--secondary);
+    }
+
+    /* Section wrapper */
+    .lesson-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .lesson-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .lesson-header-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .arc-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+    .arc-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      padding: 2px 10px;
+      border-radius: var(--rounded-full);
+    }
+
+    /* Surface Band */
+    .wash-band {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      border: var(--card-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    /* Adaptive Grids & Container Queries */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .lab-wrapper {
+      container-type: inline-size;
+    }
+    .lab-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    @container (min-width: 780px) {
+      .lab-split {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+      }
+      .lab-split--wide-left {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.95fr);
+      }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.25;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn--primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn--primary:hover:not(:disabled) { background-color: var(--primary-hover); }
+    .btn--secondary {
+      background-color: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn--secondary:hover:not(:disabled) { background-color: var(--surface-container-low); }
+    .btn--quiet {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+    .btn--quiet:hover:not(:disabled) {
+      background-color: var(--surface-container);
+      border-color: var(--outline);
+    }
+    .btn--sm {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--label-size);
+    }
+    .btn--active {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .btn--danger {
+      background-color: var(--error-soft);
+      color: var(--error);
+      border-color: var(--error);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    /* Form Inputs */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .input, .textarea, .select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--on-surface);
+      background-color: var(--background);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      padding: 0.65rem 0.85rem;
+      min-height: 44px;
+      transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .select { padding-right: 2.25rem; }
+    .textarea {
+      min-height: 92px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Tables */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      background-color: var(--background);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background-color: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* Interactive Lesson 4.1: Document Paper Preview */
+    .doc-controls-panel {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .control-fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .control-legend {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+      margin-bottom: var(--space-xs);
+    }
+    .segmented-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .seg-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .seg-btn[aria-pressed="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Vitals Reference-Range Meter */
+    .meter-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .meter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .meter-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.5rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+    }
+    .meter-svg {
+      width: 100%;
+      height: 54px;
+      display: block;
+    }
+    .range-band {
+      fill: var(--tertiary);
+      fill-opacity: 0.16;
+    }
+
+    /* Simulated Word Processor Page */
+    .paper-frame {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+    }
+    .paper-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .paper-sheet {
+      background-color: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--space-xs);
+      box-shadow: var(--card-lift);
+      color: var(--on-surface);
+      transition: padding var(--dur-short) var(--ease-out);
+      font-family: var(--font-body);
+    }
+    .paper-sheet.margins-tight { padding: 0.9rem; }
+    .paper-sheet.margins-standard { padding: 1.75rem 1.85rem; }
+    .paper-sheet.spacing-tight { line-height: 1.15; }
+    .paper-sheet.spacing-readable { line-height: 1.55; }
+    .paper-sheet.align-center { text-align: center; }
+    .paper-sheet.align-left { text-align: left; }
+
+    .sim-doc-name {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.35rem;
+      margin-bottom: 0.2rem;
+    }
+    .sim-doc-contact {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      margin-bottom: 0.85rem;
+    }
+    .sim-heading {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: 2px;
+      margin: 0.9rem 0 0.45rem 0;
+    }
+    .sim-heading--flat {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.95rem;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--on-surface);
+      border-bottom: none;
+      margin: 0.5rem 0 0.15rem 0;
+    }
+    .sim-list {
+      margin: 0.35rem 0 0.5rem 0;
+      padding-left: 1.25rem;
+    }
+    .sim-list li { margin-bottom: 0.25rem; }
+
+    /* Interactive Lesson 4.2: Resume Builder */
+    .skill-check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+    .skill-toggle {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: var(--font-label);
+      text-align: left;
+      color: var(--on-surface);
+    }
+    .skill-toggle[aria-pressed="true"] {
+      background-color: var(--tertiary-soft);
+      border-color: var(--tertiary);
+      color: var(--secondary);
+    }
+
+    /* Interactive Lesson 4.3: File Explorer Sandbox */
+    .explorer-shell {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      overflow: hidden;
+      box-shadow: var(--card-lift);
+    }
+    .explorer-topbar {
+      background-color: var(--surface-container-low);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .explorer-body {
+      container-type: inline-size;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .explorer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    @container (min-width: 680px) {
+      .explorer-grid {
+        grid-template-columns: 240px minmax(0, 1fr);
+      }
+    }
+    .folder-tree {
+      background-color: var(--surface-paper);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    @container (min-width: 680px) {
+      .folder-tree {
+        border-bottom: none;
+        border-right: 1px solid var(--outline-variant);
+      }
+    }
+    .folder-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .folder-btn:hover { background-color: var(--surface-container-low); }
+    .folder-btn[aria-current="true"] {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+    .folder-btn--nested { padding-left: 1.75rem; }
+    .folder-btn--deep { padding-left: 2.5rem; }
+
+    .file-pane {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .file-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+    }
+    .file-row.is-selected {
+      border-color: var(--primary);
+      background-color: var(--surface-container-low);
+    }
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .file-name {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--on-surface);
+    }
+    .file-meta {
+      font-size: 0.82rem;
+      color: var(--on-surface-variant);
+    }
+    .action-panel {
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* Interactive Lesson 4.4: PDF Inspector & Scenario Quiz */
+    .scenario-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .glitch-highlight {
+      background-color: var(--error-soft);
+      border: 1px dashed var(--error);
+      border-radius: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      color: var(--error);
+      font-size: 0.9rem;
+    }
+
+    /* Interactive AI Audit */
+    .ai-segment {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background-color: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .ai-segment:hover {
+      background-color: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+    .ai-segment.is-flagged {
+      background-color: var(--error-soft);
+      border-color: var(--error);
+      color: var(--error);
+      text-decoration: line-through;
+    }
+    .ai-segment.is-verified {
+      background-color: var(--tertiary-soft);
+      border-color: var(--tertiary);
+      color: var(--secondary);
+    }
+
+    /* Checklist rows */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background-color: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .checklist-item:hover { background-color: var(--surface-container-low); }
+    .checklist-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      accent-color: var(--tertiary);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Details/Summary Reference Drawer */
+    details.ref-drawer {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    details.ref-drawer summary {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+    }
+    details.ref-drawer summary::-webkit-details-marker { display: none; }
+    .drawer-content {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    /* Live feedback region */
+    .feedback-box {
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      font-size: 0.95rem;
+      display: none;
+    }
+    .feedback-box.is-visible { display: block; }
+    .feedback-box--ok {
+      background-color: var(--tertiary-soft);
+      border-left: var(--status-bar-width) solid var(--tertiary);
+      color: var(--secondary);
+    }
+    .feedback-box--warn {
+      background-color: var(--warning-soft);
+      border-left: var(--status-bar-width) solid var(--warning);
+      color: var(--warning-ink);
+    }
+    .feedback-box--err {
+      background-color: var(--error-soft);
+      border-left: var(--status-bar-width) solid var(--error);
+      color: var(--error);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--outline-variant);
+      padding: var(--space-xl) 0 var(--space-2xl) 0;
+      margin-top: var(--space-xl);
+      color: var(--on-surface-variant);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-lg);
+      }
+      .comfort-bar, .wash-band, .doc-controls-panel, .status-card {
+        padding: var(--space-md);
+      }
+      .btn { width: 100%; }
+      .btn-row .btn--sm, .comfort-group .btn--sm, .segmented-row .seg-btn { width: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to lesson content</a>
+
+  <div class="page-shell">
+    <main id="main-content" class="page-grid">
+
+      <!-- HERO & COMFORT CONTROLS -->
+      <header class="hero-block">
+        <div class="hero-meta-row">
+          <span class="kicker">Home4Good Inc. &bull; Digital Pathways to Employment</span>
+          <span class="chip" data-status="info">
+            <i data-lucide="shield-check" width="16" height="16" aria-hidden="true"></i>
+            Privacy-Safe Training Sandbox
+          </span>
+        </div>
+
+        <h1 class="title">Module 4: Creating Documents and Managing Files</h1>
+        <p class="lede">
+          Build a clean one-page workplace résumé, organize editable and shareable files in folders, and use AI tools responsibly—practicing step by step in a safe, fictional workspace.
+        </p>
+
+        <!-- Accessibility & Display Comfort Controls -->
+        <div class="comfort-bar" role="region" aria-label="Reading and accessibility adjustments">
+          <div class="comfort-group">
+            <span class="comfort-label">Text size:</span>
+            <button type="button" class="btn btn--quiet btn--sm" id="scale-standard" onclick="setTextScale('standard')" aria-pressed="true">Standard</button>
+            <button type="button" class="btn btn--quiet btn--sm" id="scale-large" onclick="setTextScale('large')" aria-pressed="false">Large</button>
+            <button type="button" class="btn btn--quiet btn--sm" id="scale-xlarge" onclick="setTextScale('xlarge')" aria-pressed="false">Extra Large</button>
+          </div>
+          <div class="comfort-group">
+            <button type="button" class="btn btn--quiet btn--sm" id="toggle-contrast" onclick="toggleContrastMode()" aria-pressed="false">
+              <i data-lucide="contrast" width="16" height="16" aria-hidden="true"></i>
+              Stronger Borders
+            </button>
+          </div>
+        </div>
+
+        <!-- Persistent Progress & Quick Navigation -->
+        <div class="progress-strip" role="region" aria-label="Module 4 progress">
+          <div class="progress-top">
+            <div>
+              <strong id="progress-headline">Your Module 4 Progress: 0 of 10 milestones completed</strong>
+              <p class="field-hint" id="progress-subtext">Work at your own pace. Your progress saves automatically in this workspace.</p>
+            </div>
+            <span class="chip" id="progress-badge" data-status="info">Getting Started</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-aria">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <nav class="jump-nav" aria-label="Jump to module sections">
+            <a href="#section-4-1" class="jump-link" id="nav-lab1">4.1 Formatting</a>
+            <a href="#section-4-2" class="jump-link" id="nav-lab2">4.2 Résumé</a>
+            <a href="#section-4-3" class="jump-link" id="nav-lab3">4.3 File Manager</a>
+            <a href="#section-4-4" class="jump-link" id="nav-lab4">4.4 .docx &amp; .pdf</a>
+            <a href="#section-ai" class="jump-link" id="nav-lab5">Responsible AI</a>
+            <a href="#section-eval" class="jump-link" id="nav-eval">Self-Evaluation</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- GROUND RULES & FICTIONAL SANDBOX -->
+      <section aria-labelledby="ground-rules-heading">
+        <div class="card-grid">
+          <div class="status-card" data-status="info">
+            <span class="kicker">How This Module Works</span>
+            <h2 class="subhead" id="ground-rules-heading">Practice First, One Step at a Time</h2>
+            <p>
+              Every lesson follows four supportive steps: <strong>Watch me</strong> (see a clear example), <strong>Let’s do it</strong> (follow guided controls), <strong>You try</strong> (adjust the workspace yourself), and <strong>Show what you can do</strong> (check your finished work).
+            </p>
+            <p class="field-hint">
+              Suggested pacing: four 90-minute sessions (6 hours total) or self-paced without a fixed deadline.
+            </p>
+          </div>
+
+          <div class="status-card" data-status="ok">
+            <span class="kicker">Your Privacy Comes First</span>
+            <h2 class="subhead">Fictional Sandbox Identity Only</h2>
+            <p>
+              Never type your real name, street address, phone number, SSN, state ID, or justice-system history into practice exercises. Today we are helping fictional applicant <strong>Jordan Lee</strong> apply to <strong>Riverside Community Services</strong>.
+            </p>
+            <p class="field-hint">
+              The <span class="mono">.test</span> email domain is reserved for training—no real emails are ever sent.
+            </p>
+          </div>
+        </div>
+
+        <details class="ref-drawer" style="margin-top: var(--space-lg);">
+          <summary>
+            <span>Open Quick Reference: Jordan Lee’s Candidate Card &amp; Riverside Job Listing</span>
+            <i data-lucide="chevron-down" width="20" height="20" aria-hidden="true"></i>
+          </summary>
+          <div class="drawer-content card-grid">
+            <div>
+              <h3 class="subhead" style="margin-bottom: var(--space-sm);">Fictional Candidate Card: Jordan Lee</h3>
+              <div class="table-wrap">
+                <table>
+                  <tbody>
+                    <tr><th>Name</th><td>Jordan Lee</td></tr>
+                    <tr><th>Email</th><td><span class="mono">jordan.lee@riverside-example.test</span></td></tr>
+                    <tr><th>City</th><td>Atlanta, Georgia</td></tr>
+                    <tr><th>Target Role</th><td>Customer Support Associate</td></tr>
+                    <tr><th>Experience 1</th><td>Volunteer front desk, community event registration (2025–2026)</td></tr>
+                    <tr><th>Experience 2</th><td>Retail stock assistant, fictional workplace (2024–2025)</td></tr>
+                    <tr><th>Skills</th><td>Active listening; organized records; scheduling; written communication</td></tr>
+                    <tr><th>Education</th><td>High school diploma (fictional for training)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h3 class="subhead" style="margin-bottom: var(--space-sm);">Practice Job Listing: Riverside Community Services</h3>
+              <div class="status-card" data-status="info">
+                <p><strong>Role:</strong> Customer Support Associate &bull; Atlanta, GA &bull; Full-time &bull; $19–$22/hour (fictional)</p>
+                <p><strong>Duties:</strong> Answer customer questions, update basic records, organize service requests, and schedule follow-up calls.</p>
+                <p><strong>Required:</strong> Clear written communication, ability to use email and standard computer applications, ability to maintain accurate records.</p>
+                <p><strong>Preferred:</strong> Experience with customer support software.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===============================================================
+           LESSON 4.1: WORD PROCESSING & DOCUMENT FORMATTING
+      ================================================================ -->
+      <section id="section-4-1" class="lesson-section" aria-labelledby="heading-4-1">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Lesson 4.1 &bull; Document Foundations</span>
+            <span class="chip" id="status-lab1" data-status="info">Not yet completed</span>
+          </div>
+          <h2 class="section-heading" id="heading-4-1">Format Documents So Readers Find Your Strengths Fast</h2>
+          <p class="lede">
+            A clear layout respects the reader’s time. When headings, spacing, margins, and bullet lists work together, an employer can spot your skills in seconds—and Applicant Tracking Systems (ATS) can read your file accurately.
+          </p>
+          <div class="arc-pill-row">
+            <span class="arc-badge">1. Watch me: Compare layout habits</span>
+            <span class="arc-badge">2. Let’s do it &amp; You try: Formatting Studio</span>
+          </div>
+        </div>
+
+        <!-- Watch me: Key Formatting Rules -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Formatting Element</th>
+                <th>Hard to Read</th>
+                <th>Clear &amp; Employer-Ready</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Headings &amp; Styles</strong></td>
+                <td>Same plain font size everywhere; sections blend together.</td>
+                <td>Bold, slightly larger section headings (Summary, Skills, Experience, Education).</td>
+              </tr>
+              <tr>
+                <td><strong>Line Spacing</strong></td>
+                <td>Cramped lines (1.0) that make paragraphs feel like a wall of text.</td>
+                <td>Comfortable breathing room (1.15 to 1.5 line spacing) with space between sections.</td>
+              </tr>
+              <tr>
+                <td><strong>Margins &amp; Alignment</strong></td>
+                <td>Very narrow margins or centered body paragraphs with uneven edges.</td>
+                <td>Balanced 0.75"–1.0" margins and consistent left alignment for easy scanning.</td>
+              </tr>
+              <tr>
+                <td><strong>Bullet Lists</strong></td>
+                <td>Long run-on sentences packed with commas.</td>
+                <td>Short bullet points starting with action words—one clear idea per line.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interactive Lab 4.1 -->
+        <div class="wash-band lab-wrapper">
+          <div>
+            <span class="kicker">Hands-On Lab 4.1</span>
+            <h3 class="subhead">Document Formatting Studio</h3>
+            <p class="field-hint">
+              Jordan Lee’s draft profile below is currently unformatted. Use the four formatting controls to bring the document into the green <strong>Employer-Ready Target Range</strong>.
+            </p>
+          </div>
+
+          <div class="lab-split">
+            <!-- Controls -->
+            <div class="doc-controls-panel">
+              <!-- Target Range Meter -->
+              <div class="meter-card">
+                <div class="meter-header">
+                  <div>
+                    <span class="kicker" style="margin-bottom: 0;">Readability &amp; ATS Readiness</span>
+                    <div class="meter-value" id="fmt-score-text">25%</div>
+                  </div>
+                  <span class="chip" id="fmt-range-chip" data-status="warn">Needs Formatting</span>
+                </div>
+                <svg class="meter-svg" viewBox="0 0 300 44" role="img" aria-label="Readability meter showing target range 80 to 100 percent">
+                  <rect x="0" y="14" width="300" height="16" rx="8" fill="var(--outline-variant)" fill-opacity="0.45"></rect>
+                  <rect x="240" y="8" width="60" height="28" rx="6" class="range-band"></rect>
+                  <line x1="240" y1="6" x2="240" y2="38" stroke="var(--tertiary)" stroke-width="1.5" stroke-dasharray="3 2"></line>
+                  <text x="242" y="11" font-family="Figtree, sans-serif" font-size="9" font-weight="700" fill="var(--secondary)">Target 80–100%</text>
+                  <rect id="fmt-meter-bar" x="0" y="14" width="75" height="16" rx="8" fill="var(--warning)"></rect>
+                </svg>
+              </div>
+
+              <fieldset class="control-fieldset">
+                <legend class="control-legend">1. Text Styles &amp; Section Headings</legend>
+                <div class="segmented-row">
+                  <button type="button" class="seg-btn" id="fmt-headings-plain" onclick="setFormatOption('headings', 'plain')" aria-pressed="true">Plain Text Only</button>
+                  <button type="button" class="seg-btn" id="fmt-headings-styled" onclick="setFormatOption('headings', 'styled')" aria-pressed="false">Clear Section Headings</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="control-fieldset">
+                <legend class="control-legend">2. Line Spacing</legend>
+                <div class="segmented-row">
+                  <button type="button" class="seg-btn" id="fmt-spacing-tight" onclick="setFormatOption('spacing', 'tight')" aria-pressed="true">Cramped (1.0)</button>
+                  <button type="button" class="seg-btn" id="fmt-spacing-readable" onclick="setFormatOption('spacing', 'readable')" aria-pressed="false">Readable (1.4)</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="control-fieldset">
+                <legend class="control-legend">3. Page Margins &amp; Alignment</legend>
+                <div class="segmented-row">
+                  <button type="button" class="seg-btn" id="fmt-layout-messy" onclick="setFormatOption('layout', 'messy')" aria-pressed="true">Narrow &amp; Centered</button>
+                  <button type="button" class="seg-btn" id="fmt-layout-clean" onclick="setFormatOption('layout', 'clean')" aria-pressed="false">1" Margins &amp; Left-Aligned</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="control-fieldset">
+                <legend class="control-legend">4. Lists &amp; Bullet Points</legend>
+                <div class="segmented-row">
+                  <button type="button" class="seg-btn" id="fmt-lists-para" onclick="setFormatOption('lists', 'para')" aria-pressed="true">Run-on Paragraph</button>
+                  <button type="button" class="seg-btn" id="fmt-lists-bullets" onclick="setFormatOption('lists', 'bullets')" aria-pressed="false">Clean Bullet Points</button>
+                </div>
+              </fieldset>
+
+              <div class="btn-row" style="margin-top: var(--space-xs);">
+                <button type="button" class="btn btn--primary" onclick="checkFormattingLab()">Check Formatting &amp; Save Lesson 4.1</button>
+              </div>
+              <div class="feedback-box" id="fmt-feedback" role="status" aria-live="polite"></div>
+            </div>
+
+            <!-- Live Document Preview -->
+            <div class="paper-frame">
+              <div class="paper-toolbar">
+                <span class="mono">Jordan_Profile_Draft.docx</span>
+                <span class="field-hint" id="fmt-live-summary">4 adjustments remaining</span>
+              </div>
+              <div id="fmt-paper-preview" class="paper-sheet margins-tight spacing-tight align-center">
+                <div class="sim-doc-name">Jordan Lee</div>
+                <div class="sim-doc-contact">Atlanta, Georgia &bull; jordan.lee@riverside-example.test</div>
+                <div id="fmt-preview-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           LESSON 4.2: BUILDING A ONE-PAGE WORKPLACE RÉSUMÉ
+      ================================================================ -->
+      <section id="section-4-2" class="lesson-section" aria-labelledby="heading-4-2">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Lesson 4.2 &bull; Workplace Résumé</span>
+            <span class="chip" id="status-lab2" data-status="info">Not yet completed</span>
+          </div>
+          <h2 class="section-heading" id="heading-4-2">Build a Truthful, One-Page Résumé Around Transferable Skills</h2>
+          <p class="lede">
+            You do not need a long job list to build a strong résumé. Volunteer service, community roles, and day-to-day responsibilities demonstrate real reliability, communication, and organization. Stick strictly to verified facts—never invent work history.
+          </p>
+          <div class="arc-pill-row">
+            <span class="arc-badge">1. Watch me: Match skills to the role</span>
+            <span class="arc-badge">2. You try: Build Jordan Lee’s résumé</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>What Riverside Community Services is looking for:</strong>
+          <span>Customer Support Associate &mdash; Required: <strong>clear written communication</strong>, <strong>email and standard computer applications</strong>, and <strong>maintaining accurate records</strong>. Select at least 3 matching skills below and write truthful experience bullets.</span>
+        </div>
+
+        <div class="wash-band lab-wrapper">
+          <div class="lab-split lab-split--wide-left">
+            <!-- Left: Builder Form -->
+            <div class="doc-controls-panel">
+              <h3 class="subhead">Jordan Lee’s Résumé Workspace (Sandbox)</h3>
+
+              <div class="field-group">
+                <label class="field-label" for="res-contact">Header Contact Line (No street address, phone, or ID)</label>
+                <input type="text" id="res-contact" class="input" value="Atlanta, Georgia | jordan.lee@riverside-example.test" oninput="updateResumeField('contact', this.value)">
+                <div class="feedback-box feedback-box--err" id="res-privacy-alert" role="alert"></div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="res-summary">Brief Career Summary (2 sentences)</label>
+                <textarea id="res-summary" class="textarea" oninput="updateResumeField('summary', this.value)"></textarea>
+                <div class="btn-row">
+                  <button type="button" class="btn btn--quiet btn--sm" onclick="insertSummaryStarter()">Use Sample Summary</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label">Relevant Skills (Choose at least 3 verified skills)</span>
+                <span class="field-hint">Drawn directly from Jordan Lee’s candidate card and digital training.</span>
+                <div class="skill-check-grid" id="res-skills-grid"></div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="res-exp1">Volunteer Front Desk, Community Event Registration (2025–2026)</label>
+                <textarea id="res-exp1" class="textarea" oninput="updateResumeField('exp1', this.value)"></textarea>
+                <div class="btn-row">
+                  <button type="button" class="btn btn--quiet btn--sm" onclick="insertExpStarter(1)">Insert Action-Verb Example</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="res-exp2">Retail Stock Assistant, Fictional Workplace (2024–2025)</label>
+                <textarea id="res-exp2" class="textarea" oninput="updateResumeField('exp2', this.value)"></textarea>
+                <div class="btn-row">
+                  <button type="button" class="btn btn--quiet btn--sm" onclick="insertExpStarter(2)">Insert Action-Verb Example</button>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="res-edu">Education</label>
+                <input type="text" id="res-edu" class="input" value="High school diploma (fictional for training)" oninput="updateResumeField('edu', this.value)">
+              </div>
+
+              <div class="btn-row">
+                <button type="button" class="btn btn--primary" onclick="verifyResumeLab()">Verify One-Page Résumé (Lesson 4.2)</button>
+                <button type="button" class="btn btn--secondary" onclick="downloadResumeTxt()">Download Plain-Text Copy (.txt)</button>
+              </div>
+              <div class="feedback-box" id="res-feedback" role="status" aria-live="polite"></div>
+            </div>
+
+            <!-- Right: Live 1-Page Preview -->
+            <div class="paper-frame">
+              <div class="paper-toolbar">
+                <span class="mono">Jordan_Lee_Resume.docx</span>
+                <span class="chip" id="res-fit-chip" data-status="ok">Fits cleanly on 1 page</span>
+              </div>
+              <div class="paper-sheet margins-standard spacing-readable align-left" id="res-live-preview">
+                <div class="sim-doc-name">Jordan Lee</div>
+                <div class="sim-doc-contact" id="prev-res-contact">Atlanta, Georgia | jordan.lee@riverside-example.test</div>
+
+                <h4 class="sim-heading">Summary</h4>
+                <p id="prev-res-summary" style="font-size: 0.94rem;"></p>
+
+                <h4 class="sim-heading">Skills</h4>
+                <ul class="sim-list" id="prev-res-skills" style="font-size: 0.94rem;"></ul>
+
+                <h4 class="sim-heading">Experience</h4>
+                <p style="font-size: 0.94rem; margin-bottom: 0.2rem;"><strong>Volunteer Front Desk</strong> &mdash; Community Event Registration (2025–2026)</p>
+                <ul class="sim-list" id="prev-res-exp1" style="font-size: 0.92rem;"></ul>
+
+                <p style="font-size: 0.94rem; margin: 0.5rem 0 0.2rem 0;"><strong>Retail Stock Assistant</strong> &mdash; Fictional Workplace (2024–2025)</p>
+                <ul class="sim-list" id="prev-res-exp2" style="font-size: 0.92rem;"></ul>
+
+                <h4 class="sim-heading">Education</h4>
+                <p id="prev-res-edu" style="font-size: 0.94rem;"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           LESSON 4.3: FILE MANAGEMENT, FOLDERS, NAMING & BACKUPS
+      ================================================================ -->
+      <section id="section-4-3" class="lesson-section" aria-labelledby="heading-4-3">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Lesson 4.3 &bull; File Organization</span>
+            <span class="chip" id="status-lab3" data-status="info">Not yet completed</span>
+          </div>
+          <h2 class="section-heading" id="heading-4-3">Organize Folders, Name Files Clearly, and Keep Safe Backups</h2>
+          <p class="lede">
+            Knowing where your files live prevents last-minute stress before an interview. Build one simple folder tree, give files predictable names, move old drafts to an archive folder, and save a second backup copy.
+          </p>
+          <div class="arc-pill-row">
+            <span class="arc-badge">1. Watch me: Naming &amp; folder structure</span>
+            <span class="arc-badge">2. You try: Clean up Jordan’s cluttered Downloads</span>
+          </div>
+        </div>
+
+        <!-- Naming & Folder Conventions Reference -->
+        <div class="card-grid">
+          <div class="status-card" data-status="info">
+            <h3 class="subhead">Clear File Naming Rule</h3>
+            <p>Use <span class="mono">First_Last_DocType.ext</span> with underscores or hyphens—never vague names like <span class="mono">resume(2)FINAL.docx</span>.</p>
+            <p class="field-hint">Good: <span class="mono">Jordan_Lee_Resume.docx</span> and <span class="mono">Jordan_Lee_Resume.pdf</span></p>
+          </div>
+          <div class="status-card" data-status="info">
+            <h3 class="subhead">Folder Hierarchy &amp; Version Control</h3>
+            <p>Keep active job files inside <span class="mono">Documents / Job_Search / Applications</span>. Move older versions to <span class="mono">Archive</span> with dates so you never attach the wrong draft.</p>
+          </div>
+          <div class="status-card" data-status="ok">
+            <h3 class="subhead">Local + Cloud Backup Habit</h3>
+            <p>Shared training computers may reset or sign out. Keep a second copy in your authorized cloud drive or personal USB drive—never rely on just one copy.</p>
+          </div>
+        </div>
+
+        <!-- Interactive File Manager Sandbox -->
+        <div class="wash-band">
+          <div>
+            <span class="kicker">Hands-On Lab 4.3</span>
+            <h3 class="subhead">Interactive File Explorer Sandbox</h3>
+            <p class="field-hint">Complete all three organization tasks below using the simulated folders and files.</p>
+          </div>
+
+          <!-- Live 3-Task Tracker -->
+          <div class="card-grid" id="fm-tasks-status">
+            <div class="status-card" id="fm-task-1" data-status="warn">
+              <strong>Task 1: Create Applications Folder</strong>
+              <span class="field-hint" id="fm-task-1-hint">Open <span class="mono">Job_Search</span> and click “New Folder: Applications”.</span>
+            </div>
+            <div class="status-card" id="fm-task-2" data-status="warn">
+              <strong>Task 2: Clean &amp; File Résumés</strong>
+              <span class="field-hint" id="fm-task-2-hint">Rename <span class="mono">resume final (2).docx</span> to <span class="mono">Jordan_Lee_Resume.docx</span>, put both <span class="mono">.docx</span> &amp; <span class="mono">.pdf</span> in <span class="mono">Applications</span>, and move the 2024 draft to <span class="mono">Archive</span>.</span>
+            </div>
+            <div class="status-card" id="fm-task-3" data-status="warn">
+              <strong>Task 3: Enable Cloud Backup</strong>
+              <span class="field-hint" id="fm-task-3-hint">Turn on the simulated Cloud &amp; USB Backup Sync toggle.</span>
+            </div>
+          </div>
+
+          <div class="explorer-shell">
+            <div class="explorer-topbar">
+              <div class="comfort-group">
+                <i data-lucide="folder-open" width="18" height="18" aria-hidden="true"></i>
+                <span class="mono" id="fm-current-path">Documents / Downloads</span>
+              </div>
+              <div class="btn-row">
+                <button type="button" class="btn btn--secondary btn--sm" id="fm-new-folder-btn" onclick="createApplicationsFolder()">
+                  <i data-lucide="folder-plus" width="16" height="16" aria-hidden="true"></i>
+                  New Folder: Applications
+                </button>
+                <button type="button" class="btn btn--quiet btn--sm" id="fm-backup-btn" onclick="toggleBackupSync()" aria-pressed="false">
+                  <i data-lucide="cloud-off" width="16" height="16" aria-hidden="true"></i>
+                  Backup Sync: Off
+                </button>
+              </div>
+            </div>
+
+            <div class="explorer-body">
+              <div class="explorer-grid">
+                <!-- Left Folder Tree -->
+                <div class="folder-tree" role="navigation" aria-label="Simulated folders">
+                  <span class="comfort-label" style="margin-bottom: var(--space-xs);">Folders</span>
+                  <button type="button" class="folder-btn" id="folder-downloads" onclick="selectFolder('downloads')" aria-current="true">
+                    <span>Downloads</span>
+                    <span class="chip" data-status="warn" id="count-downloads">3</span>
+                  </button>
+                  <button type="button" class="folder-btn" id="folder-documents" onclick="selectFolder('documents')" aria-current="false">
+                    <span>Documents</span>
+                    <span class="chip" data-status="info" id="count-documents">1</span>
+                  </button>
+                  <button type="button" class="folder-btn folder-btn--nested" id="folder-jobsearch" onclick="selectFolder('jobsearch')" aria-current="false">
+                    <span>Job_Search</span>
+                    <span class="chip" data-status="info" id="count-jobsearch">0</span>
+                  </button>
+                  <button type="button" class="folder-btn folder-btn--deep" id="folder-applications" onclick="selectFolder('applications')" aria-current="false" hidden>
+                    <span>Applications</span>
+                    <span class="chip" data-status="ok" id="count-applications">0</span>
+                  </button>
+                  <button type="button" class="folder-btn folder-btn--deep" id="folder-archive" onclick="selectFolder('archive')" aria-current="false">
+                    <span>Archive</span>
+                    <span class="chip" data-status="info" id="count-archive">0</span>
+                  </button>
+                </div>
+
+                <!-- Right File Pane -->
+                <div class="file-pane">
+                  <div id="fm-file-list" style="display: flex; flex-direction: column; gap: var(--space-sm);"></div>
+
+                  <!-- Action Panel for Selected File -->
+                  <div class="action-panel" id="fm-action-panel">
+                    <span class="field-hint" id="fm-empty-hint">Select any file above to rename it or move it to the right folder.</span>
+                    <div id="fm-selected-controls" hidden style="display: none; flex-direction: column; gap: var(--space-sm);">
+                      <div class="field-group">
+                        <label class="field-label" for="fm-rename-input">Rename <span class="mono" id="fm-rename-target-name"></span></label>
+                        <div class="btn-row">
+                          <input type="text" id="fm-rename-input" class="input" style="max-width: 320px;" value="">
+                          <button type="button" class="btn btn--secondary btn--sm" onclick="renameSelectedFile()">Save Filename</button>
+                        </div>
+                      </div>
+                      <div class="field-group">
+                        <span class="field-label">Move file to folder:</span>
+                        <div class="btn-row">
+                          <button type="button" class="btn btn--primary btn--sm" onclick="moveSelectedFile('applications')">Move to Applications</button>
+                          <button type="button" class="btn btn--quiet btn--sm" onclick="moveSelectedFile('archive')">Move to Archive</button>
+                          <button type="button" class="btn btn--quiet btn--sm" onclick="moveSelectedFile('jobsearch')">Move to Job_Search</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feedback-box" id="fm-feedback" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           LESSON 4.4: EDITABLE (.DOCX) VS SHAREABLE (.PDF)
+      ================================================================ -->
+      <section id="section-4-4" class="lesson-section" aria-labelledby="heading-4-4">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Lesson 4.4 &bull; Saving &amp; Exporting</span>
+            <span class="chip" id="status-lab4" data-status="info">Not yet completed</span>
+          </div>
+          <h2 class="section-heading" id="heading-4-4">Keep Both Versions: Editable (.docx) and Shareable (.pdf)</h2>
+          <p class="lede">
+            Save your master work as an editable document (<span class="mono">.docx</span>) so you can update it later. When you apply for a job or send a résumé, export a fixed-layout <span class="mono">.pdf</span> and always reopen the PDF to check its layout before sending.
+          </p>
+          <div class="arc-pill-row">
+            <span class="arc-badge">1. Watch me: Compare .docx and .pdf</span>
+            <span class="arc-badge">2. Let’s do it: Pick the right format</span>
+            <span class="arc-badge">3. You try: Export &amp; inspect a PDF</span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>Purpose</th>
+                <th>When to Use It</th>
+                <th>What to Watch For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono">.docx</span> (Editable)</td>
+                <td>Revise text, add new skills, update dates for future roles.</td>
+                <td>Whenever you are drafting, editing, or tailoring your résumé.</td>
+                <td>Margins or fonts can shift slightly on another person’s computer.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">.pdf</span> (Fixed-Layout)</td>
+                <td>Preserves exact spacing, margins, and fonts across any device.</td>
+                <td>Uploading to a job portal or attaching to a professional email.</td>
+                <td>Always reopen and inspect the exported PDF for cut-off lines or wrong filenames.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Part A: Format Decision Check -->
+        <div class="wash-band">
+          <span class="kicker">Practice Check 4.4A</span>
+          <h3 class="subhead">Which File Should Jordan Choose?</h3>
+          <div class="card-grid" id="format-quiz-grid"></div>
+        </div>
+
+        <!-- Part B: PDF Export & Quality Inspector -->
+        <div class="wash-band lab-wrapper">
+          <div>
+            <span class="kicker">Hands-On Lab 4.4B</span>
+            <h3 class="subhead">Export &amp; Post-Export Quality Inspection</h3>
+            <p class="field-hint">
+              Never send a PDF sight unseen! Click <strong>Export PDF</strong> below, inspect the generated preview carefully, spot any error, and fix it before marking Lesson 4.4 ready.
+            </p>
+          </div>
+
+          <div class="lab-split">
+            <div class="doc-controls-panel">
+              <div class="btn-row">
+                <button type="button" class="btn btn--primary" id="pdf-export-btn" onclick="runSimulatedPdfExport()">
+                  <i data-lucide="file-down" width="18" height="18" aria-hidden="true"></i>
+                  Export Jordan_Lee_Resume.pdf
+                </button>
+              </div>
+
+              <div id="pdf-inspection-controls" style="display: none; flex-direction: column; gap: var(--space-md);">
+                <span class="field-label">Inspect the exported file on the right. What needs fixing?</span>
+                <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                  <button type="button" class="btn btn--quiet" style="justify-content: flex-start;" onclick="answerPdfInspection('looks_fine')">Looks great—send it as is!</button>
+                  <button type="button" class="btn btn--quiet" style="justify-content: flex-start;" onclick="answerPdfInspection('spotted_glitch')">Wait: Education spilled onto Page 2 and the filename says “(1)”.</button>
+                </div>
+                <div id="pdf-fix-action" style="display: none;">
+                  <button type="button" class="btn btn--primary" onclick="fixAndReexportPdf()">Tighten Margin Slightly, Rename Cleanly &amp; Re-Export PDF</button>
+                </div>
+              </div>
+
+              <div class="feedback-box" id="pdf-feedback" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="paper-frame">
+              <div class="paper-toolbar">
+                <span class="mono" id="pdf-preview-filename">Waiting to export...</span>
+                <span class="chip" id="pdf-preview-status" data-status="info">Draft Only</span>
+              </div>
+              <div id="pdf-preview-canvas" class="paper-sheet margins-standard spacing-readable align-left">
+                <p class="field-hint">Click <strong>Export Jordan_Lee_Resume.pdf</strong> to preview what the employer will see.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           RESPONSIBLE AI IN WORKPLACE DOCUMENTS (MODULE 7 BRIDGE)
+      ================================================================ -->
+      <section id="section-ai" class="lesson-section" aria-labelledby="heading-ai">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Responsible AI Bridge &bull; Digital Literacy + AI Check</span>
+            <span class="chip" id="status-lab5" data-status="info">Not yet completed</span>
+          </div>
+          <h2 class="section-heading" id="heading-ai">Use AI as a Drafting Helper—Never as the Final Fact-Checker</h2>
+          <p class="lede">
+            An AI assistant can help proofread grammar or turn rough notes into strong action verbs. However, AI often invents degrees, job titles, or numbers that are not true. <strong>You</strong> are always the author and decision-maker.
+          </p>
+          <div class="arc-pill-row">
+            <span class="arc-badge">1. Watch me: CLEAR prompting &amp; safety</span>
+            <span class="arc-badge">2. You try: Audit an AI draft for fabrications</span>
+          </div>
+        </div>
+
+        <!-- 3 Rules + CLEAR Prompting -->
+        <div class="card-grid">
+          <div class="status-card" data-status="alert">
+            <h3 class="subhead">1. Protect Private Details</h3>
+            <p>Leave real names, SSNs, state IDs, phone numbers, home addresses, and personal history out of AI prompts. Use fictional or general placeholders instead.</p>
+          </div>
+          <div class="status-card" data-status="warn">
+            <h3 class="subhead">2. Reject AI Fabrications</h3>
+            <p>Never keep skills, certificates, or years of experience that AI added on its own. Compare every single AI sentence word-for-word against your real facts.</p>
+          </div>
+          <div class="status-card" data-status="ok">
+            <h3 class="subhead">3. Prompt with CLEAR</h3>
+            <p><strong>C</strong>ontext &bull; <strong>L</strong>et AI know the task &bull; <strong>E</strong>xplain details &bull; <strong>A</strong>sk for format &bull; <strong>R</strong>eview &amp; refine in your own words.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Lab 5A: Fact-Check & Privacy Audit -->
+        <div class="wash-band lab-wrapper">
+          <div>
+            <span class="kicker">Hands-On AI Lab A</span>
+            <h3 class="subhead">Spot the 3 AI Mistakes Before Saving</h3>
+            <p class="field-hint">
+              Below is a simulated AI draft written for Jordan Lee’s résumé. Compare it against Jordan’s real Candidate Card (Atlanta, GA; High school diploma; Volunteer front desk &amp; Retail stock assistant). <strong>Click the 3 lines that contain a fabrication, wrong fact, or privacy risk.</strong>
+            </p>
+          </div>
+
+          <div class="lab-split">
+            <div class="doc-controls-panel">
+              <span class="comfort-label">Simulated AI Draft (Click risky lines to flag &amp; remove)</span>
+              <div id="ai-audit-list" style="display: flex; flex-direction: column; gap: var(--space-sm);"></div>
+              <div class="feedback-box" id="ai-audit-feedback" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="doc-controls-panel">
+              <span class="kicker" style="margin-bottom: 0;">Hands-On AI Lab B &bull; CLEAR Action-Verb Polisher</span>
+              <h4 class="subhead">Refine a Real Experience Note Safely</h4>
+              <p class="field-hint">
+                See how a privacy-safe CLEAR prompt turns Jordan’s rough note into a crisp, truthful bullet point—then verify it against the candidate facts.
+              </p>
+
+              <div class="callout">
+                <strong>Rough Fact (from Candidate Card):</strong>
+                <span>“Volunteer front desk at community event registration (2025–2026) — greeted people, answered questions, kept sign-in sheets organized.”</span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="ai-prompt-choice">Choose a CLEAR Prompt Instruction:</label>
+                <select id="ai-prompt-choice" class="select" onchange="previewClearPrompt(this.value)">
+                  <option value="vague">Vague Prompt: “Make me sound like an executive manager.”</option>
+                  <option value="clear">CLEAR Prompt: “Using only my volunteer front desk note, write 1 truthful action-verb bullet for a Customer Support role. No added credentials.”</option>
+                </select>
+              </div>
+
+              <div class="status-card" id="ai-clear-output" data-status="warn">
+                <strong id="ai-clear-label">Vague Prompt Result (Risky!):</strong>
+                <p id="ai-clear-text">“Directed a 12-person customer operations team and administered enterprise CRM software.”</p>
+                <span class="field-hint" id="ai-clear-note">Warning: Because the prompt was vague, the AI invented a team and software Jordan never used.</span>
+              </div>
+
+              <div class="btn-row">
+                <button type="button" class="btn btn--primary" id="ai-verify-btn" onclick="completeAiLab()">Verify Truthful Bullet &amp; Complete AI Lab</button>
+              </div>
+              <div class="feedback-box" id="ai-lab-feedback" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           SHOW WHAT YOU CAN DO: PERFORMANCE CHECKLIST & SELF-EVALUATION
+      ================================================================ -->
+      <section id="section-eval" class="lesson-section" aria-labelledby="heading-eval">
+        <div class="lesson-header">
+          <div class="lesson-header-top">
+            <span class="kicker">Show What You Can Do &bull; Student Worksheet 4</span>
+            <span class="chip" id="status-eval" data-status="info">Self-Evaluation</span>
+          </div>
+          <h2 class="section-heading" id="heading-eval">Module 4 Self-Evaluation &amp; Completion Summary</h2>
+          <p class="lede">
+            Review what you practiced today, check each “I can” statement honestly, and save a short note on what you learned or want to ask in Skool or class.
+          </p>
+        </div>
+
+        <div class="lab-wrapper">
+          <div class="lab-split">
+            <!-- Left: "I Can" Checkboxes -->
+            <div class="doc-controls-panel">
+              <h3 class="subhead">My “I Can” Work Checklist</h3>
+              <p class="field-hint">Check each skill you feel confident demonstrating with your saved files or accessibility tools.</p>
+
+              <div style="display: flex; flex-direction: column; gap: var(--space-sm);" id="ican-list">
+                <label class="checklist-item">
+                  <input type="checkbox" id="ican-1" onchange="toggleICan('ican1', this.checked)">
+                  <span><strong>I can</strong> create a readable document using clear headings, comfortable spacing, and bullet lists.</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" id="ican-2" onchange="toggleICan('ican2', this.checked)">
+                  <span><strong>I can</strong> write relevant, truthful skills accurately on a one-page résumé.</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" id="ican-3" onchange="toggleICan('ican3', this.checked)">
+                  <span><strong>I can</strong> organize folders, name files clearly, and save an editable <span class="mono">.docx</span> version.</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" id="ican-4" onchange="toggleICan('ican4', this.checked)">
+                  <span><strong>I can</strong> export, retrieve, and inspect a shareable <span class="mono">.pdf</span> version for missing content.</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" id="ican-5" onchange="toggleICan('ican5', this.checked)">
+                  <span><strong>I can</strong> check AI suggestions against my real facts and protect private personal data.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Right: Worksheet 4 Reflection & Export -->
+            <div class="doc-controls-panel">
+              <h3 class="subhead">Try It Again &amp; Reflection Notes</h3>
+              <p class="field-hint">Keep your notes focused on skills—never enter personal or legal details.</p>
+
+              <div class="field-group">
+                <label class="field-label" for="refl-learned">Something I learned in Module 4</label>
+                <input type="text" id="refl-learned" class="input" oninput="updateReflection('learned', this.value)">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="refl-practice">One skill I want to practice again independently</label>
+                <input type="text" id="refl-practice" class="input" oninput="updateReflection('practice', this.value)">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="refl-question">Questions I want to ask my instructor or Skool group</label>
+                <textarea id="refl-question" class="textarea" oninput="updateReflection('question', this.value)"></textarea>
+              </div>
+
+              <div class="callout callout--ok" id="completion-summary-box">
+                <strong id="completion-status-title">Module 4 Practice Status</strong>
+                <span id="completion-status-body">Complete the 5 hands-on labs and check your “I can” statements above to build your full summary.</span>
+              </div>
+
+              <div class="btn-row">
+                <button type="button" class="btn btn--primary" onclick="downloadCompletionSummary()">
+                  <i data-lucide="download" width="18" height="18" aria-hidden="true"></i>
+                  Download My Module 4 Summary (.txt)
+                </button>
+                <button type="button" class="btn btn--danger" id="reset-sandbox-btn" onclick="resetAllProgress(this)">
+                  Reset Practice Sandbox
+                </button>
+              </div>
+              <div class="feedback-box" id="eval-feedback" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-card" data-status="info" style="margin-top: var(--space-sm);">
+          <strong>About Official Course Completion</strong>
+          <p>
+            Completing these self-paced interactive exercises prepares you to demonstrate your skills with confidence. Official Module 4 completion is confirmed individually by an authorized Home4Good instructor or staff member after reviewing your saved files and task demonstration (Task Card DP-04). Any accommodations or accessibility supports you use are always welcome.
+          </p>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p><strong>Digital Pathways to Employment &mdash; Module 4: Creating Documents and Managing Files</strong></p>
+        <p>
+          Copyright &copy; 2026 Ronda Bell. Original instructional text, activities, and design licensed to Home4Good Inc. for authorized educational and charitable use. Eligible participants in Home4Good programs may access and download designated learning resources for personal educational use.
+        </p>
+        <p>
+          Curriculum references: Home4Good Digital Pathways Instructor Guide &amp; Student Workbook (v1.0) and Seven-Module Instructor Breakdown (v1.1); aligned with Northstar Digital Literacy skill standards and CareerOneStop / FTC / CISA public guidance. Training scenarios use strictly fictional identities (<span class="mono">riverside-example.test</span>).
+        </p>
+      </footer>
+
+    </main>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    /* =========================================================================
+       STATE & PERSISTENCE (notebookAppApi)
+    ========================================================================= */
+    const DEFAULT_STATE = {
+      textScale: 'standard',
+      highContrast: false,
+      labs: {
+        lab1: false,
+        lab2: false,
+        lab3: false,
+        lab4: false,
+        lab5: false
+      },
+      fmt: {
+        headings: 'plain',
+        spacing: 'tight',
+        layout: 'messy',
+        lists: 'para'
+      },
+      resume: {
+        contact: `Atlanta, Georgia | jordan.lee@riverside-example.test`,
+        summary: `Dependable and organized support candidate with volunteer front-desk and retail stock experience. Skilled in active listening, accurate record keeping, and clear written communication.`,
+        skills: [`Active listening`, `Organized records`],
+        exp1: `Greeted event guests, answered routine questions, and updated attendee sign-in records accurately.`,
+        exp2: `Organized incoming stockroom items, checked inventory lists, and kept work areas orderly.`,
+        edu: `High school diploma (fictional for training)`
+      },
+      fileManager: {
+        currentFolder: 'downloads',
+        selectedFileId: null,
+        hasApplicationsFolder: false,
+        backupEnabled: false,
+        files: [
+          { id: 'f1', name: `resume final (2).docx`, folder: 'downloads', size: `28 KB`, note: `Messy filename — needs renaming & moving` },
+          { id: 'f2', name: `Jordan_Lee_Resume.pdf`, folder: 'downloads', size: `64 KB`, note: `Shareable PDF copy` },
+          { id: 'f3', name: `jordan_resume_2024_old.docx`, folder: 'downloads', size: `22 KB`, note: `Outdated 2024 draft` },
+          { id: 'f4', name: `First_Day_Plan.docx`, folder: 'documents', size: `19 KB`, note: `From Module 1 practice` }
+        ]
+      },
+      formatQuiz: {
+        q1: null,
+        q2: null,
+        q3: null
+      },
+      pdfLab: {
+        exported: false,
+        spottedGlitch: false,
+        fixed: false
+      },
+      aiLab: {
+        flaggedIds: [],
+        promptMode: 'vague',
+        verifiedClear: false
+      },
+      ican: {
+        ican1: false,
+        ican2: false,
+        ican3: false,
+        ican4: false,
+        ican5: false
+      },
+      reflection: {
+        learned: ``,
+        practice: ``,
+        question: ``
+      }
+    };
+
+    let appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+    function cloneDefaults() {
+      return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    }
+
+    async function saveState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (err) {
+          /* Silently ignore transient save failures in preview */
+        }
+      }
+    }
+
+    /* =========================================================================
+       ACCESSIBILITY & COMFORT CONTROLS
+    ========================================================================= */
+    function setTextScale(scale) {
+      appState.textScale = scale;
+      applyComfortPreferences();
+      saveState();
+    }
+
+    function toggleContrastMode() {
+      appState.highContrast = !appState.highContrast;
+      applyComfortPreferences();
+      saveState();
+    }
+
+    function applyComfortPreferences() {
+      const root = document.documentElement;
+      if (appState.textScale === 'standard') {
+        root.removeAttribute('data-text-scale');
+      } else {
+        root.setAttribute('data-text-scale', appState.textScale);
+      }
+      if (appState.highContrast) {
+        root.setAttribute('data-contrast', 'high');
+      } else {
+        root.removeAttribute('data-contrast');
+      }
+
+      const scaleIds = ['standard', 'large', 'xlarge'];
+      scaleIds.forEach(function (id) {
+        const btn = document.getElementById('scale-' + id);
+        if (btn) {
+          const active = appState.textScale === id;
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          btn.classList.toggle('btn--active', active);
+          btn.classList.toggle('btn--quiet', !active);
+        }
+      });
+
+      const contrastBtn = document.getElementById('toggle-contrast');
+      if (contrastBtn) {
+        contrastBtn.setAttribute('aria-pressed', appState.highContrast ? 'true' : 'false');
+        contrastBtn.classList.toggle('btn--active', appState.highContrast);
+        contrastBtn.classList.toggle('btn--quiet', !appState.highContrast);
+      }
+    }
+
+    /* =========================================================================
+       OVERALL PROGRESS TRACKER
+    ========================================================================= */
+    function updateOverallProgress() {
+      const labKeys = ['lab1', 'lab2', 'lab3', 'lab4', 'lab5'];
+      const icanKeys = ['ican1', 'ican2', 'ican3', 'ican4', 'ican5'];
+      let labsDone = 0;
+      let icanDone = 0;
+
+      labKeys.forEach(function (k) {
+        if (appState.labs[k]) labsDone += 1;
+        const chip = document.getElementById('status-' + k);
+        const nav = document.getElementById('nav-' + k);
+        if (chip) {
+          chip.textContent = appState.labs[k] ? `Completed` : `Not yet completed`;
+          chip.setAttribute('data-status', appState.labs[k] ? 'ok' : 'info');
+        }
+        if (nav) {
+          nav.classList.toggle('is-done', !!appState.labs[k]);
+        }
+      });
+
+      icanKeys.forEach(function (k) {
+        if (appState.ican[k]) icanDone += 1;
+      });
+
+      const evalChip = document.getElementById('status-eval');
+      const evalNav = document.getElementById('nav-eval');
+      if (evalChip) {
+        evalChip.textContent = icanDone === 5 ? `All 5 Checked` : icanDone + ` of 5 Checked`;
+        evalChip.setAttribute('data-status', icanDone === 5 ? 'ok' : 'info');
+      }
+      if (evalNav) {
+        evalNav.classList.toggle('is-done', icanDone === 5);
+      }
+
+      const totalDone = labsDone + icanDone;
+      const pct = Math.round((totalDone / 10) * 100);
+
+      const headline = document.getElementById('progress-headline');
+      const fill = document.getElementById('progress-fill');
+      const barAria = document.getElementById('progress-bar-aria');
+      const badge = document.getElementById('progress-badge');
+      const sumTitle = document.getElementById('completion-status-title');
+      const sumBody = document.getElementById('completion-status-body');
+
+      if (headline) {
+        headline.textContent = `Your Module 4 Progress: ` + totalDone + ` of 10 milestones completed (` + labsDone + `/5 labs, ` + icanDone + `/5 self-checks)`;
+      }
+      if (fill) { fill.style.width = pct + `%`; }
+      if (barAria) { barAria.setAttribute('aria-valuenow', String(pct)); }
+      if (badge) {
+        if (totalDone === 10) {
+          badge.textContent = `Ready for Instructor Review`;
+          badge.setAttribute('data-status', 'ok');
+        } else if (totalDone > 0) {
+          badge.textContent = pct + `% Complete`;
+          badge.setAttribute('data-status', 'info');
+        } else {
+          badge.textContent = `Getting Started`;
+          badge.setAttribute('data-status', 'info');
+        }
+      }
+      if (sumTitle && sumBody) {
+        if (totalDone === 10) {
+          sumTitle.textContent = `All 10 Practice Milestones Complete!`;
+          sumBody.textContent = `Great work! Download your Module 4 summary below to share in Skool or review with your Home4Good instructor.`;
+        } else {
+          sumTitle.textContent = `Module 4 Practice Status (` + labsDone + `/5 labs, ` + icanDone + `/5 self-checks)`;
+          sumBody.textContent = `Keep going at your own pace. Every checked item and completed lab updates this summary automatically.`;
+        }
+      }
+    }
+
+    /* =========================================================================
+       LESSON 4.1: DOCUMENT FORMATTING STUDIO
+    ========================================================================= */
+    function setFormatOption(group, val) {
+      appState.fmt[group] = val;
+      renderFormattingLab();
+      saveState();
+    }
+
+    function renderFormattingLab() {
+      const f = appState.fmt;
+      const pairs = [
+        ['headings', ['plain', 'styled']],
+        ['spacing', ['tight', 'readable']],
+        ['layout', ['messy', 'clean']],
+        ['lists', ['para', 'bullets']]
+      ];
+      pairs.forEach(function (pair) {
+        const group = pair[0];
+        pair[1].forEach(function (opt) {
+          const btn = document.getElementById('fmt-' + group + '-' + opt);
+          if (btn) {
+            btn.setAttribute('aria-pressed', f[group] === opt ? 'true' : 'false');
+          }
+        });
+      });
+
+      let score = 20;
+      let remaining = 4;
+      if (f.headings === 'styled') { score += 20; remaining -= 1; }
+      if (f.spacing === 'readable') { score += 20; remaining -= 1; }
+      if (f.layout === 'clean') { score += 20; remaining -= 1; }
+      if (f.lists === 'bullets') { score += 20; remaining -= 1; }
+
+      const scoreText = document.getElementById('fmt-score-text');
+      const rangeChip = document.getElementById('fmt-range-chip');
+      const meterBar = document.getElementById('fmt-meter-bar');
+      const liveSum = document.getElementById('fmt-live-summary');
+      const paper = document.getElementById('fmt-paper-preview');
+      const previewBody = document.getElementById('fmt-preview-body');
+
+      if (scoreText) scoreText.textContent = score + `%`;
+      if (meterBar) {
+        meterBar.setAttribute('width', String(Math.round((score / 100) * 300)));
+        meterBar.setAttribute('fill', score === 100 ? 'var(--tertiary)' : (score >= 60 ? 'var(--primary)' : 'var(--warning)'));
+      }
+      if (rangeChip) {
+        if (score === 100) {
+          rangeChip.textContent = `Employer-Ready`;
+          rangeChip.setAttribute('data-status', 'ok');
+        } else {
+          rangeChip.textContent = `Needs Formatting`;
+          rangeChip.setAttribute('data-status', 'warn');
+        }
+      }
+      if (liveSum) {
+        liveSum.textContent = remaining === 0 ? `All 4 formatting checks met` : remaining + ` adjustment(s) remaining`;
+      }
+
+      if (paper) {
+        paper.className = 'paper-sheet ' +
+          (f.layout === 'clean' ? 'margins-standard align-left ' : 'margins-tight align-center ') +
+          (f.spacing === 'readable' ? 'spacing-readable' : 'spacing-tight');
+      }
+
+      if (previewBody) {
+        const headingClass = f.headings === 'styled' ? 'sim-heading' : 'sim-heading--flat';
+        const skillsHtml = f.lists === 'bullets'
+          ? `<ul class="sim-list"><li>Active listening and patient problem-solving</li><li>Organized record keeping and scheduling</li><li>Clear written and spoken communication</li></ul>`
+          : `<p style="font-size: 0.92rem;">Active listening and patient problem-solving, organized record keeping and scheduling, and clear written and spoken communication.</p>`;
+
+        const expHtml = f.lists === 'bullets'
+          ? `<ul class="sim-list"><li>Welcomed community members at the registration desk</li><li>Updated attendance logs and verified contact details</li></ul>`
+          : `<p style="font-size: 0.92rem;">Welcomed community members at the registration desk and updated attendance logs and verified contact details.</p>`;
+
+        previewBody.innerHTML =
+          `<div class="` + headingClass + `">Summary</div>` +
+          `<p style="font-size: 0.92rem;">Reliable support candidate ready to assist visitors, keep accurate records, and follow workplace procedures.</p>` +
+          `<div class="` + headingClass + `">Key Skills</div>` +
+          skillsHtml +
+          `<div class="` + headingClass + `">Experience</div>` +
+          `<p style="font-size: 0.92rem;"><strong>Volunteer Front Desk</strong> (2025–2026)</p>` +
+          expHtml;
+      }
+    }
+
+    function checkFormattingLab() {
+      const f = appState.fmt;
+      const missing = [];
+      if (f.headings !== 'styled') missing.push(`Clear Section Headings`);
+      if (f.spacing !== 'readable') missing.push(`Readable Line Spacing (1.4)`);
+      if (f.layout !== 'clean') missing.push(`1" Margins & Left Alignment`);
+      if (f.lists !== 'bullets') missing.push(`Clean Bullet Points`);
+
+      const box = document.getElementById('fmt-feedback');
+      if (!box) return;
+
+      if (missing.length === 0) {
+        appState.labs.lab1 = true;
+        box.className = `feedback-box feedback-box--ok is-visible`;
+        box.innerHTML = `<strong>Well done!</strong> Your document now uses clear headings, comfortable line spacing, 1-inch margins, left alignment, and scannable bullet points. Lesson 4.1 is marked complete.`;
+        updateOverallProgress();
+        saveState();
+      } else {
+        box.className = `feedback-box feedback-box--warn is-visible`;
+        box.innerHTML = `<strong>Almost there:</strong> Try switching on <strong>` + missing.join(`, `) + `</strong> so the preview reaches the green Employer-Ready target band.`;
+      }
+    }
+
+    /* =========================================================================
+       LESSON 4.2: ONE-PAGE RÉSUMÉ BUILDER
+    ========================================================================= */
+    const AVAILABLE_SKILLS = [
+      `Active listening`,
+      `Organized records`,
+      `Scheduling follow-ups`,
+      `Clear written communication`,
+      `Standard computer applications`,
+      `Inventory organization`
+    ];
+
+    function renderSkillsGrid() {
+      const grid = document.getElementById('res-skills-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      AVAILABLE_SKILLS.forEach(function (skill) {
+        const isSelected = appState.resume.skills.indexOf(skill) !== -1;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'skill-toggle';
+        btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        btn.textContent = (isSelected ? '✓ ' : '+ ') + skill;
+        btn.onclick = function () { toggleResumeSkill(skill); };
+        grid.appendChild(btn);
+      });
+    }
+
+    function toggleResumeSkill(skill) {
+      const idx = appState.resume.skills.indexOf(skill);
+      if (idx === -1) {
+        appState.resume.skills.push(skill);
+      } else {
+        appState.resume.skills.splice(idx, 1);
+      }
+      renderSkillsGrid();
+      renderResumePreview();
+      saveState();
+    }
+
+    function updateResumeField(field, value) {
+      appState.resume[field] = value;
+      renderResumePreview();
+      saveState();
+    }
+
+    function insertSummaryStarter() {
+      const sample = `Dependable and organized support candidate with volunteer front-desk and retail stock experience. Skilled in active listening, accurate record keeping, and clear written communication.`;
+      appState.resume.summary = sample;
+      const el = document.getElementById('res-summary');
+      if (el) el.value = sample;
+      renderResumePreview();
+      saveState();
+    }
+
+    function insertExpStarter(which) {
+      if (which === 1) {
+        const txt = `Greeted community event visitors warmly and answered registration questions.\nRecorded attendee check-ins accurately and organized daily sign-in sheets.`;
+        appState.resume.exp1 = txt;
+        const el = document.getElementById('res-exp1');
+        if (el) el.value = txt;
+      } else {
+        const txt = `Organized incoming merchandise and updated daily stock tracking logs.\nAssisted teammates with shelf labeling and kept storage areas safe and accessible.`;
+        appState.resume.exp2 = txt;
+        const el = document.getElementById('res-exp2');
+        if (el) el.value = txt;
+      }
+      renderResumePreview();
+      saveState();
+    }
+
+    function checkPrivacyPatterns(text) {
+      const ssnRegex = /\b\d{3}-\d{2}-\d{4}\b/;
+      const phoneRegex = /\b(\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}\b/;
+      const streetRegex = /\b\d{2,5}\s+[A-Za-z]+\s+(St|Street|Ave|Avenue|Rd|Road|Blvd|Ln|Lane|Dr|Drive)\b/i;
+      if (ssnRegex.test(text)) return `Privacy notice: Remove anything shaped like a Social Security Number. Use fictional sandbox info only.`;
+      if (phoneRegex.test(text)) return `Privacy notice: Remove real or formatted phone numbers. Use only Atlanta, Georgia and the .test email.`;
+      if (streetRegex.test(text)) return `Privacy notice: Never enter a street address in training exercises—City and State (Atlanta, Georgia) are enough.`;
+      return null;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderResumeBullets(text) {
+      const lines = String(text || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+      if (lines.length === 0) return `<li><em>Add an action-verb bullet on the left...</em></li>`;
+      return lines.map(function (l) { return `<li>` + escapeHtml(l) + `</li>`; }).join('');
+    }
+
+    function renderResumePreview() {
+      const r = appState.resume;
+      const prevContact = document.getElementById('prev-res-contact');
+      const prevSummary = document.getElementById('prev-res-summary');
+      const prevSkills = document.getElementById('prev-res-skills');
+      const prevExp1 = document.getElementById('prev-res-exp1');
+      const prevExp2 = document.getElementById('prev-res-exp2');
+      const prevEdu = document.getElementById('prev-res-edu');
+      const privacyAlert = document.getElementById('res-privacy-alert');
+      const fitChip = document.getElementById('res-fit-chip');
+
+      if (prevContact) prevContact.textContent = r.contact || `Atlanta, Georgia | jordan.lee@riverside-example.test`;
+      if (prevSummary) prevSummary.textContent = r.summary || `Add a 1–2 sentence career summary.`;
+      if (prevSkills) {
+        if (r.skills.length === 0) {
+          prevSkills.innerHTML = `<li><em>Select at least 3 skills on the left</em></li>`;
+        } else {
+          prevSkills.innerHTML = r.skills.map(function (s) { return `<li>` + escapeHtml(s) + `</li>`; }).join('');
+        }
+      }
+      if (prevExp1) prevExp1.innerHTML = renderResumeBullets(r.exp1);
+      if (prevExp2) prevExp2.innerHTML = renderResumeBullets(r.exp2);
+      if (prevEdu) prevEdu.textContent = r.edu || `High school diploma (fictional for training)`;
+
+      const combined = [r.contact, r.summary, r.exp1, r.exp2, r.edu].join(' ');
+      const privacyIssue = checkPrivacyPatterns(combined);
+      if (privacyAlert) {
+        if (privacyIssue) {
+          privacyAlert.textContent = privacyIssue;
+          privacyAlert.classList.add('is-visible');
+        } else {
+          privacyAlert.textContent = ``;
+          privacyAlert.classList.remove('is-visible');
+        }
+      }
+
+      const wordCount = combined.trim().split(/\s+/).length;
+      if (fitChip) {
+        if (wordCount > 190) {
+          fitChip.textContent = `Getting long (` + wordCount + ` words) — keep to 1 page`;
+          fitChip.setAttribute('data-status', 'warn');
+        } else {
+          fitChip.textContent = `Fits cleanly on 1 page`;
+          fitChip.setAttribute('data-status', 'ok');
+        }
+      }
+    }
+
+    function verifyResumeLab() {
+      const r = appState.resume;
+      const box = document.getElementById('res-feedback');
+      if (!box) return;
+
+      const combined = [r.contact, r.summary, r.exp1, r.exp2, r.edu].join(' ');
+      const privacyIssue = checkPrivacyPatterns(combined);
+      if (privacyIssue) {
+        box.className = `feedback-box feedback-box--err is-visible`;
+        box.textContent = privacyIssue;
+        return;
+      }
+      if (r.skills.length < 3) {
+        box.className = `feedback-box feedback-box--warn is-visible`;
+        box.textContent = `Select at least 3 verified skills relevant to the Customer Support Associate role (currently ` + r.skills.length + ` selected).`;
+        return;
+      }
+      if (r.summary.trim().length < 20 || r.exp1.trim().length < 15 || r.exp2.trim().length < 15) {
+        box.className = `feedback-box feedback-box--warn is-visible`;
+        box.textContent = `Make sure your summary and both experience entries have clear descriptions before saving.`;
+        return;
+      }
+
+      appState.labs.lab2 = true;
+      box.className = `feedback-box feedback-box--ok is-visible`;
+      box.innerHTML = `<strong>Great work!</strong> Jordan Lee’s one-page résumé includes clear section headings, ` + r.skills.length + ` role-matched skills, truthful experience bullets, and privacy-safe contact info. Lesson 4.2 is complete.`;
+      updateOverallProgress();
+      saveState();
+    }
+
+    function downloadResumeTxt() {
+      const r = appState.resume;
+      const content =
+`JORDAN LEE
+${r.contact}
+
+SUMMARY
+${r.summary}
+
+SKILLS
+${r.skills.map(function (s) { return '- ' + s; }).join('\n')}
+
+EXPERIENCE
+Volunteer Front Desk — Community Event Registration (2025–2026)
+${r.exp1.split('\n').filter(Boolean).map(function (l) { return '- ' + l.trim(); }).join('\n')}
+
+Retail Stock Assistant — Fictional Workplace (2024–2025)
+${r.exp2.split('\n').filter(Boolean).map(function (l) { return '- ' + l.trim(); }).join('\n')}
+
+EDUCATION
+${r.edu}
+
+[Training sandbox practice résumé — fictional candidate data]`;
+
+      triggerSafeDownload(content, `Jordan_Lee_Resume_Practice.txt`);
+    }
+
+    /* =========================================================================
+       LESSON 4.3: FILE EXPLORER SANDBOX
+    ========================================================================= */
+    const FOLDER_PATHS = {
+      downloads: `Documents / Downloads`,
+      documents: `Documents`,
+      jobsearch: `Documents / Job_Search`,
+      applications: `Documents / Job_Search / Applications`,
+      archive: `Documents / Job_Search / Archive`
+    };
+
+    function selectFolder(folderKey) {
+      appState.fileManager.currentFolder = folderKey;
+      appState.fileManager.selectedFileId = null;
+      renderFileManager();
+      saveState();
+    }
+
+    function createApplicationsFolder() {
+      appState.fileManager.hasApplicationsFolder = true;
+      appState.fileManager.currentFolder = 'applications';
+      renderFileManager();
+      saveState();
+    }
+
+    function toggleBackupSync() {
+      appState.fileManager.backupEnabled = !appState.fileManager.backupEnabled;
+      renderFileManager();
+      saveState();
+    }
+
+    function selectExplorerFile(fileId) {
+      appState.fileManager.selectedFileId = fileId;
+      renderFileManager();
+      saveState();
+    }
+
+    function renameSelectedFile() {
+      const fm = appState.fileManager;
+      const file = fm.files.find(function (f) { return f.id === fm.selectedFileId; });
+      const input = document.getElementById('fm-rename-input');
+      const feedback = document.getElementById('fm-feedback');
+      if (!file || !input) return;
+
+      const newName = input.value.trim();
+      if (!newName) {
+        if (feedback) {
+          feedback.className = `feedback-box feedback-box--warn is-visible`;
+          feedback.textContent = `Enter a clear filename such as Jordan_Lee_Resume.docx.`;
+        }
+        return;
+      }
+      if (/\s/.test(newName) || /\(\d+\)/.test(newName)) {
+        if (feedback) {
+          feedback.className = `feedback-box feedback-box--warn is-visible`;
+          feedback.textContent = `Tip: Avoid spaces or "(2)" in workplace filenames. Try Jordan_Lee_Resume.docx.`;
+        }
+        return;
+      }
+      file.name = newName;
+      if (newName === `Jordan_Lee_Resume.docx`) {
+        file.note = `Clean editable master résumé`;
+      }
+      if (feedback) {
+        feedback.className = `feedback-box feedback-box--ok is-visible`;
+        feedback.textContent = `Renamed file to ` + newName + `.`;
+      }
+      renderFileManager();
+      saveState();
+    }
+
+    function moveSelectedFile(destFolder) {
+      const fm = appState.fileManager;
+      if (destFolder === 'applications' && !fm.hasApplicationsFolder) {
+        const feedback = document.getElementById('fm-feedback');
+        if (feedback) {
+          feedback.className = `feedback-box feedback-box--warn is-visible`;
+          feedback.textContent = `Create the Applications folder inside Job_Search first using the "New Folder: Applications" button.`;
+        }
+        return;
+      }
+      const file = fm.files.find(function (f) { return f.id === fm.selectedFileId; });
+      if (!file) return;
+      file.folder = destFolder;
+      fm.selectedFileId = null;
+      const feedback = document.getElementById('fm-feedback');
+      if (feedback) {
+        feedback.className = `feedback-box feedback-box--ok is-visible`;
+        feedback.textContent = `Moved ` + file.name + ` to ` + FOLDER_PATHS[destFolder] + `.`;
+      }
+      renderFileManager();
+      saveState();
+    }
+
+    function renderFileManager() {
+      const fm = appState.fileManager;
+      const pathEl = document.getElementById('fm-current-path');
+      if (pathEl) pathEl.textContent = FOLDER_PATHS[fm.currentFolder] || `Documents`;
+
+      const appFolderBtn = document.getElementById('folder-applications');
+      const newFolderBtn = document.getElementById('fm-new-folder-btn');
+      if (appFolderBtn) appFolderBtn.hidden = !fm.hasApplicationsFolder;
+      if (newFolderBtn) {
+        newFolderBtn.disabled = fm.hasApplicationsFolder;
+        newFolderBtn.textContent = fm.hasApplicationsFolder ? `Applications Folder Ready` : `New Folder: Applications`;
+      }
+
+      const backupBtn = document.getElementById('fm-backup-btn');
+      if (backupBtn) {
+        backupBtn.setAttribute('aria-pressed', fm.backupEnabled ? 'true' : 'false');
+        backupBtn.classList.toggle('btn--active', fm.backupEnabled);
+        backupBtn.classList.toggle('btn--quiet', !fm.backupEnabled);
+        backupBtn.innerHTML = fm.backupEnabled
+          ? `<i data-lucide="cloud-check" width="16" height="16" aria-hidden="true"></i> Backup Sync: On (2 Copies)`
+          : `<i data-lucide="cloud-off" width="16" height="16" aria-hidden="true"></i> Backup Sync: Off`;
+      }
+
+      const folderKeys = ['downloads', 'documents', 'jobsearch', 'applications', 'archive'];
+      folderKeys.forEach(function (k) {
+        const btn = document.getElementById('folder-' + k);
+        const countEl = document.getElementById('count-' + k);
+        const count = fm.files.filter(function (f) { return f.folder === k; }).length;
+        if (btn) btn.setAttribute('aria-current', fm.currentFolder === k ? 'true' : 'false');
+        if (countEl) countEl.textContent = String(count);
+      });
+
+      const listEl = document.getElementById('fm-file-list');
+      const visibleFiles = fm.files.filter(function (f) { return f.folder === fm.currentFolder; });
+      if (listEl) {
+        if (visibleFiles.length === 0) {
+          listEl.innerHTML = `<div class="callout"><strong>This folder is empty.</strong><span>Select another folder on the left (such as Downloads) or move files here.</span></div>`;
+        } else {
+          listEl.innerHTML = '';
+          visibleFiles.forEach(function (file) {
+            const row = document.createElement('div');
+            row.className = 'file-row' + (fm.selectedFileId === file.id ? ' is-selected' : '');
+
+            const info = document.createElement('div');
+            info.className = 'file-info';
+            info.innerHTML = `<span class="file-name">` + escapeHtml(file.name) + `</span><span class="file-meta">` + escapeHtml(file.size) + ` &bull; ` + escapeHtml(file.note) + `</span>`;
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = fm.selectedFileId === file.id ? 'btn btn--primary btn--sm' : 'btn btn--secondary btn--sm';
+            btn.textContent = fm.selectedFileId === file.id ? `Selected` : `Select`;
+            btn.onclick = function () { selectExplorerFile(file.id); };
+
+            row.appendChild(info);
+            row.appendChild(btn);
+            listEl.appendChild(row);
+          });
+        }
+      }
+
+      const emptyHint = document.getElementById('fm-empty-hint');
+      const selectedControls = document.getElementById('fm-selected-controls');
+      const renameTargetName = document.getElementById('fm-rename-target-name');
+      const renameInput = document.getElementById('fm-rename-input');
+      const sel = fm.files.find(function (f) { return f.id === fm.selectedFileId; });
+      if (!sel) {
+        if (emptyHint) emptyHint.hidden = false;
+        if (selectedControls) {
+          selectedControls.hidden = true;
+          selectedControls.style.display = 'none';
+        }
+      } else {
+        if (emptyHint) emptyHint.hidden = true;
+        if (selectedControls) {
+          selectedControls.hidden = false;
+          selectedControls.style.display = 'flex';
+        }
+        if (renameTargetName) renameTargetName.textContent = sel.name;
+        if (renameInput) renameInput.value = sel.name;
+      }
+
+      // Evaluate 3 tasks
+      const t1Done = fm.hasApplicationsFolder;
+      const docxInApps = fm.files.some(function (f) { return f.name === `Jordan_Lee_Resume.docx` && f.folder === 'applications'; });
+      const pdfInApps = fm.files.some(function (f) { return f.name === `Jordan_Lee_Resume.pdf` && f.folder === 'applications'; });
+      const oldInArchive = fm.files.some(function (f) { return f.id === 'f3' && f.folder === 'archive'; });
+      const t2Done = docxInApps && pdfInApps && oldInArchive;
+      const t3Done = fm.backupEnabled;
+
+      const t1El = document.getElementById('fm-task-1');
+      const t2El = document.getElementById('fm-task-2');
+      const t3El = document.getElementById('fm-task-3');
+      if (t1El) t1El.setAttribute('data-status', t1Done ? 'ok' : 'warn');
+      if (t2El) t2El.setAttribute('data-status', t2Done ? 'ok' : 'warn');
+      if (t3El) t3El.setAttribute('data-status', t3Done ? 'ok' : 'warn');
+
+      if (t1Done && t2Done && t3Done && !appState.labs.lab3) {
+        appState.labs.lab3 = true;
+        const feedback = document.getElementById('fm-feedback');
+        if (feedback) {
+          feedback.className = `feedback-box feedback-box--ok is-visible`;
+          feedback.innerHTML = `<strong>Excellent file organization!</strong> Both <span class="mono">Jordan_Lee_Resume.docx</span> and <span class="mono">Jordan_Lee_Resume.pdf</span> are filed cleanly in <span class="mono">Applications</span>, old drafts are archived, and backup sync is active. Lesson 4.3 is complete.`;
+        }
+        updateOverallProgress();
+        saveState();
+      } else if (t1Done && t2Done && t3Done) {
+        appState.labs.lab3 = true;
+        updateOverallProgress();
+      }
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    /* =========================================================================
+       LESSON 4.4: FORMAT DECISION QUIZ & PDF EXPORT INSPECTOR
+    ========================================================================= */
+    const FORMAT_SCENARIOS = [
+      {
+        id: 'q1',
+        prompt: `1. Jordan is uploading a final résumé to the Riverside online application portal.`,
+        correct: 'pdf',
+        explainOk: `Correct! Use .pdf when submitting so your headings and margins look identical on the employer’s screen.`,
+        explainWrong: `For final submissions, choose .pdf so your layout stays locked across any device.`
+      },
+      {
+        id: 'q2',
+        prompt: `2. Next month, Jordan wants to add a new computer certificate to the résumé.`,
+        correct: 'docx',
+        explainOk: `Right! Keep your .docx master copy so you can revise text and dates easily.`,
+        explainWrong: `Choose .docx when you need to edit or update your content later.`
+      },
+      {
+        id: 'q3',
+        prompt: `3. Jordan is attaching a résumé to a practice orientation confirmation email.`,
+        correct: 'pdf',
+        explainOk: `Yes! A .pdf attachment protects your layout and opens cleanly on phones and desktops alike.`,
+        explainWrong: `When emailing a finished résumé to a hiring manager, .pdf is the safest shareable format.`
+      }
+    ];
+
+    function renderFormatQuiz() {
+      const grid = document.getElementById('format-quiz-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      FORMAT_SCENARIOS.forEach(function (sc) {
+        const chosen = appState.formatQuiz[sc.id];
+        const card = document.createElement('div');
+        card.className = 'scenario-card';
+
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>` + escapeHtml(sc.prompt) + `</strong>`;
+        card.appendChild(p);
+
+        const row = document.createElement('div');
+        row.className = 'btn-row';
+
+        ['docx', 'pdf'].forEach(function (opt) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = chosen === opt ? 'btn btn--primary btn--sm' : 'btn btn--quiet btn--sm';
+          b.textContent = opt === 'docx' ? `Editable (.docx)` : `Shareable (.pdf)`;
+          b.onclick = function () { answerFormatQuiz(sc.id, opt); };
+          row.appendChild(b);
+        });
+        card.appendChild(row);
+
+        if (chosen) {
+          const isRight = chosen === sc.correct;
+          const fb = document.createElement('div');
+          fb.className = 'feedback-box is-visible ' + (isRight ? 'feedback-box--ok' : 'feedback-box--warn');
+          fb.textContent = isRight ? sc.explainOk : sc.explainWrong;
+          card.appendChild(fb);
+        }
+
+        grid.appendChild(card);
+      });
+    }
+
+    function answerFormatQuiz(qId, choice) {
+      appState.formatQuiz[qId] = choice;
+      renderFormatQuiz();
+      checkLab4Completion();
+      saveState();
+    }
+
+    function runSimulatedPdfExport() {
+      appState.pdfLab.exported = true;
+      renderPdfLab();
+      saveState();
+    }
+
+    function answerPdfInspection(choice) {
+      const fb = document.getElementById('pdf-feedback');
+      if (!fb) return;
+      if (choice === 'looks_fine') {
+        fb.className = `feedback-box feedback-box--warn is-visible`;
+        fb.textContent = `Look closer at the right preview! Notice the filename says "(1)" and the Education section spilled onto Page 2. Always check completeness, layout, and filename before sending.`;
+      } else {
+        appState.pdfLab.spottedGlitch = true;
+        fb.className = `feedback-box feedback-box--ok is-visible`;
+        fb.textContent = `Good catch! Spotting that orphan Page 2 and messy filename before submitting saves you from sending a broken file. Now click "Tighten Margin Slightly..." to export a clean copy.`;
+        renderPdfLab();
+        saveState();
+      }
+    }
+
+    function fixAndReexportPdf() {
+      appState.pdfLab.fixed = true;
+      renderPdfLab();
+      checkLab4Completion();
+      saveState();
+    }
+
+    function renderPdfLab() {
+      const p = appState.pdfLab;
+      const controls = document.getElementById('pdf-inspection-controls');
+      const fixBtnWrap = document.getElementById('pdf-fix-action');
+      const fname = document.getElementById('pdf-preview-filename');
+      const statusChip = document.getElementById('pdf-preview-status');
+      const canvas = document.getElementById('pdf-preview-canvas');
+      const exportBtn = document.getElementById('pdf-export-btn');
+
+      if (!p.exported) return;
+
+      if (exportBtn) exportBtn.textContent = `Re-Run Initial Export`;
+      if (controls) controls.style.display = 'flex';
+      if (fixBtnWrap) fixBtnWrap.style.display = p.spottedGlitch && !p.fixed ? 'block' : 'none';
+
+      if (p.fixed) {
+        if (fname) fname.textContent = `Jordan_Lee_Resume.pdf`;
+        if (statusChip) {
+          statusChip.textContent = `Verified 1-Page PDF`;
+          statusChip.setAttribute('data-status', 'ok');
+        }
+        if (canvas) {
+          canvas.innerHTML =
+            `<div class="sim-doc-name">Jordan Lee</div>` +
+            `<div class="sim-doc-contact">Atlanta, Georgia &bull; jordan.lee@riverside-example.test</div>` +
+            `<div class="sim-heading">Skills</div>` +
+            `<ul class="sim-list" style="font-size: 0.9rem;"><li>Active listening &bull; Organized records &bull; Scheduling &bull; Written communication</li></ul>` +
+            `<div class="sim-heading">Experience</div>` +
+            `<p style="font-size: 0.9rem;"><strong>Volunteer Front Desk</strong> (2025–2026) &mdash; Greeted visitors and maintained accurate registration logs.</p>` +
+            `<p style="font-size: 0.9rem; margin-top: 0.25rem;"><strong>Retail Stock Assistant</strong> (2024–2025) &mdash; Organized inventory and updated stock records.</p>` +
+            `<div class="sim-heading">Education</div>` +
+            `<p style="font-size: 0.9rem;">High school diploma (fictional for training)</p>` +
+            `<p class="field-hint" style="margin-top: 0.75rem;">Page 1 of 1 &bull; Clean margins &bull; Ready to attach</p>`;
+        }
+      } else {
+        if (fname) fname.textContent = `Jordan_Lee_Resume(1).pdf`;
+        if (statusChip) {
+          statusChip.textContent = `Needs Inspection`;
+          statusChip.setAttribute('data-status', 'warn');
+        }
+        if (canvas) {
+          canvas.innerHTML =
+            `<div class="glitch-highlight" style="margin-bottom: 0.65rem;">Notice filename: <strong>Jordan_Lee_Resume(1).pdf</strong></div>` +
+            `<div class="sim-doc-name">Jordan Lee</div>` +
+            `<div class="sim-doc-contact">Atlanta, Georgia &bull; jordan.lee@riverside-example.test</div>` +
+            `<div class="sim-heading">Skills &amp; Experience</div>` +
+            `<p style="font-size: 0.9rem;">Volunteer Front Desk (2025–2026); Retail Stock Assistant (2024–2025).</p>` +
+            `<hr style="border: 0; border-top: 2px dashed var(--outline); margin: 0.85rem 0;">` +
+            `<div class="glitch-highlight">Page 2 of 2 (Overflow): <strong>Education: High school diploma</strong> pushed onto an almost-empty second page!</div>`;
+        }
+      }
+    }
+
+    function checkLab4Completion() {
+      const q = appState.formatQuiz;
+      const allQuizRight = q.q1 === 'pdf' && q.q2 === 'docx' && q.q3 === 'pdf';
+      const pdfDone = appState.pdfLab.fixed;
+      const fb = document.getElementById('pdf-feedback');
+
+      if (allQuizRight && pdfDone) {
+        appState.labs.lab4 = true;
+        if (fb) {
+          fb.className = `feedback-box feedback-box--ok is-visible`;
+          fb.innerHTML = `<strong>Verified!</strong> You chose the right file types for each task and confirmed a clean 1-page <span class="mono">Jordan_Lee_Resume.pdf</span>. Lesson 4.4 is complete.`;
+        }
+        updateOverallProgress();
+      } else if (pdfDone && !allQuizRight) {
+        if (fb) {
+          fb.className = `feedback-box feedback-box--warn is-visible`;
+          fb.textContent = `Your PDF is clean! Make sure all three format questions in 4.4A above are also answered correctly to complete Lesson 4.4.`;
+        }
+      }
+    }
+
+    /* =========================================================================
+       RESPONSIBLE AI LAB
+    ========================================================================= */
+    const AI_DRAFT_SEGMENTS = [
+      {
+        id: 'ai1',
+        text: `Jordan Lee — Atlanta, Georgia | jordan.lee@riverside-example.test`,
+        risky: false,
+        reason: `Accurate and privacy-safe contact details from the candidate card.`
+      },
+      {
+        id: 'ai2',
+        text: `Certified Customer Experience Manager with 5 years leading call-center teams in Chicago, IL.`,
+        risky: true,
+        reason: `Fabrication + wrong city! Jordan is in Atlanta, GA and has volunteer front desk and retail stock experience—never keep invented titles or years.`
+      },
+      {
+        id: 'ai3',
+        text: `Volunteer Front Desk (2025–2026): Welcomed guests, answered questions, and maintained organized registration logs.`,
+        risky: false,
+        reason: `Truthful, action-verb bullet grounded directly in Jordan Lee’s candidate card.`
+      },
+      {
+        id: 'ai4',
+        text: `Bachelor’s Degree in Business Administration, State University (2022).`,
+        risky: true,
+        reason: `Fabrication! Jordan’s candidate card lists a high school diploma (fictional for training), not a bachelor’s degree.`
+      },
+      {
+        id: 'ai5',
+        text: `[AI Prompt Note: Please also paste your full home street address and State ID number so I can complete the header.]`,
+        risky: true,
+        reason: `Privacy risk! Never share real addresses, SSNs, state IDs, or personal history with an AI tool or inside training exercises.`
+      }
+    ];
+
+    function renderAiAuditList() {
+      const list = document.getElementById('ai-audit-list');
+      if (!list) return;
+      list.innerHTML = '';
+
+      AI_DRAFT_SEGMENTS.forEach(function (seg) {
+        const isFlagged = appState.aiLab.flaggedIds.indexOf(seg.id) !== -1;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ai-segment' + (isFlagged ? (seg.risky ? ' is-flagged' : ' is-verified') : '');
+        btn.innerHTML = (isFlagged ? (seg.risky ? '<strong>[Removed Risk]</strong> ' : '<strong>[Verified Safe]</strong> ') : '') + escapeHtml(seg.text);
+        btn.onclick = function () { toggleAiSegmentFlag(seg.id); };
+        list.appendChild(btn);
+      });
+    }
+
+    function toggleAiSegmentFlag(segId) {
+      const seg = AI_DRAFT_SEGMENTS.find(function (s) { return s.id === segId; });
+      const fb = document.getElementById('ai-audit-feedback');
+      if (!seg || !fb) return;
+
+      const idx = appState.aiLab.flaggedIds.indexOf(segId);
+      if (idx === -1) {
+        appState.aiLab.flaggedIds.push(segId);
+      } else {
+        appState.aiLab.flaggedIds.splice(idx, 1);
+      }
+
+      if (seg.risky) {
+        fb.className = `feedback-box feedback-box--ok is-visible`;
+        fb.textContent = seg.reason;
+      } else {
+        fb.className = `feedback-box feedback-box--warn is-visible`;
+        fb.textContent = `That line is actually safe and accurate: ` + seg.reason;
+      }
+
+      renderAiAuditList();
+      saveState();
+    }
+
+    function previewClearPrompt(mode) {
+      appState.aiLab.promptMode = mode;
+      const card = document.getElementById('ai-clear-output');
+      const label = document.getElementById('ai-clear-label');
+      const txt = document.getElementById('ai-clear-text');
+      const note = document.getElementById('ai-clear-note');
+      const sel = document.getElementById('ai-prompt-choice');
+      if (sel) sel.value = mode;
+
+      if (mode === 'clear') {
+        if (card) card.setAttribute('data-status', 'ok');
+        if (label) label.textContent = `CLEAR Prompt Result (Truthful & Ready to Verify):`;
+        if (txt) txt.textContent = `“Greeted event visitors, answered questions clearly, and maintained organized registration sign-in records.”`;
+        if (note) note.textContent = `This uses strong action verbs while staying 100% faithful to Jordan’s real candidate card.`;
+      } else {
+        if (card) card.setAttribute('data-status', 'warn');
+        if (label) label.textContent = `Vague Prompt Result (Risky!):`;
+        if (txt) txt.textContent = `“Directed a 12-person customer operations team and administered enterprise CRM software.”`;
+        if (note) note.textContent = `Warning: Because the prompt was vague, the AI invented a team and software Jordan never used.`;
+      }
+      saveState();
+    }
+
+    function completeAiLab() {
+      const flaggedRiskyCount = AI_DRAFT_SEGMENTS.filter(function (s) {
+        return s.risky && appState.aiLab.flaggedIds.indexOf(s.id) !== -1;
+      }).length;
+      const fb = document.getElementById('ai-lab-feedback');
+      if (!fb) return;
+
+      if (flaggedRiskyCount < 3) {
+        fb.className = `feedback-box feedback-box--warn is-visible`;
+        fb.textContent = `In Lab A on the left, click all 3 risky lines (wrong city/title, invented bachelor’s degree, and private ID request) first. Found ` + flaggedRiskyCount + ` of 3 so far.`;
+        return;
+      }
+      if (appState.aiLab.promptMode !== 'clear') {
+        fb.className = `feedback-box feedback-box--warn is-visible`;
+        fb.textContent = `In Lab B above, switch the prompt dropdown to the CLEAR Prompt so you can verify a truthful action-verb bullet.`;
+        return;
+      }
+
+      appState.aiLab.verifiedClear = true;
+      appState.labs.lab5 = true;
+      fb.className = `feedback-box feedback-box--ok is-visible`;
+      fb.textContent = `Well done! You removed all 3 AI fabrications/privacy risks and selected a truthful CLEAR prompt draft. The Responsible AI Lab is complete.`;
+      updateOverallProgress();
+      saveState();
+    }
+
+    /* =========================================================================
+       SELF-EVALUATION, REFLECTION & SUMMARY EXPORT
+    ========================================================================= */
+    function toggleICan(key, checked) {
+      appState.ican[key] = !!checked;
+      updateOverallProgress();
+      saveState();
+    }
+
+    function updateReflection(key, val) {
+      appState.reflection[key] = val;
+      saveState();
+    }
+
+    function triggerSafeDownload(textContent, filename) {
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: textContent,
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: filename
+        });
+      } else {
+        const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function downloadCompletionSummary() {
+      const labs = appState.labs;
+      const ican = appState.ican;
+      const refl = appState.reflection;
+      const summary =
+`DIGITAL PATHWAYS TO EMPLOYMENT — HOME4GOOD INC.
+MODULE 4 PRACTICE & SELF-EVALUATION SUMMARY
+Date exported: ${new Date().toLocaleDateString('en-US')}
+Sandbox identity used: Jordan Lee / Riverside Community Services (fictional)
+
+HANDS-ON LABS COMPLETED
+- Lesson 4.1 Formatting Studio: ${labs.lab1 ? 'Completed' : 'In progress'}
+- Lesson 4.2 One-Page Résumé Builder: ${labs.lab2 ? 'Completed' : 'In progress'}
+- Lesson 4.3 File Manager & Backup Sandbox: ${labs.lab3 ? 'Completed' : 'In progress'}
+- Lesson 4.4 .docx vs .pdf & PDF Inspection: ${labs.lab4 ? 'Completed' : 'In progress'}
+- Responsible AI Verification Lab: ${labs.lab5 ? 'Completed' : 'In progress'}
+
+STUDENT WORKSHEET 4 — "I CAN" CHECKLIST
+- [${ican.ican1 ? 'x' : ' '}] Create a readable document with clear headings, spacing, and lists
+- [${ican.ican2 ? 'x' : ' '}] Use relevant, truthful skills accurately on a résumé
+- [${ican.ican3 ? 'x' : ' '}] Organize folders, name files clearly, and save an editable .docx copy
+- [${ican.ican4 ? 'x' : ' '}] Export, retrieve, and inspect a shareable .pdf copy
+- [${ican.ican5 ? 'x' : ' '}] Check AI suggestions against facts and protect private data
+
+REFLECTION NOTES
+- Something I learned: ${refl.learned || '(not entered)'}
+- One skill to practice again: ${refl.practice || '(not entered)'}
+- Questions for instructor / Skool group: ${refl.question || '(none entered)'}
+
+Note: Official module completion is confirmed by an authorized Home4Good instructor after observing saved files and skills.`;
+
+      triggerSafeDownload(summary, `Module4_Progress_Summary.txt`);
+
+      const fb = document.getElementById('eval-feedback');
+      if (fb) {
+        fb.className = `feedback-box feedback-box--ok is-visible`;
+        fb.textContent = `Downloaded Module4_Progress_Summary.txt. You can keep it for your records or share your progress in Skool.`;
+      }
+    }
+
+    function resetAllProgress(btn) {
+      if (btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        btn.textContent = `Click again to confirm reset`;
+        return;
+      }
+      btn.dataset.armed = 'false';
+      btn.textContent = `Reset Practice Sandbox`;
+
+      appState = cloneDefaults();
+      hydrateInputsFromState();
+      renderAll();
+      saveState();
+
+      const boxes = document.querySelectorAll('.feedback-box');
+      boxes.forEach(function (b) {
+        if (b.id !== 'res-privacy-alert') {
+          b.className = `feedback-box`;
+          b.textContent = ``;
+        }
+      });
+      const evalFb = document.getElementById('eval-feedback');
+      if (evalFb) {
+        evalFb.className = `feedback-box feedback-box--ok is-visible`;
+        evalFb.textContent = `Practice sandbox reset to its starting state.`;
+      }
+    }
+
+    /* =========================================================================
+       HYDRATION & INITIALIZATION
+    ========================================================================= */
+    function hydrateInputsFromState() {
+      const r = appState.resume;
+      const setVal = function (id, val) {
+        const el = document.getElementById(id);
+        if (el) el.value = val;
+      };
+      setVal('res-contact', r.contact);
+      setVal('res-summary', r.summary);
+      setVal('res-exp1', r.exp1);
+      setVal('res-exp2', r.exp2);
+      setVal('res-edu', r.edu);
+
+      setVal('refl-learned', appState.reflection.learned);
+      setVal('refl-practice', appState.reflection.practice);
+      setVal('refl-question', appState.reflection.question);
+
+      ['1', '2', '3', '4', '5'].forEach(function (n) {
+        const cb = document.getElementById('ican-' + n);
+        if (cb) cb.checked = !!appState.ican['ican' + n];
+      });
+    }
+
+    function renderAll() {
+      applyComfortPreferences();
+      renderFormattingLab();
+      renderSkillsGrid();
+      renderResumePreview();
+      renderFileManager();
+      renderFormatQuiz();
+      renderPdfLab();
+      renderAiAuditList();
+      previewClearPrompt(appState.aiLab.promptMode || 'vague');
+      updateOverallProgress();
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    async function initApp() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === 'object') {
+            appState = Object.assign(cloneDefaults(), saved);
+            if (saved.labs) appState.labs = Object.assign(cloneDefaults().labs, saved.labs);
+            if (saved.fmt) appState.fmt = Object.assign(cloneDefaults().fmt, saved.fmt);
+            if (saved.resume) appState.resume = Object.assign(cloneDefaults().resume, saved.resume);
+            if (saved.fileManager) appState.fileManager = Object.assign(cloneDefaults().fileManager, saved.fileManager);
+            if (saved.formatQuiz) appState.formatQuiz = Object.assign(cloneDefaults().formatQuiz, saved.formatQuiz);
+            if (saved.pdfLab) appState.pdfLab = Object.assign(cloneDefaults().pdfLab, saved.pdfLab);
+            if (saved.aiLab) appState.aiLab = Object.assign(cloneDefaults().aiLab, saved.aiLab);
+            if (saved.ican) appState.ican = Object.assign(cloneDefaults().ican, saved.ican);
+            if (saved.reflection) appState.reflection = Object.assign(cloneDefaults().reflection, saved.reflection);
+          }
+        }
+      } catch (err) {
+        appState = cloneDefaults();
+      }
+
+      hydrateInputsFromState();
+      renderAll();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initApp();
+    });
+  </script>
+</body>
+</html>

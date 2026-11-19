@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Digital Pathways to Employment — Module 6: Virtual Interviews &amp; Workplace Digital Skills</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --primary-hover: #0b636f;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --tertiary-container: #e2f2e8;
+      --error: #b3261e;
+      --error-container: #fbe9e7;
+      --on-error: #ffffff;
+      --warning-surface: #fdf4e3;
+      --warning-ink: #7a4800;
+
+      /* SVG presence frame tokens */
+      --svg-bg-default: #22343d;
+      --svg-bg-blur: #2b414c;
+      --svg-bg-busy: #38515e;
+      --svg-bg-audio: #18262d;
+      --svg-window: #d2e2f1;
+      --svg-shirt: #0f7c8a;
+      --svg-face-lit: #e3f1f3;
+      --svg-face-dim: #46585f;
+      --svg-text: #f1f7f8;
+
+      /* Simulated dark video stage tokens */
+      --stage-bg: #18262d;
+      --stage-panel: #22343d;
+      --stage-panel-alt: #2b414c;
+      --stage-ink: #f1f7f8;
+      --stage-muted: #b8c7ca;
+      --stage-border: #38515e;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Shared tokens */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.125rem, 1.4rem + 2.8vw, 3.25rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.4vw, 2.125rem);
+      --subhead-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.375rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    body.large-text {
+      --body-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.375rem);
+      --subhead-size: clamp(1.3125rem, 1.15rem + 0.6vw, 1.5625rem);
+      --label-size: 0.875rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    header { position: static !important; }
+
+    .page-shell {
+      border-top: var(--top-bar);
+      background: var(--background);
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+      max-width: 980px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.08;
+    }
+    .section-title {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+    }
+    .subhead {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .lede {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: var(--space-sm) 0 0;
+    }
+    p {
+      margin: 0 0 var(--space-md);
+      max-width: 65ch;
+    }
+    p:last-child { margin-bottom: 0; }
+    ul, ol {
+      margin: 0 0 var(--space-md);
+      padding-left: var(--space-lg);
+      max-width: 65ch;
+    }
+    li + li { margin-top: var(--space-xs); }
+
+    .kicker {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--on-primary-container);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    /* Header & Accessibility bar */
+    .module-header {
+      padding: var(--space-xl) var(--space-lg) var(--space-lg);
+      max-width: 980px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .header-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .org-crumbs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .a11y-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Chips & Status Cards */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background: var(--tertiary-container);
+      color: var(--secondary);
+      line-height: 1.3;
+    }
+    .chip[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="alert"] {
+      background: var(--error-container);
+      color: var(--error);
+    }
+    .chip[data-status="warn"] {
+      background: var(--warning-surface);
+      color: var(--warning-ink);
+    }
+
+    .status-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-status="warn"] { border-left-color: var(--data-3); }
+
+    .callout {
+      background: var(--primary-container);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-primary-container);
+    }
+    .callout p, .callout li { color: var(--on-primary-container); }
+
+    .dignity-note {
+      background: var(--tertiary-container);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--tertiary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--secondary);
+    }
+
+    /* Buttons & Inputs */
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: 0.625rem var(--space-lg);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-in-out),
+                  color var(--dur-micro) var(--ease-in-out),
+                  border-color var(--dur-micro) var(--ease-in-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+    .btn-secondary {
+      background: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) { background: var(--surface-container-low); }
+    .btn-subtle {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+    .btn-subtle:hover:not(:disabled) { background: var(--surface-container); }
+    .btn-danger {
+      background: var(--error);
+      color: var(--on-error);
+    }
+    .btn:active:not(:disabled) { transform: translateY(1px); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .input-control, .select-control, .textarea-control {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.625rem 0.875rem;
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      line-height: 1.45;
+    }
+    .select-control {
+      padding-right: 2.25rem;
+    }
+    .textarea-control {
+      min-height: 96px;
+      resize: vertical;
+    }
+    .input-control:focus-visible, .select-control:focus-visible, .textarea-control:focus-visible {
+      border-color: var(--primary);
+    }
+
+    /* Layout Helpers */
+    .wash-band {
+      background: var(--surface-container-low);
+      border-top: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-xl) var(--space-lg);
+    }
+    .band-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(185px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .kpi-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      margin: var(--space-xs) 0;
+    }
+    .split-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    /* Section Structure */
+    .module-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .module-section:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .step-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    /* Progress Bar & Quick Nav */
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container);
+      overflow: hidden;
+      border: 1px solid var(--outline-variant);
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--tertiary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .jump-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .jump-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background: var(--background);
+      color: var(--primary);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+    }
+    .jump-link:hover {
+      background: var(--surface-container-low);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Interactive Sandbox Cards */
+    .sandbox-box {
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .choice-card {
+      text-align: left;
+      width: 100%;
+      padding: var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-left: var(--status-bar-width) solid var(--outline);
+      border-radius: var(--rounded-lg);
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      min-height: 44px;
+      transition: background-color var(--dur-micro) var(--ease-in-out), border-color var(--dur-micro) var(--ease-in-out);
+    }
+    .choice-card:hover { background: var(--surface-container-low); }
+    .choice-card.is-selected {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      border-left-color: var(--primary);
+    }
+    .choice-card.is-correct {
+      background: var(--tertiary-container);
+      border-color: var(--tertiary);
+      border-left-color: var(--tertiary);
+    }
+    .choice-card.is-wrong {
+      background: var(--error-container);
+      border-color: var(--error);
+      border-left-color: var(--error);
+    }
+
+    /* Simulated Video Meeting Room */
+    .meeting-stage {
+      background: var(--stage-bg);
+      color: var(--stage-ink);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      border: 1px solid var(--stage-border);
+    }
+    .meeting-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      border-bottom: 1px solid var(--stage-border);
+      padding-bottom: var(--space-sm);
+    }
+    .meeting-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .video-tile {
+      background: var(--stage-panel);
+      border: 2px solid var(--stage-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      min-height: 175px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .video-tile.is-speaking {
+      border-color: var(--tertiary);
+    }
+    .avatar-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--rounded-full);
+      background: var(--primary);
+      color: var(--on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.375rem;
+      margin: var(--space-sm) auto;
+    }
+    .tile-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 0.875rem;
+      color: var(--stage-muted);
+    }
+    .meeting-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      justify-content: center;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--stage-border);
+    }
+    .ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0.5rem 0.875rem;
+      border-radius: var(--rounded);
+      border: 1px solid var(--stage-border);
+      background: var(--stage-panel-alt);
+      color: var(--stage-ink);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .ctrl-btn:hover { background: var(--primary); border-color: var(--primary); }
+    .ctrl-btn.is-active { background: var(--tertiary); border-color: var(--tertiary); color: var(--on-primary); }
+    .ctrl-btn.is-alert { background: var(--error); border-color: var(--error); color: var(--on-error); }
+
+    .stage-drawer {
+      background: var(--stage-panel);
+      border: 1px solid var(--stage-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      color: var(--stage-ink);
+    }
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      max-height: 140px;
+      overflow-y: auto;
+      margin-bottom: var(--space-sm);
+    }
+    .chat-bubble {
+      background: var(--stage-panel-alt);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      font-size: 0.9rem;
+    }
+
+    /* Framing & Target Range Meter */
+    .range-meter {
+      position: relative;
+      height: 22px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      overflow: hidden;
+    }
+    .range-target-band {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 70%;
+      right: 0;
+      background: var(--tertiary-container);
+      border-left: 2px dashed var(--tertiary);
+    }
+    .range-fill {
+      position: relative;
+      height: 100%;
+      background: var(--primary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .range-fill.in-range {
+      background: var(--tertiary);
+    }
+
+    /* Tables & Summary Lists */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .data-table th {
+      text-align: left;
+      background: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--on-surface-variant);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .data-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+    }
+    .tabular { font-variant-numeric: tabular-nums; }
+
+    /* Checkboxes */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--background);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .check-item:hover { background: var(--surface-container-low); }
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin: 2px 0 0;
+      accent-color: var(--tertiary);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    .module-footer {
+      background: var(--surface-container-low);
+      border-top: 1px solid var(--outline-variant);
+      padding: var(--space-xl) var(--space-lg);
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+    }
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* Inline code / filenames */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--surface-container-low);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--outline-variant);
+    }
+
+    @media (max-width: 640px) {
+      .module-header, .page-grid, .wash-band, .module-footer {
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
+      }
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="module-header">
+      <div class="header-top-row">
+        <div class="org-crumbs">
+          <span class="chip" data-status="info">Home4Good Inc.</span>
+          <span class="chip" data-status="info">Digital Pathways to Employment</span>
+          <span class="chip">Module 6 of 7</span>
+        </div>
+        <div class="a11y-controls">
+          <button type="button" class="btn btn-subtle" id="btn-large-text" aria-pressed="false" onclick="toggleLargeText()">
+            <i data-lucide="type" aria-hidden="true"></i>
+            <span>Larger Text</span>
+          </button>
+        </div>
+      </div>
+
+      <h1 class="title">Virtual Interviews and Workplace Digital Skills</h1>
+      <p class="lede">
+        Practice joining online interviews, managing microphone and camera controls, handling technical hiccups calmly, reading calendar invitations across time zones, and using AI tools safely without sharing private information.
+      </p>
+
+      <div class="dignity-note" style="margin-top: var(--space-lg);">
+        <strong>Safe Training Environment &amp; Dignity Commitment:</strong>
+        Every exercise here uses fictional training data—<strong>Jordan Lee</strong> applying to <strong>Riverside Community Services</strong> (`hr@riverside-example.test`). Never enter real Social Security numbers, state IDs, passwords, home addresses, or justice-system history. Participation never requires disclosing personal circumstances, and audio-only or phone alternatives are always valid workplace accommodations.
+      </div>
+    </header>
+
+    <div class="wash-band">
+      <div class="band-inner" style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-md);">
+          <div>
+            <span class="kicker">Your Practice Progress</span>
+            <h2 class="subhead" id="progress-headline">Ready to start — pick up any section below</h2>
+          </div>
+          <span class="chip" id="overall-status-chip" data-status="info">0 of 7 sections completed</span>
+        </div>
+
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="main-progress-bar">
+          <div class="progress-fill" id="main-progress-fill"></div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="status-card" data-status="info">
+            <span class="kicker">Core Activities</span>
+            <div class="kpi-value tabular" id="kpi-sections">0 / 7</div>
+            <div class="field-hint">Guided sandboxes &amp; capstone</div>
+          </div>
+          <div class="status-card" data-status="ok">
+            <span class="kicker">I Can Self-Checks</span>
+            <div class="kpi-value tabular" id="kpi-ican">0 / 5</div>
+            <div class="field-hint">Student Worksheet 6 goals</div>
+          </div>
+          <div class="status-card" data-status="info">
+            <span class="kicker">Delivery Mode</span>
+            <div class="kpi-value" style="font-size: 1.25rem;">Self-Paced</div>
+            <div class="field-hint">Watch me &rarr; You try &rarr; Show skill</div>
+          </div>
+        </div>
+
+        <nav aria-label="Module sections">
+          <ul class="jump-list">
+            <li><a class="jump-link" href="#sec-join">1. Joining Links</a></li>
+            <li><a class="jump-link" href="#sec-controls">2. Meeting Controls</a></li>
+            <li><a class="jump-link" href="#sec-troubleshoot">3. Troubleshooting</a></li>
+            <li><a class="jump-link" href="#sec-presence">4. Virtual Presence</a></li>
+            <li><a class="jump-link" href="#sec-calendar">5. Calendar &amp; Time Zones</a></li>
+            <li><a class="jump-link" href="#sec-ai">6. Responsible AI Prep</a></li>
+            <li><a class="jump-link" href="#sec-capstone">7. Riverside Capstone</a></li>
+            <li><a class="jump-link" href="#sec-ican">8. Self-Check &amp; Export</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <main class="page-grid">
+
+      <!-- SECTION 1: JOINING A VIRTUAL MEETING SAFELY -->
+      <section class="module-section" id="sec-join" aria-labelledby="h-join">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">1</span>
+            <span class="kicker">Lesson 6.1 &bull; Pre-Join Check &amp; Link Safety</span>
+            <span class="chip" id="badge-sec-1" data-status="info">Not started</span>
+          </div>
+          <h2 class="section-title" id="h-join">Verify the meeting link before you enter the room</h2>
+          <p class="lede">
+            A virtual interview starts five to ten minutes before the clock hits your scheduled time. Before clicking any link, check who sent it, confirm it matches your calendar invitation, and preview your microphone and display name in the pre-join screen.
+          </p>
+        </div>
+
+        <div class="callout">
+          <strong>Key rule on links and safety:</strong>
+          Legitimate employers never ask you to pay an interview fee, send gift cards, or enter your bank or ID numbers to unlock a meeting link. Keep private interview links off social media so uninvited people cannot join your session.
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Practice 1A: Pick the trustworthy interview link</h3>
+          <p>Jordan Lee received three messages about interviews today. Select the one that is safe to open for the Riverside Community Services practice interview.</p>
+
+          <div class="card-grid" id="link-choices">
+            <button type="button" class="choice-card" id="link-opt-a" onclick="selectLinkOption('a')">
+              <span class="kicker">Message A</span>
+              <strong>Riverside Urgent Portal: riverside-verify-fee.example.test</strong>
+              <span class="field-hint">“Pay $15 verification fee and enter your state ID before joining video.”</span>
+            </button>
+
+            <button type="button" class="choice-card" id="link-opt-b" onclick="selectLinkOption('b')">
+              <span class="kicker">Message B</span>
+              <strong>Ms. Johnson — Riverside Training Room (video-room.riverside-example.test)</strong>
+              <span class="field-hint">“Scheduled Friday, Nov 13, 2:00–2:30 PM Eastern. Join 10 minutes early.”</span>
+            </button>
+
+            <button type="button" class="choice-card" id="link-opt-c" onclick="selectLinkOption('c')">
+              <span class="kicker">Message C</span>
+              <strong>Unknown Sender — Instant Cash Job Room</strong>
+              <span class="field-hint">“Click now! Reply with your email password to confirm attendance.”</span>
+            </button>
+          </div>
+          <div id="link-feedback" class="status-card" data-status="info" aria-live="polite">
+            Choose one message above to check its safety signals.
+          </div>
+        </div>
+
+        <div class="sandbox-box" id="prejoin-lobby">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+            <h3 class="subhead">Practice 1B: Pre-Join Lobby Check</h3>
+            <span class="chip" id="lobby-status-chip" data-status="info">Waiting for link check</span>
+          </div>
+          <p>Once you choose the safe link above, configure Jordan Lee’s display name and test the microphone and camera before clicking <strong>Join Training Room</strong>.</p>
+
+          <div class="split-layout">
+            <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+              <div class="field-group">
+                <label class="field-label" for="lobby-display-name">Display name shown to the interviewer</label>
+                <span class="field-hint">Use your training name (for example, Jordan Lee), not a nickname or account number.</span>
+                <input type="text" class="input-control" id="lobby-display-name" value="Jordan Lee" oninput="updateLobbyName(this.value)">
+              </div>
+
+              <div class="btn-row">
+                <button type="button" class="btn btn-secondary" id="btn-test-mic" onclick="runLobbyMicTest()">
+                  <i data-lucide="mic" aria-hidden="true"></i>
+                  <span>Test Microphone</span>
+                </button>
+                <button type="button" class="btn btn-secondary" id="btn-test-cam" onclick="runLobbyCamTest()">
+                  <i data-lucide="video" aria-hidden="true"></i>
+                  <span>Test Camera</span>
+                </button>
+              </div>
+              <div id="lobby-device-readout" class="field-hint" aria-live="polite">
+                Device check: Click Test Microphone and Test Camera to verify your setup.
+              </div>
+            </div>
+
+            <div class="status-card" id="lobby-preview-card" data-status="info" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+              <span class="kicker">Room Preview</span>
+              <div><strong>Meeting:</strong> Riverside Practice Interview</div>
+              <div><strong>Display Name:</strong> <span id="preview-name-text">Jordan Lee</span></div>
+              <div><strong>Microphone:</strong> <span id="preview-mic-text">Not tested yet</span></div>
+              <div><strong>Camera:</strong> <span id="preview-cam-text">Not tested yet</span></div>
+              <button type="button" class="btn btn-primary" id="btn-join-room" onclick="joinLobbyRoom()" style="margin-top: var(--space-sm);">
+                <i data-lucide="log-in" aria-hidden="true"></i>
+                <span>Join Training Room</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: VIDEO CONFERENCE CONTROLS SANDBOX -->
+      <section class="module-section" id="sec-controls" aria-labelledby="h-controls">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">2</span>
+            <span class="kicker">Lesson 6.1 &amp; 6.3 &bull; Live Controls Sandbox</span>
+            <span class="chip" id="badge-sec-2" data-status="info">0 of 5 drills done</span>
+          </div>
+          <h2 class="section-title" id="h-controls">Master the six everyday meeting controls</h2>
+          <p class="lede">
+            During an interview or team meeting, you will be asked to mute, turn your camera on or off, raise your hand, reply in chat, or switch audio devices. Practice every button right here in a safe simulated room.
+          </p>
+        </div>
+
+        <div class="meeting-stage" role="region" aria-label="Simulated Riverside Video Meeting Room">
+          <div class="meeting-topbar">
+            <div>
+              <strong style="font-size: 1rem;">Riverside Practice Room — Customer Support Associate</strong>
+              <div style="font-size: 0.85rem; color: var(--stage-muted);">Fictional training session &bull; Host: Ms. Johnson</div>
+            </div>
+            <div class="btn-row">
+              <span class="chip" id="sim-drill-counter" data-status="info">Drill 1 of 5</span>
+            </div>
+          </div>
+
+          <div class="stage-drawer" style="border-left: 4px solid var(--primary);" aria-live="polite">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--stage-muted); margin-bottom: 4px;">
+              Ms. Johnson (Training Supervisor) says:
+            </div>
+            <div id="sim-prompt-text" style="font-size: 1.05rem; font-weight: 700;">
+              “Welcome, Jordan! Step 1: Please unmute your microphone using the Mic button below so I can hear you.”
+            </div>
+          </div>
+
+          <div class="meeting-tiles">
+            <div class="video-tile is-speaking">
+              <span class="chip" data-status="info" style="align-self: flex-start;">Host</span>
+              <div class="avatar-circle" aria-hidden="true">MJ</div>
+              <div class="tile-footer">
+                <span><strong>Ms. Johnson</strong></span>
+                <span>Mic: Active &bull; Cam: On</span>
+              </div>
+            </div>
+
+            <div class="video-tile" id="learner-video-tile">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="chip" data-status="info">You</span>
+                <span class="chip" id="sim-hand-chip" style="display: none;">Hand Raised</span>
+              </div>
+              <div class="avatar-circle" id="sim-avatar-circle" aria-hidden="true">JL</div>
+              <div id="sim-cam-status-note" style="text-align: center; font-size: 0.875rem; color: var(--stage-muted);">
+                Camera Off (Avatar shown)
+              </div>
+              <div class="tile-footer">
+                <span><strong id="sim-tile-name">Jordan Lee</strong></span>
+                <span id="sim-tile-av-state">Mic: Muted &bull; Cam: Off</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meeting-controls">
+            <button type="button" class="ctrl-btn is-alert" id="ctrl-mic" onclick="toggleSimMic()">
+              <i data-lucide="mic-off" aria-hidden="true"></i>
+              <span id="ctrl-mic-label">Unmute Mic</span>
+            </button>
+            <button type="button" class="ctrl-btn" id="ctrl-cam" onclick="toggleSimCam()">
+              <i data-lucide="video-off" aria-hidden="true"></i>
+              <span id="ctrl-cam-label">Start Camera</span>
+            </button>
+            <button type="button" class="ctrl-btn" id="ctrl-audio-only" onclick="useAudioOnlyMode()">
+              <i data-lucide="headphones" aria-hidden="true"></i>
+              <span>Audio-Only Mode</span>
+            </button>
+            <button type="button" class="ctrl-btn" id="ctrl-hand" onclick="toggleSimHand()">
+              <i data-lucide="hand" aria-hidden="true"></i>
+              <span id="ctrl-hand-label">Raise Hand</span>
+            </button>
+            <button type="button" class="ctrl-btn" id="ctrl-chat" onclick="toggleSimChat()">
+              <i data-lucide="message-square" aria-hidden="true"></i>
+              <span>Chat</span>
+            </button>
+            <button type="button" class="ctrl-btn" id="ctrl-settings" onclick="toggleSimSettings()">
+              <i data-lucide="settings" aria-hidden="true"></i>
+              <span>Audio/Video Settings</span>
+            </button>
+          </div>
+
+          <div class="stage-drawer" id="sim-chat-drawer" style="display: none;">
+            <div style="font-weight: 700; margin-bottom: var(--space-xs);">In-Meeting Chat</div>
+            <div class="chat-messages" id="sim-chat-log">
+              <div class="chat-bubble"><strong>Ms. Johnson:</strong> Welcome to the Riverside practice room, Jordan.</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: end;">
+              <div class="field-group" style="flex: 1 1 220px;">
+                <label class="field-label" for="sim-chat-input" style="color: var(--stage-ink);">Message to meeting chat</label>
+                <input type="text" class="input-control" id="sim-chat-input" value="Ready to begin — Jordan Lee">
+              </div>
+              <button type="button" class="btn btn-primary" onclick="sendSimChat()">Send Chat</button>
+            </div>
+          </div>
+
+          <div class="stage-drawer" id="sim-settings-drawer" style="display: none;">
+            <div style="font-weight: 700; margin-bottom: var(--space-sm);">Audio &amp; Video Settings</div>
+            <div class="split-layout">
+              <div class="field-group">
+                <label class="field-label" for="sim-mic-select" style="color: var(--stage-ink);">Microphone input device</label>
+                <select class="select-control" id="sim-mic-select" onchange="changeSimMicDevice(this.value)">
+                  <option value="Built-in Microphone">Built-in Laptop Microphone</option>
+                  <option value="Headset Mic">Headset Mic (Recommended for clarity)</option>
+                  <option value="External USB Mic">External USB Microphone</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="sim-spk-select" style="color: var(--stage-ink);">Speaker output</label>
+                <select class="select-control" id="sim-spk-select">
+                  <option value="Headphones">Headphones (Prevents echo)</option>
+                  <option value="Built-in Speakers">Built-in Speakers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="sim-drill-feedback" style="font-size: 0.95rem; color: var(--stage-muted);" aria-live="polite">
+            Complete each prompt from Ms. Johnson above to practice all 5 meeting skills.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: TROUBLESHOOTING COMMON TECH HURDLES -->
+      <section class="module-section" id="sec-troubleshoot" aria-labelledby="h-trouble">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">3</span>
+            <span class="kicker">Lesson 6.3 &bull; Calm Tech Triage</span>
+            <span class="chip" id="badge-sec-3" data-status="info">0 of 4 resolved</span>
+          </div>
+          <h2 class="section-title" id="h-trouble">Handle tech hiccups calmly and communicate fast</h2>
+          <p class="lede">
+            Even in professional offices, audio cuts out, browser permissions block a camera, or Wi-Fi slows down. How you respond—staying calm, trying one fix, and updating the interviewer—shows workplace professionalism.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <div class="sandbox-box">
+            <span class="kicker">Hurdle 1 &bull; Permissions</span>
+            <h3 class="subhead">“Your browser says Camera &amp; Mic Blocked”</h3>
+            <p class="field-hint">You joined the link, and your mic and camera buttons show a slash that will not click on.</p>
+            <div class="btn-row" style="flex-direction: column; align-items: stretch;">
+              <button type="button" class="choice-card" id="tr-1-a" onclick="solveTrouble(1, 'a')">
+                <strong>Click the lock/settings icon next to the web address and set Mic &amp; Camera to Allow, then refresh.</strong>
+              </button>
+              <button type="button" class="choice-card" id="tr-1-b" onclick="solveTrouble(1, 'b')">
+                <strong>Close the laptop and skip the interview without messaging anyone.</strong>
+              </button>
+            </div>
+            <div id="tr-fb-1" class="field-hint" aria-live="polite">Select the best fix.</div>
+          </div>
+
+          <div class="sandbox-box">
+            <span class="kicker">Hurdle 2 &bull; Audio Feedback</span>
+            <h3 class="subhead">“Loud echoing or squealing noise in the room”</h3>
+            <p class="field-hint">Every time Ms. Johnson speaks, her voice echoes back loudly.</p>
+            <div class="btn-row" style="flex-direction: column; align-items: stretch;">
+              <button type="button" class="choice-card" id="tr-2-a" onclick="solveTrouble(2, 'a')">
+                <strong>Turn your speaker volume up to 100% so your voice is louder than the echo.</strong>
+              </button>
+              <button type="button" class="choice-card" id="tr-2-b" onclick="solveTrouble(2, 'b')">
+                <strong>Plug in headphones or mute any second device connected in the same room.</strong>
+              </button>
+            </div>
+            <div id="tr-fb-2" class="field-hint" aria-live="polite">Select the best fix.</div>
+          </div>
+
+          <div class="sandbox-box">
+            <span class="kicker">Hurdle 3 &bull; Weak Connection</span>
+            <h3 class="subhead">“Video freezes and voices sound robotic”</h3>
+            <p class="field-hint">Your internet connection dips while Ms. Johnson asks a question.</p>
+            <div class="btn-row" style="flex-direction: column; align-items: stretch;">
+              <button type="button" class="choice-card" id="tr-3-a" onclick="solveTrouble(3, 'a')">
+                <strong>Turn off your camera to save bandwidth, keep audio on, and note it politely in chat.</strong>
+              </button>
+              <button type="button" class="choice-card" id="tr-3-b" onclick="solveTrouble(3, 'b')">
+                <strong>Keep talking without checking whether they can hear you.</strong>
+              </button>
+            </div>
+            <div id="tr-fb-3" class="field-hint" aria-live="polite">Select the best fix.</div>
+          </div>
+
+          <div class="sandbox-box">
+            <span class="kicker">Hurdle 4 &bull; Connection Drops</span>
+            <h3 class="subhead">“The meeting suddenly disconnects mid-sentence”</h3>
+            <p class="field-hint">Your screen returns to the desktop after a brief power or Wi-Fi drop.</p>
+            <div class="btn-row" style="flex-direction: column; align-items: stretch;">
+              <button type="button" class="choice-card" id="tr-4-a" onclick="solveTrouble(4, 'a')">
+                <strong>Wait two hours to see if the interviewer emails you first.</strong>
+              </button>
+              <button type="button" class="choice-card" id="tr-4-b" onclick="solveTrouble(4, 'b')">
+                <strong>Rejoin via the invite link right away; if it fails, call or email the approved contact within 2 minutes.</strong>
+              </button>
+            </div>
+            <div id="tr-fb-4" class="field-hint" aria-live="polite">Select the best fix.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: PROFESSIONAL VIRTUAL PRESENCE & BACKGROUND -->
+      <section class="module-section" id="sec-presence" aria-labelledby="h-presence">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">4</span>
+            <span class="kicker">Lesson 6.1 &amp; Equity Standard &bull; Presence &amp; Framing</span>
+            <span class="chip" id="badge-sec-4" data-status="info">Reviewing setup</span>
+          </div>
+          <h2 class="section-title" id="h-presence">Set up clear lighting, eye-level framing, and zero pressure</h2>
+          <p class="lede">
+            Digital proficiency is about how clearly you communicate and manage your tools—never about owning expensive equipment, living alone, or having a designer room behind you. Adjust the four simple controls below to see what makes the biggest difference.
+          </p>
+        </div>
+
+        <div class="dignity-note">
+          <strong>Home4Good Assessment Standard:</strong>
+          Instructors and fair employers do not evaluate clothing, home background, accent, or personal circumstances as digital skill. A plain wall, background blur, a library booth, or audio-only accommodation is completely acceptable.
+        </div>
+
+        <div class="sandbox-box">
+          <div class="split-layout">
+            <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+              <div class="field-group">
+                <label class="field-label" for="pres-light">1. Where is the main light source?</label>
+                <select class="select-control" id="pres-light" onchange="updatePresence('light', this.value)">
+                  <option value="front">Window or lamp in front of your face</option>
+                  <option value="back">Bright window directly behind you</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="pres-angle">2. Camera height</label>
+                <select class="select-control" id="pres-angle" onchange="updatePresence('angle', this.value)">
+                  <option value="eye">Eye level (laptop propped on books or shelf)</option>
+                  <option value="low">Low angle on lap pointing upward</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="pres-bg">3. Background &amp; privacy choice</label>
+                <select class="select-control" id="pres-bg" onchange="updatePresence('bg', this.value)">
+                  <option value="blur">Background Blur / Plain wall / Shared-space quiet corner</option>
+                  <option value="audio">Audio-only accommodation (low bandwidth / privacy)</option>
+                  <option value="busy">Busy movement right behind camera</option>
+                </select>
+              </div>
+
+              <label class="check-item">
+                <input type="checkbox" id="pres-dnd" checked onchange="updatePresence('dnd', this.checked)">
+                <span><strong>Silence notifications / Do Not Disturb</strong> on phone and computer so alerts do not interrupt your answer.</span>
+              </label>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+              <div style="background: var(--stage-bg); color: var(--stage-ink); border-radius: var(--rounded-lg); padding: var(--space-md); border: 1px solid var(--stage-border);">
+                <div style="font-size: 0.85rem; color: var(--stage-muted); margin-bottom: var(--space-xs);">Simulated Camera Frame</div>
+                <svg id="presence-svg" viewBox="0 0 320 180" width="100%" aria-hidden="true" style="display: block; border-radius: 8px; background: var(--svg-bg-default);">
+                  <rect id="svg-bg-rect" x="0" y="0" width="320" height="180" fill="var(--svg-bg-blur)"></rect>
+                  <circle id="svg-window" cx="265" cy="40" r="24" fill="var(--svg-window)" opacity="0.15"></circle>
+                  <g id="svg-person" transform="translate(160, 102)">
+                    <ellipse cx="0" cy="54" rx="54" ry="34" fill="var(--svg-shirt)"></ellipse>
+                    <circle id="svg-face" cx="0" cy="-6" r="28" fill="var(--svg-face-lit)"></circle>
+                  </g>
+                  <text id="svg-frame-note" x="12" y="168" fill="var(--svg-text)" font-family="Figtree, sans-serif" font-size="11" font-weight="600">Eye-level &bull; Front light &bull; Blur on</text>
+                </svg>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <span class="kicker">Clarity Target Band (70%–100%)</span>
+                  <span class="chip" id="presence-score-chip">100% Clear Setup</span>
+                </div>
+                <div class="range-meter" aria-hidden="true">
+                  <div class="range-target-band"></div>
+                  <div class="range-fill in-range" id="presence-meter-fill" style="width: 100%;"></div>
+                </div>
+                <p id="presence-advice" class="field-hint" style="margin-top: var(--space-xs);">
+                  Great setup: Front lighting, eye-level camera, distraction-free background, and silenced alerts keep focus on your strengths.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: CALENDAR INVITES AND TIME ZONES -->
+      <section class="module-section" id="sec-calendar" aria-labelledby="h-calendar">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">5</span>
+            <span class="kicker">Lesson 6.2 &bull; Scheduling &amp; Time Zones</span>
+            <span class="chip" id="badge-sec-5" data-status="info">0 of 3 checks passed</span>
+          </div>
+          <h2 class="section-title" id="h-calendar">Read calendar invitations and time zones accurately</h2>
+          <p class="lede">
+            Remote interviews often list the employer’s time zone—such as <strong>Eastern Time</strong>—even if you live or work in another zone. Always convert the time before you RSVP, set a 15-minute reminder, and confirm any missing location details.
+          </p>
+        </div>
+
+        <div class="split-layout">
+          <div class="status-card" data-status="info">
+            <span class="kicker">Sample Calendar Invitation (Workbook Module 6)</span>
+            <h3 class="subhead" style="margin-top: var(--space-xs);">Riverside Practice Interview</h3>
+            <table class="data-table" style="margin-top: var(--space-sm);">
+              <tbody>
+                <tr>
+                  <th>Date</th>
+                  <td>Friday, November 13, 2026</td>
+                </tr>
+                <tr>
+                  <th>Scheduled Time</th>
+                  <td class="tabular"><strong>2:00–2:30 PM Eastern (ET)</strong></td>
+                </tr>
+                <tr>
+                  <th>Location</th>
+                  <td>Instructor-hosted training video room</td>
+                </tr>
+                <tr>
+                  <th>Attendees</th>
+                  <td>Jordan Lee (candidate), Ms. Johnson (instructor)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sandbox-box">
+            <h3 class="subhead">Interactive Time-Zone Converter</h3>
+            <div class="field-group">
+              <label class="field-label" for="tz-select">Select your local time zone</label>
+              <select class="select-control" id="tz-select" onchange="updateTimezone(this.value)">
+                <option value="America/New_York">Eastern Time (ET) — Atlanta, GA / New York</option>
+                <option value="America/Chicago">Central Time (CT) — 1 hour behind ET</option>
+                <option value="America/Denver">Mountain Time (MT) — 2 hours behind ET</option>
+                <option value="America/Los_Angeles">Pacific Time (PT) — 3 hours behind ET</option>
+              </select>
+            </div>
+            <div class="callout" aria-live="polite">
+              <div><strong>Your Local Interview Window:</strong> <span id="tz-local-window" class="tabular">2:00–2:30 PM Eastern</span></div>
+              <div><strong>Recommended Join-Prep Time (10 min early):</strong> <span id="tz-prep-time" class="tabular">1:50 PM Eastern</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Practice 5: Verify the Invitation Details</h3>
+          <div class="card-grid">
+            <div class="field-group">
+              <span class="field-label">1. If Jordan is in Central Time (CT), what local time does the 2:00 PM ET interview start?</span>
+              <div class="btn-row">
+                <button type="button" class="btn btn-subtle" id="cal-q1-a" onclick="answerCalQuiz(1, 'a')">1:00 PM CT</button>
+                <button type="button" class="btn btn-subtle" id="cal-q1-b" onclick="answerCalQuiz(1, 'b')">3:00 PM CT</button>
+              </div>
+              <div id="cal-fb-1" class="field-hint" aria-live="polite"></div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">2. What is the safest way to handle the meeting link?</span>
+              <div class="btn-row">
+                <button type="button" class="btn btn-subtle" id="cal-q2-a" onclick="answerCalQuiz(2, 'a')">Post it in a public group chat</button>
+                <button type="button" class="btn btn-subtle" id="cal-q2-b" onclick="answerCalQuiz(2, 'b')">Keep it private &amp; RSVP Yes</button>
+              </div>
+              <div id="cal-fb-2" class="field-hint" aria-live="polite"></div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">3. What if an invite arrives WITHOUT a link or location?</span>
+              <div class="btn-row">
+                <button type="button" class="btn btn-subtle" id="cal-q3-a" onclick="answerCalQuiz(3, 'a')">Reply politely to ask for it</button>
+                <button type="button" class="btn btn-subtle" id="cal-q3-b" onclick="answerCalQuiz(3, 'b')">Ignore the invite</button>
+              </div>
+              <div id="cal-fb-3" class="field-hint" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: RESPONSIBLE AI FOR INTERVIEW PREP -->
+      <section class="module-section" id="sec-ai" aria-labelledby="h-ai">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">6</span>
+            <span class="kicker">Module 7 Bridge &bull; CLEAR Prompts, STAR &amp; Fact-Checking</span>
+            <span class="chip" id="badge-sec-6" data-status="info">In progress</span>
+          </div>
+          <h2 class="section-title" id="h-ai">Use AI to prepare—without giving away privacy or inventing facts</h2>
+          <p class="lede">
+            An AI assistant can generate practice interview questions and help organize your ideas. However, AI often invents accomplishments or dates you never had. Use the <strong>CLEAR</strong> prompt framework, protect private data, and verify every word against your real history.
+          </p>
+        </div>
+
+        <div class="split-layout">
+          <div class="status-card" data-status="info">
+            <span class="kicker">CLEAR Prompting Guide (Module 7)</span>
+            <ul style="margin-top: var(--space-sm); margin-bottom: 0;">
+              <li><strong>C — Context:</strong> What is the situation? (<em>“Preparing for an entry-level customer support interview.”</em>)</li>
+              <li><strong>L — Let AI know the task:</strong> What help do you want? (<em>“Suggest a STAR practice draft.”</em>)</li>
+              <li><strong>E — Explain details:</strong> Share only safe, true facts from Jordan’s card.</li>
+              <li><strong>A — Ask for a format:</strong> Request simple plain-language bullets.</li>
+              <li><strong>R — Review &amp; refine:</strong> Remove anything AI invented and rewrite in your own voice.</li>
+            </ul>
+          </div>
+
+          <div class="status-card" data-status="ok">
+            <span class="kicker">Fictional Candidate Card: Jordan Lee</span>
+            <ul style="margin-top: var(--space-sm); margin-bottom: 0;">
+              <li><strong>Target Role:</strong> Customer Support Associate, Riverside Community Services ($19–$22/hr)</li>
+              <li><strong>Experience 1:</strong> Volunteer front desk, community event registration (2025–2026)</li>
+              <li><strong>Experience 2:</strong> Retail stock assistant, fictional workplace (2024–2025)</li>
+              <li><strong>Skills:</strong> Active listening, organized records, scheduling, written communication</li>
+              <li><strong>Education:</strong> High school diploma</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Practice 6A: Privacy Boundary Check — What stays OUT of AI prompts?</h3>
+          <p>Before typing a prompt into any AI tool, decide whether each item is safe to include or must stay private.</p>
+          <div id="privacy-quiz-list" style="display: flex; flex-direction: column; gap: var(--space-sm);"></div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Practice 6B: AI STAR Response Studio &amp; Fact-Checker</h3>
+          <p>Pick a common behavioral interview question, inspect the AI’s sample draft, spot the details AI invented, and write Jordan’s truthful <strong>STAR</strong> answer (<strong>S</strong>ituation, <strong>T</strong>ask, <strong>A</strong>ction, <strong>R</strong>esult).</p>
+
+          <div class="field-group">
+            <label class="field-label" for="ai-question-select">Choose an interview question to practice</label>
+            <select class="select-control" id="ai-question-select" onchange="selectAiQuestion(this.value)">
+              <option value="0">1. “Tell me about a time you kept records or schedules organized during a busy day.”</option>
+              <option value="1">2. “Describe a time you listened carefully to help someone resolve a question.”</option>
+              <option value="2">3. “Give an example of how you showed dependability on a team.”</option>
+            </select>
+          </div>
+
+          <div class="callout">
+            <span class="kicker">CLEAR Prompt Sent (Safe Fictional Facts Only)</span>
+            <p id="ai-clear-prompt-preview" style="margin-top: var(--space-xs);"></p>
+          </div>
+
+          <div class="status-card" data-status="warn">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+              <span class="kicker">Sample AI Draft — Spot the 2 Fabricated Details</span>
+              <span class="chip" id="ai-flags-chip" data-status="warn">0 of 2 mistakes flagged</span>
+            </div>
+            <p id="ai-draft-text" style="margin-bottom: var(--space-sm);"></p>
+            <div class="field-label" style="margin-bottom: var(--space-xs);">Click the statements below that do NOT match Jordan Lee’s Candidate Card:</div>
+            <div class="card-grid" id="ai-fact-checks"></div>
+            <div id="ai-fact-feedback" class="field-hint" style="margin-top: var(--space-sm);" aria-live="polite"></div>
+          </div>
+
+          <div class="split-layout">
+            <div class="field-group">
+              <label class="field-label" for="star-s">S — Situation (Where and when?)</label>
+              <input type="text" class="input-control" id="star-s" oninput="updateStarField('starS', this.value)" value="At the community event registration desk (2025–2026)">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="star-t">T — Task (What needed to get done?)</label>
+              <input type="text" class="input-control" id="star-t" oninput="updateStarField('starT', this.value)" value="Check in visitors and keep sign-in records accurate">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="star-a">A — Action (What did Jordan actually do?)</label>
+              <textarea class="textarea-control" id="star-a" oninput="updateStarField('starA', this.value)">Used active listening to greet each visitor, verified names on the schedule, and updated our sign-in sheet carefully.</textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="star-r">R — Result (What happened? No exaggeration)</label>
+              <textarea class="textarea-control" id="star-r" oninput="updateStarField('starR', this.value)">Visitors were directed smoothly without duplicate entries, and the volunteer coordinator had an accurate attendance log.</textarea>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" onclick="verifyStarResponse()">
+              <i data-lucide="check-circle" aria-hidden="true"></i>
+              <span>Check My Truthful STAR Response</span>
+            </button>
+          </div>
+          <div id="star-verify-feedback" class="status-card" data-status="info" aria-live="polite">
+            Edit any STAR box above if you like, then click Check My Truthful STAR Response to confirm it stays accurate and clear.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: INTEGRATED RIVERSIDE CAPSTONE SIMULATION -->
+      <section class="module-section" id="sec-capstone" aria-labelledby="h-capstone">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">7</span>
+            <span class="kicker">Lesson 6.4 &amp; Task Card DP-06 &bull; Integrated Capstone</span>
+            <span class="chip" id="badge-sec-7" data-status="info">Not completed</span>
+          </div>
+          <h2 class="section-title" id="h-capstone">Capstone: Complete Jordan Lee’s Riverside Virtual Interview</h2>
+          <p class="lede">
+            Bring all your digital skills together in a four-part simulation for Riverside Community Services (Customer Support Associate). Work carefully at your own pace—accuracy and calm communication matter more than speed.
+          </p>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Stage 1: Confirm Schedule &amp; Safety Readiness</h3>
+          <p>Review the practice details: <strong>Friday, November 13, 2026 &bull; 2:00–2:30 PM Eastern &bull; Instructor-hosted training room</strong>.</p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" id="cap-stage1-btn" onclick="completeCapStage1()">
+              <i data-lucide="calendar-check" aria-hidden="true"></i>
+              <span>Confirm Time Zone &amp; Private Link Rules</span>
+            </button>
+            <span class="chip" id="cap-stage1-chip" data-status="info">Pending</span>
+          </div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Stage 2: Live Mid-Interview Tech Curveball</h3>
+          <p><strong>Scenario:</strong> Five minutes into the interview, Ms. Johnson says in chat: <em>“Jordan, your video froze and your voice is breaking up. What would you like to do?”</em></p>
+          <div class="card-grid">
+            <button type="button" class="choice-card" id="cap-s2-a" onclick="selectCapStage2('a')">
+              <strong>Turn off camera to stabilize audio, stay on the call, and send a short polite chat update.</strong>
+            </button>
+            <button type="button" class="choice-card" id="cap-s2-b" onclick="selectCapStage2('b')">
+              <strong>Abruptly close the browser window and avoid replying.</strong>
+            </button>
+          </div>
+          <div id="cap-s2-feedback" class="field-hint" aria-live="polite">Choose the strongest workplace response.</div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Stage 3: Respond to Two Fictional Interview Questions</h3>
+          <p>Use only verified facts from Jordan Lee’s card (volunteer front desk 2025–2026, retail stock assistant 2024–2025, active listening, organized records, scheduling, written communication).</p>
+
+          <div class="field-group">
+            <label class="field-label" for="cap-q1">Question 1: “Why are you interested in the Customer Support Associate role at Riverside Community Services?”</label>
+            <textarea class="textarea-control" id="cap-q1" oninput="updateCapField('q1Draft', this.value)">I enjoy helping people clearly and staying organized. Through my volunteer front desk work and retail stock experience, I practiced active listening, scheduling, and keeping accurate records, which fit Riverside’s customer support duties well.</textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="cap-q2">Question 2: “How do you make sure customer requests and follow-up calls don’t get lost?”</label>
+            <textarea class="textarea-control" id="cap-q2" oninput="updateCapField('q2Draft', this.value)">I write down key details right away, organize requests clearly in a tracker or calendar, and double-check dates and names before confirming follow-ups.</textarea>
+          </div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Stage 4: Draft a Concise Follow-Up Email</h3>
+          <p>Send a simulated thank-you note to <code>hr@riverside-example.test</code> (training placeholder only—nothing leaves this page). Include a clear subject line, the role title, and continued interest, with zero private IDs or passwords.</p>
+
+          <div class="field-group">
+            <label class="field-label" for="cap-email-subject">Email Subject Line</label>
+            <input type="text" class="input-control" id="cap-email-subject" oninput="updateCapField('emailSubject', this.value)" value="Thank You — Customer Support Associate Interview — Jordan Lee">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="cap-email-body">Follow-Up Message Body</label>
+            <textarea class="textarea-control" id="cap-email-body" oninput="updateCapField('emailBody', this.value)">Dear Ms. Johnson,
+
+Thank you for meeting with me today about the Customer Support Associate position at Riverside Community Services. I appreciated learning about the team’s work and remain very interested in bringing my scheduling, record-keeping, and communication skills to the role.
+
+Sincerely,
+Jordan Lee</textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" onclick="evaluateCapstone()">
+              <i data-lucide="award" aria-hidden="true"></i>
+              <span>Submit Practice Capstone &amp; Run Quality Check</span>
+            </button>
+          </div>
+
+          <div id="cap-final-feedback" class="status-card" data-status="info" aria-live="polite">
+            Complete Stages 1–4 above, then click Submit Practice Capstone &amp; Run Quality Check.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: "I CAN" SELF-CHECK, ACCOMMODATIONS & EXPORT -->
+      <section class="module-section" id="sec-ican" aria-labelledby="h-ican">
+        <div class="section-head">
+          <div class="step-badge-row">
+            <span class="step-num">8</span>
+            <span class="kicker">Student Worksheet 6 &amp; Task Card DP-06 &bull; Self-Check</span>
+            <span class="chip" id="badge-sec-8" data-status="info">0 of 5 checked</span>
+          </div>
+          <h2 class="section-title" id="h-ican">Review your “I can” skills and save your learning record</h2>
+          <p class="lede">
+            Check the skills you feel ready to demonstrate to your instructor or staff coordinator. Staff confirmation is recorded separately—asking for extra practice or accommodations is always welcomed.
+          </p>
+        </div>
+
+        <div class="split-layout">
+          <div class="sandbox-box">
+            <h3 class="subhead">My Work Checklist (Student Worksheet 6)</h3>
+            <label class="check-item">
+              <input type="checkbox" id="ican-1" onchange="toggleICan('can1', this.checked)">
+              <span><strong>I can:</strong> read meeting details accurately (date, time zone, and link safety).</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="ican-2" onchange="toggleICan('can2', this.checked)">
+              <span><strong>I can:</strong> join a meeting and test microphone and camera controls.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="ican-3" onchange="toggleICan('can3', this.checked)">
+              <span><strong>I can:</strong> use appropriate virtual etiquette and troubleshoot tech issues calmly.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="ican-4" onchange="toggleICan('can4', this.checked)">
+              <span><strong>I can:</strong> respond to interview prompts honestly without fabricating experience.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="ican-5" onchange="toggleICan('can5', this.checked)">
+              <span><strong>I can:</strong> draft a professional follow-up email.</span>
+            </label>
+          </div>
+
+          <div class="sandbox-box">
+            <h3 class="subhead">Supports or Accommodations Helpful to Me</h3>
+            <p class="field-hint">Documenting what helps you succeed supports accessible training—never a penalty.</p>
+            <label class="check-item">
+              <input type="checkbox" id="sup-large" onchange="toggleSupport('Larger text / high contrast', this.checked)">
+              <span>Larger text or screen magnification</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="sup-audio" onchange="toggleSupport('Audio-only / phone alternative', this.checked)">
+              <span>Audio-only or phone-based practice alternative</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="sup-keys" onchange="toggleSupport('Keyboard navigation / captions', this.checked)">
+              <span>Keyboard navigation or live captions</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="sup-time" onchange="toggleSupport('Extended practice time / written steps', this.checked)">
+              <span>Extended practice time or printed step guide</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sandbox-box">
+          <h3 class="subhead">Learner Reflection (Worksheet 6)</h3>
+          <div class="card-grid">
+            <div class="field-group">
+              <label class="field-label" for="ref-learned">Something I learned in Module 6</label>
+              <textarea class="textarea-control" id="ref-learned" oninput="updateReflection('learned', this.value)"></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="ref-practice">One skill I want to practice again</label>
+              <textarea class="textarea-control" id="ref-practice" oninput="updateReflection('practiceAgain', this.value)"></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="ref-questions">Questions I want to ask my instructor</label>
+              <textarea class="textarea-control" id="ref-questions" oninput="updateReflection('questions', this.value)"></textarea>
+            </div>
+          </div>
+
+          <div class="btn-row" style="justify-content: space-between; margin-top: var(--space-sm);">
+            <button type="button" class="btn btn-primary" onclick="downloadPracticeSummary()">
+              <i data-lucide="download" aria-hidden="true"></i>
+              <span>Download Practice Summary (.txt)</span>
+            </button>
+            <button type="button" class="btn btn-subtle" id="btn-reset-all" onclick="resetProgress(this)">
+              <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+              <span>Reset Practice Progress</span>
+            </button>
+          </div>
+          <div id="export-status" class="field-hint" aria-live="polite">
+            Your progress saves automatically inside your notebook workspace.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <div class="footer-inner">
+        <div>
+          <strong>Sources &amp; Attribution:</strong> Grounded in <em>Digital Pathways to Employment — Complete Instructor Guide &amp; Student Learning Workbook (Module 6: Virtual Interviews and Workplace Digital Skills &amp; Module 7: Beginner AI Literacy, v1.0 / v1.1, November 2026)</em>, developed for Home4Good Inc. Instructional alignment references Northstar Digital Literacy standards, FTC job-scam guidance (consumer.ftc.gov), CISA security practices (cisa.gov), and CareerOneStop (careeronestop.org).
+        </div>
+        <div>
+          Original curriculum materials Copyright &copy; 2026 Ronda Bell, licensed to Home4Good Inc. for authorized educational and charitable use. Training examples and addresses (<code>.test</code>) are fictional simulations only.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const DEFAULT_STATE = {
+      largeText: false,
+      step1: {
+        linkChoice: null,
+        linkVerified: false,
+        displayName: `Jordan Lee`,
+        micTested: false,
+        camTested: false,
+        joined: false
+      },
+      step2: {
+        micOn: false,
+        camOn: false,
+        audioOnly: false,
+        handRaised: false,
+        chatOpen: false,
+        settingsOpen: false,
+        selectedMic: `Built-in Microphone`,
+        chatLog: [
+          { sender: `Ms. Johnson`, text: `Welcome to the Riverside practice room, Jordan.` }
+        ],
+        drillsDone: []
+      },
+      step3: { solved: {} },
+      step4: { light: `front`, angle: `eye`, bg: `blur`, dnd: true, visited: false },
+      step5: { tz: `America/New_York`, q1: null, q2: null, q3: null },
+      step6: {
+        privacyAnswers: {},
+        selectedPromptIdx: 0,
+        flaggedMistakes: [],
+        starS: `At the community event registration desk (2025–2026)`,
+        starT: `Check in visitors and keep sign-in records accurate`,
+        starA: `Used active listening to greet each visitor, verified names on the schedule, and updated our sign-in sheet carefully.`,
+        starR: `Visitors were directed smoothly without duplicate entries, and the volunteer coordinator had an accurate attendance log.`,
+        starChecked: false
+      },
+      capstone: {
+        stage1Done: false,
+        stage2Choice: null,
+        stage2Done: false,
+        q1Draft: `I enjoy helping people clearly and staying organized. Through my volunteer front desk work and retail stock experience, I practiced active listening, scheduling, and keeping accurate records, which fit Riverside’s customer support duties well.`,
+        q2Draft: `I write down key details right away, organize requests clearly in a tracker or calendar, and double-check dates and names before confirming follow-ups.`,
+        emailSubject: `Thank You — Customer Support Associate Interview — Jordan Lee`,
+        emailBody: `Dear Ms. Johnson,\n\nThank you for meeting with me today about the Customer Support Associate position at Riverside Community Services. I appreciated learning about the team’s work and remain very interested in bringing my scheduling, record-keeping, and communication skills to the role.\n\nSincerely,\nJordan Lee`,
+        completed: false
+      },
+      selfCheck: {
+        can1: false,
+        can2: false,
+        can3: false,
+        can4: false,
+        can5: false,
+        supports: [],
+        learned: ``,
+        practiceAgain: ``,
+        questions: ``
+      }
+    };
+
+    let appState = cloneObj(DEFAULT_STATE);
+
+    // Clean exact scenario array for Module 6/7 AI STAR fact-checking practice
+    const CLEAN_AI_SCENARIOS = [
+      {
+        prompt: `Context: Jordan Lee is preparing for a Customer Support Associate interview at Riverside Community Services. Task: Draft a short STAR answer about staying organized. Details: Use ONLY Jordan's volunteer front desk work (2025–2026) and retail stock role (2024–2025). Format: 4 simple sentences.`,
+        draft: `“When I managed a corporate call center for three years, I handled 200 tickets daily. At my volunteer front desk role, I checked guests in calmly, used our schedule sheet to prevent double-bookings, and kept accurate event records after receiving my Customer Support Pro certification.”`,
+        items: [
+          { id: `a1`, label: `“Managed a corporate call center for three years”`, isFake: true },
+          { id: `a2`, label: `“Checked guests in and used our schedule sheet at volunteer front desk”`, isFake: false },
+          { id: `a3`, label: `“After receiving my Customer Support Pro certification”`, isFake: true }
+        ]
+      },
+      {
+        prompt: `Context: Jordan Lee is preparing for an interview at Riverside. Task: Draft a STAR answer about active listening. Details: Use ONLY Jordan's volunteer front desk and retail stock assistant experience. Format: Short, truthful paragraph.`,
+        draft: `“While working as a senior hospital administrator in 2022, I supervised 15 staff. At my community registration desk, I practiced active listening so visitors felt heard, answered basic questions politely, and earned a Master's degree in Communications.”`,
+        items: [
+          { id: `b1`, label: `“Senior hospital administrator supervising 15 staff”`, isFake: true },
+          { id: `b2`, label: `“Practiced active listening at the community registration desk”`, isFake: false },
+          { id: `b3`, label: `“Earned a Master's degree in Communications”`, isFake: true }
+        ]
+      },
+      {
+        prompt: `Context: Jordan Lee is practicing reliability questions. Task: Draft a STAR answer about dependability on a team. Details: Use ONLY Jordan's retail stock assistant role (2024–2025). Format: Concise 4-part summary.`,
+        draft: `“In my retail stock assistant role (2024–2025), I arrived on time for early shifts and kept inventory records organized. I also led a 40-person warehouse team and shared my state ID number inside this AI chat so you can verify me.”`,
+        items: [
+          { id: `c1`, label: `“Retail stock assistant (2024–2025), arrived on time and organized records”`, isFake: false },
+          { id: `c2`, label: `“Led a 40-person warehouse team” (not on Jordan's card)`, isFake: true },
+          { id: `c3`, label: `“Shared my state ID number inside this AI chat” (unsafe privacy breach)`, isFake: true }
+        ]
+      }
+    ];
+
+    const PRIVACY_ITEMS = [
+      { id: `p1`, text: `Jordan's fictional duties: “Volunteer front desk, community event registration (2025–2026).”`, safe: true, why: `Safe: General work or volunteer tasks without private identifiers are okay for interview prep.` },
+      { id: `p2`, text: `Your real Social Security Number, state ID number, or bank account details.`, safe: false, why: `Keep Out: Never put government IDs, SSNs, or financial numbers into any AI prompt or training exercise.` },
+      { id: `p3`, text: `The public Customer Support Associate job duties from Riverside's posting.`, safe: true, why: `Safe: Public job descriptions help tailor practice interview questions.` },
+      { id: `p4`, text: `Personal justice-system case numbers, court records, or probation contact details.`, safe: false, why: `Keep Out: Never share sensitive legal or case details with AI tools or employers during digital skills practice.` },
+      { id: `p5`, text: `Your real home street address, personal phone number, and email password.`, safe: false, why: `Keep Out: Use fictional placeholders (.test) or omit contact details and passwords completely.` }
+    ];
+
+    function cloneObj(o) {
+      return JSON.parse(JSON.stringify(o));
+    }
+
+    function deepMerge(target, source) {
+      const out = cloneObj(target);
+      for (const k of Object.keys(source)) {
+        if (source[k] && typeof source[k] === `object` && !Array.isArray(source[k]) && target[k] && typeof target[k] === `object` && !Array.isArray(target[k])) {
+          out[k] = deepMerge(target[k], source[k]);
+        } else {
+          out[k] = source[k];
+        }
+      }
+      return out;
+    }
+
+    async function loadAppState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.getAppState !== `function`) return;
+      try {
+        const saved = await window.notebookAppApi.getAppState();
+        if (saved && typeof saved === `object`) {
+          appState = deepMerge(DEFAULT_STATE, saved);
+        }
+      } catch (err) {
+        // Use defaults if state retrieval fails
+      }
+    }
+
+    async function saveAppState() {
+      if (!window.notebookAppApi || typeof window.notebookAppApi.setAppState !== `function`) return;
+      try {
+        await window.notebookAppApi.setAppState(appState);
+      } catch (err) {
+        // Non-fatal in preview
+      }
+    }
+
+    function toggleLargeText() {
+      appState.largeText = !appState.largeText;
+      applyLargeText();
+      saveAppState();
+    }
+
+    function applyLargeText() {
+      document.body.classList.toggle(`large-text`, !!appState.largeText);
+      const btn = document.getElementById(`btn-large-text`);
+      if (btn) btn.setAttribute(`aria-pressed`, appState.largeText ? `true` : `false`);
+    }
+
+    // --- SECTION 1: JOINING LINKS & LOBBY ---
+    function selectLinkOption(opt) {
+      appState.step1.linkChoice = opt;
+      appState.step1.linkVerified = (opt === `b`);
+      renderSection1();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function updateLobbyName(val) {
+      appState.step1.displayName = val;
+      const preview = document.getElementById(`preview-name-text`);
+      const tileName = document.getElementById(`sim-tile-name`);
+      if (preview) preview.textContent = val.trim() || `(Enter name)`;
+      if (tileName) tileName.textContent = val.trim() || `Jordan Lee`;
+      saveAppState();
+    }
+
+    function runLobbyMicTest() {
+      appState.step1.micTested = true;
+      renderSection1();
+      saveAppState();
+    }
+
+    function runLobbyCamTest() {
+      appState.step1.camTested = true;
+      renderSection1();
+      saveAppState();
+    }
+
+    function joinLobbyRoom() {
+      const fb = document.getElementById(`lobby-device-readout`);
+      if (!appState.step1.linkVerified) {
+        if (fb) fb.textContent = `First choose the safe Riverside meeting link in Practice 1A above.`;
+        return;
+      }
+      if (!appState.step1.micTested || !appState.step1.camTested) {
+        if (fb) fb.textContent = `Please click both Test Microphone and Test Camera before joining.`;
+        return;
+      }
+      appState.step1.joined = true;
+      renderSection1();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection1() {
+      [`a`, `b`, `c`].forEach((k) => {
+        const el = document.getElementById(`link-opt-${k}`);
+        if (!el) return;
+        el.classList.remove(`is-selected`, `is-correct`, `is-wrong`);
+        if (appState.step1.linkChoice === k) {
+          el.classList.add(k === `b` ? `is-correct` : `is-wrong`);
+        }
+      });
+
+      const fb = document.getElementById(`link-feedback`);
+      if (fb) {
+        if (appState.step1.linkChoice === `b`) {
+          fb.dataset.status = `ok`;
+          fb.innerHTML = `<strong>Safe link verified:</strong> This invitation matches Ms. Johnson’s scheduled Riverside training room, asks for no fees or passwords, and uses the expected time.`;
+        } else if (appState.step1.linkChoice === `a`) {
+          fb.dataset.status = `alert`;
+          fb.innerHTML = `<strong>Warning sign detected:</strong> Legitimate employers never charge a fee or demand a state ID number to open an interview link. Do not click or pay.`;
+        } else if (appState.step1.linkChoice === `c`) {
+          fb.dataset.status = `alert`;
+          fb.innerHTML = `<strong>Phishing alert:</strong> Never reply with your email password or click urgent links from unknown senders.`;
+        } else {
+          fb.dataset.status = `info`;
+          fb.textContent = `Choose one message above to check its safety signals.`;
+        }
+      }
+
+      const nameInput = document.getElementById(`lobby-display-name`);
+      if (nameInput && nameInput.value !== appState.step1.displayName) {
+        nameInput.value = appState.step1.displayName;
+      }
+      const pName = document.getElementById(`preview-name-text`);
+      if (pName) pName.textContent = appState.step1.displayName.trim() || `(Enter name)`;
+      const tName = document.getElementById(`sim-tile-name`);
+      if (tName) tName.textContent = appState.step1.displayName.trim() || `Jordan Lee`;
+
+      const pMic = document.getElementById(`preview-mic-text`);
+      if (pMic) pMic.textContent = appState.step1.micTested ? `Verified (Clear input)` : `Not tested yet`;
+      const pCam = document.getElementById(`preview-cam-text`);
+      if (pCam) pCam.textContent = appState.step1.camTested ? `Verified (Framing ready)` : `Not tested yet`;
+
+      const readout = document.getElementById(`lobby-device-readout`);
+      if (readout && (appState.step1.micTested || appState.step1.camTested)) {
+        readout.textContent = `Mic: ${appState.step1.micTested ? `Ready` : `Pending`} • Camera: ${appState.step1.camTested ? `Ready` : `Pending`}`;
+      }
+
+      const lobbyChip = document.getElementById(`lobby-status-chip`);
+      const badge1 = document.getElementById(`badge-sec-1`);
+      const previewCard = document.getElementById(`lobby-preview-card`);
+      const joinBtn = document.getElementById(`btn-join-room`);
+
+      if (appState.step1.joined) {
+        if (lobbyChip) { lobbyChip.dataset.status = `ok`; lobbyChip.textContent = `Joined training room`; }
+        if (badge1) { badge1.dataset.status = `ok`; badge1.textContent = `Completed`; }
+        if (previewCard) previewCard.dataset.status = `ok`;
+        if (joinBtn) joinBtn.innerHTML = `<i data-lucide="check" aria-hidden="true"></i><span>Joined Successfully</span>`;
+      } else if (appState.step1.linkVerified) {
+        if (lobbyChip) { lobbyChip.dataset.status = `info`; lobbyChip.textContent = `Link safe — test devices`; }
+        if (badge1) { badge1.dataset.status = `info`; badge1.textContent = `In progress`; }
+      }
+    }
+
+    // --- SECTION 2: LIVE MEETING CONTROLS SANDBOX ---
+    const SIM_DRILLS = [
+      `“Welcome, Jordan! Step 1: Please unmute your microphone using the Mic button below so I can hear you.”`,
+      `“Great, I hear you clearly. Step 2: Turn on your camera (or choose Audio-Only Mode if you need low-bandwidth access).”`,
+      `“Thank you! Step 3: Click Raise Hand when you are ready for the next instruction.”`,
+      `“Nice work. Step 4: Open Chat and send the confirmation message ‘Ready to begin — Jordan Lee’.”`,
+      `“Final check! Step 5: Open Audio/Video Settings and switch your Microphone input to Headset Mic.”`
+    ];
+
+    function markDrillDone(num) {
+      if (!appState.step2.drillsDone.includes(num)) {
+        appState.step2.drillsDone.push(num);
+      }
+    }
+
+    function toggleSimMic() {
+      appState.step2.micOn = !appState.step2.micOn;
+      if (appState.step2.micOn) markDrillDone(1);
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleSimCam() {
+      appState.step2.camOn = !appState.step2.camOn;
+      if (appState.step2.camOn) {
+        appState.step2.audioOnly = false;
+        markDrillDone(2);
+      }
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function useAudioOnlyMode() {
+      appState.step2.audioOnly = true;
+      appState.step2.camOn = false;
+      markDrillDone(2);
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleSimHand() {
+      appState.step2.handRaised = !appState.step2.handRaised;
+      if (appState.step2.handRaised) markDrillDone(3);
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleSimChat() {
+      appState.step2.chatOpen = !appState.step2.chatOpen;
+      renderSection2();
+      saveAppState();
+    }
+
+    function sendSimChat() {
+      const inp = document.getElementById(`sim-chat-input`);
+      if (!inp) return;
+      const txt = inp.value.trim();
+      if (!txt) return;
+      appState.step2.chatLog.push({ sender: appState.step1.displayName || `Jordan Lee`, text: txt });
+      markDrillDone(4);
+      inp.value = ``;
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleSimSettings() {
+      appState.step2.settingsOpen = !appState.step2.settingsOpen;
+      renderSection2();
+      saveAppState();
+    }
+
+    function changeSimMicDevice(val) {
+      appState.step2.selectedMic = val;
+      if (val === `Headset Mic`) markDrillDone(5);
+      renderSection2();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection2() {
+      const doneCount = appState.step2.drillsDone.length;
+      const nextStep = [1, 2, 3, 4, 5].find((n) => !appState.step2.drillsDone.includes(n));
+
+      const promptEl = document.getElementById(`sim-prompt-text`);
+      const counterChip = document.getElementById(`sim-drill-counter`);
+      const badge2 = document.getElementById(`badge-sec-2`);
+      const fb2 = document.getElementById(`sim-drill-feedback`);
+
+      if (nextStep) {
+        if (promptEl) promptEl.textContent = SIM_DRILLS[nextStep - 1];
+        if (counterChip) { counterChip.dataset.status = `info`; counterChip.textContent = `Step ${nextStep} of 5`; }
+      } else {
+        if (promptEl) promptEl.textContent = `“Excellent job, Jordan! You demonstrated every video meeting control smoothly.”`;
+        if (counterChip) { counterChip.dataset.status = `ok`; counterChip.textContent = `All 5 controls mastered`; }
+      }
+
+      if (badge2) {
+        badge2.textContent = `${doneCount} of 5 drills done`;
+        badge2.dataset.status = doneCount === 5 ? `ok` : `info`;
+      }
+      if (fb2) {
+        fb2.textContent = doneCount === 5
+          ? `All five controls completed! Feel free to keep testing buttons anytime.`
+          : `Completed ${doneCount} of 5 drills. Follow Ms. Johnson’s prompt above.`;
+      }
+
+      // Controls visuals
+      const micBtn = document.getElementById(`ctrl-mic`);
+      const micLbl = document.getElementById(`ctrl-mic-label`);
+      if (micBtn && micLbl) {
+        micBtn.classList.toggle(`is-active`, appState.step2.micOn);
+        micBtn.classList.toggle(`is-alert`, !appState.step2.micOn);
+        micLbl.textContent = appState.step2.micOn ? `Mute Mic` : `Unmute Mic`;
+      }
+
+      const camBtn = document.getElementById(`ctrl-cam`);
+      const camLbl = document.getElementById(`ctrl-cam-label`);
+      if (camBtn && camLbl) {
+        camBtn.classList.toggle(`is-active`, appState.step2.camOn);
+        camLbl.textContent = appState.step2.camOn ? `Stop Camera` : `Start Camera`;
+      }
+
+      const aoBtn = document.getElementById(`ctrl-audio-only`);
+      if (aoBtn) aoBtn.classList.toggle(`is-active`, appState.step2.audioOnly);
+
+      const handBtn = document.getElementById(`ctrl-hand`);
+      const handLbl = document.getElementById(`ctrl-hand-label`);
+      const handChip = document.getElementById(`sim-hand-chip`);
+      if (handBtn && handLbl) {
+        handBtn.classList.toggle(`is-active`, appState.step2.handRaised);
+        handLbl.textContent = appState.step2.handRaised ? `Lower Hand` : `Raise Hand`;
+      }
+      if (handChip) handChip.style.display = appState.step2.handRaised ? `inline-flex` : `none`;
+
+      const chatDrawer = document.getElementById(`sim-chat-drawer`);
+      if (chatDrawer) chatDrawer.style.display = appState.step2.chatOpen ? `block` : `none`;
+
+      const setDrawer = document.getElementById(`sim-settings-drawer`);
+      if (setDrawer) setDrawer.style.display = appState.step2.settingsOpen ? `block` : `none`;
+
+      const micSelect = document.getElementById(`sim-mic-select`);
+      if (micSelect) micSelect.value = appState.step2.selectedMic;
+
+      const tile = document.getElementById(`learner-video-tile`);
+      const camNote = document.getElementById(`sim-cam-status-note`);
+      const avState = document.getElementById(`sim-tile-av-state`);
+      if (tile) tile.classList.toggle(`is-speaking`, appState.step2.micOn);
+      if (camNote) {
+        if (appState.step2.camOn) camNote.textContent = `Camera On — Clear eye-level framing`;
+        else if (appState.step2.audioOnly) camNote.textContent = `Audio-Only Accommodation Active`;
+        else camNote.textContent = `Camera Off (Avatar shown)`;
+      }
+      if (avState) {
+        avState.textContent = `Mic: ${appState.step2.micOn ? `Live (${appState.step2.selectedMic})` : `Muted`} • Cam: ${appState.step2.camOn ? `On` : (appState.step2.audioOnly ? `Audio-Only` : `Off`)}`;
+      }
+
+      const chatLogEl = document.getElementById(`sim-chat-log`);
+      if (chatLogEl) {
+        chatLogEl.innerHTML = appState.step2.chatLog.map((m) =>
+          `<div class="chat-bubble"><strong>${escapeHtml(m.sender)}:</strong> ${escapeHtml(m.text)}</div>`
+        ).join(``);
+      }
+    }
+
+    // --- SECTION 3: TROUBLESHOOTING ---
+    const TROUBLE_KEY = {
+      1: {
+        correct: `a`,
+        okMsg: `Correct! Check browser address-bar permissions first—allowing Mic & Camera unlocks the controls right away.`,
+        badMsg: `Not quite. Leaving without communicating causes confusion. Check browser site permissions in the address bar first.`
+      },
+      2: {
+        correct: `b`,
+        okMsg: `Spot on! Echo happens when speaker sound loops back into a mic or two devices are open in the same room.`,
+        badMsg: `Turning volume up makes feedback louder! Use headphones or mute the second device in the room.`
+      },
+      3: {
+        correct: `a`,
+        okMsg: `Great judgment! Turning off video reduces bandwidth immediately while keeping your voice clear.`,
+        badMsg: `If audio is robotic, pause briefly, turn off video to save bandwidth, and update the host in chat.`
+      },
+      4: {
+        correct: `b`,
+        okMsg: `Exactly right! Rejoin right away, or contact the interviewer via an approved channel within 2 minutes.`,
+        badMsg: `Waiting hours makes the interviewer wonder what happened. Rejoin quickly or send a brief status message.`
+      }
+    };
+
+    function solveTrouble(num, opt) {
+      appState.step3.solved[num] = opt;
+      renderSection3();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection3() {
+      let count = 0;
+      for (let i = 1; i <= 4; i++) {
+        const chosen = appState.step3.solved[i];
+        const info = TROUBLE_KEY[i];
+        const btnA = document.getElementById(`tr-${i}-a`);
+        const btnB = document.getElementById(`tr-${i}-b`);
+        const fb = document.getElementById(`tr-fb-${i}`);
+        if (btnA) {
+          btnA.classList.remove(`is-correct`, `is-wrong`);
+          if (chosen === `a`) btnA.classList.add(info.correct === `a` ? `is-correct` : `is-wrong`);
+        }
+        if (btnB) {
+          btnB.classList.remove(`is-correct`, `is-wrong`);
+          if (chosen === `b`) btnB.classList.add(info.correct === `b` ? `is-correct` : `is-wrong`);
+        }
+        if (fb) {
+          if (!chosen) fb.textContent = `Select the best fix.`;
+          else if (chosen === info.correct) { fb.textContent = info.okMsg; count++; }
+          else fb.textContent = info.badMsg;
+        }
+      }
+      const badge3 = document.getElementById(`badge-sec-3`);
+      if (badge3) {
+        badge3.textContent = `${count} of 4 resolved`;
+        badge3.dataset.status = count === 4 ? `ok` : `info`;
+      }
+    }
+
+    // --- SECTION 4: VIRTUAL PRESENCE ---
+    function updatePresence(key, val) {
+      appState.step4[key] = val;
+      appState.step4.visited = true;
+      renderSection4();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection4() {
+      const s = appState.step4;
+      const lightEl = document.getElementById(`pres-light`);
+      const angleEl = document.getElementById(`pres-angle`);
+      const bgEl = document.getElementById(`pres-bg`);
+      const dndEl = document.getElementById(`pres-dnd`);
+      if (lightEl) lightEl.value = s.light;
+      if (angleEl) angleEl.value = s.angle;
+      if (bgEl) bgEl.value = s.bg;
+      if (dndEl) dndEl.checked = !!s.dnd;
+
+      let score = 0;
+      if (s.light === `front`) score += 30;
+      if (s.angle === `eye`) score += 30;
+      if (s.bg === `blur` || s.bg === `audio`) score += 25;
+      if (s.dnd) score += 15;
+
+      const fill = document.getElementById(`presence-meter-fill`);
+      const chip = document.getElementById(`presence-score-chip`);
+      const advice = document.getElementById(`presence-advice`);
+      const badge4 = document.getElementById(`badge-sec-4`);
+
+      if (fill) {
+        fill.style.width = `${score}%`;
+        fill.classList.toggle(`in-range`, score >= 70);
+      }
+      if (chip) {
+        chip.textContent = score >= 70 ? `${score}% Clear Setup` : `${score}% Needs Adjustment`;
+        chip.dataset.status = score >= 70 ? `ok` : `warn`;
+      }
+      if (badge4) {
+        badge4.textContent = score >= 70 ? `Setup ready (${score}%)` : `Adjust setup (${score}%)`;
+        badge4.dataset.status = score >= 70 ? `ok` : `warn`;
+      }
+      if (advice) {
+        const tips = [];
+        if (s.light === `back`) tips.push(`Face toward your light source so your face is not in shadow.`);
+        if (s.angle === `low`) tips.push(`Raise your device on a few books so the camera sits near eye level.`);
+        if (s.bg === `busy`) tips.push(`Turn on Background Blur or face a plain wall if people are walking behind you.`);
+        if (!s.dnd) tips.push(`Enable Do Not Disturb so alert chimes do not interrupt you.`);
+        advice.textContent = tips.length === 0
+          ? `Great setup: Front lighting, eye-level camera, distraction-free background, and silenced alerts keep focus on your strengths.`
+          : tips.join(` `);
+      }
+
+      // Update SVG preview
+      const face = document.getElementById(`svg-face`);
+      const person = document.getElementById(`svg-person`);
+      const bgRect = document.getElementById(`svg-bg-rect`);
+      const win = document.getElementById(`svg-window`);
+      const note = document.getElementById(`svg-frame-note`);
+
+      if (face) face.setAttribute(`fill`, s.light === `front` ? `var(--svg-face-lit)` : `var(--svg-face-dim)`);
+      if (win) win.setAttribute(`opacity`, s.light === `back` ? `0.85` : `0.15`);
+      if (person) person.setAttribute(`transform`, s.angle === `eye` ? `translate(160, 102)` : `translate(160, 128)`);
+      if (bgRect) bgRect.setAttribute(`fill`, s.bg === `audio` ? `var(--svg-bg-audio)` : (s.bg === `blur` ? `var(--svg-bg-blur)` : `var(--svg-bg-busy)`));
+      if (note) {
+        note.textContent = s.bg === `audio`
+          ? `Audio-Only Accommodation • Clear Voice`
+          : `${s.angle === `eye` ? `Eye-level` : `Low angle`} • ${s.light === `front` ? `Front light` : `Backlit`}`;
+      }
+    }
+
+    // --- SECTION 5: CALENDAR & TIME ZONES ---
+    const TZ_MAP = {
+      'America/New_York': { label: `Eastern`, window: `2:00–2:30 PM Eastern`, prep: `1:50 PM Eastern` },
+      'America/Chicago': { label: `Central`, window: `1:00–1:30 PM Central`, prep: `12:50 PM Central` },
+      'America/Denver': { label: `Mountain`, window: `12:00–12:30 PM Mountain`, prep: `11:50 AM Mountain` },
+      'America/Los_Angeles': { label: `Pacific`, window: `11:00–11:30 AM Pacific`, prep: `10:50 AM Pacific` }
+    };
+
+    function updateTimezone(tz) {
+      appState.step5.tz = tz;
+      renderSection5();
+      saveAppState();
+    }
+
+    function answerCalQuiz(qNum, opt) {
+      appState.step5[`q${qNum}`] = opt;
+      renderSection5();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection5() {
+      const tzSel = document.getElementById(`tz-select`);
+      if (tzSel) tzSel.value = appState.step5.tz;
+      const tzInfo = TZ_MAP[appState.step5.tz] || TZ_MAP[`America/New_York`];
+      const wEl = document.getElementById(`tz-local-window`);
+      const pEl = document.getElementById(`tz-prep-time`);
+      if (wEl) wEl.textContent = tzInfo.window;
+      if (pEl) pEl.textContent = tzInfo.prep;
+
+      const answers = { 1: `a`, 2: `b`, 3: `a` };
+      const msgs = {
+        1: { ok: `Correct! Central Time is 1 hour earlier than Eastern (1:00 PM CT).`, bad: `Careful—Central Time is 1 hour behind Eastern, so 2:00 PM ET is 1:00 PM CT.` },
+        2: { ok: `Correct! Keep interview links private and RSVP promptly.`, bad: `Never post private interview links publicly.` },
+        3: { ok: `Correct! Always reply politely to request the missing link or location.`, bad: `Do not ignore it—send a short, polite reply asking for the missing details.` }
+      };
+
+      let passed = 0;
+      for (let i = 1; i <= 3; i++) {
+        const chosen = appState.step5[`q${i}`];
+        const btnA = document.getElementById(`cal-q${i}-a`);
+        const btnB = document.getElementById(`cal-q${i}-b`);
+        const fb = document.getElementById(`cal-fb-${i}`);
+        if (btnA) {
+          btnA.classList.remove(`btn-primary`, `btn-danger`);
+          if (chosen === `a`) btnA.classList.add(answers[i] === `a` ? `btn-primary` : `btn-danger`);
+        }
+        if (btnB) {
+          btnB.classList.remove(`btn-primary`, `btn-danger`);
+          if (chosen === `b`) btnB.classList.add(answers[i] === `b` ? `btn-primary` : `btn-danger`);
+        }
+        if (fb) {
+          if (!chosen) fb.textContent = ``;
+          else if (chosen === answers[i]) { fb.textContent = msgs[i].ok; passed++; }
+          else fb.textContent = msgs[i].bad;
+        }
+      }
+
+      const badge5 = document.getElementById(`badge-sec-5`);
+      if (badge5) {
+        badge5.textContent = `${passed} of 3 checks passed`;
+        badge5.dataset.status = passed === 3 ? `ok` : `info`;
+      }
+    }
+
+    // --- SECTION 6: RESPONSIBLE AI PREP ---
+    function answerPrivacyItem(id, choice) {
+      appState.step6.privacyAnswers[id] = choice;
+      renderSection6();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function selectAiQuestion(idx) {
+      appState.step6.selectedPromptIdx = Number(idx);
+      appState.step6.flaggedMistakes = [];
+      renderSection6();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleAiFlag(itemId) {
+      const idx = appState.step6.flaggedMistakes.indexOf(itemId);
+      if (idx >= 0) appState.step6.flaggedMistakes.splice(idx, 1);
+      else appState.step6.flaggedMistakes.push(itemId);
+      renderSection6();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function updateStarField(key, val) {
+      appState.step6[key] = val;
+      appState.step6.starChecked = false;
+      saveAppState();
+    }
+
+    function verifyStarResponse() {
+      const s = appState.step6.starS.trim();
+      const t = appState.step6.starT.trim();
+      const a = appState.step6.starA.trim();
+      const r = appState.step6.starR.trim();
+      const fb = document.getElementById(`star-verify-feedback`);
+
+      if (s.length < 8 || t.length < 8 || a.length < 15 || r.length < 12) {
+        if (fb) {
+          fb.dataset.status = `warn`;
+          fb.textContent = `Please include a brief, concrete sentence in each of the four STAR fields (Situation, Task, Action, Result).`;
+        }
+        return;
+      }
+
+      const combined = `${s} ${t} ${a} ${r}`.toLowerCase();
+      if (combined.includes(`ssn`) || combined.includes(`social security`) || combined.includes(`password`)) {
+        if (fb) {
+          fb.dataset.status = `alert`;
+          fb.textContent = `Privacy check: Remove references to SSNs or passwords from your interview answer.`;
+        }
+        return;
+      }
+
+      appState.step6.starChecked = true;
+      if (fb) {
+        fb.dataset.status = `ok`;
+        fb.innerHTML = `<strong>STAR answer verified!</strong> Your response follows Situation &rarr; Task &rarr; Action &rarr; Result cleanly and stays grounded in Jordan’s real experience without inventing titles or certifications.`;
+      }
+      renderSection6();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderSection6() {
+      const privList = document.getElementById(`privacy-quiz-list`);
+      let privCorrect = 0;
+      if (privList) {
+        privList.innerHTML = PRIVACY_ITEMS.map((item) => {
+          const ans = appState.step6.privacyAnswers[item.id];
+          const isOk = (ans === `safe` && item.safe) || (ans === `out` && !item.safe);
+          if (isOk) privCorrect++;
+          const statusCls = ans ? (isOk ? `ok` : `alert`) : `info`;
+          return `
+            <div class="status-card" data-status="${statusCls}">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+                <div style="flex: 1 1 280px;"><strong>${escapeHtml(item.text)}</strong></div>
+                <div class="btn-row">
+                  <button type="button" class="btn ${ans === `safe` ? `btn-primary` : `btn-subtle`}" onclick="answerPrivacyItem('${item.id}', 'safe')">Safe to Include</button>
+                  <button type="button" class="btn ${ans === `out` ? `btn-primary` : `btn-subtle`}" onclick="answerPrivacyItem('${item.id}', 'out')">Keep Out of AI</button>
+                </div>
+              </div>
+              ${ans ? `<div class="field-hint" style="margin-top: var(--space-xs);">${escapeHtml(item.why)}</div>` : ``}
+            </div>
+          `;
+        }).join(``);
+      }
+
+      const sel = document.getElementById(`ai-question-select`);
+      const qIdx = appState.step6.selectedPromptIdx || 0;
+      if (sel) sel.value = String(qIdx);
+
+      const sc = CLEAN_AI_SCENARIOS[qIdx] || CLEAN_AI_SCENARIOS[0];
+      const promptPrev = document.getElementById(`ai-clear-prompt-preview`);
+      const draftEl = document.getElementById(`ai-draft-text`);
+      const checksEl = document.getElementById(`ai-fact-checks`);
+      const flagChip = document.getElementById(`ai-flags-chip`);
+      const factFb = document.getElementById(`ai-fact-feedback`);
+
+      if (promptPrev) promptPrev.textContent = sc.prompt;
+      if (draftEl) draftEl.textContent = sc.draft;
+
+      let fakeCaught = 0;
+      let falseFlag = 0;
+      if (checksEl) {
+        checksEl.innerHTML = sc.items.map((it) => {
+          const picked = appState.step6.flaggedMistakes.includes(it.id);
+          let cls = `choice-card`;
+          if (picked) {
+            cls += it.isFake ? ` is-correct` : ` is-wrong`;
+            if (it.isFake) fakeCaught++;
+            else falseFlag++;
+          }
+          return `
+            <button type="button" class="${cls}" onclick="toggleAiFlag('${it.id}')">
+              <span>${escapeHtml(it.label)}</span>
+              <span class="field-hint">${picked ? (it.isFake ? `Flagged accurately: remove/replace` : `Actually true on Jordan's card`) : `Click to flag if fabricated/unsafe`}</span>
+            </button>
+          `;
+        }).join(``);
+      }
+
+      if (flagChip) {
+        flagChip.textContent = `${fakeCaught} of 2 mistakes flagged`;
+        flagChip.dataset.status = (fakeCaught === 2 && falseFlag === 0) ? `ok` : `warn`;
+      }
+      if (factFb) {
+        if (fakeCaught === 2 && falseFlag === 0) {
+          factFb.textContent = `Nice catch! You spotted both unsupported or unsafe AI additions and kept the accurate experience.`;
+        } else {
+          factFb.textContent = `Compare each statement against Jordan Lee’s Candidate Card above and flag the 2 inaccurate or unsafe lines.`;
+        }
+      }
+
+      const starS = document.getElementById(`star-s`);
+      const starT = document.getElementById(`star-t`);
+      const starA = document.getElementById(`star-a`);
+      const starR = document.getElementById(`star-r`);
+      if (starS && starS.value !== appState.step6.starS) starS.value = appState.step6.starS;
+      if (starT && starT.value !== appState.step6.starT) starT.value = appState.step6.starT;
+      if (starA && starA.value !== appState.step6.starA) starA.value = appState.step6.starA;
+      if (starR && starR.value !== appState.step6.starR) starR.value = appState.step6.starR;
+
+      const badge6 = document.getElementById(`badge-sec-6`);
+      const aiDone = (privCorrect === PRIVACY_ITEMS.length) && (fakeCaught === 2 && falseFlag === 0) && appState.step6.starChecked;
+      if (badge6) {
+        badge6.textContent = aiDone ? `Completed` : `Privacy ${privCorrect}/5 • Fact-check ${fakeCaught}/2`;
+        badge6.dataset.status = aiDone ? `ok` : `info`;
+      }
+    }
+
+    // --- SECTION 7: CAPSTONE ---
+    function completeCapStage1() {
+      appState.capstone.stage1Done = true;
+      renderCapstone();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function selectCapStage2(opt) {
+      appState.capstone.stage2Choice = opt;
+      appState.capstone.stage2Done = (opt === `a`);
+      renderCapstone();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function updateCapField(key, val) {
+      appState.capstone[key] = val;
+      appState.capstone.completed = false;
+      saveAppState();
+    }
+
+    function evaluateCapstone() {
+      const c = appState.capstone;
+      const fb = document.getElementById(`cap-final-feedback`);
+      const issues = [];
+
+      if (!c.stage1Done) issues.push(`Confirm Stage 1 (Schedule & Private Link Rules).`);
+      if (!c.stage2Done) issues.push(`Choose the calm tech recovery action in Stage 2.`);
+      if (c.q1Draft.trim().length < 25 || c.q2Draft.trim().length < 25) {
+        issues.push(`Write clear, complete answers for both Stage 3 interview questions.`);
+      }
+      const subj = c.emailSubject.trim().toLowerCase();
+      const body = c.emailBody.trim().toLowerCase();
+      if (!subj || subj.length < 8) issues.push(`Add a clear, meaningful Subject Line in Stage 4.`);
+      if (!body.includes(`thank`) || !body.includes(`customer support`)) {
+        issues.push(`In Stage 4, thank the interviewer and reference the Customer Support Associate role.`);
+      }
+      if (body.includes(`ssn`) || /\b\d{3}-\d{2}-\d{4}\b/.test(body)) {
+        issues.push(`Remove any SSN or sensitive ID numbers from your follow-up email.`);
+      }
+
+      if (issues.length > 0) {
+        c.completed = false;
+        if (fb) {
+          fb.dataset.status = `warn`;
+          fb.innerHTML = `<strong>Almost ready—check these items:</strong><ul style="margin: var(--space-xs) 0 0;">${issues.map((x) => `<li>${escapeHtml(x)}</li>`).join(``)}</ul>`;
+        }
+      } else {
+        c.completed = true;
+        if (fb) {
+          fb.dataset.status = `ok`;
+          fb.innerHTML = `<strong>Capstone simulation passed!</strong> You verified the invitation, handled a connection drop calmly, answered using grounded experience, and drafted a respectful follow-up email for Jordan Lee.`;
+        }
+      }
+      renderCapstone();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function renderCapstone() {
+      const c = appState.capstone;
+      const s1Chip = document.getElementById(`cap-stage1-chip`);
+      if (s1Chip) {
+        s1Chip.textContent = c.stage1Done ? `Confirmed` : `Pending`;
+        s1Chip.dataset.status = c.stage1Done ? `ok` : `info`;
+      }
+
+      const s2a = document.getElementById(`cap-s2-a`);
+      const s2b = document.getElementById(`cap-s2-b`);
+      const s2fb = document.getElementById(`cap-s2-feedback`);
+      if (s2a) {
+        s2a.classList.remove(`is-correct`, `is-wrong`);
+        if (c.stage2Choice === `a`) s2a.classList.add(`is-correct`);
+      }
+      if (s2b) {
+        s2b.classList.remove(`is-correct`, `is-wrong`);
+        if (c.stage2Choice === `b`) s2b.classList.add(`is-wrong`);
+      }
+      if (s2fb) {
+        if (c.stage2Choice === `a`) s2fb.textContent = `Strong response! Turning off camera restores audio stability and communicates professionally.`;
+        else if (c.stage2Choice === `b`) s2fb.textContent = `Avoid disappearing without explanation—turn off video and send a quick chat note instead.`;
+        else s2fb.textContent = `Choose the strongest workplace response.`;
+      }
+
+      const q1El = document.getElementById(`cap-q1`);
+      const q2El = document.getElementById(`cap-q2`);
+      const subjEl = document.getElementById(`cap-email-subject`);
+      const bodyEl = document.getElementById(`cap-email-body`);
+      if (q1El && q1El.value !== c.q1Draft) q1El.value = c.q1Draft;
+      if (q2El && q2El.value !== c.q2Draft) q2El.value = c.q2Draft;
+      if (subjEl && subjEl.value !== c.emailSubject) subjEl.value = c.emailSubject;
+      if (bodyEl && bodyEl.value !== c.emailBody) bodyEl.value = c.emailBody;
+
+      const badge7 = document.getElementById(`badge-sec-7`);
+      if (badge7) {
+        badge7.textContent = c.completed ? `Completed` : `Not completed`;
+        badge7.dataset.status = c.completed ? `ok` : `info`;
+      }
+    }
+
+    // --- SECTION 8: I CAN, SUPPORTS, REFLECTION & EXPORT ---
+    function toggleICan(key, checked) {
+      appState.selfCheck[key] = checked;
+      renderSelfCheck();
+      updateDashboardProgress();
+      saveAppState();
+    }
+
+    function toggleSupport(label, checked) {
+      const arr = appState.selfCheck.supports;
+      const idx = arr.indexOf(label);
+      if (checked && idx < 0) arr.push(label);
+      if (!checked && idx >= 0) arr.splice(idx, 1);
+      saveAppState();
+    }
+
+    function updateReflection(key, val) {
+      appState.selfCheck[key] = val;
+      saveAppState();
+    }
+
+    function renderSelfCheck() {
+      const sc = appState.selfCheck;
+      let count = 0;
+      for (let i = 1; i <= 5; i++) {
+        const cb = document.getElementById(`ican-${i}`);
+        const val = !!sc[`can${i}`];
+        if (cb) cb.checked = val;
+        if (val) count++;
+      }
+
+      const supMap = [
+        [`sup-large`, `Larger text / high contrast`],
+        [`sup-audio`, `Audio-only / phone alternative`],
+        [`sup-keys`, `Keyboard navigation / captions`],
+        [`sup-time`, `Extended practice time / written steps`]
+      ];
+      supMap.forEach(([id, lbl]) => {
+        const el = document.getElementById(id);
+        if (el) el.checked = sc.supports.includes(lbl);
+      });
+
+      const r1 = document.getElementById(`ref-learned`);
+      const r2 = document.getElementById(`ref-practice`);
+      const r3 = document.getElementById(`ref-questions`);
+      if (r1 && r1.value !== sc.learned) r1.value = sc.learned;
+      if (r2 && r2.value !== sc.practiceAgain) r2.value = sc.practiceAgain;
+      if (r3 && r3.value !== sc.questions) r3.value = sc.questions;
+
+      const badge8 = document.getElementById(`badge-sec-8`);
+      if (badge8) {
+        badge8.textContent = `${count} of 5 checked`;
+        badge8.dataset.status = count === 5 ? `ok` : `info`;
+      }
+    }
+
+    function updateDashboardProgress() {
+      const s1Done = !!appState.step1.joined;
+      const s2Done = appState.step2.drillsDone.length === 5;
+      const s3Done = [1, 2, 3, 4].every((i) => appState.step3.solved[i] === TROUBLE_KEY[i].correct);
+      const s4Done = !!appState.step4.visited;
+      const s5Done = appState.step5.q1 === `a` && appState.step5.q2 === `b` && appState.step5.q3 === `a`;
+      const privAll = PRIVACY_ITEMS.every((it) => {
+        const ans = appState.step6.privacyAnswers[it.id];
+        return (ans === `safe` && it.safe) || (ans === `out` && !it.safe);
+      });
+      const s6Done = privAll && appState.step6.starChecked;
+      const s7Done = !!appState.capstone.completed;
+
+      const completedSections = [s1Done, s2Done, s3Done, s4Done, s5Done, s6Done, s7Done].filter(Boolean).length;
+      const icanCount = [1, 2, 3, 4, 5].filter((i) => !!appState.selfCheck[`can${i}`]).length;
+      const pct = Math.round(((completedSections + (icanCount / 5)) / 8) * 100);
+
+      const bar = document.getElementById(`main-progress-bar`);
+      const fill = document.getElementById(`main-progress-fill`);
+      const kpiSec = document.getElementById(`kpi-sections`);
+      const kpiCan = document.getElementById(`kpi-ican`);
+      const chip = document.getElementById(`overall-status-chip`);
+      const head = document.getElementById(`progress-headline`);
+
+      if (bar) bar.setAttribute(`aria-valuenow`, String(pct));
+      if (fill) fill.style.width = `${pct}%`;
+      if (kpiSec) kpiSec.textContent = `${completedSections} / 7`;
+      if (kpiCan) kpiCan.textContent = `${icanCount} / 5`;
+      if (chip) {
+        chip.textContent = `${completedSections} of 7 sections completed`;
+        chip.dataset.status = completedSections === 7 ? `ok` : `info`;
+      }
+      if (head) {
+        if (completedSections === 7 && icanCount === 5) {
+          head.textContent = `Module 6 practice complete — ready to share with your instructor`;
+        } else if (completedSections > 0) {
+          head.textContent = `Keep going — ${completedSections} of 7 core practice activities completed`;
+        } else {
+          head.textContent = `Ready to start — work through each section at your own pace`;
+        }
+      }
+    }
+
+    function downloadPracticeSummary() {
+      const sc = appState.selfCheck;
+      const lines = [
+        `DIGITAL PATHWAYS TO EMPLOYMENT — MODULE 6 PRACTICE SUMMARY`,
+        `Home4Good Inc. • Virtual Interviews and Workplace Digital Skills`,
+        `Fictional Practice Scenario: Jordan Lee / Riverside Community Services`,
+        `----------------------------------------------------------------------`,
+        `1. Joining & Lobby Check: ${appState.step1.joined ? `Completed` : `In progress`}`,
+        `2. Video Controls Drills: ${appState.step2.drillsDone.length} / 5 completed`,
+        `3. Troubleshooting Scenarios: ${[1,2,3,4].filter((i) => appState.step3.solved[i] === TROUBLE_KEY[i].correct).length} / 4 resolved`,
+        `4. Virtual Presence Check: Reviewed (${appState.step4.bg})`,
+        `5. Calendar & Time Zones: Local zone ${appState.step5.tz}`,
+        `6. Responsible AI & STAR Practice: ${appState.step6.starChecked ? `Verified` : `In progress`}`,
+        `7. Riverside Capstone Simulation: ${appState.capstone.completed ? `Completed` : `In progress`}`,
+        ``,
+        `STUDENT WORKSHEET 6 — I CAN SELF-CHECKS`,
+        `[${sc.can1 ? `X` : ` `}] Read meeting details accurately (date, time zone, link safety)`,
+        `[${sc.can2 ? `X` : ` `}] Join meeting and test microphone/camera controls`,
+        `[${sc.can3 ? `X` : ` `}] Use appropriate virtual etiquette and troubleshoot calmly`,
+        `[${sc.can4 ? `X` : ` `}] Respond to interview prompts honestly`,
+        `[${sc.can5 ? `X` : ` `}] Draft a professional follow-up email`,
+        ``,
+        `Supports / Accommodations Helpful: ${sc.supports.length ? sc.supports.join(`, `) : `None selected`}`,
+        `Something I learned: ${sc.learned || `(Not entered)`}`,
+        `One skill to practice again: ${sc.practiceAgain || `(Not entered)`}`,
+        `Questions for instructor: ${sc.questions || `(Not entered)`}`,
+        ``,
+        `Note: Staff confirmation is recorded separately after observing your demonstration.`
+      ];
+      const text = lines.join(`\n`);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: text,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `Digital_Pathways_Module6_Summary.txt`
+        });
+      }
+      const st = document.getElementById(`export-status`);
+      if (st) st.textContent = `Practice summary downloaded as Digital_Pathways_Module6_Summary.txt.`;
+    }
+
+    function resetProgress(btn) {
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to confirm reset`;
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.innerHTML = `<i data-lucide="rotate-ccw" aria-hidden="true"></i><span>Reset Practice Progress</span>`;
+      appState = cloneObj(DEFAULT_STATE);
+      renderAll();
+      saveAppState();
+      const st = document.getElementById(`export-status`);
+      if (st) st.textContent = `All Module 6 practice responses have been reset.`;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`);
+    }
+
+    function renderAll() {
+      applyLargeText();
+      renderSection1();
+      renderSection2();
+      renderSection3();
+      renderSection4();
+      renderSection5();
+      renderSection6();
+      renderCapstone();
+      renderSelfCheck();
+      updateDashboardProgress();
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    async function initApp() {
+      await loadAppState();
+      renderAll();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>

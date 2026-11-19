@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="vitals">
+  <title>Digital Pathways to Employment — Module 2: Navigating the Internet Safely</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+      --surface-chrome: #eef3f4;
+      --surface-ok: #e8f4ec;
+      --surface-warning: #fdf4e3;
+      --surface-alert: #fceceb;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+      --on-warning-container: #6e4100;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --primary-hover: #0b636e;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Data & semantic tokens */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-sm: 0.375rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --input-border: 1px solid var(--outline);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+      --focus-shadow: 0 0 0 3px rgb(15 124 138 / 0.25);
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2rem, 1.4rem + 2.4vw, 3.125rem);
+      --headline-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.125rem);
+      --subhead-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+      --mono-size: 0.9375rem;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    body.large-text-mode {
+      --body-size: 1.25rem;
+      --subhead-size: clamp(1.3125rem, 1.15rem + 0.5vw, 1.6rem);
+      --label-size: 0.875rem;
+      --mono-size: 1.0625rem;
+    }
+
+    .page-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+      background: var(--surface-container-low);
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      box-shadow: var(--focus-shadow);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .title {
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.08;
+    }
+    .section-heading {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+    }
+    .sub-heading {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .lede {
+      font-size: 1.12em;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: var(--space-sm) 0 0;
+    }
+    p {
+      margin: 0 0 var(--space-md);
+      max-width: 68ch;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-primary-container);
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Top utility & hero */
+    .top-utility {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .org-mark {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+    .utility-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .hero-block {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--card-lift);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* Status accent cards */
+    .status-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .status-card[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-left-color: var(--primary);
+    }
+    .status-card[data-status="ok"] {
+      background: var(--surface-ok);
+      border-left-color: var(--tertiary);
+    }
+    .status-card[data-status="warn"] {
+      background: var(--surface-warning);
+      border-left-color: var(--warning);
+    }
+    .status-card[data-status="alert"] {
+      background: var(--surface-alert);
+      border-left-color: var(--error);
+    }
+
+    /* Chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      background: var(--surface-ok);
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+    .chip[data-status="info"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="warn"] {
+      background: var(--surface-warning);
+      color: var(--on-warning-container);
+    }
+    .chip[data-status="alert"] {
+      background: var(--surface-alert);
+      color: var(--error);
+    }
+    .chip[data-status="neutral"] {
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border: var(--card-border);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.25;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: var(--background);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--surface-container-low);
+    }
+    .btn-ghost {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-container);
+    }
+    .btn-sm {
+      min-height: 38px;
+      padding: var(--space-xs) var(--space-sm);
+      font-size: 0.875rem;
+    }
+    .btn[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Roadmap & Progress Bar */
+    .roadmap-panel {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .roadmap-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--surface-container);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--tertiary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-long) var(--ease-out);
+    }
+    .roadmap-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+    .roadmap-link {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      text-decoration: none;
+      color: var(--on-surface);
+      min-height: 44px;
+      transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+    .roadmap-link:hover {
+      background: var(--surface-container);
+      border-color: var(--primary);
+    }
+    .roadmap-step-num {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+    .roadmap-step-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* Module Sections */
+    .module-section {
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--card-lift);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .section-header {
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .subsection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      padding-top: var(--space-sm);
+    }
+    .subsection + .subsection {
+      border-top: 1px solid var(--outline-variant);
+      padding-top: var(--space-lg);
+    }
+
+    /* Browser Simulator */
+    .browser-sim {
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded-lg);
+      overflow: hidden;
+      background: var(--background);
+    }
+    .browser-tabs-bar {
+      background: var(--surface-chrome);
+      padding: var(--space-sm) var(--space-sm) 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-xs);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .browser-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 40px;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-bottom: none;
+      border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+    }
+    .browser-tab[aria-selected="true"] {
+      background: var(--background);
+      color: var(--on-surface);
+      border-color: var(--outline);
+      margin-bottom: -1px;
+      padding-bottom: calc(var(--space-xs) + 1px);
+    }
+    .browser-toolbar {
+      background: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .nav-btn-group {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      min-height: 40px;
+      padding: var(--space-xs);
+      border-radius: var(--rounded-sm);
+      border: 1px solid var(--outline-variant);
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+    .icon-btn:hover:not(:disabled) {
+      background: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+    .icon-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .icon-btn[aria-pressed="true"] {
+      background: var(--surface-warning);
+      border-color: var(--warning);
+      color: var(--on-warning-container);
+    }
+    .address-bar {
+      flex: 1 1 260px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 42px;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-mono);
+      font-size: var(--mono-size);
+      color: var(--on-surface);
+    }
+    .address-bar[data-security="danger"] {
+      background: var(--surface-alert);
+      border-color: var(--error);
+    }
+    .security-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded-full);
+      background: var(--surface-ok);
+      color: var(--secondary);
+      flex-shrink: 0;
+    }
+    .security-pill[data-security="danger"] {
+      background: var(--error);
+      color: var(--on-error);
+    }
+    .bookmarks-bar {
+      background: var(--surface-container-low);
+      padding: var(--space-xs) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+    }
+    .bookmark-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 2px var(--space-sm);
+      background: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-sm);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      color: var(--primary);
+      cursor: pointer;
+      min-height: 32px;
+    }
+    .bookmark-pill:hover {
+      background: var(--surface-container);
+    }
+    .browser-viewport {
+      padding: var(--space-lg);
+      background: var(--background);
+      min-height: 220px;
+    }
+
+    /* Two-column split for guided demos */
+    .demo-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    /* URL Anatomy */
+    .url-parts-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      font-family: var(--font-mono);
+      font-size: var(--mono-size);
+    }
+    .url-segment-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-sm);
+      font-family: var(--font-mono);
+      font-size: var(--mono-size);
+      font-weight: 600;
+      color: var(--on-surface);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .url-segment-btn:hover,
+    .url-segment-btn[aria-pressed="true"] {
+      border-color: var(--primary);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .url-segment-tag {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+    }
+
+    /* Card Grids */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .info-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    /* Search Detective & Message Clinic */
+    .search-result-card {
+      background: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--outline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .search-result-card[data-state="correct"] { border-left-color: var(--tertiary); }
+    .search-result-card[data-state="retry"] { border-left-color: var(--error); }
+
+    .result-url {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      word-break: break-word;
+    }
+    .result-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--primary);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    /* Phishing Message Box */
+    .email-sim {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .email-meta {
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .email-meta code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: var(--background);
+      padding: 2px var(--space-xs);
+      border-radius: var(--rounded-sm);
+      border: var(--card-border);
+    }
+
+    /* Forms & Labels */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .text-input, .text-area, .select-input {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      border: var(--input-border);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .text-area {
+      min-height: 96px;
+      resize: vertical;
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    /* Checklist & Radio options */
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .check-item:hover {
+      background: var(--surface-container);
+    }
+    .check-item input[type="checkbox"],
+    .check-item input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin: 2px 0 0;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Tables */
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .clean-table th {
+      text-align: left;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      background: var(--surface-container-low);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline);
+    }
+    .clean-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+    }
+
+    /* Portfolio Summary Preview */
+    .portfolio-box {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .hidden-panel { display: none; }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--outline-variant);
+      padding-top: var(--space-lg);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 780px) {
+      .demo-split,
+      .form-grid-2,
+      .roadmap-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md) var(--space-sm) var(--space-xl);
+        gap: var(--space-lg);
+      }
+      .hero-block,
+      .module-section {
+        padding: var(--space-lg) var(--space-md);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media print {
+      body { background: var(--background); }
+      .utility-controls,
+      .roadmap-panel,
+      .no-print { display: none !important; }
+      .module-section, .hero-block {
+        box-shadow: none;
+        border: 1px solid var(--outline-variant);
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <main class="page-grid">
+
+      <!-- TOP BAR & ORIENTATION -->
+      <header class="hero-block">
+        <div class="top-utility">
+          <div class="org-mark">Home4Good Inc. • Digital Pathways to Employment</div>
+          <div class="utility-controls no-print">
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-large-text" aria-pressed="false" onclick="toggleLargeText()">
+              <i data-lucide="type" width="16" height="16" aria-hidden="true"></i>
+              <span>Larger Text</span>
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-keyboard-tips" aria-expanded="false" onclick="toggleKeyboardTips()">
+              <i data-lucide="keyboard" width="16" height="16" aria-hidden="true"></i>
+              <span>Keyboard Tips</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="keyboard-tips-panel" class="status-card hidden-panel" data-status="info" role="region" aria-label="Keyboard navigation tips">
+          <strong>Keyboard Navigation Tips:</strong> Press <strong>Tab</strong> to move forward to the next button or input, <strong>Shift + Tab</strong> to move back, and <strong>Enter</strong> or <strong>Space</strong> to activate a button or checkbox. You are always welcome to work at your own pace.
+        </div>
+
+        <div>
+          <span class="kicker">Module 2 of 7 • Practice-First Digital Literacy</span>
+          <h1 class="title">Navigating the Internet Safely</h1>
+          <p class="lede">
+            Build confidence finding trustworthy job resources, reading web addresses, spotting scams early, and protecting your privacy — using a safe, fictional practice environment.
+          </p>
+        </div>
+
+        <div class="status-card" data-status="info">
+          <strong>Our Safe Training Promise:</strong> All employers, emails, and job postings in this module are fictional training simulations (such as <strong>Riverside Community Services</strong> and candidate <strong>Jordan Lee</strong>, using reserved <code>.test</code> addresses). Never enter real Social Security numbers, state ID numbers, bank details, passwords, or personal history into practice exercises.
+        </div>
+      </header>
+
+      <!-- PROGRESS ROADMAP -->
+      <nav class="roadmap-panel no-print" aria-label="Module learning flow">
+        <div class="roadmap-header">
+          <div>
+            <strong style="font-family: var(--font-headline); font-size: 1.05rem;">Your Four-Step Learning Path</strong>
+            <div class="field-hint">Follow each step in order, or jump to any section you want to review.</div>
+          </div>
+          <span class="chip" data-status="info" id="overall-progress-chip">0 of 8 activities completed</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="overall-progress-bar">
+          <div class="progress-fill" id="overall-progress-fill"></div>
+        </div>
+        <div class="roadmap-steps">
+          <a href="#part-watch-me" class="roadmap-link">
+            <span class="roadmap-step-num">1. Watch Me</span>
+            <span class="roadmap-step-title">Guided Browser &amp; URL Demos</span>
+          </a>
+          <a href="#part-lets-do-it" class="roadmap-link">
+            <span class="roadmap-step-num">2. Let’s Do It</span>
+            <span class="roadmap-step-title">Search &amp; Scam Practice</span>
+          </a>
+          <a href="#part-you-try" class="roadmap-link">
+            <span class="roadmap-step-num">3. You Try</span>
+            <span class="roadmap-step-title">Privacy &amp; Site Sandbox</span>
+          </a>
+          <a href="#part-show-what-you-can-do" class="roadmap-link">
+            <span class="roadmap-step-num">4. Show What You Can Do</span>
+            <span class="roadmap-step-title">Task Card DP-02 &amp; Portfolio</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- =========================================================
+           PART 1: WATCH ME
+      ========================================================== -->
+      <section class="module-section" id="part-watch-me" aria-labelledby="heading-watch-me">
+        <div class="section-header">
+          <div>
+            <span class="kicker">Step 1 of 4 • Guided Walkthrough</span>
+            <h2 class="section-heading" id="heading-watch-me">Watch Me: Browser Essentials &amp; Reading Web Addresses</h2>
+          </div>
+          <span class="chip" data-status="neutral" id="chip-part1">Guided Demo</span>
+        </div>
+
+        <p>
+          Before searching for jobs or services, it helps to know how your web browser works and how to read a web address before you trust a page. Click through the simulated browser below to see each control in action.
+        </p>
+
+        <!-- 1.1 Browser Essentials Simulator -->
+        <div class="subsection">
+          <h3 class="sub-heading">1.1 Try the Interactive Browser Controls</h3>
+          <p class="field-hint">Click the tabs, Back/Forward/Refresh buttons, Bookmark star, or switch between Address Bar and Search Bar mode.</p>
+
+          <div class="demo-split">
+            <div class="browser-sim" role="region" aria-label="Interactive practice web browser">
+              <div class="browser-tabs-bar">
+                <button type="button" class="browser-tab" id="sim-tab-0" aria-selected="true" onclick="switchSimTab(0)">
+                  <i data-lucide="shield-check" width="15" height="15" aria-hidden="true"></i>
+                  <span>Riverside Careers</span>
+                </button>
+                <button type="button" class="browser-tab" id="sim-tab-1" aria-selected="false" onclick="switchSimTab(1)">
+                  <i data-lucide="book-open" width="15" height="15" aria-hidden="true"></i>
+                  <span>Workplace Safety Guide</span>
+                </button>
+                <button type="button" class="browser-tab" id="sim-tab-2" aria-selected="false" onclick="switchSimTab(2)">
+                  <i data-lucide="plus" width="15" height="15" aria-hidden="true"></i>
+                  <span>New Tab (Search vs. Address)</span>
+                </button>
+              </div>
+
+              <div class="browser-toolbar">
+                <div class="nav-btn-group">
+                  <button type="button" class="icon-btn" id="sim-back" aria-label="Back to previous page" title="Back" onclick="simGoBack()">
+                    <i data-lucide="arrow-left" width="18" height="18" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="icon-btn" id="sim-forward" aria-label="Forward to next page" title="Forward" onclick="simGoForward()">
+                    <i data-lucide="arrow-right" width="18" height="18" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="icon-btn" id="sim-refresh" aria-label="Refresh page" title="Refresh" onclick="simRefresh()">
+                    <i data-lucide="rotate-cw" width="18" height="18" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+                <div class="address-bar" id="sim-address-bar" data-security="safe">
+                  <span class="security-pill" id="sim-security-pill" data-security="safe">
+                    <i data-lucide="lock" width="13" height="13" aria-hidden="true"></i>
+                    <span>HTTPS</span>
+                  </span>
+                  <span id="sim-url-text">www.riverside-example.test/careers</span>
+                </div>
+
+                <button type="button" class="icon-btn" id="sim-bookmark-btn" aria-pressed="false" aria-label="Bookmark this page" title="Bookmark" onclick="toggleSimBookmark()">
+                  <i data-lucide="star" width="18" height="18" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div class="bookmarks-bar" id="sim-bookmarks-bar">
+                <span style="font-weight: 700; color: var(--on-surface-variant);">Bookmarks:</span>
+                <span id="sim-bookmarks-list" class="btn-row"></span>
+              </div>
+
+              <div class="browser-viewport" id="sim-viewport">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="status-card" id="sim-coach-card" data-status="info">
+              <strong id="sim-coach-title">How Tabs &amp; Controls Help You</strong>
+              <p id="sim-coach-body" style="margin-top: var(--space-xs);">
+                Tabs let you keep two pages open side-by-side so you can compare information without losing your place. Try clicking the second tab, hitting the Refresh button, or clicking the Star icon to save a trusted page to your bookmarks bar.
+              </p>
+              <div class="btn-row" style="margin-top: var(--space-sm);">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="markWatchControlExplored()">
+                  <i data-lucide="check" width="16" height="16" aria-hidden="true"></i>
+                  <span>I explored the browser controls</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 Address Bar vs Search Bar & URL Anatomy -->
+        <div class="subsection">
+          <h3 class="sub-heading">1.2 Address Bar vs. Search Bar — and How to Read a Web Address</h3>
+          <div class="card-grid">
+            <div class="info-card">
+              <span class="chip" data-status="info">Address Bar (Top Box)</span>
+              <strong>Takes you directly to a known site</strong>
+              <p>If you type an exact address like <code>careeronestop.org</code> into the top bar, you go straight to that organization’s official website — skipping paid ads.</p>
+            </div>
+            <div class="info-card">
+              <span class="chip" data-status="warn">Search Bar (Middle of Page)</span>
+              <strong>Finds matching pages across the web</strong>
+              <p>Typing words like “workplace safety Atlanta” shows a list of results. The top results are often paid <strong>Sponsored</strong> ads, not always the safest official site.</p>
+            </div>
+          </div>
+
+          <p style="margin-top: var(--space-sm);">
+            <strong>Inspect a Web Address (URL):</strong> Choose one of the three sample addresses below, then click any part of it to see what that piece tells you.
+          </p>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-ghost btn-sm" id="url-preset-0" aria-pressed="true" onclick="selectUrlPreset(0)">Official Government (.gov)</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="url-preset-1" aria-pressed="false" onclick="selectUrlPreset(1)">Fictional Training (.test)</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="url-preset-2" aria-pressed="false" onclick="selectUrlPreset(2)">Suspicious Look-Alike</button>
+          </div>
+
+          <div class="url-parts-row" id="url-anatomy-row" role="group" aria-label="Clickable web address parts">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="status-card" id="url-anatomy-explanation" data-status="info">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- 1.3 Padlock Myth Check & Domain Extensions -->
+        <div class="subsection">
+          <h3 class="sub-heading">1.3 Does the Padlock Prove a Website Is Safe?</h3>
+          <div class="status-card" data-status="warn">
+            <strong>Quick Check:</strong> You see a small padlock icon (HTTPS) next to a website address. Does that padlock alone prove the organization is honest and legitimate?
+            <div class="btn-row" style="margin-top: var(--space-sm);">
+              <button type="button" class="btn btn-ghost btn-sm" id="padlock-yes" onclick="answerPadlockCheck(true)">Yes — padlock means trustworthy</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="padlock-no" onclick="answerPadlockCheck(false)">No — it only protects the connection</button>
+            </div>
+            <div id="padlock-feedback" style="margin-top: var(--space-sm);"></div>
+          </div>
+
+          <h4 style="margin-top: var(--space-sm);">Common Domain Extensions &amp; Trust Signals</h4>
+          <div class="card-grid">
+            <div class="info-card">
+              <strong><code>.gov</code> — Government</strong>
+              <p>Reserved for official U.S. government agencies (like <code>consumer.ftc.gov</code> or <code>cisa.gov</code>). Cannot be bought by random individuals.</p>
+            </div>
+            <div class="info-card">
+              <strong><code>.edu</code> — Education</strong>
+              <p>Used by accredited colleges and universities. Helpful for verified training guides and adult learning programs.</p>
+            </div>
+            <div class="info-card">
+              <strong><code>.org</code> — Organizations</strong>
+              <p>Often used by nonprofits and community services. Anyone can register a <code>.org</code>, so still check the <strong>About Us</strong> and <strong>Contact</strong> pages.</p>
+            </div>
+            <div class="info-card">
+              <strong><code>.com</code> &amp; <code>.test</code></strong>
+              <p><code>.com</code> is open to anyone for business or scams — verify carefully. <code>.test</code> is a reserved practice domain used safely in this course.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PART 2: LET'S DO IT
+      ========================================================== -->
+      <section class="module-section" id="part-lets-do-it" aria-labelledby="heading-lets-do-it">
+        <div class="section-header">
+          <div>
+            <span class="kicker">Step 2 of 4 • Scaffolded Practice with Hints</span>
+            <h2 class="section-heading" id="heading-lets-do-it">Let’s Do It: Spot Ads, Look-Alikes, and Scam Messages</h2>
+          </div>
+          <span class="chip" data-status="neutral" id="chip-part2">0 of 2 activities done</span>
+        </div>
+
+        <!-- 2.1 Search Results Detective -->
+        <div class="subsection">
+          <h3 class="sub-heading">2.1 Search Results Detective</h3>
+          <p>
+            Imagine Jordan Lee searched for <strong>“Riverside Community Services workplace safety and jobs”</strong>. Review each search result below and decide whether it is a <strong>Legitimate Result</strong>, a <strong>Sponsored Ad</strong>, or a <strong>Deceptive / Scam Link</strong>. Use the hint button anytime you want a clue.
+          </p>
+
+          <div id="search-detective-list" style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- 2.2 Scam & Phishing Red-Flag Clinic -->
+        <div class="subsection">
+          <h3 class="sub-heading">2.2 Phishing &amp; Job-Scam Clinic (3 Fictional Messages)</h3>
+          <p>
+            <strong>Phishing</strong> is an attempt to trick someone into sharing private information or taking a harmful action. Read these three fictional messages, check the warning signs, and choose the safest next action.
+          </p>
+
+          <div id="phishing-clinic-list" style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PART 3: YOU TRY
+      ========================================================== -->
+      <section class="module-section" id="part-you-try" aria-labelledby="heading-you-try">
+        <div class="section-header">
+          <div>
+            <span class="kicker">Step 3 of 4 • Independent Sandbox</span>
+            <h2 class="section-heading" id="heading-you-try">You Try: Privacy Boundaries &amp; Employer Website Check</h2>
+          </div>
+          <span class="chip" data-status="neutral" id="chip-part3">0 of 2 sandboxes done</span>
+        </div>
+
+        <!-- 3.1 Practical Data Privacy Boundaries -->
+        <div class="subsection">
+          <h3 class="sub-heading">3.1 Data Privacy Boundaries Sandbox</h3>
+          <p>
+            Protecting your personal information keeps you safe online — whether you are using a job website, a web form, or a public AI tool. Decide whether each action below is <strong>Safe Practice</strong> or <strong>Keep Private / Do Not Share</strong>.
+          </p>
+
+          <div id="privacy-sandbox-list" class="card-grid">
+            <!-- Populated by JS -->
+          </div>
+          <div id="privacy-sandbox-summary" class="status-card hidden-panel" data-status="info"></div>
+        </div>
+
+        <!-- 3.2 Validate a Practice Employer Website -->
+        <div class="subsection">
+          <h3 class="sub-heading">3.2 Validate a Practice Employer Website (Jordan Lee Scenario)</h3>
+          <p>
+            Jordan Lee wants to verify whether a job posting for <strong>Customer Support Associate at Riverside Community Services</strong> is real. Switch between <strong>Website A</strong> and <strong>Website B</strong> in the inspection viewer below, check their details, and submit your verdict.
+          </p>
+
+          <div class="browser-sim">
+            <div class="browser-tabs-bar">
+              <button type="button" class="browser-tab" id="lab-tab-0" aria-selected="true" onclick="switchLabSite(0)">
+                <i data-lucide="globe" width="15" height="15" aria-hidden="true"></i>
+                <span>Website A: riverside-example.test</span>
+              </button>
+              <button type="button" class="browser-tab" id="lab-tab-1" aria-selected="false" onclick="switchLabSite(1)">
+                <i data-lucide="globe" width="15" height="15" aria-hidden="true"></i>
+                <span>Website B: riverside-fast-hire.example.test</span>
+              </button>
+            </div>
+            <div class="browser-toolbar">
+              <div class="address-bar" id="lab-address-bar" data-security="safe">
+                <span class="security-pill" id="lab-security-pill" data-security="safe">
+                  <i data-lucide="lock" width="13" height="13" aria-hidden="true"></i>
+                  <span id="lab-pill-text">HTTPS</span>
+                </span>
+                <span id="lab-url-display">www.riverside-example.test/about-and-careers</span>
+              </div>
+            </div>
+            <div class="browser-viewport" id="lab-viewport">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="status-card" data-status="info">
+            <strong>Your Independent Verification Verdict</strong>
+            <div class="form-grid-2" style="margin-top: var(--space-sm);">
+              <div class="field-group">
+                <label class="field-label" for="lab-verdict-select">Which website is the legitimate Riverside Community Services site?</label>
+                <select id="lab-verdict-select" class="select-input" onchange="saveFieldValue('labVerdict', this.value)">
+                  <option value="">-- Choose one --</option>
+                  <option value="A">Website A (riverside-example.test)</option>
+                  <option value="B">Website B (riverside-fast-hire.example.test)</option>
+                  <option value="neither">Neither is trustworthy</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="lab-reason-select">What is the strongest sign that helped you decide?</label>
+                <select id="lab-reason-select" class="select-input" onchange="saveFieldValue('labReason', this.value)">
+                  <option value="">-- Choose one --</option>
+                  <option value="fees_and_id">Website B asks for a $35 badge fee and State ID, while Website A has an About Us page, Atlanta contact info, and no fees</option>
+                  <option value="padlock_only">Website A has a padlock icon</option>
+                  <option value="pay_higher">Website B pays more money</option>
+                </select>
+              </div>
+            </div>
+            <div class="btn-row" style="margin-top: var(--space-md);">
+              <button type="button" class="btn btn-primary" onclick="checkEmployerLab()">Check My Verification</button>
+            </div>
+            <div id="lab-feedback" style="margin-top: var(--space-sm);"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           PART 4: SHOW WHAT YOU CAN DO (DP-02 + I CAN + PORTFOLIO)
+      ========================================================== -->
+      <section class="module-section" id="part-show-what-you-can-do" aria-labelledby="heading-show">
+        <div class="section-header">
+          <div>
+            <span class="kicker">Step 4 of 4 • Task Card DP-02 &amp; Self-Reflection</span>
+            <h2 class="section-heading" id="heading-show">Show What You Can Do: Task Card DP-02 &amp; Portfolio Summary</h2>
+          </div>
+          <span class="chip" data-status="neutral" id="chip-part4">Ready to complete</span>
+        </div>
+
+        <div class="status-card" data-status="info">
+          <strong>Task Card DP-02 Prompt:</strong> “Your team needs a legitimate, current workplace safety resource, but a suspicious page appears in search results.” Complete the source log and safety questions below using only fictional or public training details.
+        </div>
+
+        <!-- 4.1 Task Card DP-02 Form -->
+        <div class="subsection">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+            <h3 class="sub-heading">4.1 Source Verification Log &amp; Safe Navigation Plan</h3>
+            <button type="button" class="btn btn-ghost btn-sm no-print" onclick="loadSampleDp02()">
+              <i data-lucide="file-text" width="16" height="16" aria-hidden="true"></i>
+              <span>Fill Practice Example (Jordan Lee)</span>
+            </button>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="dp02-title">1. Guidance Page Title</label>
+              <input type="text" id="dp02-title" class="text-input" oninput="saveFieldValue('dp02Title', this.value)" placeholder="e.g., Workplace Safety &amp; Health Rights">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="dp02-org">2. Publishing Organization</label>
+              <input type="text" id="dp02-org" class="text-input" oninput="saveFieldValue('dp02Org', this.value)" placeholder="e.g., CareerOneStop / OSHA / Riverside Training">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="dp02-url">3. URL / Domain</label>
+              <input type="text" id="dp02-url" class="text-input" oninput="saveFieldValue('dp02Url', this.value)" placeholder="e.g., www.careeronestop.org or osha.gov">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="dp02-date">4. Date Accessed</label>
+              <input type="text" id="dp02-date" class="text-input" oninput="saveFieldValue('dp02Date', this.value)" value="November 18, 2026">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="dp02-compare">5. Second Independent, Credible Source (for Cross-Checking)</label>
+            <input type="text" id="dp02-compare" class="text-input" oninput="saveFieldValue('dp02Compare', this.value)" placeholder="e.g., Compared with consumer.ftc.gov or cisa.gov — both list no-fee safety guidance">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="dp02-nav-explain">6. How do you navigate to a service independently instead of clicking an urgent login link?</label>
+            <span class="field-hint">Describe the safe steps in your own words.</span>
+            <textarea id="dp02-nav-explain" class="text-area" oninput="saveFieldValue('dp02NavExplain', this.value)" placeholder="Example: Do not click the link in the message. Open a new browser tab, type the official web address I know (or use my saved bookmark), and check my account status there."></textarea>
+            <div class="btn-row no-print">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="checkDp02NavigationAnswer()">Check My Explanation</button>
+            </div>
+            <div id="dp02-nav-feedback"></div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="dp02-rule1">7a. My Rule #1 for Handling Private Information Online</label>
+              <input type="text" id="dp02-rule1" class="text-input" oninput="saveFieldValue('dp02Rule1', this.value)" placeholder="e.g., Never share my SSN, State ID, or passwords through email links">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="dp02-rule2">7b. My Rule #2 for Handling Private Information Online</label>
+              <input type="text" id="dp02-rule2" class="text-input" oninput="saveFieldValue('dp02Rule2', this.value)" placeholder="e.g., Never pay a fee or buy gift cards to apply for a job">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4.2 Module 2 Exit Check -->
+        <div class="subsection">
+          <h3 class="sub-heading">4.2 Module 2 Exit Check (3 Questions)</h3>
+          <p class="field-hint">Answer all three questions to confirm your key takeaways before finishing.</p>
+          <div id="exit-check-list" style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <!-- Populated by JS -->
+          </div>
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn-primary" onclick="gradeExitCheck()">Check My Exit Check Answers</button>
+          </div>
+          <div id="exit-check-summary"></div>
+        </div>
+
+        <!-- 4.3 "I Can" Self-Reflection (Worksheet 2) -->
+        <div class="subsection">
+          <h3 class="sub-heading">4.3 Student Worksheet 2: “I Can” Self-Reflection</h3>
+          <p>Check each skill you feel ready to demonstrate, and note any accessibility supports or questions for your instructor.</p>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="learner-id">Learner Name or Program ID (Training / First Name Only)</label>
+              <input type="text" id="learner-id" class="text-input" oninput="saveFieldValue('learnerId', this.value)" placeholder="e.g., Jordan L. or ID #204 (never enter SSN)">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="learner-supports">Accessibility or Learning Supports Used</label>
+              <input type="text" id="learner-supports" class="text-input" oninput="saveFieldValue('learnerSupports', this.value)" placeholder="e.g., Larger text, keyboard navigation, extra time">
+            </div>
+          </div>
+
+          <fieldset style="border: none; padding: 0; margin: 0;">
+            <legend class="field-label" style="margin-bottom: var(--space-sm);">My Work Checklist (“I Can” Statements)</legend>
+            <div class="check-list" id="ican-checklist">
+              <label class="check-item">
+                <input type="checkbox" id="ican-0" onchange="toggleICan(0, this.checked)">
+                <span><strong>I can</strong> navigate a web browser and switch between tabs.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" id="ican-1" onchange="toggleICan(1, this.checked)">
+                <span><strong>I can</strong> use focused search terms and spot sponsored ads.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" id="ican-2" onchange="toggleICan(2, this.checked)">
+                <span><strong>I can</strong> identify the publisher and domain of a website.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" id="ican-3" onchange="toggleICan(3, this.checked)">
+                <span><strong>I can</strong> recognize a suspicious request or phishing red flag.</span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" id="ican-4" onchange="toggleICan(4, this.checked)">
+                <span><strong>I can</strong> explain a safe, independent way to verify a site or message.</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="reflect-learned">Something I learned in Module 2</label>
+              <input type="text" id="reflect-learned" class="text-input" oninput="saveFieldValue('reflectLearned', this.value)" placeholder="Write one takeaway in your own words">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="reflect-practice">One skill I want to practice again</label>
+              <input type="text" id="reflect-practice" class="text-input" oninput="saveFieldValue('reflectPractice', this.value)" placeholder="e.g., Reading domain extensions carefully">
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="reflect-question">Questions I want to ask my instructor or coach</label>
+            <input type="text" id="reflect-question" class="text-input" oninput="saveFieldValue('reflectQuestion', this.value)" placeholder="Optional — any question is welcome">
+          </div>
+        </div>
+
+        <!-- 4.4 Skool Portfolio Summary & Export -->
+        <div class="subsection">
+          <h3 class="sub-heading">4.4 Your Skool Portfolio Completion Summary</h3>
+          <p>
+            Save or print this summary for your Home4Good Skool portfolio or instructor check-in. Remember: staff confirm module completion individually after observing your skills — your practice progress here supports that conversation.
+          </p>
+
+          <div class="portfolio-box" id="portfolio-summary-card">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm);">
+              <strong>Module 2 Completion Snapshot</strong>
+              <span class="chip" data-status="info" id="portfolio-date-chip">November 18, 2026</span>
+            </div>
+            <table class="clean-table" aria-label="Module 2 progress summary">
+              <thead>
+                <tr>
+                  <th>Module Component</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="portfolio-table-body">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn-primary" onclick="downloadPortfolioSummary()">
+              <i data-lucide="download" width="18" height="18" aria-hidden="true"></i>
+              <span>Download Summary (.txt)</span>
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="copyPortfolioSummary()">
+              <i data-lucide="copy" width="18" height="18" aria-hidden="true"></i>
+              <span>Copy Summary for Skool</span>
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="printSummary()">
+              <i data-lucide="printer" width="18" height="18" aria-hidden="true"></i>
+              <span>Print / Save as PDF</span>
+            </button>
+            <button type="button" class="btn btn-ghost" id="btn-reset-all" onclick="handleResetAll(this)">
+              <i data-lucide="rotate-ccw" width="18" height="18" aria-hidden="true"></i>
+              <span>Reset Practice</span>
+            </button>
+          </div>
+          <div id="export-feedback" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- ATTRIBUTION & SAFETY FOOTER -->
+      <footer class="site-footer">
+        <div>
+          <strong>Digital Pathways to Employment — Module 2: Navigating the Internet Safely</strong> • Grounded in Home4Good Inc. Curriculum &amp; Northstar Digital Literacy aligned standards (independent Home4Good guide).
+        </div>
+        <div>
+          Copyright © 2026 Ronda Bell. Licensed to Home4Good Inc. for authorized educational and charitable use. Eligible participants may use designated materials for personal learning. Contact: home4good@bellahvisions.com • programs.bellahvisions.com.
+        </div>
+        <div>
+          Recommended verification references (plain text): www.digitalliteracyassessment.org • consumer.ftc.gov • www.cisa.gov • www.careeronestop.org.
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    // =========================================================================
+    // DATA DEFINITIONS (Backtick literals throughout for safe apostrophes)
+    // =========================================================================
+
+    const SIM_PAGES = [
+      {
+        id: `riverside`,
+        tabLabel: `Riverside Careers`,
+        url: `www.riverside-example.test/careers`,
+        security: `safe`,
+        pill: `HTTPS`,
+        title: `Riverside Community Services — Careers (Training Simulation)`,
+        bodyHtml: `
+          <div class="status-card" data-status="ok" style="margin-bottom: var(--space-md);">
+            <strong>Verified Training Organization:</strong> Riverside Community Services (Atlanta, GA)
+          </div>
+          <p><strong>Open Position:</strong> Customer Support Associate (Full-Time • $19–$22/hr fictional)</p>
+          <p><strong>Duties:</strong> Answer customer questions, update basic records, organize service requests, and schedule follow-up calls.</p>
+          <p><strong>Required Skills:</strong> Clear written communication, email and standard computer applications, accurate record keeping.</p>
+          <p class="field-hint">Notice: No application fee, clear Atlanta office contact info, and matches the official <code>riverside-example.test</code> domain.</p>
+        `
+      },
+      {
+        id: `safety`,
+        tabLabel: `Workplace Safety Guide`,
+        url: `www.careeronestop.org/workplace-safety-training`,
+        security: `safe`,
+        pill: `HTTPS`,
+        title: `Workplace Safety & Career Guidance (Public Resource Preview)`,
+        bodyHtml: `
+          <div class="status-card" data-status="info" style="margin-bottom: var(--space-md);">
+            <strong>Trusted Public Resource:</strong> Sponsored by U.S. Department of Labor (<code>careeronestop.org</code>)
+          </div>
+          <p><strong>Workplace Safety Basics:</strong> Know your right to a safe workplace, how to report hazards, and how to confirm an employer's legitimacy before sharing personal records.</p>
+          <p><strong>Tip:</strong> Keep this tab open while reviewing a job posting in Tab 1 so you can compare facts side by side.</p>
+        `
+      },
+      {
+        id: `newtab`,
+        tabLabel: `New Tab`,
+        url: `new-tab // choose address bar or search`,
+        security: `safe`,
+        pill: `READY`,
+        title: `Address Bar vs. Search Bar Practice`,
+        bodyHtml: `
+          <p><strong>Try clicking a quick destination below</strong> to practice using the Back and Forward buttons:</p>
+          <div class="btn-row" style="margin-top: var(--space-sm);">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="simNavigateTo('ftc')">Go to consumer.ftc.gov (Scam Alerts)</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="simNavigateTo('cisa')">Go to cisa.gov (Phishing Help)</button>
+          </div>
+        `
+      }
+    ];
+
+    const EXTRA_SIM_PAGES = {
+      ftc: {
+        id: `ftc`,
+        url: `consumer.ftc.gov/articles/job-scams`,
+        security: `safe`,
+        pill: `HTTPS (.gov)`,
+        bodyHtml: `
+          <div class="status-card" data-status="ok" style="margin-bottom: var(--space-md);">
+            <strong>Official Government Guidance (.gov):</strong> Federal Trade Commission Consumer Advice
+          </div>
+          <p><strong>Job Scam Warning:</strong> Honest employers will never ask you to pay for a job, buy gift cards, or send money to cover training equipment.</p>
+          <p class="field-hint">Now try clicking the <strong>Back arrow</strong> in the toolbar above to return to your previous page!</p>
+        `
+      },
+      cisa: {
+        id: `cisa`,
+        url: `www.cisa.gov/secure-our-world/recognize-and-report-phishing`,
+        security: `safe`,
+        pill: `HTTPS (.gov)`,
+        bodyHtml: `
+          <div class="status-card" data-status="ok" style="margin-bottom: var(--space-md);">
+            <strong>Official Government Guidance (.gov):</strong> Cybersecurity &amp; Infrastructure Security Agency
+          </div>
+          <p><strong>Phishing Check:</strong> Watch for urgent threats, mismatched sender domains, and requests for passwords or ID numbers. Navigate to the official site yourself instead of clicking links in unexpected messages.</p>
+          <p class="field-hint">Try clicking the <strong>Back arrow</strong> or the <strong>Star icon</strong> to bookmark this page.</p>
+        `
+      }
+    };
+
+    const URL_PRESETS = [
+      {
+        label: `Official Government (.gov)`,
+        segments: [
+          { text: `https://`, tag: `Protocol`, title: `HTTPS Encryption`, desc: `Means data traveling between your device and the site is encrypted. Helpful for privacy, though scam sites can use HTTPS too — always inspect the domain next!` },
+          { text: `consumer.ftc`, tag: `Domain Name`, title: `Organization Name (FTC)`, desc: `Look right before the extension (.gov). Here the core domain is ftc.gov — the Federal Trade Commission.` },
+          { text: `.gov`, tag: `Extension`, title: `.gov Extension`, desc: `Restricted strictly to verified U.S. government agencies. Private individuals or scammers cannot register a .gov address.` },
+          { text: `/articles/job-scams`, tag: `Page Path`, title: `Specific Page Folder`, desc: `Everything after the first single slash shows which page inside that website you are reading.` }
+        ]
+      },
+      {
+        label: `Fictional Training (.test)`,
+        segments: [
+          { text: `https://`, tag: `Protocol`, title: `HTTPS Encryption`, desc: `Protects the browser connection. Always verify the domain name alongside the padlock.` },
+          { text: `www.riverside-example`, tag: `Domain Name`, title: `Exact Employer Name`, desc: `Matches "Riverside Community Services" cleanly without extra urgent words.` },
+          { text: `.test`, tag: `Extension`, title: `.test Training Domain`, desc: `Reserved by internet standards strictly for safe classroom training and practice — no real emails or submissions go out.` },
+          { text: `/careers`, tag: `Page Path`, title: `Careers Section`, desc: `Points directly to the job opportunities section on Riverside's practice website.` }
+        ]
+      },
+      {
+        label: `Suspicious Look-Alike`,
+        segments: [
+          { text: `http://`, tag: `Protocol (Warning)`, title: `Unencrypted HTTP`, desc: `Notice there is no "s" after http and no padlock. Anything typed here is not encrypted.` },
+          { text: `riverside-urgent-hire`, tag: `Deceptive Domain`, title: `Fake Look-Alike Name`, desc: `Scammers add urgent words like "-urgent-hire" or misspell names to trick people who only glance at the first word.` },
+          { text: `.com`, tag: `Extension`, title: `.com Extension`, desc: `Anyone can buy a .com web address in minutes. Seeing .com does not mean a site is verified.` },
+          { text: `/pay-badge-fee`, tag: `Suspicious Path`, title: `Fee Request Warning`, desc: `Legitimate employers never send you to a page asking for a badge fee or gift card to get hired.` }
+        ]
+      }
+    ];
+
+    const SEARCH_DETECTIVE_ITEMS = [
+      {
+        id: `sd1`,
+        badge: `Sponsored`,
+        url: `www.riverside-fast-hire-apply.com/guaranteed-job`,
+        title: `APPLY NOW — Riverside Instant Hire ($25 Processing Fee)`,
+        snippet: `Skip the line! Guaranteed Customer Support job in Atlanta today. Pay $25 registration fee to unlock interview slot.`,
+        correct: `ad`,
+        hint: `Look at the top label above the URL ("Sponsored") and notice the .com address asking for a $25 fee.`,
+        feedbackOk: `Spot on! This is a Sponsored Ad — and it also shows a major scam red flag (charging a $25 fee and promising a guaranteed job).`,
+        feedbackRetry: `Look closely at the "Sponsored" label at the top left of this card. Companies pay to place Sponsored ads above real search results.`
+      },
+      {
+        id: `sd2`,
+        badge: `Organic Result`,
+        url: `www.riverside-example.test/careers`,
+        title: `Careers at Riverside Community Services | Customer Support Associate`,
+        snippet: `Official training site for Riverside Community Services in Atlanta, GA. Read job duties, required skills, and our About Us page. No fees to apply.`,
+        correct: `legit`,
+        hint: `Check the domain: does it match the organization cleanly without extra urgent words or fees?`,
+        feedbackOk: `Correct! The domain matches Riverside cleanly, lists clear duties and location, and requires no fee.`,
+        feedbackRetry: `Look again at the URL and description: this is the clean riverside-example.test domain with no fees or urgent threats.`
+      },
+      {
+        id: `sd3`,
+        badge: `Organic Result`,
+        url: `riverside-urgent-verify.example.test/ssn-check`,
+        title: `URGENT: Riverside Applicant Background Portal — Enter ID Now`,
+        snippet: `Your job file expires in 30 minutes. Enter your Social Security number and state ID immediately to remain eligible.`,
+        correct: `scam`,
+        hint: `Look at the words "urgent-verify" in the domain and the threat that your file expires in 30 minutes unless you enter your SSN.`,
+        feedbackOk: `Great catch! Urgent 30-minute deadlines, altered domains ("riverside-urgent-verify"), and upfront SSN requests are classic phishing red flags.`,
+        feedbackRetry: `Look closely at the domain ("riverside-urgent-verify") and the threat demanding your SSN in 30 minutes. That is a deceptive scam link.`
+      },
+      {
+        id: `sd4`,
+        badge: `Organic Result`,
+        url: `www.careeronestop.org/ExploreCareers`,
+        title: `CareerOneStop — Workplace Skills & Safe Job Search`,
+        snippet: `Sponsored by the U.S. Department of Labor. Free career resources, resume tips, and workplace safety information.`,
+        correct: `legit`,
+        hint: `Do you recognize this official .org resource sponsored by the U.S. Department of Labor?`,
+        feedbackOk: `Correct! CareerOneStop is a trusted public career resource you can use to cross-check job and workplace information.`,
+        feedbackRetry: `Check the URL and publisher: careeronestop.org is a trusted U.S. Department of Labor-sponsored resource, not an ad or scam.`
+      }
+    ];
+
+    const PHISHING_MESSAGES = [
+      {
+        id: `pm1`,
+        from: `account-verify@riverside-urgent.example.test`,
+        subject: `Password verification required immediately`,
+        body: `"Your account will be deleted in 30 minutes unless you reply with your password and identification number."`,
+        clues: [
+          `Sender domain uses "riverside-urgent" instead of the normal employer domain`,
+          `Creates fake panic ("deleted in 30 minutes")`,
+          `Asks you to reply with a password and identification number`
+        ],
+        options: [
+          { id: `reply`, label: `Reply quickly with your password so your account stays open` },
+          { id: `verify`, label: `Do not reply or click; open a new tab and verify directly through the official site or trusted support` },
+          { id: `forward`, label: `Forward the email to coworkers asking for their passwords` }
+        ],
+        correctOption: `verify`,
+        hint: `Real support teams never ask for your password or ID number by email, and never force a 30-minute panic deadline.`,
+        feedbackOk: `Well done! Never reply with passwords or IDs. Always navigate independently to the official service or contact trusted program staff.`
+      },
+      {
+        id: `pm2`,
+        from: `hiring-desk@quick-payroll-jobs.com`,
+        subject: `Congratulations — Equipment Deposit Needed Today`,
+        body: `"You are hired! Please purchase a $100 gift card and email us the code so we can ship your work laptop before Friday."`,
+        clues: [
+          `Offers a job instantly without a real interview`,
+          `Asks you to buy a gift card and send the code`,
+          `Sender uses an unrelated .com domain`
+        ],
+        options: [
+          { id: `buy`, label: `Buy the gift card so you don't lose the job` },
+          { id: `scam`, label: `Stop immediately — requests for fees or gift cards are a major job scam` },
+          { id: `bank`, label: `Offer your bank account number instead of a gift card` }
+        ],
+        correctOption: `scam`,
+        hint: `Remember our core rule: no legitimate employer requires fees or gift cards to secure a job or equipment.`,
+        feedbackOk: `Exactly right! Any request for gift cards, wire transfers, or upfront fees is a clear job scam.`
+      },
+      {
+        id: `pm3`,
+        from: `no-reply@mail-security-alert.example.test`,
+        subject: `Unexpected password reset on your training account`,
+        body: `"Someone requested a password reset. Click here right away to cancel or confirm your login."`,
+        clues: [
+          `Unexpected password-reset message you did not request`,
+          `Asks you to click an embedded link ("Click here right away")`
+        ],
+        options: [
+          { id: `click`, label: `Click the link inside the message to see what happened` },
+          { id: `official`, label: `Ignore the link; go to the official login page yourself or ask your training coordinator` },
+          { id: `wifi`, label: `Log in using the link while connected to public coffee-shop Wi-Fi` }
+        ],
+        correctOption: `official`,
+        hint: `What does Module 2 say about unexpected password-reset links?`,
+        feedbackOk: `Great decision! Verify unexpected password-reset notices through the official service or a trusted support channel — never through the message link.`
+      }
+    ];
+
+    const PRIVACY_ITEMS = [
+      {
+        id: `pr1`,
+        scenario: `Entering Jordan Lee's fictional name and "jordan.lee@riverside-example.test" into a class mock job form.`,
+        correct: `safe`,
+        explain: `Safe in training! Using fictional personas and .test addresses lets you practice safely without exposing real personal data.`
+      },
+      {
+        id: `pr2`,
+        scenario: `Typing your real Social Security Number or State ID into an unfamiliar job website before an interview.`,
+        correct: `private`,
+        explain: `Keep private! Never enter SSNs, state IDs, or bank numbers into untrusted sites or practice exercises.`
+      },
+      {
+        id: `pr3`,
+        scenario: `Pasting your personal case number or justice history into a public AI tool to help write a message.`,
+        correct: `private`,
+        explain: `Keep private! Leave passwords, case numbers, IDs, and private personal history out of AI prompts and untrusted tools.`
+      },
+      {
+        id: `pr4`,
+        scenario: `Reading a public workplace safety checklist on a verified .gov website without creating an account.`,
+        correct: `safe`,
+        explain: `Safe practice! Reading public information on verified .gov or .org websites protects your privacy.`
+      },
+      {
+        id: `pr5`,
+        scenario: `Entering your real home address and phone number on a pop-up page claiming you won a job interview.`,
+        correct: `private`,
+        explain: `Keep private! Pop-ups promising instant interviews are often data-harvesting scams.`
+      },
+      {
+        id: `pr6`,
+        scenario: `Sharing only general transferable skills (like "organized records, scheduling, active listening") on a practice résumé.`,
+        correct: `safe`,
+        explain: `Safe practice! Focusing on transferable skills builds a strong résumé without disclosing sensitive personal history.`
+      }
+    ];
+
+    const LAB_SITES = [
+      {
+        url: `www.riverside-example.test/about-and-careers`,
+        security: `safe`,
+        pill: `HTTPS`,
+        html: `
+          <div class="status-card" data-status="ok" style="margin-bottom: var(--space-md);">
+            <strong>Riverside Community Services</strong> — Official Training Site
+          </div>
+          <p><strong>About Us:</strong> Founded to support Atlanta neighborhoods with community programs and client support services. Office: 100 Practice Way, Atlanta, GA (training placeholder). Contact: <code>hr@riverside-example.test</code>.</p>
+          <p><strong>Current Opening:</strong> Customer Support Associate • Full-time • $19–$22/hr (fictional). Required: clear written communication, email &amp; computer basics, accurate records. <strong>No fee to apply.</strong></p>
+          <p><strong>Privacy Note:</strong> Never send SSN, State ID, or bank details during initial application.</p>
+        `
+      },
+      {
+        url: `riverside-fast-hire.example.test/apply-now`,
+        security: `danger`,
+        pill: `HTTP · Not Secure`,
+        html: `
+          <div class="status-card" data-status="alert" style="margin-bottom: var(--space-md);">
+            <strong>RIVERSIDE FAST HIRE PORTAL — ACT WITHIN 15 MINUTES!</strong>
+          </div>
+          <p><strong>Customer Support — $38/hr Instant Start!</strong> No experience needed. Send a <strong>$35 refundable badge fee</strong> by gift card and upload a photo of your <strong>State ID and Social Security card</strong> below to reserve your spot.</p>
+          <p class="field-hint"><em>No "About Us" page, no physical office address, and no official employer contact listed.</em></p>
+        `
+      }
+    ];
+
+    const EXIT_QUESTIONS = [
+      {
+        id: `eq1`,
+        prompt: `1. Does a padlock icon (HTTPS) alone prove that a website is trustworthy?`,
+        options: [
+          { id: `a`, text: `Yes — the padlock guarantees the company is honest.` },
+          { id: `b`, text: `No — HTTPS protects a connection but does not establish legitimacy.` },
+          { id: `c`, text: `Yes — only .gov websites can have a padlock.` }
+        ],
+        correct: `b`,
+        answerText: `No. HTTPS protects a connection (encrypts data in transit) but does not establish legitimacy.`
+      },
+      {
+        id: `eq2`,
+        prompt: `2. What is phishing?`,
+        options: [
+          { id: `a`, text: `A tool for organizing browser bookmarks into folders.` },
+          { id: `b`, text: `An attempt to trick someone into disclosing information or taking a harmful action.` },
+          { id: `c`, text: `A faster way to upload a PDF résumé.` }
+        ],
+        correct: `b`,
+        answerText: `An attempt to trick someone into disclosing information or taking a harmful action.`
+      },
+      {
+        id: `eq3`,
+        prompt: `3. What should you do with an unexpected password-reset link?`,
+        options: [
+          { id: `a`, text: `Click it right away and enter your old password.` },
+          { id: `b`, text: `Reply to the message with your identification number.` },
+          { id: `c`, text: `Verify through the official service or a trusted support channel.` }
+        ],
+        correct: `c`,
+        answerText: `Verify through the official service or a trusted support channel (never through the unexpected link).`
+      }
+    ];
+
+    // =========================================================================
+    // STATE MANAGEMENT
+    // =========================================================================
+
+    const DEFAULT_STATE = {
+      largeText: false,
+      watchBrowserDone: false,
+      watchPadlockDone: false,
+      padlockChoice: null,
+      simTab: 0,
+      simHistory: [`riverside`],
+      simHistoryIdx: 0,
+      simBookmarks: [`www.riverside-example.test/careers`],
+      urlPreset: 0,
+      urlSegmentIdx: 0,
+      searchAnswers: {},
+      phishingAnswers: {},
+      phishingCluesOpen: {},
+      privacyAnswers: {},
+      labSiteIdx: 0,
+      labVerdict: ``,
+      labReason: ``,
+      labVerifiedOk: false,
+      dp02Title: ``,
+      dp02Org: ``,
+      dp02Url: ``,
+      dp02Date: `November 18, 2026`,
+      dp02Compare: ``,
+      dp02NavExplain: ``,
+      dp02NavChecked: false,
+      dp02Rule1: ``,
+      dp02Rule2: ``,
+      exitAnswers: {},
+      exitGraded: false,
+      learnerId: ``,
+      learnerSupports: ``,
+      iCan: [false, false, false, false, false],
+      reflectLearned: ``,
+      reflectPractice: ``,
+      reflectQuestion: ``
+    };
+
+    let appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (e) {}
+      }
+    }
+
+    function restoreState(saved) {
+      if (!saved || typeof saved !== `object`) return;
+      appState = Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), saved);
+      if (!Array.isArray(appState.iCan) || appState.iCan.length !== 5) {
+        appState.iCan = [false, false, false, false, false];
+      }
+      if (!Array.isArray(appState.simHistory) || appState.simHistory.length === 0) {
+        appState.simHistory = [`riverside`];
+        appState.simHistoryIdx = 0;
+      }
+      if (!Array.isArray(appState.simBookmarks)) {
+        appState.simBookmarks = [`www.riverside-example.test/careers`];
+      }
+    }
+
+    // =========================================================================
+    // ACCESSIBILITY & TOP CONTROLS
+    // =========================================================================
+
+    function toggleLargeText() {
+      appState.largeText = !appState.largeText;
+      applyLargeText();
+      persistState();
+    }
+
+    function applyLargeText() {
+      document.body.classList.toggle(`large-text-mode`, !!appState.largeText);
+      const btn = document.getElementById(`btn-large-text`);
+      if (btn) {
+        btn.setAttribute(`aria-pressed`, appState.largeText ? `true` : `false`);
+      }
+    }
+
+    function toggleKeyboardTips() {
+      const panel = document.getElementById(`keyboard-tips-panel`);
+      const btn = document.getElementById(`btn-keyboard-tips`);
+      if (!panel || !btn) return;
+      const isHidden = panel.classList.contains(`hidden-panel`);
+      panel.classList.toggle(`hidden-panel`, !isHidden);
+      btn.setAttribute(`aria-expanded`, isHidden ? `true` : `false`);
+    }
+
+    // =========================================================================
+    // PART 1: WATCH ME — BROWSER SIMULATOR & URL ANATOMY
+    // =========================================================================
+
+    function getSimPageObj(id) {
+      const main = SIM_PAGES.find(function (p) { return p.id === id; });
+      if (main) return main;
+      if (EXTRA_SIM_PAGES[id]) return EXTRA_SIM_PAGES[id];
+      return SIM_PAGES[0];
+    }
+
+    function switchSimTab(tabIdx) {
+      appState.simTab = tabIdx;
+      const page = SIM_PAGES[tabIdx] || SIM_PAGES[0];
+      appState.simHistory = appState.simHistory.slice(0, appState.simHistoryIdx + 1);
+      appState.simHistory.push(page.id);
+      appState.simHistoryIdx = appState.simHistory.length - 1;
+      setCoachMessage(
+        `Tab Switched: ${page.tabLabel}`,
+        tabIdx === 1
+          ? `Keeping a second tab open lets you compare an employer listing side-by-side with a trusted public resource without losing your spot.`
+          : tabIdx === 2
+          ? `This New Tab lets you test clicking links and using the Back arrow to return safely.`
+          : `You are viewing the Riverside Careers training tab. Try starring the address bar to bookmark it.`
+      );
+      renderBrowserSim();
+      persistState();
+    }
+
+    function simNavigateTo(pageId) {
+      appState.simHistory = appState.simHistory.slice(0, appState.simHistoryIdx + 1);
+      appState.simHistory.push(pageId);
+      appState.simHistoryIdx = appState.simHistory.length - 1;
+      setCoachMessage(
+        `Moved to a New Page`,
+        `Look at the Back arrow (top left) — it is now active! Click Back to return to the previous page, or click the Star to save this .gov resource.`
+      );
+      renderBrowserSim();
+      persistState();
+    }
+
+    function simGoBack() {
+      if (appState.simHistoryIdx > 0) {
+        appState.simHistoryIdx -= 1;
+        setCoachMessage(`Used Back Button`, `The Back button steps one page backward in your tab history without needing to search again.`);
+        renderBrowserSim();
+        persistState();
+      }
+    }
+
+    function simGoForward() {
+      if (appState.simHistoryIdx < appState.simHistory.length - 1) {
+        appState.simHistoryIdx += 1;
+        setCoachMessage(`Used Forward Button`, `The Forward button returns to the page you just backed away from.`);
+        renderBrowserSim();
+        persistState();
+      }
+    }
+
+    function simRefresh() {
+      setCoachMessage(`Refreshed the Page`, `Refresh reloads the current page so you can see updated details or fix a page that stopped loading.`);
+      const vp = document.getElementById(`sim-viewport`);
+      if (vp) {
+        vp.style.opacity = `0.5`;
+        setTimeout(function () { vp.style.opacity = `1`; }, 150);
+      }
+    }
+
+    function toggleSimBookmark() {
+      const currentId = appState.simHistory[appState.simHistoryIdx] || `riverside`;
+      const page = getSimPageObj(currentId);
+      const idx = appState.simBookmarks.indexOf(page.url);
+      if (idx === -1) {
+        appState.simBookmarks.push(page.url);
+        setCoachMessage(`Bookmark Saved!`, `Saving trusted pages to your bookmarks bar means next time you can click the saved link directly instead of risking a look-alike search ad.`);
+      } else {
+        appState.simBookmarks.splice(idx, 1);
+        setCoachMessage(`Bookmark Removed`, `You can add or remove bookmarks anytime using the star button.`);
+      }
+      renderBrowserSim();
+      persistState();
+    }
+
+    function openBookmarkUrl(url) {
+      const all = SIM_PAGES.concat(Object.values(EXTRA_SIM_PAGES));
+      const found = all.find(function (p) { return p.url === url; });
+      if (found) {
+        simNavigateTo(found.id);
+      }
+    }
+
+    function setCoachMessage(title, body) {
+      const t = document.getElementById(`sim-coach-title`);
+      const b = document.getElementById(`sim-coach-body`);
+      if (t) t.textContent = title;
+      if (b) b.textContent = body;
+    }
+
+    function markWatchControlExplored() {
+      appState.watchBrowserDone = true;
+      updateAllProgress();
+      persistState();
+    }
+
+    function renderBrowserSim() {
+      const currentId = appState.simHistory[appState.simHistoryIdx] || `riverside`;
+      const page = getSimPageObj(currentId);
+
+      for (let i = 0; i < 3; i++) {
+        const tabBtn = document.getElementById(`sim-tab-${i}`);
+        if (tabBtn) {
+          tabBtn.setAttribute(`aria-selected`, appState.simTab === i ? `true` : `false`);
+        }
+      }
+
+      const backBtn = document.getElementById(`sim-back`);
+      const fwdBtn = document.getElementById(`sim-forward`);
+      if (backBtn) backBtn.disabled = appState.simHistoryIdx <= 0;
+      if (fwdBtn) fwdBtn.disabled = appState.simHistoryIdx >= appState.simHistory.length - 1;
+
+      const urlEl = document.getElementById(`sim-url-text`);
+      const barEl = document.getElementById(`sim-address-bar`);
+      const pillEl = document.getElementById(`sim-security-pill`);
+      if (urlEl) urlEl.textContent = page.url;
+      if (barEl) barEl.setAttribute(`data-security`, page.security);
+      if (pillEl) {
+        pillEl.setAttribute(`data-security`, page.security);
+        const span = pillEl.querySelector(`span`);
+        if (span) span.textContent = page.pill;
+      }
+
+      const bmBtn = document.getElementById(`sim-bookmark-btn`);
+      const isBookmarked = appState.simBookmarks.indexOf(page.url) !== -1;
+      if (bmBtn) bmBtn.setAttribute(`aria-pressed`, isBookmarked ? `true` : `false`);
+
+      const bmList = document.getElementById(`sim-bookmarks-list`);
+      if (bmList) {
+        if (appState.simBookmarks.length === 0) {
+          bmList.innerHTML = `<span class="field-hint">None saved yet — click the star icon to save one.</span>`;
+        } else {
+          bmList.innerHTML = appState.simBookmarks.map(function (u) {
+            return `<button type="button" class="bookmark-pill" onclick="openBookmarkUrl('${u}')">${u}</button>`;
+          }).join(``);
+        }
+      }
+
+      const vp = document.getElementById(`sim-viewport`);
+      if (vp) vp.innerHTML = page.bodyHtml;
+      refreshIcons();
+    }
+
+    function selectUrlPreset(idx) {
+      appState.urlPreset = idx;
+      appState.urlSegmentIdx = 0;
+      renderUrlAnatomy();
+      persistState();
+    }
+
+    function selectUrlSegment(segIdx) {
+      appState.urlSegmentIdx = segIdx;
+      renderUrlAnatomy();
+      persistState();
+    }
+
+    function renderUrlAnatomy() {
+      for (let i = 0; i < URL_PRESETS.length; i++) {
+        const btn = document.getElementById(`url-preset-${i}`);
+        if (btn) btn.setAttribute(`aria-pressed`, appState.urlPreset === i ? `true` : `false`);
+      }
+      const preset = URL_PRESETS[appState.urlPreset] || URL_PRESETS[0];
+      const row = document.getElementById(`url-anatomy-row`);
+      const exp = document.getElementById(`url-anatomy-explanation`);
+      if (!row || !exp) return;
+
+      row.innerHTML = preset.segments.map(function (seg, i) {
+        const pressed = appState.urlSegmentIdx === i ? `true` : `false`;
+        return `<button type="button" class="url-segment-btn" aria-pressed="${pressed}" onclick="selectUrlSegment(${i})">
+          <span class="url-segment-tag">${seg.tag}</span>
+          <span>${seg.text}</span>
+        </button>`;
+      }).join(``);
+
+      const activeSeg = preset.segments[appState.urlSegmentIdx] || preset.segments[0];
+      exp.setAttribute(`data-status`, appState.urlPreset === 2 ? `alert` : `info`);
+      exp.innerHTML = `<strong>${activeSeg.title}:</strong> ${activeSeg.desc}`;
+    }
+
+    function answerPadlockCheck(isYes) {
+      appState.padlockChoice = isYes ? `yes` : `no`;
+      if (!isYes) appState.watchPadlockDone = true;
+      renderPadlockCheck();
+      updateAllProgress();
+      persistState();
+    }
+
+    function renderPadlockCheck() {
+      const fb = document.getElementById(`padlock-feedback`);
+      const btnYes = document.getElementById(`padlock-yes`);
+      const btnNo = document.getElementById(`padlock-no`);
+      if (!fb) return;
+
+      if (btnYes) btnYes.setAttribute(`aria-pressed`, appState.padlockChoice === `yes` ? `true` : `false`);
+      if (btnNo) btnNo.setAttribute(`aria-pressed`, appState.padlockChoice === `no` ? `true` : `false`);
+
+      if (appState.padlockChoice === `no`) {
+        fb.innerHTML = `<span class="chip" data-status="ok">Correct!</span> <strong>Answer Guide:</strong> No — HTTPS protects the connection (encrypts data), but scammers can get a padlock too. Always verify the domain name and publisher.`;
+      } else if (appState.padlockChoice === `yes`) {
+        fb.innerHTML = `<span class="chip" data-status="warn">Common Myth — Try Again</span> A padlock only means the connection is encrypted; it does <strong>not</strong> prove the site is honest. Try the second option.`;
+      } else {
+        fb.innerHTML = ``;
+      }
+    }
+
+    // =========================================================================
+    // PART 2: LET'S DO IT — SEARCH DETECTIVE & PHISHING CLINIC
+    // =========================================================================
+
+    function chooseSearchType(itemId, choice) {
+      appState.searchAnswers[itemId] = choice;
+      renderSearchDetective();
+      updateAllProgress();
+      persistState();
+    }
+
+    function toggleSearchHint(itemId) {
+      const el = document.getElementById(`sd-hint-${itemId}`);
+      if (el) el.classList.toggle(`hidden-panel`);
+    }
+
+    function renderSearchDetective() {
+      const container = document.getElementById(`search-detective-list`);
+      if (!container) return;
+
+      container.innerHTML = SEARCH_DETECTIVE_ITEMS.map(function (item) {
+        const chosen = appState.searchAnswers[item.id];
+        const isCorrect = chosen === item.correct;
+        const cardState = !chosen ? `` : (isCorrect ? `correct` : `retry`);
+        const badgeStatus = item.badge === `Sponsored` ? `warn` : `neutral`;
+
+        let fbHtml = ``;
+        if (chosen) {
+          fbHtml = isCorrect
+            ? `<div class="status-card" data-status="ok"><strong>Nice work:</strong> ${item.feedbackOk}</div>`
+            : `<div class="status-card" data-status="alert"><strong>Let’s check closer:</strong> ${item.feedbackRetry}</div>`;
+        }
+
+        return `
+          <div class="search-result-card" data-state="${cardState}">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs);">
+              <span class="result-url">${item.url}</span>
+              <span class="chip" data-status="${badgeStatus}">${item.badge}</span>
+            </div>
+            <div class="result-title">${item.title}</div>
+            <p>${item.snippet}</p>
+            <div class="btn-row">
+              <button type="button" class="btn btn-ghost btn-sm" aria-pressed="${chosen === 'legit'}" onclick="chooseSearchType('${item.id}', 'legit')">Legitimate Result</button>
+              <button type="button" class="btn btn-ghost btn-sm" aria-pressed="${chosen === 'ad'}" onclick="chooseSearchType('${item.id}', 'ad')">Sponsored Ad</button>
+              <button type="button" class="btn btn-ghost btn-sm" aria-pressed="${chosen === 'scam'}" onclick="chooseSearchType('${item.id}', 'scam')">Deceptive / Scam Link</button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="toggleSearchHint('${item.id}')">Show Hint</button>
+            </div>
+            <div id="sd-hint-${item.id}" class="status-card hidden-panel" data-status="info">
+              <strong>Hint:</strong> ${item.hint}
+            </div>
+            ${fbHtml}
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function choosePhishingAction(msgId, optionId) {
+      appState.phishingAnswers[msgId] = optionId;
+      renderPhishingClinic();
+      updateAllProgress();
+      persistState();
+    }
+
+    function togglePhishingClues(msgId) {
+      appState.phishingCluesOpen[msgId] = !appState.phishingCluesOpen[msgId];
+      renderPhishingClinic();
+      persistState();
+    }
+
+    function renderPhishingClinic() {
+      const container = document.getElementById(`phishing-clinic-list`);
+      if (!container) return;
+
+      container.innerHTML = PHISHING_MESSAGES.map(function (msg, idx) {
+        const chosen = appState.phishingAnswers[msg.id];
+        const isCorrect = chosen === msg.correctOption;
+        const showClues = !!appState.phishingCluesOpen[msg.id];
+
+        const cluesHtml = showClues ? `
+          <div class="status-card" data-status="warn">
+            <strong>Warning Signs Found:</strong>
+            <ul style="margin: var(--space-xs) 0 0; padding-left: var(--space-lg);">
+              ${msg.clues.map(function (c) { return `<li>${c}</li>`; }).join(``)}
+            </ul>
+          </div>
+        ` : ``;
+
+        let fbHtml = ``;
+        if (chosen) {
+          fbHtml = isCorrect
+            ? `<div class="status-card" data-status="ok"><strong>Safe Choice:</strong> ${msg.feedbackOk}</div>`
+            : `<div class="status-card" data-status="alert"><strong>Pause &amp; Rethink:</strong> ${msg.hint}</div>`;
+        }
+
+        return `
+          <div class="search-result-card" data-state="${!chosen ? '' : (isCorrect ? 'correct' : 'retry')}">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs);">
+              <strong>Fictional Message ${idx + 1} of 3</strong>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="togglePhishingClues('${msg.id}')">
+                ${showClues ? `Hide Red Flags` : `Reveal Red Flags (Hint)`}
+              </button>
+            </div>
+            <div class="email-sim">
+              <div class="email-meta">
+                <div><strong>FROM:</strong> <code>${msg.from}</code></div>
+                <div><strong>SUBJECT:</strong> ${msg.subject}</div>
+              </div>
+              <div>${msg.body}</div>
+            </div>
+            ${cluesHtml}
+            <div>
+              <strong style="font-size: 0.95rem;">What is the safest next action?</strong>
+              <div class="btn-row" style="margin-top: var(--space-xs);">
+                ${msg.options.map(function (opt) {
+                  return `<button type="button" class="btn btn-ghost btn-sm" style="text-align: left;" aria-pressed="${chosen === opt.id}" onclick="choosePhishingAction('${msg.id}', '${opt.id}')">${opt.label}</button>`;
+                }).join(``)}
+              </div>
+            </div>
+            ${fbHtml}
+          </div>
+        `;
+      }).join(``);
+    }
+
+    // =========================================================================
+    // PART 3: YOU TRY — PRIVACY SANDBOX & EMPLOYER WEBSITE LAB
+    // =========================================================================
+
+    function choosePrivacyAction(itemId, choice) {
+      appState.privacyAnswers[itemId] = choice;
+      renderPrivacySandbox();
+      updateAllProgress();
+      persistState();
+    }
+
+    function renderPrivacySandbox() {
+      const container = document.getElementById(`privacy-sandbox-list`);
+      const summary = document.getElementById(`privacy-sandbox-summary`);
+      if (!container) return;
+
+      let answered = 0;
+      let correctCount = 0;
+
+      container.innerHTML = PRIVACY_ITEMS.map(function (item) {
+        const chosen = appState.privacyAnswers[item.id];
+        if (chosen) answered += 1;
+        const isCorrect = chosen === item.correct;
+        if (isCorrect) correctCount += 1;
+
+        let fb = ``;
+        if (chosen) {
+          fb = isCorrect
+            ? `<div class="status-card" data-status="ok" style="margin-top: var(--space-xs);">${item.explain}</div>`
+            : `<div class="status-card" data-status="alert" style="margin-top: var(--space-xs);">Try the other choice: ${item.explain}</div>`;
+        }
+
+        return `
+          <div class="info-card" style="justify-content: space-between;">
+            <p>${item.scenario}</p>
+            <div class="btn-row">
+              <button type="button" class="btn btn-ghost btn-sm" aria-pressed="${chosen === 'safe'}" onclick="choosePrivacyAction('${item.id}', 'safe')">Safe Practice</button>
+              <button type="button" class="btn btn-ghost btn-sm" aria-pressed="${chosen === 'private'}" onclick="choosePrivacyAction('${item.id}', 'private')">Keep Private</button>
+            </div>
+            ${fb}
+          </div>
+        `;
+      }).join(``);
+
+      if (summary) {
+        if (answered === PRIVACY_ITEMS.length) {
+          summary.classList.remove(`hidden-panel`);
+          summary.setAttribute(`data-status`, correctCount === PRIVACY_ITEMS.length ? `ok` : `info`);
+          summary.innerHTML = `<strong>Privacy Sandbox Check:</strong> You matched ${correctCount} of ${PRIVACY_ITEMS.length} scenarios. Rule to keep: never share SSNs, State IDs, bank numbers, passwords, or private case numbers in untrusted sites or public AI tools.`;
+        } else {
+          summary.classList.add(`hidden-panel`);
+        }
+      }
+    }
+
+    function switchLabSite(idx) {
+      appState.labSiteIdx = idx;
+      renderEmployerLab();
+      persistState();
+    }
+
+    function renderEmployerLab() {
+      const site = LAB_SITES[appState.labSiteIdx] || LAB_SITES[0];
+      for (let i = 0; i < 2; i++) {
+        const t = document.getElementById(`lab-tab-${i}`);
+        if (t) t.setAttribute(`aria-selected`, appState.labSiteIdx === i ? `true` : `false`);
+      }
+      const bar = document.getElementById(`lab-address-bar`);
+      const pill = document.getElementById(`lab-security-pill`);
+      const pillText = document.getElementById(`lab-pill-text`);
+      const urlDisp = document.getElementById(`lab-url-display`);
+      const vp = document.getElementById(`lab-viewport`);
+
+      if (bar) bar.setAttribute(`data-security`, site.security);
+      if (pill) pill.setAttribute(`data-security`, site.security);
+      if (pillText) pillText.textContent = site.pill;
+      if (urlDisp) urlDisp.textContent = site.url;
+      if (vp) vp.innerHTML = site.html;
+
+      const vSel = document.getElementById(`lab-verdict-select`);
+      const rSel = document.getElementById(`lab-reason-select`);
+      if (vSel) vSel.value = appState.labVerdict || ``;
+      if (rSel) rSel.value = appState.labReason || ``;
+
+      const fb = document.getElementById(`lab-feedback`);
+      if (fb && appState.labVerifiedOk) {
+        fb.innerHTML = `<div class="status-card" data-status="ok"><strong>Verified!</strong> Website A (<code>riverside-example.test</code>) provides an About Us page, Atlanta contact info, and no application fees, while Website B asks for a $35 fee and State ID.</div>`;
+      }
+    }
+
+    function checkEmployerLab() {
+      const fb = document.getElementById(`lab-feedback`);
+      if (!fb) return;
+      if (!appState.labVerdict || !appState.labReason) {
+        fb.innerHTML = `<div class="status-card" data-status="warn">Please choose both which website is legitimate and the strongest sign that helped you decide.</div>`;
+        return;
+      }
+      if (appState.labVerdict === `A` && appState.labReason === `fees_and_id`) {
+        appState.labVerifiedOk = true;
+        fb.innerHTML = `<div class="status-card" data-status="ok"><strong>Verified!</strong> Website A (<code>riverside-example.test</code>) provides an About Us page, Atlanta contact info, and no application fees, while Website B asks for a $35 fee and State ID.</div>`;
+      } else {
+        appState.labVerifiedOk = false;
+        fb.innerHTML = `<div class="status-card" data-status="alert"><strong>Look closer at Website B:</strong> Notice it asks for a $35 badge fee via gift card and your State ID up front, and has no About Us page. Website A is the legitimate fictional employer site.</div>`;
+      }
+      updateAllProgress();
+      persistState();
+    }
+
+    // =========================================================================
+    // PART 4: TASK CARD DP-02, EXIT CHECK, I CAN & PORTFOLIO
+    // =========================================================================
+
+    function saveFieldValue(key, val) {
+      appState[key] = val;
+      updatePortfolioTable();
+      updateAllProgress();
+      persistState();
+    }
+
+    function loadSampleDp02() {
+      appState.dp02Title = `Workplace Safety & Recognizing Job Scams`;
+      appState.dp02Org = `Federal Trade Commission (Consumer Advice)`;
+      appState.dp02Url = `consumer.ftc.gov/articles/job-scams`;
+      appState.dp02Date = `November 18, 2026`;
+      appState.dp02Compare = `Cross-checked with CareerOneStop (careeronestop.org) — both confirm real employers never charge fees or ask for gift cards.`;
+      appState.dp02NavExplain = `I would ignore the urgent link in the message, open a fresh browser tab, type the official web address myself (or click my saved bookmark), and verify my account from the official website.`;
+      appState.dp02Rule1 = `Never share my SSN, State ID, bank account, or passwords through email or text links.`;
+      appState.dp02Rule2 = `Never pay money or buy gift cards to apply for a job or interview.`;
+      syncFormInputs();
+      updatePortfolioTable();
+      updateAllProgress();
+      persistState();
+    }
+
+    function checkDp02NavigationAnswer() {
+      const fb = document.getElementById(`dp02-nav-feedback`);
+      if (!fb) return;
+      const text = (appState.dp02NavExplain || ``).trim().toLowerCase();
+      if (text.length < 15) {
+        fb.innerHTML = `<div class="status-card" data-status="warn">Please write at least one full sentence explaining how you would reach the official site safely.</div>`;
+        return;
+      }
+      const hasIndependentStep = /new tab|bookmark|type|official|address|without clicking|don't click|do not click|support/.test(text);
+      appState.dp02NavChecked = true;
+      if (hasIndependentStep) {
+        fb.innerHTML = `<div class="status-card" data-status="ok"><strong>Strong Answer:</strong> You described navigating independently (typing the official address, using a bookmark, or contacting trusted support) instead of clicking the suspicious link.</div>`;
+      } else {
+        fb.innerHTML = `<div class="status-card" data-status="info"><strong>Helpful Tip:</strong> Make sure your steps clearly state: 1) Do not click the message link, and 2) Open a new tab to type the official address or use a saved bookmark.</div>`;
+      }
+      updateAllProgress();
+      persistState();
+    }
+
+    function selectExitAnswer(qId, optId) {
+      appState.exitAnswers[qId] = optId;
+      renderExitCheck();
+      persistState();
+    }
+
+    function gradeExitCheck() {
+      appState.exitGraded = true;
+      renderExitCheck();
+      updateAllProgress();
+      persistState();
+    }
+
+    function renderExitCheck() {
+      const container = document.getElementById(`exit-check-list`);
+      const summary = document.getElementById(`exit-check-summary`);
+      if (!container) return;
+
+      let score = 0;
+      let answered = 0;
+
+      container.innerHTML = EXIT_QUESTIONS.map(function (q) {
+        const chosen = appState.exitAnswers[q.id];
+        if (chosen) answered += 1;
+        const isCorrect = chosen === q.correct;
+        if (appState.exitGraded && isCorrect) score += 1;
+
+        let fb = ``;
+        if (appState.exitGraded) {
+          fb = isCorrect
+            ? `<div class="status-card" data-status="ok" style="margin-top: var(--space-xs);"><strong>Correct:</strong> ${q.answerText}</div>`
+            : `<div class="status-card" data-status="warn" style="margin-top: var(--space-xs);"><strong>Answer Guide:</strong> ${q.answerText}</div>`;
+        }
+
+        return `
+          <div class="info-card">
+            <strong>${q.prompt}</strong>
+            <div class="check-list" style="margin-top: var(--space-xs);">
+              ${q.options.map(function (opt) {
+                const checked = chosen === opt.id ? `checked` : ``;
+                return `
+                  <label class="check-item">
+                    <input type="radio" name="exit-${q.id}" value="${opt.id}" ${checked} onchange="selectExitAnswer('${q.id}', '${opt.id}')">
+                    <span>${opt.text}</span>
+                  </label>
+                `;
+              }).join(``)}
+            </div>
+            ${fb}
+          </div>
+        `;
+      }).join(``);
+
+      if (summary) {
+        if (appState.exitGraded) {
+          summary.innerHTML = `<div class="status-card" data-status="${score === 3 ? 'ok' : 'info'}"><strong>Exit Check Score: ${score} of ${EXIT_QUESTIONS.length}.</strong> ${score === 3 ? `You mastered every Module 2 exit question!` : `Review the Answer Guide notes above — you can update your choices anytime.`}</div>`;
+        } else {
+          summary.innerHTML = ``;
+        }
+      }
+    }
+
+    function toggleICan(idx, checked) {
+      appState.iCan[idx] = !!checked;
+      updatePortfolioTable();
+      updateAllProgress();
+      persistState();
+    }
+
+    function syncFormInputs() {
+      const map = {
+        'dp02-title': `dp02Title`,
+        'dp02-org': `dp02Org`,
+        'dp02-url': `dp02Url`,
+        'dp02-date': `dp02Date`,
+        'dp02-compare': `dp02Compare`,
+        'dp02-nav-explain': `dp02NavExplain`,
+        'dp02-rule1': `dp02Rule1`,
+        'dp02-rule2': `dp02Rule2`,
+        'learner-id': `learnerId`,
+        'learner-supports': `learnerSupports`,
+        'reflect-learned': `reflectLearned`,
+        'reflect-practice': `reflectPractice`,
+        'reflect-question': `reflectQuestion`
+      };
+      Object.keys(map).forEach(function (domId) {
+        const el = document.getElementById(domId);
+        const key = map[domId];
+        if (el && appState[key] !== undefined) {
+          el.value = appState[key];
+        }
+      });
+      for (let i = 0; i < 5; i++) {
+        const cb = document.getElementById(`ican-${i}`);
+        if (cb) cb.checked = !!appState.iCan[i];
+      }
+    }
+
+    function computeProgressMetrics() {
+      const searchCorrect = SEARCH_DETECTIVE_ITEMS.filter(function (item) {
+        return appState.searchAnswers[item.id] === item.correct;
+      }).length;
+      const phishingCorrect = PHISHING_MESSAGES.filter(function (msg) {
+        return appState.phishingAnswers[msg.id] === msg.correctOption;
+      }).length;
+      const privacyCorrect = PRIVACY_ITEMS.filter(function (item) {
+        return appState.privacyAnswers[item.id] === item.correct;
+      }).length;
+      const exitCorrect = EXIT_QUESTIONS.filter(function (q) {
+        return appState.exitAnswers[q.id] === q.correct;
+      }).length;
+      const dp02Filled = !!(
+        (appState.dp02Title || ``).trim() &&
+        (appState.dp02Org || ``).trim() &&
+        (appState.dp02Url || ``).trim() &&
+        (appState.dp02NavExplain || ``).trim() &&
+        (appState.dp02Rule1 || ``).trim() &&
+        (appState.dp02Rule2 || ``).trim()
+      );
+      const iCanCount = appState.iCan.filter(Boolean).length;
+
+      const milestones = [
+        !!appState.watchBrowserDone,
+        !!appState.watchPadlockDone,
+        searchCorrect === SEARCH_DETECTIVE_ITEMS.length,
+        phishingCorrect === PHISHING_MESSAGES.length,
+        privacyCorrect === PRIVACY_ITEMS.length,
+        !!appState.labVerifiedOk,
+        dp02Filled,
+        appState.exitGraded && exitCorrect === EXIT_QUESTIONS.length
+      ];
+      const completed = milestones.filter(Boolean).length;
+
+      return {
+        completed: completed,
+        total: milestones.length,
+        searchCorrect: searchCorrect,
+        phishingCorrect: phishingCorrect,
+        privacyCorrect: privacyCorrect,
+        exitCorrect: exitCorrect,
+        dp02Filled: dp02Filled,
+        iCanCount: iCanCount
+      };
+    }
+
+    function updateAllProgress() {
+      const m = computeProgressMetrics();
+      const pct = Math.round((m.completed / m.total) * 100);
+
+      const chip = document.getElementById(`overall-progress-chip`);
+      const fill = document.getElementById(`overall-progress-fill`);
+      const bar = document.getElementById(`overall-progress-bar`);
+      if (chip) chip.textContent = `${m.completed} of ${m.total} activities completed`;
+      if (fill) fill.style.width = `${pct}%`;
+      if (bar) bar.setAttribute(`aria-valuenow`, String(pct));
+
+      const p1 = document.getElementById(`chip-part1`);
+      if (p1) {
+        const p1Done = (appState.watchBrowserDone ? 1 : 0) + (appState.watchPadlockDone ? 1 : 0);
+        p1.textContent = p1Done === 2 ? `Completed` : `${p1Done} of 2 checked`;
+        p1.setAttribute(`data-status`, p1Done === 2 ? `ok` : `neutral`);
+      }
+
+      const p2 = document.getElementById(`chip-part2`);
+      if (p2) {
+        const p2Done = (m.searchCorrect === 4 ? 1 : 0) + (m.phishingCorrect === 3 ? 1 : 0);
+        p2.textContent = p2Done === 2 ? `Completed` : `${p2Done} of 2 activities done`;
+        p2.setAttribute(`data-status`, p2Done === 2 ? `ok` : `neutral`);
+      }
+
+      const p3 = document.getElementById(`chip-part3`);
+      if (p3) {
+        const p3Done = (m.privacyCorrect === 6 ? 1 : 0) + (appState.labVerifiedOk ? 1 : 0);
+        p3.textContent = p3Done === 2 ? `Completed` : `${p3Done} of 2 sandboxes done`;
+        p3.setAttribute(`data-status`, p3Done === 2 ? `ok` : `neutral`);
+      }
+
+      const p4 = document.getElementById(`chip-part4`);
+      if (p4) {
+        const p4Ready = m.dp02Filled && m.iCanCount >= 4 && appState.exitGraded;
+        p4.textContent = p4Ready ? `Portfolio Ready` : `${m.iCanCount}/5 "I Can" checked`;
+        p4.setAttribute(`data-status`, p4Ready ? `ok` : `neutral`);
+      }
+
+      updatePortfolioTable();
+    }
+
+    function updatePortfolioTable() {
+      const tbody = document.getElementById(`portfolio-table-body`);
+      if (!tbody) return;
+      const m = computeProgressMetrics();
+
+      const rows = [
+        {
+          name: `1. Watch Me — Browser Controls &amp; Padlock Myth Check`,
+          status: (appState.watchBrowserDone && appState.watchPadlockDone) ? `Completed` : `In progress`,
+          ok: (appState.watchBrowserDone && appState.watchPadlockDone)
+        },
+        {
+          name: `2. Let’s Do It — Search Detective (${m.searchCorrect}/4) &amp; Scam Clinic (${m.phishingCorrect}/3)`,
+          status: (m.searchCorrect === 4 && m.phishingCorrect === 3) ? `Completed` : `In progress`,
+          ok: (m.searchCorrect === 4 && m.phishingCorrect === 3)
+        },
+        {
+          name: `3. You Try — Privacy Boundaries (${m.privacyCorrect}/6) &amp; Riverside Site Check`,
+          status: (m.privacyCorrect === 6 && appState.labVerifiedOk) ? `Completed` : `In progress`,
+          ok: (m.privacyCorrect === 6 && appState.labVerifiedOk)
+        },
+        {
+          name: `4. Show What You Can Do — Task Card DP-02 Log &amp; Exit Check (${m.exitCorrect}/3)`,
+          status: (m.dp02Filled && appState.exitGraded) ? `Ready for Staff Review` : `Drafting`,
+          ok: (m.dp02Filled && appState.exitGraded)
+        },
+        {
+          name: `Worksheet 2 — “I Can” Self-Reflection Checkboxes`,
+          status: `${m.iCanCount} of 5 confirmed`,
+          ok: m.iCanCount === 5
+        }
+      ];
+
+      tbody.innerHTML = rows.map(function (r) {
+        return `
+          <tr>
+            <td>${r.name}</td>
+            <td><span class="chip" data-status="${r.ok ? 'ok' : 'info'}">${r.status}</span></td>
+          </tr>
+        `;
+      }).join(``);
+    }
+
+    function buildPortfolioText() {
+      const m = computeProgressMetrics();
+      const iCanLabels = [
+        `I can navigate a browser and tabs`,
+        `I can use focused search terms and spot sponsored ads`,
+        `I can identify the publisher and domain`,
+        `I can recognize a suspicious request or phishing red flag`,
+        `I can explain a safe, independent verification method`
+      ];
+      const checkedList = iCanLabels.map(function (lbl, idx) {
+        return `[${appState.iCan[idx] ? `X` : ` `}] ${lbl}`;
+      }).join(`\n`);
+
+      return [
+        `HOME4GOOD INC. — DIGITAL PATHWAYS TO EMPLOYMENT`,
+        `Module 2: Navigating the Internet Safely — Learner Portfolio Summary`,
+        `Date: November 18, 2026`,
+        `Learner / Program ID: ${appState.learnerId || `(Not entered)`}`,
+        `Accessibility Supports Used: ${appState.learnerSupports || `None noted`}`,
+        ``,
+        `--- PRACTICE ACTIVITIES ---`,
+        `Activities Completed: ${m.completed} of ${m.total}`,
+        `Search Results Detective: ${m.searchCorrect} / 4`,
+        `Phishing & Scam Clinic: ${m.phishingCorrect} / 3`,
+        `Data Privacy Sandbox: ${m.privacyCorrect} / 6`,
+        `Riverside Employer Verification: ${appState.labVerifiedOk ? `Verified` : `Not yet verified`}`,
+        `Module 2 Exit Check: ${m.exitCorrect} / 3`,
+        ``,
+        `--- TASK CARD DP-02 SOURCE LOG ---`,
+        `Page Title: ${appState.dp02Title || `(Blank)`}`,
+        `Publishing Organization: ${appState.dp02Org || `(Blank)`}`,
+        `URL / Domain: ${appState.dp02Url || `(Blank)`}`,
+        `Date Accessed: ${appState.dp02Date || `(Blank)`}`,
+        `Second Independent Source: ${appState.dp02Compare || `(Blank)`}`,
+        `Safe Independent Navigation Plan: ${appState.dp02NavExplain || `(Blank)`}`,
+        `Private Info Rule 1: ${appState.dp02Rule1 || `(Blank)`}`,
+        `Private Info Rule 2: ${appState.dp02Rule2 || `(Blank)`}`,
+        ``,
+        `--- WORKSHEET 2 "I CAN" CHECKLIST ---`,
+        checkedList,
+        ``,
+        `Something I learned: ${appState.reflectLearned || `(Blank)`}`,
+        `One skill to practice again: ${appState.reflectPractice || `(Blank)`}`,
+        `Questions for instructor: ${appState.reflectQuestion || `(None)`}`,
+        ``,
+        `Note: Practice completion supports instructor observation and staff confirmation.`
+      ].join(`\n`);
+    }
+
+    function setExportFeedback(status, text) {
+      const el = document.getElementById(`export-feedback`);
+      if (el) {
+        el.innerHTML = `<div class="status-card" data-status="${status}">${text}</div>`;
+      }
+    }
+
+    function downloadPortfolioSummary() {
+      const content = buildPortfolioText();
+      const filename = `Module2_Navigating_Internet_Safely_Summary.txt`;
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: content,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: filename
+        });
+        setExportFeedback(`ok`, `Downloaded <strong>${filename}</strong>. You can upload or attach this file to your Skool portfolio.`);
+      } else {
+        const blob = new Blob([content], { type: `text/plain;charset=utf-8` });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement(`a`);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        setExportFeedback(`ok`, `Downloaded <strong>${filename}</strong>.`);
+      }
+    }
+
+    async function copyPortfolioSummary() {
+      const content = buildPortfolioText();
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(content);
+          setExportFeedback(`ok`, `Copied your Module 2 summary to the clipboard! You can paste it directly into a Skool post.`);
+        } else {
+          setExportFeedback(`info`, `Clipboard access is restricted here — use <strong>Download Summary (.txt)</strong> or <strong>Print / Save as PDF</strong> instead.`);
+        }
+      } catch (e) {
+        setExportFeedback(`info`, `Clipboard access is restricted here — use <strong>Download Summary (.txt)</strong> or <strong>Print / Save as PDF</strong> instead.`);
+      }
+    }
+
+    function printSummary() {
+      window.print();
+    }
+
+    function handleResetAll(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.innerHTML = `<i data-lucide="alert-circle" width="18" height="18" aria-hidden="true"></i><span>Click again to confirm reset</span>`;
+        refreshIcons();
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.innerHTML = `<i data-lucide="rotate-ccw" width="18" height="18" aria-hidden="true"></i><span>Reset Practice</span>`;
+      appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      renderAll();
+      persistState();
+      setExportFeedback(`info`, `All practice answers and reflections have been reset for a fresh start.`);
+    }
+
+    // =========================================================================
+    // INITIALIZATION
+    // =========================================================================
+
+    function refreshIcons() {
+      try {
+        if (window.lucide && typeof window.lucide.createIcons === `function`) {
+          window.lucide.createIcons();
+        }
+      } catch (e) {}
+    }
+
+    function renderAll() {
+      applyLargeText();
+      renderBrowserSim();
+      renderUrlAnatomy();
+      renderPadlockCheck();
+      renderSearchDetective();
+      renderPhishingClinic();
+      renderPrivacySandbox();
+      renderEmployerLab();
+      renderExitCheck();
+      syncFormInputs();
+      updateAllProgress();
+      refreshIcons();
+    }
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) restoreState(saved);
+        } catch (e) {}
+      }
+      renderAll();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
