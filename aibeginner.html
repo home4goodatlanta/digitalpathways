@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="canopy">
+  <title>Beginner AI Literacy and Responsible Use Workshop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (earth strata) */
+      --background: #faf6ef;
+      --surface-container-low: #f0eae0;
+      --surface-container: #e8e0d2;
+      --surface-container-high: #ddd3c2;
+
+      /* Ink */
+      --on-surface: #2a302b;
+      --on-surface-variant: #4a524b;
+
+      /* Lines */
+      --outline: #737872;
+      --outline-variant: #cbc5b8;
+
+      /* Accents */
+      --primary: #366948;
+      --on-primary: #ffffff;
+      --primary-container: #d8efe0;
+      --on-primary-container: #1f4d30;
+      --secondary: #5c635c;
+      --tertiary: #8f5822;
+      --tertiary-container: #f2d4a7;
+      --on-tertiary-container: #6e3f0c;
+      --error: #b83230;
+      --on-error: #ffffff;
+      --error-container: #f7dfdf;
+      --on-error-container: #7a1c1a;
+
+      /* Data series */
+      --data-1: #366948;
+      --data-2: #8f5822;
+      --data-3: #a85438;
+      --data-4: #4b6b78;
+      --data-context: #b5b0a3;
+
+      /* Fonts */
+      --font-headline: 'Literata', serif;
+      --font-body: 'Nunito Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 1rem;
+      --rounded-sm: 0.375rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --shadow-soft: 0 4px 20px rgb(42 48 43 / 0.06);
+      --shadow-soft-hover: 0 8px 28px rgb(42 48 43 / 0.09);
+      --border-soft: 1px solid rgb(203 197 184 / 0.65);
+      --border-strong: 1.5px solid var(--outline);
+      --focus-glow: 0 0 0 4px rgb(54 105 72 / 0.18);
+
+      /* Shared semantic and focus tokens */
+      --positive: #366948;
+      --warning: #8f5822;
+      --focus: #366948;
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.15rem, 1.4rem + 2.8vw, 3.35rem);
+      --headline-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.05rem);
+      --subhead-size: clamp(1.125rem, 1.04rem + 0.4vw, 1.35rem);
+      --body-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.65;
+      scroll-behavior: smooth;
+    }
+    header { position: static !important; }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      margin: 0;
+      line-height: 1.18;
+    }
+    h1 {
+      font-size: var(--display-size);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    h2 {
+      font-size: var(--headline-size);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: var(--subhead-size);
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      max-width: 68ch;
+    }
+
+    .kicker {
+      font-family: var(--font-body);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--tertiary);
+      display: inline-block;
+    }
+
+    .mono-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+    }
+
+    /* Header & Safe Hero */
+    .workshop-header {
+      display: grid;
+      gap: var(--space-md);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .header-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .tag-ochre {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-sm);
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .tag-ochre.is-ready-badge {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .tag-neutral {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-sm);
+      background-color: var(--surface-container);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+    }
+    .lead-copy {
+      font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+      color: var(--on-surface-variant);
+      max-width: 64ch;
+    }
+
+    /* Progress Strip (Canopy Almanac Cycle Strip) */
+    .progress-panel {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .progress-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .progress-title-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .progress-counter-text {
+      font-family: var(--font-headline);
+      font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.65rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    .progress-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .progress-bar-track {
+      width: 100%;
+      height: 10px;
+      border-radius: var(--rounded-full);
+      background-color: var(--surface-container-high);
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary);
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    .season-strip {
+      background-color: var(--surface-container);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .section-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      flex: 1 1 auto;
+    }
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-sm);
+      border: 0;
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .section-pill:hover {
+      background-color: var(--outline-variant);
+      transform: translateY(-1px);
+    }
+    .section-pill.is-practiced {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .section-pill.is-practiced:hover {
+      background-color: var(--on-primary-container);
+    }
+
+    .inline-status-msg {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--tertiary);
+      min-height: 1.2em;
+    }
+
+    /* Cards and Leaf Highlight */
+    .card {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .card.is-leaf-highlight {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .card.is-leaf-highlight h2,
+    .card.is-leaf-highlight h3 {
+      color: var(--on-primary-container);
+    }
+    .leaf-header {
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-md);
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .leaf-kicker {
+      color: var(--on-primary-container);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+      padding-top: var(--space-sm);
+    }
+    .profile-item {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .profile-item-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-primary-container);
+      opacity: 0.85;
+    }
+    .profile-item-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Section Containers */
+    .workshop-section {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      display: grid;
+      gap: var(--space-lg);
+      scroll-margin-top: var(--space-lg);
+    }
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--border-soft);
+    }
+    .section-title-block {
+      display: grid;
+      gap: var(--space-xs);
+      flex: 1 1 300px;
+    }
+    .section-badge-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded-sm);
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      transition: background-color var(--dur-short) var(--ease-in-out), color var(--dur-short) var(--ease-in-out);
+    }
+    .workshop-section.is-practiced .section-badge {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .section-status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-sm);
+      background-color: var(--surface-container);
+      color: var(--secondary);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+    }
+    .workshop-section.is-practiced .section-status-pill {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    /* Split & Comparison Grids */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .three-col-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .sub-panel {
+      background-color: var(--background);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      border: var(--border-soft);
+      display: grid;
+      gap: var(--space-sm);
+      align-content: start;
+    }
+    .sub-panel.is-warm {
+      background-color: var(--surface-container);
+      border: 0;
+    }
+
+    .clean-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    /* Buttons & Inputs */
+    button {
+      font-family: var(--font-body);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover {
+      background-color: var(--on-primary-container);
+    }
+    .btn-secondary {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .btn-secondary:hover {
+      background-color: var(--surface-container-high);
+    }
+    .btn-ochre {
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .btn-ochre:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    /* Choice buttons (neutral by default) */
+    .choice-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .choice-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--border-soft);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .choice-btn:hover {
+      background-color: var(--surface-container);
+    }
+    .choice-btn.is-selected {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .choice-btn.is-correct {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    .choice-btn.is-incorrect {
+      background-color: var(--error-container);
+      color: var(--on-error-container);
+      box-shadow: inset 0 0 0 2px var(--error);
+    }
+
+    /* Form Controls */
+    .field-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--border-strong);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    select {
+      padding-right: var(--space-xl);
+    }
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    /* Accessible Focus Rings */
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      box-shadow: var(--focus-glow);
+    }
+
+    /* Feedback Boxes */
+    .feedback-box {
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      font-size: 0.95rem;
+      display: none;
+    }
+    .feedback-box.is-visible {
+      display: block;
+    }
+    .feedback-box.is-good {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .feedback-box.is-warn {
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+    .feedback-box.is-error {
+      background-color: var(--error-container);
+      color: var(--on-error-container);
+    }
+
+    /* Interactive Cards & Drills */
+    .drill-card {
+      background-color: var(--background);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      border: var(--border-soft);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .drill-head-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      align-items: center;
+    }
+    .quote-box {
+      background-color: var(--surface-container-low);
+      border-left: 4px solid var(--tertiary);
+      padding: var(--space-md);
+      border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+      font-size: 0.98rem;
+    }
+    .quote-box.is-ai-draft {
+      border-left-color: var(--data-4);
+    }
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .chip-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      border: var(--border-soft);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out);
+    }
+    .chip-btn:hover {
+      background-color: var(--surface-container-high);
+    }
+    .chip-btn.is-selected {
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+      box-shadow: inset 0 0 0 2px var(--tertiary);
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    thead tr {
+      background-color: var(--surface-container);
+    }
+    th {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--secondary);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: var(--border-soft);
+    }
+    td {
+      padding: var(--space-md);
+      border-bottom: var(--border-soft);
+      vertical-align: top;
+    }
+
+    /* CLEAR Builder Layout */
+    .clear-workspace {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .clear-letter-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: var(--rounded-sm);
+      background-color: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: var(--space-xs);
+    }
+    .preview-pane {
+      background-color: var(--background);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      border: var(--border-soft);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .prompt-output-box {
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded-sm);
+      padding: var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      min-height: 110px;
+      color: var(--on-surface);
+    }
+    .draft-readout-box {
+      min-height: 80px;
+      white-space: pre-wrap;
+    }
+
+    /* Rubric Scoreboard */
+    .rubric-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .rubric-list {
+      display: grid;
+      gap: var(--space-md);
+    }
+    .score-summary-card {
+      background-color: var(--background);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      border: var(--border-soft);
+      display: grid;
+      gap: var(--space-md);
+    }
+    .score-big {
+      font-family: var(--font-headline);
+      font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+      font-weight: 600;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--on-surface);
+    }
+    .rubric-category {
+      background-color: var(--background);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      border: var(--border-soft);
+      display: grid;
+      gap: var(--space-sm);
+    }
+    .rubric-cat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .rubric-pts {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--tertiary);
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-xs);
+      cursor: pointer;
+      border-radius: var(--rounded-sm);
+    }
+    .check-item:hover {
+      background-color: var(--surface-container-low);
+    }
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin: 2px 0 0 0;
+      flex: 0 0 22px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: var(--space-xs);
+    }
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+    }
+    .bar-track {
+      height: 8px;
+      border-radius: var(--rounded-full);
+      background-color: var(--surface-container);
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .takeaway-group {
+      padding-top: var(--space-sm);
+      border-top: var(--border-soft);
+    }
+
+    /* Section Completion Footer Bar */
+    .section-complete-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: var(--border-soft);
+    }
+    .practice-toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      border: var(--border-soft);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-in-out);
+    }
+    .practice-toggle-label:hover {
+      background-color: var(--surface-container);
+    }
+    .workshop-section.is-practiced .practice-toggle-label {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+    .practice-toggle-label input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Footer */
+    .workshop-footer {
+      border-top: 1px solid var(--outline-variant);
+      padding-top: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+      color: var(--on-surface-variant);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md) var(--space-sm) var(--space-xl);
+        gap: var(--space-lg);
+      }
+      .workshop-section {
+        padding: var(--space-lg) var(--space-md);
+      }
+      .progress-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <!-- Header -->
+    <header class="workshop-header">
+      <div class="header-meta-row">
+        <span class="tag-ochre">Self-Paced Digital Literacy Workshop</span>
+        <span class="tag-neutral">Level 1 · No Prerequisites</span>
+        <span class="tag-neutral">Fictional Safe Sandbox</span>
+      </div>
+      <h1>Beginner AI Literacy and Responsible Use Workshop</h1>
+      <p class="lead-copy">
+        Build confidence using workplace AI tools responsibly—at your own pace, with zero personal risk. Every activity uses the fictional job-seeker scenario of Jordan Lee so you never enter real personal information.
+      </p>
+    </header>
+
+    <!-- Progress & Section Jump Strip -->
+    <section class="progress-panel" aria-label="Workshop progress tracker">
+      <div class="progress-top">
+        <div class="progress-title-group">
+          <span class="kicker">Workshop Progress</span>
+          <div id="progress-counter" class="progress-counter-text">0 of 7 Sections Practiced</div>
+        </div>
+        <div class="progress-actions">
+          <button type="button" id="reset-progress-btn" class="btn btn-secondary" onclick="resetAllProgress()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Reset Progress
+          </button>
+          <button type="button" id="export-summary-btn" class="btn btn-ochre" onclick="exportWorkshopSummary()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Save Practice Summary
+          </button>
+        </div>
+      </div>
+
+      <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0" id="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+
+      <div class="season-strip">
+        <span class="mono-label">Sections 1–7</span>
+        <nav class="section-pills" aria-label="Workshop section navigation">
+          <button type="button" class="section-pill" data-pill-section="1" onclick="jumpToSection(1)">1 · AI Basics</button>
+          <button type="button" class="section-pill" data-pill-section="2" onclick="jumpToSection(2)">2 · Privacy</button>
+          <button type="button" class="section-pill" data-pill-section="3" onclick="jumpToSection(3)">3 · Assistants</button>
+          <button type="button" class="section-pill" data-pill-section="4" onclick="jumpToSection(4)">4 · CLEAR</button>
+          <button type="button" class="section-pill" data-pill-section="5" onclick="jumpToSection(5)">5 · Work Tasks</button>
+          <button type="button" class="section-pill" data-pill-section="6" onclick="jumpToSection(6)">6 · Verify</button>
+          <button type="button" class="section-pill" data-pill-section="7" onclick="jumpToSection(7)">7 · Rubric</button>
+        </nav>
+      </div>
+      <div id="reset-status" class="inline-status-msg" aria-live="polite"></div>
+    </section>
+
+    <!-- Safe Fictional Sandbox Reference Card (Single Pale Leaf Highlight) -->
+    <aside class="card is-leaf-highlight" aria-label="Fictional practice scenario reference">
+      <div class="leaf-header">
+        <span class="mono-label leaf-kicker">Safe Practice Persona · Training Data Only</span>
+        <h2>Jordan Lee at Riverside Community Services</h2>
+        <p>Use these invented details across every exercise. Never type real Social Security numbers, state IDs, passwords, home addresses, or personal case details into any AI tool or practice box.</p>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <span class="profile-item-label">Candidate &amp; Placeholder Email</span>
+          <span class="profile-item-value">Jordan Lee · jordan.lee@riverside-example.test</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-item-label">Target Role &amp; Employer</span>
+          <span class="profile-item-value">Customer Support Associate · Riverside Community Services (Atlanta, GA · $19–$22/hr fictional)</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-item-label">Verified Experience</span>
+          <span class="profile-item-value">Volunteer front desk, community event registration (2025–2026); Retail stock assistant (2024–2025)</span>
+        </div>
+        <div class="profile-item">
+          <span class="profile-item-label">Skills &amp; Education</span>
+          <span class="profile-item-value">Active listening, organized records, scheduling, written communication; High school diploma</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- SECTION 1 -->
+    <section id="section-1" class="workshop-section" data-section="1" aria-labelledby="s1-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-1">01</span>
+            <span class="kicker">Foundations</span>
+            <span class="section-status-pill" id="status-pill-1">Not yet practiced</span>
+          </div>
+          <h2 id="s1-heading">Understanding AI &amp; Everyday Examples</h2>
+        </div>
+      </div>
+
+      <p>
+        A generative AI tool produces new text or ideas in response to an instruction called a <strong>prompt</strong>. It works by predicting helpful language patterns—not by looking up verified facts the way a human researcher checks official records. Knowing what AI does well and where human judgment takes over keeps you in control.
+      </p>
+
+      <div class="three-col-grid">
+        <article class="sub-panel">
+          <h3>Generative AI</h3>
+          <p>Drafts emails, suggests practice interview questions, summarizes notes, and formats lists from the details you give it.</p>
+          <span class="mono-label">Limit: Can invent confident errors</span>
+        </article>
+        <article class="sub-panel">
+          <h3>Search Engines</h3>
+          <p>Finds existing web pages, official agency portals, transit schedules, and published employer websites.</p>
+          <span class="mono-label">Limit: Still requires checking source trust</span>
+        </article>
+        <article class="sub-panel">
+          <h3>Human Expertise</h3>
+          <p>Brings lived judgment, verifies truthfulness, protects privacy, spots job scams, and owns every final workplace message.</p>
+          <span class="mono-label">Strength: Accountability &amp; care</span>
+        </article>
+      </div>
+
+      <div class="drill-card">
+        <h3>Practice: Match the Tool to the Workplace Task</h3>
+        <p>Choose the safest starting tool for each situation Jordan Lee encounters.</p>
+
+        <div class="field-group" data-s1-q="1">
+          <span class="field-label">1. Checking the official opening hours and street address for Atlanta Public Library career help.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS1Question(1, 'ai', this)">Generative AI</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(1, 'search', this)">Search Engine / Official Site</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(1, 'human', this)">Human Judgment</button>
+          </div>
+          <div class="feedback-box" id="s1-fb-1"></div>
+        </div>
+
+        <div class="field-group" data-s1-q="2">
+          <span class="field-label">2. Turning rough notes from volunteer event registration into two clear résumé bullet points.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS1Question(2, 'ai', this)">Generative AI</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(2, 'search', this)">Search Engine / Official Site</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(2, 'human', this)">Human Judgment</button>
+          </div>
+          <div class="feedback-box" id="s1-fb-2"></div>
+        </div>
+
+        <div class="field-group" data-s1-q="3">
+          <span class="field-label">3. Deciding whether a recruiter asking for a $45 gift card to secure an interview is legitimate.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS1Question(3, 'ai', this)">Generative AI</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(3, 'search', this)">Search Engine / Official Site</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(3, 'human', this)">Human Judgment</button>
+          </div>
+          <div class="feedback-box" id="s1-fb-3"></div>
+        </div>
+
+        <div class="field-group" data-s1-q="4">
+          <span class="field-label">4. Brainstorming five practice interview questions about teamwork and reliability.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS1Question(4, 'ai', this)">Generative AI</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(4, 'search', this)">Search Engine / Official Site</button>
+            <button type="button" class="choice-btn" onclick="checkS1Question(4, 'human', this)">Human Judgment</button>
+          </div>
+          <div class="feedback-box" id="s1-fb-4"></div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="s1-reflection">Self-Reflection: Name one workplace task AI can help you draft, and one task you would verify yourself</label>
+        <span class="field-hint">Keep your answer general or use Jordan Lee’s scenario—no real personal details needed.</span>
+        <textarea id="s1-reflection" oninput="handleInputChange()"></textarea>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">When you finish the tool match and reflection above, mark this section practiced.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-1" onchange="toggleSectionPracticed(1, this.checked)">
+          <span>Mark Section 1 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="section-2" class="workshop-section" data-section="2" aria-labelledby="s2-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-2">02</span>
+            <span class="kicker">Safety First</span>
+            <span class="section-status-pill" id="status-pill-2">Not yet practiced</span>
+          </div>
+          <h2 id="s2-heading">Privacy, Security &amp; Responsible Boundaries</h2>
+        </div>
+      </div>
+
+      <p>
+        Before typing anything into an AI tool, pause and protect your privacy. Anything typed into an online assistant may be stored or reviewed depending on platform settings. Never share passwords, Social Security numbers, state IDs, bank numbers, home street addresses, or personal justice-system history.
+      </p>
+
+      <div class="two-col-grid">
+        <div class="sub-panel">
+          <h3>Always Keep Out of Prompts</h3>
+          <ul class="clean-list">
+            <li>Passwords, PINs, or one-time login codes</li>
+            <li>Social Security numbers, state IDs, or bank information</li>
+            <li>Real home addresses, phone numbers, or birthdates</li>
+            <li>Case numbers, legal history, or medical details</li>
+          </ul>
+        </div>
+        <div class="sub-panel is-warm">
+          <h3>Three AI Risks to Watch For</h3>
+          <ul class="clean-list">
+            <li><strong>Hallucinations:</strong> Confident-sounding wrong dates, times, or fake qualifications.</li>
+            <li><strong>Bias:</strong> Unfair assumptions about background, education, or ability.</li>
+            <li><strong>Deceptive Content:</strong> Polished phishing emails or fake job listings that mimic real employers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <h3>Practice: Safe or Redact Inspector</h3>
+        <p>Review each line below and decide whether it is safe to paste into an AI prompt or must be removed first.</p>
+
+        <div class="field-group">
+          <span class="field-label">A. “Draft a thank-you note for a customer support interview using polite, plain English.”</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS2Card('A', 'safe', this)">Safe to Paste</button>
+            <button type="button" class="choice-btn" onclick="checkS2Card('A', 'redact', this)">Redact / Remove</button>
+          </div>
+          <div class="feedback-box" id="s2-fb-A"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">B. “Use my SSN 123-45-6789 and state ID to fill out this Riverside Community Services application.”</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS2Card('B', 'safe', this)">Safe to Paste</button>
+            <button type="button" class="choice-btn" onclick="checkS2Card('B', 'redact', this)">Redact / Remove</button>
+          </div>
+          <div class="feedback-box" id="s2-fb-B"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">C. “Summarize Jordan Lee’s volunteer front-desk experience into three short bullet points.”</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS2Card('C', 'safe', this)">Safe to Paste</button>
+            <button type="button" class="choice-btn" onclick="checkS2Card('C', 'redact', this)">Redact / Remove</button>
+          </div>
+          <div class="feedback-box" id="s2-fb-C"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">D. “Reply to account-verify@riverside-urgent.example.test with my login password so my account stays open.”</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS2Card('D', 'safe', this)">Safe to Paste</button>
+            <button type="button" class="choice-btn" onclick="checkS2Card('D', 'redact', this)">Redact / Remove</button>
+          </div>
+          <div class="feedback-box" id="s2-fb-D"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">E. “Include my probation case number #4408-B and home apartment address in this cover letter.”</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS2Card('E', 'safe', this)">Safe to Paste</button>
+            <button type="button" class="choice-btn" onclick="checkS2Card('E', 'redact', this)">Redact / Remove</button>
+          </div>
+          <div class="feedback-box" id="s2-fb-E"></div>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <h3>Practice: Rewrite an Unsafe Prompt Safely</h3>
+        <div class="quote-box">
+          <strong>Unsafe Draft:</strong> “My real name is Alex M., DOB 04/12/1988, SSN 999-00-1111, Case #7721. Write an email to Ms. Johnson at Riverside asking where my Thursday orientation is.”
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="s2-rewrite">Write a privacy-safe version using Jordan Lee’s fictional scenario</label>
+          <span class="field-hint">Remove all private numbers, dates of birth, and case numbers. Keep only the safe facts needed.</span>
+          <textarea id="s2-rewrite" oninput="handleInputChange()"></textarea>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" onclick="checkS2Rewrite()">Check Privacy Safety</button>
+        </div>
+        <div class="feedback-box" id="s2-rewrite-fb"></div>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">Keep every prompt free of private identifiers before marking practiced.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-2" onchange="toggleSectionPracticed(2, this.checked)">
+          <span>Mark Section 2 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="section-3" class="workshop-section" data-section="3" aria-labelledby="s3-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-3">03</span>
+            <span class="kicker">Choosing Your Tool</span>
+            <span class="section-status-pill" id="status-pill-3">Not yet practiced</span>
+          </div>
+          <h2 id="s3-heading">Meeting Modern AI Assistants</h2>
+        </div>
+      </div>
+
+      <p>
+        Workplaces and training centers may permit tools such as <strong>Google Gemini</strong>, <strong>ChatGPT</strong>, or <strong>Microsoft Copilot</strong>—or they may require offline practice on paper. No specific vendor is required to succeed. Just as important: knowing when writing a quick message yourself is faster and safer than opening an AI tool at all.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Common Workplace Fit</th>
+              <th>Safety &amp; Access Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Gemini</strong></td>
+              <td>Drafting plain-language emails, structuring interview prep, organizing checklists alongside Docs or Gmail.</td>
+              <td>Use only site-approved accounts; keep personal identifiers out of prompts.</td>
+            </tr>
+            <tr>
+              <td><strong>ChatGPT</strong></td>
+              <td>Brainstorming résumé action verbs, practicing mock interview dialogues, simplifying dense instructions.</td>
+              <td>Review every claim; verify dates, names, and job qualifications against your source.</td>
+            </tr>
+            <tr>
+              <td><strong>Microsoft Copilot</strong></td>
+              <td>Drafting workplace notes, summaries, and Word/Outlook drafts inside licensed office setups.</td>
+              <td>Follow employer data rules; confirm whether organizational privacy protections apply.</td>
+            </tr>
+            <tr>
+              <td><strong>Manual / Offline Writing</strong></td>
+              <td>Short 1–2 sentence confirmations, confidential entries, or any task where facts are already clear.</td>
+              <td>Fastest, zero-risk option when you already know exactly what to say.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="drill-card">
+        <h3>Practice: Use an AI Assistant or Write Manually?</h3>
+        <p>Decide the smartest workflow for each task below.</p>
+
+        <div class="field-group">
+          <span class="field-label">1. You need to reply “Yes, I confirm Friday at 2:00 p.m. Eastern” to a practice calendar invite you already understand.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS3Decision(1, 'ai', this)">Use an AI Assistant</button>
+            <button type="button" class="choice-btn" onclick="checkS3Decision(1, 'manual', this)">Write It Manually</button>
+          </div>
+          <div class="feedback-box" id="s3-fb-1"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">2. You have three volunteer duties and want help turning them into concise, professional bullet points to review.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS3Decision(2, 'ai', this)">Use an AI Assistant</button>
+            <button type="button" class="choice-btn" onclick="checkS3Decision(2, 'manual', this)">Write It Manually</button>
+          </div>
+          <div class="feedback-box" id="s3-fb-2"></div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">3. An employer portal asks for your real legal name and tax form details for an official onboarding check.</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" onclick="checkS3Decision(3, 'ai', this)">Use an AI Assistant</button>
+            <button type="button" class="choice-btn" onclick="checkS3Decision(3, 'manual', this)">Complete Manually in the Official Portal</button>
+          </div>
+          <div class="feedback-box" id="s3-fb-3"></div>
+        </div>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">Choose an approved tool only when it adds clarity without risking privacy.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-3" onchange="toggleSectionPracticed(3, this.checked)">
+          <span>Mark Section 3 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="section-4" class="workshop-section" data-section="4" aria-labelledby="s4-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-4">04</span>
+            <span class="kicker">Prompt Craft</span>
+            <span class="section-status-pill" id="status-pill-4">Not yet practiced</span>
+          </div>
+          <h2 id="s4-heading">The CLEAR Prompting Framework</h2>
+        </div>
+      </div>
+
+      <p>
+        Clear instructions lead to safer, more accurate drafts. Use the five-part <strong>CLEAR</strong> framework whenever you ask an AI assistant for help. By stating which facts it may use and how the answer should look, you reduce guesswork and spot errors faster.
+      </p>
+
+      <div class="clear-workspace">
+        <div class="drill-card">
+          <div class="drill-head-row">
+            <h3>Build Your CLEAR Prompt</h3>
+            <div class="btn-row">
+              <button type="button" class="btn btn-ochre" onclick="loadClearExample()">Load Jordan Lee Example</button>
+              <button type="button" class="btn btn-secondary" onclick="clearClearBuilder()">Clear Fields</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="clear-c"><span class="clear-letter-badge">C</span> Context — What is the situation?</label>
+            <span class="field-hint">Example: Preparing for an entry-level customer service interview at Riverside.</span>
+            <input type="text" id="clear-c" oninput="updateClearBuilder()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="clear-l"><span class="clear-letter-badge">L</span> Let AI know the task — What do you want help with?</label>
+            <span class="field-hint">Example: Create five practice interview questions.</span>
+            <input type="text" id="clear-l" oninput="updateClearBuilder()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="clear-e"><span class="clear-letter-badge">E</span> Explain details — Which facts may it use, and what tone?</label>
+            <span class="field-hint">Example: Use simple language, focus on teamwork and reliability, do not invent work history.</span>
+            <textarea id="clear-e" oninput="updateClearBuilder()"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="clear-a"><span class="clear-letter-badge">A</span> Ask for a format — How should the answer look?</label>
+            <span class="field-hint">Example: Give a numbered list with short example answers.</span>
+            <input type="text" id="clear-a" oninput="updateClearBuilder()">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="clear-r"><span class="clear-letter-badge">R</span> Review &amp; refine — What will you check or adjust?</label>
+            <span class="field-hint">Example: Remove any extra assumptions and simplify question 3.</span>
+            <input type="text" id="clear-r" oninput="updateClearBuilder()">
+          </div>
+        </div>
+
+        <div class="preview-pane">
+          <div class="drill-head-row">
+            <h3>Live Prompt Preview</h3>
+            <span class="tag-neutral" id="clear-score-tag">0 of 5 CLEAR parts</span>
+          </div>
+          <div class="prompt-output-box" id="clear-preview-text">Fill in the C, L, E, A, and R fields on the left to assemble your practice prompt.</div>
+          <div id="clear-safety-fb" class="feedback-box"></div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" onclick="testClearPrompt()">Simulate Sample AI Output</button>
+          </div>
+          <div class="field-group">
+            <span class="mono-label">Simulated Practice Output (Verify Before Using)</span>
+            <div class="prompt-output-box" id="clear-sim-output">Click “Simulate Sample AI Output” after building a prompt to preview how an assistant responds—and practice checking it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">Practice writing at least one CLEAR prompt using fictional details.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-4" onchange="toggleSectionPracticed(4, this.checked)">
+          <span>Mark Section 4 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="section-5" class="workshop-section" data-section="5" aria-labelledby="s5-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-5">05</span>
+            <span class="kicker">Applied Practice</span>
+            <span class="section-status-pill" id="status-pill-5">Not yet practiced</span>
+          </div>
+          <h2 id="s5-heading">AI for Employment &amp; Workplace Projects</h2>
+        </div>
+      </div>
+
+      <p>
+        Apply AI responsibly to three real-world job search tasks using Jordan Lee’s fictional record: preparing interview questions, polishing truthful résumé bullet points, and drafting a workplace orientation email. Remember: an AI draft is only a starting point—always rewrite the final version in your own words.
+      </p>
+
+      <div class="drill-card">
+        <div class="field-group">
+          <span class="field-label">Step 1: Choose a Workplace Scenario to Practice</span>
+          <div class="choice-row">
+            <button type="button" class="choice-btn" id="s5-tab-interview" onclick="selectS5Task('interview')">Practice Interview Questions</button>
+            <button type="button" class="choice-btn" id="s5-tab-resume" onclick="selectS5Task('resume')">Polish Résumé Bullet Points</button>
+            <button type="button" class="choice-btn" id="s5-tab-email" onclick="selectS5Task('email')">Draft Orientation Email</button>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="sub-panel">
+            <span class="mono-label">Verified Source Facts (Use Only These)</span>
+            <div id="s5-source-facts">
+              Select one of the three workplace scenarios above to view Jordan Lee’s verified source facts and generate a practice draft.
+            </div>
+          </div>
+
+          <div class="sub-panel is-warm">
+            <span class="mono-label">Simulated AI Draft Starting Point</span>
+            <div id="s5-ai-draft" class="draft-readout-box">No scenario selected yet. Choose a task above, then click “Generate Sample Draft” to inspect how AI phrases it.</div>
+            <div>
+              <button type="button" class="btn btn-primary" onclick="generateS5Draft()">Generate Sample Draft</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="s5-user-revision">Step 2: Revise and Make It Yours (Required Human Check)</label>
+          <span class="field-hint">Write your own accurate, clear version below after checking every fact against Jordan Lee’s source card.</span>
+          <textarea id="s5-user-revision" oninput="handleInputChange()"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="checkS5Revision()">Verify My Final Draft</button>
+        </div>
+        <div class="feedback-box" id="s5-fb"></div>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">Always review tone, truthfulness, and missing questions before sending any workplace draft.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-5" onchange="toggleSectionPracticed(5, this.checked)">
+          <span>Mark Section 5 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="section-6" class="workshop-section" data-section="6" aria-labelledby="s6-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-6">06</span>
+            <span class="kicker">Verification Drills</span>
+            <span class="section-status-pill" id="status-pill-6">Not yet practiced</span>
+          </div>
+          <h2 id="s6-heading">Verification Drills &amp; Error Spotting</h2>
+        </div>
+      </div>
+
+      <p>
+        An AI assistant can produce polite, confident sentences that contain wrong dates, wrong meeting formats, unsupported items, or invented job qualifications. Practice spotting every mistake against the source message before trusting a draft.
+      </p>
+
+      <!-- Drill 1 (Worksheet 7A) -->
+      <article class="drill-card" id="drill-1">
+        <div class="drill-head-row">
+          <h3>Drill 1: Practice Video Interview Invitation</h3>
+          <span class="mono-label">Based on Worksheet 7A</span>
+        </div>
+        <div class="quote-box">
+          <strong>Original Invitation:</strong> “Hello Jordan, please join us for a practice video interview on Friday, November 13, from 2:00 to 2:30 p.m. Eastern. Please reply to confirm.”
+        </div>
+        <div class="quote-box is-ai-draft">
+          <strong>Sample AI Reply:</strong> “Thank you for inviting me. I’ll be at your office on Friday, November 13, at 2:30 p.m. Eastern, and I’ll bring my certification.”
+        </div>
+        <div class="field-group">
+          <span class="field-label">Select every detail in the AI reply that disagrees with the invitation or adds unsupported claims:</span>
+          <div class="chip-group">
+            <button type="button" class="chip-btn" data-drill="1" data-chip="office" onclick="toggleDrillChip(1, 'office', this)">“at your office”</button>
+            <button type="button" class="chip-btn" data-drill="1" data-chip="friday" onclick="toggleDrillChip(1, 'friday', this)">“Friday, November 13”</button>
+            <button type="button" class="chip-btn" data-drill="1" data-chip="230pm" onclick="toggleDrillChip(1, '230pm', this)">“at 2:30 p.m. Eastern”</button>
+            <button type="button" class="chip-btn" data-drill="1" data-chip="certification" onclick="toggleDrillChip(1, 'certification', this)">“bring my certification”</button>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="drill-1-fix">Write your corrected two-sentence reply:</label>
+          <textarea id="drill-1-fix" oninput="handleInputChange()"></textarea>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" onclick="gradeDrill(1)">Check Drill 1</button>
+        </div>
+        <div class="feedback-box" id="drill-fb-1"></div>
+      </article>
+
+      <!-- Drill 2 (Worksheet 7B) -->
+      <article class="drill-card" id="drill-2">
+        <div class="drill-head-row">
+          <h3>Drill 2: Supervisor Orientation Note</h3>
+          <span class="mono-label">Based on Worksheet 7B</span>
+        </div>
+        <div class="quote-box">
+          <strong>Supervisor’s Note:</strong> “Jordan, please join the stockroom team on Tuesday at 9 a.m. for a 30-minute orientation. Bring a notebook.”
+        </div>
+        <div class="quote-box is-ai-draft">
+          <strong>Sample AI Reply:</strong> “I’ll meet the sales team on Thursday at 9 a.m. for the full morning. I’ll bring my notebook and a copy of my ID.”
+        </div>
+        <div class="field-group">
+          <span class="field-label">Select every detail you must change or remove:</span>
+          <div class="chip-group">
+            <button type="button" class="chip-btn" data-drill="2" data-chip="sales" onclick="toggleDrillChip(2, 'sales', this)">“sales team”</button>
+            <button type="button" class="chip-btn" data-drill="2" data-chip="thursday" onclick="toggleDrillChip(2, 'thursday', this)">“Thursday”</button>
+            <button type="button" class="chip-btn" data-drill="2" data-chip="9am" onclick="toggleDrillChip(2, '9am', this)">“at 9 a.m.”</button>
+            <button type="button" class="chip-btn" data-drill="2" data-chip="morning" onclick="toggleDrillChip(2, 'morning', this)">“full morning”</button>
+            <button type="button" class="chip-btn" data-drill="2" data-chip="notebook" onclick="toggleDrillChip(2, 'notebook', this)">“my notebook”</button>
+            <button type="button" class="chip-btn" data-drill="2" data-chip="id" onclick="toggleDrillChip(2, 'id', this)">“a copy of my ID”</button>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="drill-2-fix">Write your accurate reply and note how you would confirm a missing room number:</label>
+          <textarea id="drill-2-fix" oninput="handleInputChange()"></textarea>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" onclick="gradeDrill(2)">Check Drill 2</button>
+        </div>
+        <div class="feedback-box" id="drill-fb-2"></div>
+      </article>
+
+      <!-- Drill 3 (Fabricated Qualifications) -->
+      <article class="drill-card" id="drill-3">
+        <div class="drill-head-row">
+          <h3>Drill 3: Spot Fabricated Résumé Qualifications</h3>
+          <span class="mono-label">Truthfulness Check</span>
+        </div>
+        <div class="quote-box">
+          <strong>Jordan Lee Candidate Card:</strong> High school diploma; Volunteer front desk, community event registration (2025–2026); Retail stock assistant (2024–2025); Skills: Active listening, organized records, scheduling, written communication.
+        </div>
+        <div class="quote-box is-ai-draft">
+          <strong>Sample AI Summary:</strong> “Jordan Lee offers 5 years of call-center management, a Bachelor’s degree, organized records, and advanced Salesforce certification.”
+        </div>
+        <div class="field-group">
+          <span class="field-label">Select every fabricated claim that must be deleted:</span>
+          <div class="chip-group">
+            <button type="button" class="chip-btn" data-drill="3" data-chip="5years" onclick="toggleDrillChip(3, '5years', this)">“5 years of call-center management”</button>
+            <button type="button" class="chip-btn" data-drill="3" data-chip="bachelors" onclick="toggleDrillChip(3, 'bachelors', this)">“a Bachelor’s degree”</button>
+            <button type="button" class="chip-btn" data-drill="3" data-chip="records" onclick="toggleDrillChip(3, 'records', this)">“organized records”</button>
+            <button type="button" class="chip-btn" data-drill="3" data-chip="salesforce" onclick="toggleDrillChip(3, 'salesforce', this)">“advanced Salesforce certification”</button>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" onclick="gradeDrill(3)">Check Drill 3</button>
+        </div>
+        <div class="feedback-box" id="drill-fb-3"></div>
+      </article>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">Never send or submit an AI draft until every date, name, and skill matches reality.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-6" onchange="toggleSectionPracticed(6, this.checked)">
+          <span>Mark Section 6 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section id="section-7" class="workshop-section" data-section="7" aria-labelledby="s7-heading">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge-row">
+            <span class="section-badge" id="badge-7">07</span>
+            <span class="kicker">Self-Assessment</span>
+            <span class="section-status-pill" id="status-pill-7">Not yet practiced</span>
+          </div>
+          <h2 id="s7-heading">The 100-Point Practical Rubric Self-Check</h2>
+        </div>
+      </div>
+
+      <p>
+        Review your readiness across all six workshop criteria (100 points total). The proposed readiness target is <strong>80 / 100</strong> paired with full privacy and safety practices. This check guides your practice—if any item still feels uncertain, revisit that section as many times as you like.
+      </p>
+
+      <div class="rubric-layout">
+        <div class="rubric-list">
+          <!-- Verification 25 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>Verification &amp; Revision</h3>
+              <span class="rubric-pts">25 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="verification" data-pts="13" onchange="updateRubricScore()">
+              <span>I compare AI drafts line by line against the original invitation, note, or job listing. (13 pts)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="verification" data-pts="12" onchange="updateRubricScore()">
+              <span>I delete invented claims and rewrite messages accurately in my own words. (12 pts)</span>
+            </label>
+          </div>
+
+          <!-- Privacy 20 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>Privacy &amp; Responsible Boundaries (Essential Gate)</h3>
+              <span class="rubric-pts">20 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="privacy" data-pts="10" data-essential="true" onchange="updateRubricScore()">
+              <span>I never put passwords, SSNs, state IDs, addresses, or personal case details into prompts. (10 pts)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="privacy" data-pts="10" data-essential="true" onchange="updateRubricScore()">
+              <span>I use fictional training data for practice and recognize biased or deceptive outputs. (10 pts)</span>
+            </label>
+          </div>
+
+          <!-- CLEAR Prompting 20 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>CLEAR Prompt Quality</h3>
+              <span class="rubric-pts">20 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="clear" data-pts="10" onchange="updateRubricScore()">
+              <span>I state Context, Task, Details, and Format clearly in my prompt. (10 pts)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="clear" data-pts="10" onchange="updateRubricScore()">
+              <span>I give follow-up instructions to refine and simplify the output. (10 pts)</span>
+            </label>
+          </div>
+
+          <!-- AI Understanding 15 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>Basic AI Understanding</h3>
+              <span class="rubric-pts">15 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="understanding" data-pts="8" onchange="updateRubricScore()">
+              <span>I can explain how generative AI differs from search engines and human judgment. (8 pts)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="understanding" data-pts="7" onchange="updateRubricScore()">
+              <span>I can name helpful workplace uses and common AI limitations. (7 pts)</span>
+            </label>
+          </div>
+
+          <!-- Tool Selection 10 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>Choosing an Appropriate Tool</h3>
+              <span class="rubric-pts">10 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="tool" data-pts="10" onchange="updateRubricScore()">
+              <span>I choose an approved AI assistant only when helpful, and write manually when faster or safer. (10 pts)</span>
+            </label>
+          </div>
+
+          <!-- Human Responsibility 10 pts -->
+          <div class="rubric-category">
+            <div class="rubric-cat-header">
+              <h3>Human Responsibility</h3>
+              <span class="rubric-pts">10 pts</span>
+            </div>
+            <label class="check-item">
+              <input type="checkbox" class="rubric-cb" data-cat="responsibility" data-pts="10" onchange="updateRubricScore()">
+              <span>I take responsibility for every message, application, or document I send after checking it. (10 pts)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Live Score Summary -->
+        <aside class="score-summary-card" aria-label="Rubric score summary">
+          <span class="kicker">Self-Check Score</span>
+          <div class="score-big" id="rubric-total-score">0 / 100</div>
+          <div id="rubric-status-badge" class="tag-neutral">Not yet started — check skills as you verify them</div>
+
+          <div class="bar-row">
+            <div class="bar-label-row"><span>Verification (25)</span><span id="cat-pts-verification">0 / 25</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-verification"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span>Privacy &amp; Safety (20)</span><span id="cat-pts-privacy">0 / 20</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-privacy"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span>CLEAR Prompting (20)</span><span id="cat-pts-clear">0 / 20</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-clear"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span>AI Understanding (15)</span><span id="cat-pts-understanding">0 / 15</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-understanding"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span>Tool Selection (10)</span><span id="cat-pts-tool">0 / 10</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-tool"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span>Human Responsibility (10)</span><span id="cat-pts-responsibility">0 / 10</span></div>
+            <div class="bar-track"><div class="bar-fill" id="bar-responsibility"></div></div>
+          </div>
+
+          <div class="field-group takeaway-group">
+            <label class="field-label" for="s7-takeaway">My One Key Takeaway or Next Skill to Practice</label>
+            <textarea id="s7-takeaway" oninput="handleInputChange()"></textarea>
+          </div>
+        </aside>
+      </div>
+
+      <div class="section-complete-bar">
+        <span class="field-hint">This self-check supports coaching and review; instructor confirmation remains separate.</span>
+        <label class="practice-toggle-label">
+          <input type="checkbox" id="practice-check-7" onchange="toggleSectionPracticed(7, this.checked)">
+          <span>Mark Section 7 as Practiced</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Sources & Attribution Footer -->
+    <footer class="workshop-footer">
+      <p>
+        <strong>Workshop Sources &amp; Attribution:</strong> Grounded in the Digital Pathways to Employment Curriculum (Six-Module Instructor Guide &amp; Student Learning Workbook v1.0, Seven-Module Instructor Breakdown v1.1, and Module 7 Beginner AI Literacy Materials; original curriculum authored by Ronda Bell, licensed to Home4Good Inc. for authorized educational and charitable use).
+      </p>
+      <p>
+        <strong>External Verification References:</strong> For independent digital literacy, scam prevention, and career guidance, instructors may consult digitalliteracyassessment.org, consumer.ftc.gov, cisa.gov, and careeronestop.org. All scenarios and contact details (such as @riverside-example.test) are fictional placeholders for safe classroom practice.
+      </p>
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const TOTAL_SECTIONS = 7;
+
+    function createEmptyState() {
+      return {
+        practiced: [false, false, false, false, false, false, false],
+        s1Choices: {},
+        s2Choices: {},
+        s3Choices: {},
+        s5Task: '',
+        drillSelections: { 1: [], 2: [], 3: [] },
+        drillGraded: { 1: false, 2: false, 3: false },
+        inputs: {},
+        rubricChecks: []
+      };
+    }
+
+    let appState = createEmptyState();
+
+    const S1_ANSWERS = {
+      1: {
+        correct: 'search',
+        good: `Correct. Official schedules, phone numbers, and agency hours should be checked via a search engine and the official organization website—AI can invent outdated hours.`,
+        other: `Look closer: generative AI can guess wrong hours or addresses. Use a search engine to open the official library website directly.`
+      },
+      2: {
+        correct: 'ai',
+        good: `Correct. Generative AI is helpful for turning your own rough notes into clear résumé wording—as long as you check that nothing was invented.`,
+        other: `Generative AI fits best here: it can help organize your real volunteer notes into clean bullet points before you review them.`
+      },
+      3: {
+        correct: 'human',
+        good: `Correct. Legitimate employers never ask for gift cards or fees to secure an interview. Human judgment and scam checks keep you safe.`,
+        other: `Pause and protect yourself: this is a classic job scam sign. Human judgment and independent employer verification come first.`
+      },
+      4: {
+        correct: 'ai',
+        good: `Correct. Brainstorming practice interview questions is a safe, helpful use of generative AI when you use general or fictional details.`,
+        other: `Generative AI is great for creating practice interview questions focused on teamwork and reliability.`
+      }
+    };
+
+    const S2_ANSWERS = {
+      A: {
+        correct: 'safe',
+        good: `Safe to paste. It asks for a general structure without any names, IDs, or private contact details.`,
+        other: `Actually, this prompt is safe—it contains zero personal identifiers or sensitive numbers.`
+      },
+      B: {
+        correct: 'redact',
+        good: `Redact immediately. Never enter Social Security numbers, state IDs, or real identification into any AI prompt or practice form.`,
+        other: `Unsafe! Social Security numbers and state IDs must never be pasted into an AI tool.`
+      },
+      C: {
+        correct: 'safe',
+        good: `Safe to paste. It uses Jordan Lee’s fictional training profile and general volunteer duties.`,
+        other: `This one is safe because Jordan Lee is the approved fictional training persona with no real PII.`
+      },
+      D: {
+        correct: 'redact',
+        good: `Redact and do not reply! Never share a password, and recognize urgent account-deletion messages as phishing attempts.`,
+        other: `Danger! Never type a password into an AI tool or reply to an urgent password-verification email.`
+      },
+      E: {
+        correct: 'redact',
+        good: `Redact immediately. Case numbers, justice-system history, and home addresses do not belong in AI prompts.`,
+        other: `Unsafe! Leave case numbers and real street addresses completely out of prompts.`
+      }
+    };
+
+    const S3_ANSWERS = {
+      1: {
+        correct: 'manual',
+        good: `Smart choice. When you already know the exact one-sentence reply, typing it manually takes seconds and avoids AI mix-ups.`,
+        other: `Manual writing is faster and safer here—there is no need to ask AI to draft a simple one-line confirmation.`
+      },
+      2: {
+        correct: 'ai',
+        good: `Good fit. An approved AI assistant can help polish your wording into concise bullet points that you then verify.`,
+        other: `This is a helpful moment for an AI assistant: it can suggest phrasing options from your real duties before you edit.`
+      },
+      3: {
+        correct: 'manual',
+        good: `Correct. Official tax and legal forms should be completed directly in the verified employer portal—never pasted through an AI assistant.`,
+        other: `Never route sensitive tax or legal details through an AI tool. Complete official forms directly in the verified portal.`
+      }
+    };
+
+    const S5_DATA = {
+      interview: {
+        facts: `Role: Customer Support Associate at Riverside Community Services. Skills: active listening, organized records, scheduling, written communication. Experience: Volunteer front desk (2025–2026) and retail stock assistant (2024–2025).`,
+        draft: `Sample AI Output:\n1. Tell me about a time you helped keep records organized during a busy day.\n2. How do you practice active listening when a customer is frustrated?\n3. Describe how your volunteer front-desk work prepared you for scheduling follow-up calls.\n\n[Check before using: Keep answers grounded in Jordan’s volunteer and retail experience—do not claim past supervisor roles.]`
+      },
+      resume: {
+        facts: `Volunteer front desk, community event registration (2025–2026); Retail stock assistant (2024–2025); Skills: active listening, organized records, scheduling, written communication.`,
+        draft: `Sample AI Output:\n• Greeted guests and maintained accurate registration logs at community events (2025–2026).\n• Organized inventory and supported daily store operations as a retail stock assistant (2024–2025).\n\n[Check before using: Confirm every date and duty matches Jordan’s candidate card accurately.]`
+      },
+      email: {
+        facts: `From: Ms. Johnson, Training Supervisor. Message: Confirm attendance for orientation on Thursday, November 12, 2026, at 10:00 AM Eastern and send sample résumé. Missing detail: meeting location.`,
+        draft: `Sample AI Output:\nSubject: Orientation Confirmation — Jordan Lee\n\nDear Ms. Johnson,\nThank you for the orientation details. I am confirming that I can attend on Thursday, November 12, 2026, at 10:00 AM Eastern, and I have attached my sample résumé. Could you please share the meeting location?\n\nSincerely,\nJordan Lee`
+      }
+    };
+
+    const DRILL_SOLUTIONS = {
+      1: {
+        expected: ['office', '230pm', 'certification'],
+        explanation: `The invitation is a video interview (not at an office) starting at 2:00 p.m. Eastern (2:30 is the end time), and it says nothing about bringing a certification. Example fix: “Thank you for the invitation. I’m confirming our video interview on Friday, November 13, from 2:00 to 2:30 p.m. Eastern.”`
+      },
+      2: {
+        expected: ['sales', 'thursday', 'morning', 'id'],
+        explanation: `The note specifies the stockroom team (not sales), Tuesday (not Thursday), and a 30-minute orientation (not the full morning). Remove “copy of my ID” (unsupported and risky). Keep “9 a.m.” and “my notebook.” Ask the supervisor directly to confirm any missing room number.`
+      },
+      3: {
+        expected: ['5years', 'bachelors', 'salesforce'],
+        explanation: `“Organized records” is listed on Jordan’s card, but 5 years of management, a Bachelor’s degree, and Salesforce certification are fabricated inventions that must be deleted.`
+      }
+    };
+
+    function jumpToSection(num) {
+      const target = document.getElementById(`section-${num}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function updateProgressUI() {
+      let count = 0;
+      for (let i = 0; i < TOTAL_SECTIONS; i++) {
+        const secNum = i + 1;
+        const isDone = Boolean(appState.practiced[i]);
+        if (isDone) count++;
+
+        const secEl = document.getElementById(`section-${secNum}`);
+        const pillEl = document.querySelector(`[data-pill-section="${secNum}"]`);
+        const statusEl = document.getElementById(`status-pill-${secNum}`);
+        const checkEl = document.getElementById(`practice-check-${secNum}`);
+
+        if (secEl) secEl.classList.toggle('is-practiced', isDone);
+        if (pillEl) pillEl.classList.toggle('is-practiced', isDone);
+        if (statusEl) statusEl.textContent = isDone ? 'Practiced' : 'Not yet practiced';
+        if (checkEl) checkEl.checked = isDone;
+      }
+
+      const counterEl = document.getElementById('progress-counter');
+      if (counterEl) {
+        counterEl.textContent = `${count} of ${TOTAL_SECTIONS} Sections Practiced`;
+      }
+
+      const pct = Math.round((count / TOTAL_SECTIONS) * 100);
+      const fillEl = document.getElementById('progress-bar-fill');
+      const trackEl = document.getElementById('progress-bar-track');
+      if (fillEl) fillEl.style.width = `${pct}%`;
+      if (trackEl) trackEl.setAttribute('aria-valuenow', String(count));
+    }
+
+    function toggleSectionPracticed(secNum, checked) {
+      appState.practiced[secNum - 1] = Boolean(checked);
+      updateProgressUI();
+      persistState();
+    }
+
+    function checkS1Question(qNum, choice, btnEl) {
+      appState.s1Choices[qNum] = choice;
+      const group = btnEl ? btnEl.closest('[data-s1-q]') : null;
+      if (group) {
+        const btns = group.querySelectorAll('.choice-btn');
+        btns.forEach(function (b) {
+          b.classList.remove('is-selected', 'is-correct', 'is-incorrect');
+        });
+      }
+      const rule = S1_ANSWERS[qNum];
+      const fb = document.getElementById(`s1-fb-${qNum}`);
+      if (!rule || !fb) return;
+
+      const isRight = choice === rule.correct;
+      if (btnEl) btnEl.classList.add(isRight ? 'is-correct' : 'is-incorrect');
+      fb.textContent = isRight ? rule.good : rule.other;
+      fb.className = `feedback-box is-visible ${isRight ? 'is-good' : 'is-warn'}`;
+      persistState();
+    }
+
+    function checkS2Card(letter, choice, btnEl) {
+      appState.s2Choices[letter] = choice;
+      const group = btnEl ? btnEl.closest('.field-group') : null;
+      if (group) {
+        group.querySelectorAll('.choice-btn').forEach(function (b) {
+          b.classList.remove('is-selected', 'is-correct', 'is-incorrect');
+        });
+      }
+      const rule = S2_ANSWERS[letter];
+      const fb = document.getElementById(`s2-fb-${letter}`);
+      if (!rule || !fb) return;
+
+      const isRight = choice === rule.correct;
+      if (btnEl) btnEl.classList.add(isRight ? 'is-correct' : 'is-incorrect');
+      fb.textContent = isRight ? rule.good : rule.other;
+      fb.className = `feedback-box is-visible ${isRight ? 'is-good' : 'is-error'}`;
+      persistState();
+    }
+
+    function checkS2Rewrite() {
+      const box = document.getElementById('s2-rewrite');
+      const fb = document.getElementById('s2-rewrite-fb');
+      if (!box || !fb) return;
+      const val = box.value.trim();
+      if (!val) {
+        fb.textContent = `Write a short fictional version first before checking.`;
+        fb.className = `feedback-box is-visible is-warn`;
+        return;
+      }
+      const lower = val.toLowerCase();
+      const hasRisk = /\d{3}-\d{2}-\d{4}/.test(val) || lower.includes('ssn') || lower.includes('999-00') || lower.includes('7721') || lower.includes('04/12/1988') || lower.includes('alex m');
+      if (hasRisk) {
+        fb.textContent = `Hold on: your draft still includes a private number, DOB, case number, or original name. Replace them with Jordan Lee’s safe fictional details.`;
+        fb.className = `feedback-box is-visible is-error`;
+      } else {
+        fb.textContent = `Looks safe! You removed personal identifiers and kept only the fictional workplace question.`;
+        fb.className = `feedback-box is-visible is-good`;
+      }
+      persistState();
+    }
+
+    function checkS3Decision(qNum, choice, btnEl) {
+      appState.s3Choices[qNum] = choice;
+      const group = btnEl ? btnEl.closest('.field-group') : null;
+      if (group) {
+        group.querySelectorAll('.choice-btn').forEach(function (b) {
+          b.classList.remove('is-selected', 'is-correct', 'is-incorrect');
+        });
+      }
+      const rule = S3_ANSWERS[qNum];
+      const fb = document.getElementById(`s3-fb-${qNum}`);
+      if (!rule || !fb) return;
+
+      const isRight = choice === rule.correct;
+      if (btnEl) btnEl.classList.add(isRight ? 'is-correct' : 'is-incorrect');
+      fb.textContent = isRight ? rule.good : rule.other;
+      fb.className = `feedback-box is-visible ${isRight ? 'is-good' : 'is-warn'}`;
+      persistState();
+    }
+
+    function updateClearBuilder() {
+      const cEl = document.getElementById('clear-c');
+      const lEl = document.getElementById('clear-l');
+      const eEl = document.getElementById('clear-e');
+      const aEl = document.getElementById('clear-a');
+      const rEl = document.getElementById('clear-r');
+      const previewEl = document.getElementById('clear-preview-text');
+      const tagEl = document.getElementById('clear-score-tag');
+      const safetyEl = document.getElementById('clear-safety-fb');
+
+      const vals = {
+        c: cEl ? cEl.value.trim() : '',
+        l: lEl ? lEl.value.trim() : '',
+        e: eEl ? eEl.value.trim() : '',
+        a: aEl ? aEl.value.trim() : '',
+        r: rEl ? rEl.value.trim() : ''
+      };
+
+      let filled = 0;
+      if (vals.c) filled++;
+      if (vals.l) filled++;
+      if (vals.e) filled++;
+      if (vals.a) filled++;
+      if (vals.r) filled++;
+
+      if (tagEl) tagEl.textContent = `${filled} of 5 CLEAR parts`;
+
+      const parts = [];
+      if (vals.c) parts.push(`Context: ${vals.c}`);
+      if (vals.l) parts.push(`Task: ${vals.l}`);
+      if (vals.e) parts.push(`Details & Guardrails: ${vals.e}`);
+      if (vals.a) parts.push(`Format: ${vals.a}`);
+      if (vals.r) parts.push(`Review Note: ${vals.r}`);
+
+      if (previewEl) {
+        previewEl.textContent = parts.length > 0
+          ? parts.join('\n\n')
+          : `Fill in the C, L, E, A, and R fields on the left to assemble your practice prompt.`;
+      }
+
+      const combined = Object.values(vals).join(' ').toLowerCase();
+      const ssnMatch = /\b\d{3}-\d{2}-\d{4}\b/.test(combined);
+      const piiWords = /\b(ssn|social security|password|state id|probation|case #)\b/.test(combined);
+      if (safetyEl) {
+        if (ssnMatch || piiWords) {
+          safetyEl.textContent = `Privacy Alert: Possible sensitive information detected (SSN, password, ID, or case number). Remove private details before using any AI tool.`;
+          safetyEl.className = `feedback-box is-visible is-error`;
+        } else {
+          safetyEl.textContent = '';
+          safetyEl.className = `feedback-box`;
+        }
+      }
+
+      handleInputChange();
+    }
+
+    function loadClearExample() {
+      const cEl = document.getElementById('clear-c');
+      const lEl = document.getElementById('clear-l');
+      const eEl = document.getElementById('clear-e');
+      const aEl = document.getElementById('clear-a');
+      const rEl = document.getElementById('clear-r');
+      if (cEl) cEl.value = `I am Jordan Lee preparing for an entry-level Customer Support Associate interview at Riverside Community Services.`;
+      if (lEl) lEl.value = `Create three practice interview questions.`;
+      if (eEl) eEl.value = `Use simple language, focus on teamwork, active listening, and organized records. Do not invent extra work history.`;
+      if (aEl) aEl.value = `Give a numbered list with short sample answers.`;
+      if (rEl) rEl.value = `Verify every answer uses only Jordan’s volunteer front-desk and retail stock experience.`;
+      updateClearBuilder();
+    }
+
+    function clearClearBuilder() {
+      ['clear-c', 'clear-l', 'clear-e', 'clear-a', 'clear-r'].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      const simEl = document.getElementById('clear-sim-output');
+      if (simEl) {
+        simEl.textContent = `Click “Simulate Sample AI Output” after building a prompt to preview how an assistant responds—and practice checking it.`;
+      }
+      updateClearBuilder();
+    }
+
+    function testClearPrompt() {
+      const cEl = document.getElementById('clear-c');
+      const lEl = document.getElementById('clear-l');
+      const simEl = document.getElementById('clear-sim-output');
+      if (!simEl) return;
+
+      const cVal = cEl ? cEl.value.trim() : '';
+      const lVal = lEl ? lEl.value.trim() : '';
+      if (!cVal && !lVal) {
+        simEl.textContent = `Please fill in at least Context (C) and Task (L) first, or click “Load Jordan Lee Example”.`;
+        return;
+      }
+
+      simEl.textContent = `Simulated AI Draft (Practice Only):\n\nBased on your request (${lVal || 'workplace draft'}):\n1. Tell me about keeping records accurate at your volunteer front-desk role.\n2. How do you stay calm and listen actively when someone has a question?\n3. What steps do you take to confirm schedules and follow-ups?\n\nHuman Check Reminder: Verify that every detail, date, and skill matches your real source document before saving or sending.`;
+    }
+
+    function selectS5Task(taskKey) {
+      appState.s5Task = taskKey;
+      ['interview', 'resume', 'email'].forEach(function (k) {
+        const tab = document.getElementById(`s5-tab-${k}`);
+        if (tab) tab.classList.toggle('is-selected', k === taskKey);
+      });
+      const factsEl = document.getElementById('s5-source-facts');
+      const draftEl = document.getElementById('s5-ai-draft');
+      if (factsEl && S5_DATA[taskKey]) {
+        factsEl.textContent = S5_DATA[taskKey].facts;
+      }
+      if (draftEl) {
+        draftEl.textContent = `Source loaded. Click “Generate Sample Draft” to see a starting draft, then revise it in your own words below.`;
+      }
+      persistState();
+    }
+
+    function generateS5Draft() {
+      const draftEl = document.getElementById('s5-ai-draft');
+      if (!draftEl) return;
+      if (!appState.s5Task || !S5_DATA[appState.s5Task]) {
+        draftEl.textContent = `Select one of the three scenarios above first (Practice Interview Questions, Polish Résumé Bullet Points, or Draft Orientation Email).`;
+        return;
+      }
+      draftEl.textContent = S5_DATA[appState.s5Task].draft;
+    }
+
+    function checkS5Revision() {
+      const box = document.getElementById('s5-user-revision');
+      const fb = document.getElementById('s5-fb');
+      if (!box || !fb) return;
+      const text = box.value.trim();
+      if (text.length < 15) {
+        fb.textContent = `Write a complete draft in your own words (at least a sentence or two) before verifying.`;
+        fb.className = `feedback-box is-visible is-warn`;
+        return;
+      }
+      const lower = text.toLowerCase();
+      if (/\d{3}-\d{2}-\d{4}/.test(text) || lower.includes('ssn') || lower.includes('password')) {
+        fb.textContent = `Privacy check failed: remove any SSN, password, or private ID numbers from your workplace message.`;
+        fb.className = `feedback-box is-visible is-error`;
+        return;
+      }
+      if (appState.s5Task === 'email' && !lower.includes('location') && !lower.includes('where')) {
+        fb.textContent = `Almost there! Remember Ms. Johnson’s email is missing the meeting location—make sure your draft politely asks where orientation takes place.`;
+        fb.className = `feedback-box is-visible is-warn`;
+        return;
+      }
+      fb.textContent = `Great human review! Your final wording stays clear, polite, and grounded in Jordan Lee’s verified facts.`;
+      fb.className = `feedback-box is-visible is-good`;
+      persistState();
+    }
+
+    function toggleDrillChip(drillNum, chipKey, btnEl) {
+      if (!appState.drillSelections[drillNum]) {
+        appState.drillSelections[drillNum] = [];
+      }
+      const arr = appState.drillSelections[drillNum];
+      const idx = arr.indexOf(chipKey);
+      if (idx === -1) {
+        arr.push(chipKey);
+        if (btnEl) btnEl.classList.add('is-selected');
+      } else {
+        arr.splice(idx, 1);
+        if (btnEl) btnEl.classList.remove('is-selected');
+      }
+      persistState();
+    }
+
+    function gradeDrill(drillNum) {
+      const sol = DRILL_SOLUTIONS[drillNum];
+      const fb = document.getElementById(`drill-fb-${drillNum}`);
+      if (!sol || !fb) return;
+
+      const picked = (appState.drillSelections[drillNum] || []).slice().sort();
+      const target = sol.expected.slice().sort();
+      const exactMatch = picked.length === target.length && picked.every(function (v, i) { return v === target[i]; });
+
+      appState.drillGraded[drillNum] = true;
+      if (picked.length === 0) {
+        fb.textContent = `Select the mismatched or unsupported details first, then click Check Drill ${drillNum}.`;
+        fb.className = `feedback-box is-visible is-warn`;
+      } else if (exactMatch) {
+        fb.textContent = `Spot-on! ${sol.explanation}`;
+        fb.className = `feedback-box is-visible is-good`;
+      } else {
+        fb.textContent = `Good effort—compare your picks against the source: ${sol.explanation}`;
+        fb.className = `feedback-box is-visible is-warn`;
+      }
+      persistState();
+    }
+
+    function updateRubricScore() {
+      const cats = {
+        verification: { earned: 0, max: 25 },
+        privacy: { earned: 0, max: 20 },
+        clear: { earned: 0, max: 20 },
+        understanding: { earned: 0, max: 15 },
+        tool: { earned: 0, max: 10 },
+        responsibility: { earned: 0, max: 10 }
+      };
+
+      const checkedIndexes = [];
+      let essentialTotal = 0;
+      let essentialChecked = 0;
+      let totalScore = 0;
+
+      const boxes = document.querySelectorAll('.rubric-cb');
+      boxes.forEach(function (cb, idx) {
+        const isEssential = cb.dataset.essential === 'true';
+        if (isEssential) essentialTotal++;
+        if (cb.checked) {
+          checkedIndexes.push(idx);
+          const pts = Number(cb.dataset.pts || 0);
+          const cat = cb.dataset.cat;
+          totalScore += pts;
+          if (cat && cats[cat]) cats[cat].earned += pts;
+          if (isEssential) essentialChecked++;
+        }
+      });
+
+      appState.rubricChecks = checkedIndexes;
+
+      const totalEl = document.getElementById('rubric-total-score');
+      if (totalEl) totalEl.textContent = `${totalScore} / 100`;
+
+      Object.keys(cats).forEach(function (cat) {
+        const lbl = document.getElementById(`cat-pts-${cat}`);
+        const bar = document.getElementById(`bar-${cat}`);
+        if (lbl) lbl.textContent = `${cats[cat].earned} / ${cats[cat].max}`;
+        if (bar) {
+          const pct = Math.round((cats[cat].earned / cats[cat].max) * 100);
+          bar.style.width = `${pct}%`;
+        }
+      });
+
+      const badge = document.getElementById('rubric-status-badge');
+      if (badge) {
+        if (totalScore === 0) {
+          badge.textContent = `Not yet started — check skills as you verify them`;
+          badge.className = `tag-neutral`;
+        } else if (totalScore >= 80 && essentialChecked === essentialTotal) {
+          badge.textContent = `Workshop Ready (80+ points & Essential Privacy Gate met)`;
+          badge.className = `tag-ochre is-ready-badge`;
+        } else if (totalScore >= 80 && essentialChecked < essentialTotal) {
+          badge.textContent = `80+ points reached — confirm all Privacy & Safety items`;
+          badge.className = `tag-ochre`;
+        } else {
+          badge.textContent = `Building Foundation (${totalScore}/100 — target is 80+ with Privacy Gate)`;
+          badge.className = `tag-ochre`;
+        }
+      }
+
+      persistState();
+    }
+
+    function collectTextInputs() {
+      const ids = ['s1-reflection', 's2-rewrite', 'clear-c', 'clear-l', 'clear-e', 'clear-a', 'clear-r', 's5-user-revision', 'drill-1-fix', 'drill-2-fix', 's7-takeaway'];
+      const map = {};
+      ids.forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el && el.value) map[id] = el.value;
+      });
+      return map;
+    }
+
+    function handleInputChange() {
+      appState.inputs = collectTextInputs();
+      persistState();
+    }
+
+    async function persistState() {
+      if (typeof window.notebookAppApi !== 'undefined' && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (e) {
+          // Ignore storage error safely in standalone preview
+        }
+      }
+    }
+
+    async function resetAllProgress() {
+      appState = createEmptyState();
+
+      // Uncheck every checkbox and radio button
+      document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(function (el) {
+        el.checked = false;
+      });
+
+      // Clear every text input and textarea
+      document.querySelectorAll('input[type="text"], textarea').forEach(function (el) {
+        el.value = '';
+      });
+
+      // Remove practiced/active/selected styling from all pills, badges, sections, buttons, and chips
+      document.querySelectorAll('.is-practiced, .is-active, .is-selected, .is-correct, .is-incorrect, .is-ready-badge').forEach(function (el) {
+        el.classList.remove('is-practiced', 'is-active', 'is-selected', 'is-correct', 'is-incorrect', 'is-ready-badge');
+      });
+
+      // Reset all feedback boxes
+      document.querySelectorAll('.feedback-box').forEach(function (fb) {
+        fb.textContent = '';
+        fb.className = 'feedback-box';
+      });
+
+      // Reset CLEAR builder & Section 5 studio readouts
+      const clearPreview = document.getElementById('clear-preview-text');
+      const clearTag = document.getElementById('clear-score-tag');
+      const clearSim = document.getElementById('clear-sim-output');
+      if (clearPreview) clearPreview.textContent = `Fill in the C, L, E, A, and R fields on the left to assemble your practice prompt.`;
+      if (clearTag) clearTag.textContent = `0 of 5 CLEAR parts`;
+      if (clearSim) clearSim.textContent = `Click “Simulate Sample AI Output” after building a prompt to preview how an assistant responds—and practice checking it.`;
+
+      const s5Facts = document.getElementById('s5-source-facts');
+      const s5Draft = document.getElementById('s5-ai-draft');
+      if (s5Facts) s5Facts.textContent = `Select one of the three workplace scenarios above to view Jordan Lee’s verified source facts and generate a practice draft.`;
+      if (s5Draft) s5Draft.textContent = `No scenario selected yet. Choose a task above, then click “Generate Sample Draft” to inspect how AI phrases it.`;
+
+      updateProgressUI();
+      updateRubricScore();
+
+      if (typeof window.notebookAppApi !== 'undefined' && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(createEmptyState());
+        } catch (e) {
+          // Ignore safely
+        }
+      }
+
+      const statusMsg = document.getElementById('reset-status');
+      if (statusMsg) {
+        statusMsg.textContent = `Progress reset to 0 of 7 Sections Practiced.`;
+      }
+    }
+
+    function exportWorkshopSummary() {
+      const practicedCount = appState.practiced.filter(Boolean).length;
+      const scoreEl = document.getElementById('rubric-total-score');
+      const scoreText = scoreEl ? scoreEl.textContent : '0 / 100';
+      const clearPrompt = document.getElementById('clear-preview-text');
+      const s7Note = document.getElementById('s7-takeaway');
+
+      const lines = [
+        `Beginner AI Literacy and Responsible Use Workshop — Practice Summary`,
+        `Sections Practiced: ${practicedCount} of ${TOTAL_SECTIONS}`,
+        `Self-Check Rubric Score: ${scoreText}`,
+        ``,
+        `CLEAR Practice Prompt:`,
+        clearPrompt ? clearPrompt.textContent : '',
+        ``,
+        `Next Skill or Takeaway:`,
+        s7Note && s7Note.value.trim() ? s7Note.value.trim() : `(Not yet entered)`
+      ];
+      const summaryContent = lines.join('\n');
+
+      if (typeof window.notebookAppApi !== 'undefined' && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: summaryContent,
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: 'ai-literacy-practice-summary.txt'
+        });
+      }
+      const statusMsg = document.getElementById('reset-status');
+      if (statusMsg) {
+        statusMsg.textContent = `Practice summary prepared (${practicedCount} of ${TOTAL_SECTIONS} sections practiced).`;
+      }
+    }
+
+    function restoreSavedState(saved) {
+      if (!saved || typeof saved !== 'object') return;
+      if (Array.isArray(saved.practiced) && saved.practiced.length === TOTAL_SECTIONS) {
+        appState.practiced = saved.practiced.map(Boolean);
+      }
+      if (saved.inputs && typeof saved.inputs === 'object') {
+        Object.keys(saved.inputs).forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el && typeof saved.inputs[id] === 'string') {
+            el.value = saved.inputs[id];
+          }
+        });
+      }
+      if (Array.isArray(saved.rubricChecks)) {
+        const boxes = document.querySelectorAll('.rubric-cb');
+        saved.rubricChecks.forEach(function (idx) {
+          if (boxes[idx]) boxes[idx].checked = true;
+        });
+      }
+      if (saved.s5Task && S5_DATA[saved.s5Task]) {
+        selectS5Task(saved.s5Task);
+      }
+      if (saved.drillSelections && typeof saved.drillSelections === 'object') {
+        [1, 2, 3].forEach(function (dNum) {
+          const arr = saved.drillSelections[dNum];
+          if (Array.isArray(arr)) {
+            appState.drillSelections[dNum] = arr.slice();
+            arr.forEach(function (chipKey) {
+              const btn = document.querySelector(`[data-drill="${dNum}"][data-chip="${chipKey}"]`);
+              if (btn) btn.classList.add('is-selected');
+            });
+          }
+        });
+      }
+      updateClearBuilder();
+      updateRubricScore();
+      updateProgressUI();
+    }
+
+    async function initWorkshop() {
+      // Strictly ensure zero initial progress before checking stored state
+      updateProgressUI();
+      updateRubricScore();
+
+      if (typeof window.notebookAppApi !== 'undefined' && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) {
+            restoreSavedState(saved);
+          }
+        } catch (e) {
+          // Initialize clean empty state on error
+        }
+      }
+
+      if (typeof window.notebookAppApi !== 'undefined' && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initWorkshop();
+  </script>
+</body>
+</html>
